@@ -1,0 +1,33 @@
+{
+    "name": "gw2treasures/gw2api",
+    "type": "library",
+    "description": "PHP wrapper for the Guild Wars 2 API.",
+    "keywords": ["guildwars2","guild wars 2","api","wrapper"],
+    "homepage": "https://github.com/GW2Treasures/gw2api",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "darthmaim",
+            "email": "darth.maim@arcor.de"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/GW2Treasures/gw2api/issues",
+        "source": "https://github.com/GW2Treasures/gw2api"
+    },
+    "require": {
+        "php": ">=5.4.0",
+        "chuyskywalker/rolling-curl": "~3.1"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~4.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "GW2Treasures\\GW2Api\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "classmap": [ "tests/" ]
+    }
+}
