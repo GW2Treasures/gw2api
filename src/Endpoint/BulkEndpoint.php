@@ -2,7 +2,8 @@
 
 namespace GW2Treasures\GW2Api\Endpoint;
 
-use GW2Treasures\GW2Api\Request\Response;
+use GuzzleHttp\Client;
+use GuzzleHttp\Pool;
 
 trait BulkEndpoint {
 
@@ -35,7 +36,7 @@ trait BulkEndpoint {
      * @return string[]|int[]
      */
     public function ids() {
-        return $this->request()->json();
+        return $this->getClient()->send( $this->createRequest() )->json();
     }
 
     /**
@@ -45,7 +46,9 @@ trait BulkEndpoint {
      * @return mixed
      */
     public function get( $id ) {
-        return $this->request([ 'id' => $id ])->json();
+        $request = $this->createRequest([ 'id' => $id ]);
+        $response = $this->getClient()->send( $request );
+        return $response->json(['object' => true]);
     }
 
     /**
@@ -61,15 +64,17 @@ trait BulkEndpoint {
 
         $pages = array_chunk( $ids, $this->maxPageSize() );
 
-        $queries = [];
+        $requests = [];
         foreach( $pages as $page ) {
-            $queries[] = ['ids' => implode( ',', $page )];
+            $requests[] = $this->createRequest( ['ids' => implode( ',', $page )] );
         }
 
+        $responses = Pool::batch( $this->getClient(), $requests, ['pool_size' => 128] );
+
         $result = [];
-        $responses = $this->requestMany( $queries );
+        /** @var \GuzzleHttp\Message\Response $response */
         foreach( $responses as $response ) {
-            $result = array_merge( $result, $response->json() );
+            $result = array_merge( $result, $response->json(['object' => true]) );
         }
 
         return $result;
@@ -85,7 +90,7 @@ trait BulkEndpoint {
      */
     public function all() {
         if( $this->supportsIdsAll() ) {
-            return $this->request(['ids' => 'all'])->json();
+            return $this->getClient()->send( $this->createRequest([ 'ids' => 'all' ]))->json(['object' => true]);
         } else {
             $ids = $this->ids();
             return $this->many( $ids );
@@ -93,18 +98,18 @@ trait BulkEndpoint {
     }
 
     /**
-     * Implemented by GW2Treasures\GW2Api\Endpoint\Endpoint.
-     *
-     * @param string[] $query
-     * @return Response
+     * @return Client
      */
-    protected abstract function request( array $query = [] );
+    protected abstract function getClient();
 
     /**
-     * Implemented by GW2Treasures\GW2Api\Endpoint\Endpoint.
+     * Creates a new Request to this Endpoint.
      *
-     * @param string[][] $queries
-     * @return \GW2Treasures\GW2Api\Request\Response[]
+     * @param string[] $query
+     * @param null     $url
+     * @param string   $method
+     * @param array    $options
+     * @return \GuzzleHttp\Message\Request|\GuzzleHttp\Message\RequestInterface
      */
-    protected abstract function requestMany( array $queries );
+    protected abstract function createRequest( array $query = [], $url = null, $method = 'GET', $options = [] );
 }

@@ -22,6 +22,6 @@ class RecipeEndpoint extends Endpoint {
      * @return RecipeSearchEndpoint
      */
     public function search() {
-        return new RecipeSearchEndpoint( $this->requestManager );
+        return new RecipeSearchEndpoint( $this->client );
     }
 }

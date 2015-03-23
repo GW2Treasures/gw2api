@@ -19,6 +19,6 @@ class BuildEndpoint extends Endpoint {
      * @return int
      */
     public function get() {
-        return $this->request()->json()->id;
+        return $this->getClient()->send( $this->createRequest() )->json()['id'];
     }
 }

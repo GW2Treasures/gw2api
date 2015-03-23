@@ -19,7 +19,8 @@ class RecipeSearchEndpoint extends Endpoint {
      * @return mixed
      */
     public function input( $id ) {
-        return $this->request([ 'input' => $id ])->json();
+        $request = $this->createRequest([ 'input' => $id ]);
+        return $this->getClient()->send( $request )->json([ 'object' => true ]);
     }
 
     /**
@@ -27,6 +28,7 @@ class RecipeSearchEndpoint extends Endpoint {
      * @return mixed
      */
     public function output( $id ) {
-        return $this->request([ 'output' => $id ])->json();
+        $request = $this->createRequest([ 'output' => $id ]);
+        return $this->getClient()->send( $request )->json([ 'object' => true ]);
     }
 }

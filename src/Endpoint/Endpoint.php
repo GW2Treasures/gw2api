@@ -2,39 +2,44 @@
 
 namespace GW2Treasures\GW2Api\Endpoint;
 
-use GW2Treasures\GW2Api\Request\RequestManager;
+use GuzzleHttp\Client;
+use GuzzleHttp\Query;
 
 abstract class Endpoint {
+    /** @var Client $client */
+    protected $client;
 
-    /** @var RequestManager requestManager */
-    protected $requestManager;
+    /** @var array $options */
+    private $options;
 
     /**
-     * @param RequestManager $requestManager
+     * @param Client $client
+     * @param array  $options
      */
-    public function __construct( RequestManager $requestManager ) {
-        $this->requestManager = $requestManager;
+    public function __construct( Client $client, array $options = [] ) {
+        $this->client = $client;
+        $this->options = $options;
     }
 
     /**
-     * Make a request.
+     * @return Client
+     */
+    protected function getClient() {
+        return $this->client;
+    }
+
+    /**
+     * Creates a new Request to this Endpoint.
      *
      * @param string[] $query
-     * @return \GW2Treasures\GW2Api\Request\Response
+     * @param null     $url
+     * @param string   $method
+     * @param array    $options
+     * @return \GuzzleHttp\Message\Request|\GuzzleHttp\Message\RequestInterface
      */
-    protected function request( array $query = [] ) {
-        return $this->requestManager->request( $this->url(), $query );
-    }
-
-    /**
-     * Make multiple requests at once. If the RequestManager supports parallel requests, this will be way faster.
-     * Otherwise the RequestManager will fallback to multiple simple requests.
-     *
-     * @param string[][] $queries
-     * @return \GW2Treasures\GW2Api\Request\Response[]
-     */
-    protected function requestMany( array $queries ) {
-        return $this->requestManager->requestMany( $this->url(), $queries );
+    protected function createRequest( array $query = [], $url = null, $method = 'GET', $options = [] ) {
+        $url = !is_null( $url ) ? $url : $this->url();
+        return $this->client->createRequest( $method, $url, $options + [ 'query' => $query ]);
     }
 
     /**

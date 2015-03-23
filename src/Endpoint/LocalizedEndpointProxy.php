@@ -11,7 +11,7 @@ class LocalizedEndpointProxy extends Endpoint {
 
     /**
      * @param Endpoint $origin
-     * @param string            $lang
+     * @param string   $lang
      */
     public function __construct( Endpoint $origin, $lang ) {
         $this->origin = $origin;
@@ -41,20 +41,10 @@ class LocalizedEndpointProxy extends Endpoint {
     /**
      * {@inheritdoc}
      */
-    protected function request( array $query = [] ) {
-        return $this->origin->request( [ 'lang' => $this->lang ] + $query );
+    protected function createRequest( array $query = [], $url = null, $method = 'GET', $options = [] ) {
+        $query = [ 'lang' => $this->lang ] + $query;
+        return $this->origin->createRequest( $query, $url, $method, $options );
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function requestMany( array $queries ) {
-        $queries = array_map( function( $query ) {
-            return [ 'lang' => $this->lang ] + $query;
-        }, $queries );
-        return $this->origin->requestMany( $queries );
-    }
-
 
     /**
      * {@inheritdoc}
@@ -62,6 +52,14 @@ class LocalizedEndpointProxy extends Endpoint {
     protected function url() {
         return $this->origin->url();
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getClient() {
+        return $this->origin->getClient();
+    }
+
 
     /**
      * String representation of this localized endpoint.

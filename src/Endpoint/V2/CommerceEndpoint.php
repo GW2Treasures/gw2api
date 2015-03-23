@@ -17,20 +17,20 @@ class CommerceEndpoint extends Endpoint {
      * @return CommerceExchangeEndpoint
      */
     public function exchange() {
-        return new CommerceExchangeEndpoint( $this->requestManager );
+        return new CommerceExchangeEndpoint( $this->client );
     }
 
     /**
      * @return CommerceListingEndpoint
      */
     public function listings() {
-        return new CommerceListingEndpoint( $this->requestManager );
+        return new CommerceListingEndpoint( $this->client );
     }
 
     /**
      * @return CommercePriceEndpoint
      */
     public function prices() {
-        return new CommercePriceEndpoint( $this->requestManager );
+        return new CommercePriceEndpoint( $this->client );
     }
 }

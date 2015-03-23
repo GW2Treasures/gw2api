@@ -19,6 +19,6 @@ class AccountEndpoint extends AuthenticatedEndpoint {
      * @return mixed
      */
     public function info() {
-        return $this->request()->json();
+        return $this->getClient()->send( $this->createRequest() )->json([ 'object' => true ]);
     }
 }

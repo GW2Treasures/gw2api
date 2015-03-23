@@ -20,7 +20,8 @@ class CommerceExchangeEndpoint extends Endpoint {
      * @return mixed
      */
     public function gems( $quantity ) {
-        return $this->requestManager->request( $this->url() . '/gems', [ 'quantity' => $quantity ])->json();
+        $request = $this->createRequest([ 'quantity' => $quantity ], $this->url() . '/gems' );
+        return $this->getClient()->send( $request )->json([ 'object' => true ]);
     }
 
     /**
@@ -30,6 +31,7 @@ class CommerceExchangeEndpoint extends Endpoint {
      * @return mixed
      */
     public function coins( $quantity ) {
-        return $this->requestManager->request( $this->url() . '/coins', [ 'quantity' => $quantity ])->json();
+        $request = $this->createRequest([ 'quantity' => $quantity ], $this->url() . '/coins' );
+        return $this->getClient()->send( $request )->json([ 'object' => true ]);
     }
 }
