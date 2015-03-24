@@ -3,7 +3,6 @@
 namespace GW2Treasures\GW2Api\Endpoint;
 
 use GuzzleHttp\Client;
-use GuzzleHttp\Query;
 
 abstract class Endpoint {
     /** @var Client $client */

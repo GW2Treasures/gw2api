@@ -3,7 +3,6 @@
 namespace GW2Treasures\GW2Api;
 
 use GuzzleHttp\Client;
-use GuzzleHttp\Ring\Client\CurlMultiHandler;
 use GW2Treasures\GW2Api\Endpoint\V2\AccountEndpoint;
 use GW2Treasures\GW2Api\Endpoint\V2\BuildEndpoint;
 use GW2Treasures\GW2Api\Endpoint\V2\ColorEndpoint;

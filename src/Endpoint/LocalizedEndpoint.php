@@ -14,6 +14,7 @@ trait LocalizedEndpoint {
      * @return $this
      */
     public function lang( $lang ) {
+        /** @noinspection PhpParamsInspection */
         return new LocalizedEndpointProxy( $this, $lang );
     }
 }
