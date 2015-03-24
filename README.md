@@ -6,7 +6,7 @@ PHP wrapper for the Guild Wars 2 API
 
 ## Requirements
 
- - PHP > 5.4
+ - PHP >= 5.4
 
 ## Setup
 
