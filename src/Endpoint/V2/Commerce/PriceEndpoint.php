@@ -1,13 +1,12 @@
 <?php
 
-namespace GW2Treasures\GW2Api\Endpoint\V2;
+namespace GW2Treasures\GW2Api\Endpoint\V2\Commerce;
 
 use GW2Treasures\GW2Api\Endpoint\BulkEndpoint;
 use GW2Treasures\GW2Api\Endpoint\Endpoint;
-use GW2Treasures\GW2Api\Endpoint\LocalizedEndpoint;
 
-class SkinEndpoint extends Endpoint {
-    use BulkEndpoint, LocalizedEndpoint;
+class PriceEndpoint extends Endpoint {
+    use BulkEndpoint;
 
     /** @var bool $supportsIdsAll */
     protected $supportsIdsAll = false;
@@ -16,6 +15,6 @@ class SkinEndpoint extends Endpoint {
      * {@inheritdoc}
      */
     protected function url() {
-        return 'v2/skins';
+        return 'v2/commerce/prices';
     }
 }

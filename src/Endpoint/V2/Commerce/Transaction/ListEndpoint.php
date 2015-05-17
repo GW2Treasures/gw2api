@@ -1,13 +1,13 @@
 <?php
 
-namespace GW2Treasures\GW2Api\Endpoint\V2;
+namespace GW2Treasures\GW2Api\Endpoint\V2\Commerce\Transaction;
 
 use GuzzleHttp\Client;
 use GW2Treasures\GW2Api\Endpoint\AuthenticatedEndpoint;
 use InvalidArgumentException;
 
 // TODO: should support pagination
-class CommerceTransactionListEndpoint extends AuthenticatedEndpoint {
+class ListEndpoint extends AuthenticatedEndpoint {
 
     protected static $types = [ 'current', 'history' ];
 

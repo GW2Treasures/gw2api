@@ -1,10 +1,10 @@
 <?php
 
-namespace GW2Treasures\GW2Api\Endpoint\V2;
+namespace GW2Treasures\GW2Api\Endpoint\V2\Recipe;
 
 use GW2Treasures\GW2Api\Endpoint\Endpoint;
 
-class RecipeSearchEndpoint extends Endpoint {
+class SearchEndpoint extends Endpoint {
 
     /**
      * {@inheritdoc}

@@ -1,10 +1,10 @@
 <?php
 
-namespace GW2Treasures\GW2Api\Endpoint\V2;
+namespace GW2Treasures\GW2Api\Endpoint\V2\Commerce;
 
 use GW2Treasures\GW2Api\Endpoint\Endpoint;
 
-class CommerceExchangeEndpoint extends Endpoint {
+class ExchangeEndpoint extends Endpoint {
 
     /**
      * {@inheritdoc}

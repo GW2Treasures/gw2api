@@ -1,6 +1,6 @@
 <?php
 
-namespace GW2Treasures\GW2Api\Endpoint\V2;
+namespace GW2Treasures\GW2Api\Endpoint\V2\World;
 
 use GW2Treasures\GW2Api\Endpoint\Endpoint;
 use GW2Treasures\GW2Api\Endpoint\BulkEndpoint;

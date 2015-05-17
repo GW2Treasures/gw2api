@@ -1,6 +1,6 @@
 <?php
 
-namespace GW2Treasures\GW2Api\Endpoint\V2;
+namespace GW2Treasures\GW2Api\Endpoint\V2\Recipe;
 
 use GW2Treasures\GW2Api\Endpoint\BulkEndpoint;
 use GW2Treasures\GW2Api\Endpoint\Endpoint;
@@ -19,9 +19,9 @@ class RecipeEndpoint extends Endpoint {
     }
 
     /**
-     * @return RecipeSearchEndpoint
+     * @return SearchEndpoint
      */
     public function search() {
-        return new RecipeSearchEndpoint( $this->client );
+        return new SearchEndpoint( $this->client );
     }
 }
