@@ -33,4 +33,8 @@ class CommerceEndpoint extends Endpoint {
     public function prices() {
         return new CommercePriceEndpoint( $this->client );
     }
+
+    public function transactions( $apiKey ) {
+        return new CommerceTransactionEndpoint( $this->client, $apiKey );
+    }
 }
