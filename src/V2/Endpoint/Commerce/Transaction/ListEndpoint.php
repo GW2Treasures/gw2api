@@ -4,55 +4,45 @@ namespace GW2Treasures\GW2Api\V2\Endpoint\Commerce\Transaction;
 
 use GuzzleHttp\Client;
 use GW2Treasures\GW2Api\V2\AuthenticatedEndpoint;
+use GW2Treasures\GW2Api\V2\Interfaces\IPaginatedEndpoint;
+use GW2Treasures\GW2Api\V2\PaginatedEndpoint;
 use InvalidArgumentException;
 
-// TODO: should support pagination
-class ListEndpoint extends AuthenticatedEndpoint {
+class ListEndpoint extends AuthenticatedEndpoint implements IPaginatedEndpoint {
+    use PaginatedEndpoint;
 
     protected static $types = [ 'current', 'history' ];
+    protected static $lists = [ 'buys', 'sells' ];
 
-    /** @var string $type The type of the list (one of self::$types) */
+    /** @var string $type */
     protected $type;
 
-    public function __construct( Client $client, $apiKey, $type, array $options = [ ] ) {
+    /** @var string $list */
+    protected $list;
+
+    public function __construct( Client $client, $apiKey, $type, $list, array $options = [ ] ) {
         if( !in_array( $type, self::$types )) {
             throw new InvalidArgumentException(
                 'Invalid $type ("' . $type . '""), has to be one of: ' . implode(', ', self::$types)
             );
         }
 
+        if( !in_array( $list, self::$lists )) {
+            throw new InvalidArgumentException(
+                'Invalid $list ("' . $list . '""), has to be one of: ' . implode(', ', self::$lists)
+            );
+        }
+
         $this->type = $type;
+        $this->list = $list;
 
         parent::__construct( $client, $apiKey, $options );
     }
-
 
     /**
      * {@inheritdoc}
      */
     protected function url() {
-        return 'v2/commerce/transactions/' . $this->type;
-    }
-
-    /**
-     * Get pending/completed buy transactions.
-     *
-     * @return array
-     */
-    public function buys() {
-        $request = $this->createRequest( [], $this->url() . '/buys' );
-        $response = $this->request( $request );
-        return $this->getResponseAsJson( $response );
-    }
-
-    /**
-     * Get pending/completed sell transactions.
-     *
-     * @return mixed
-     */
-    public function sells() {
-        $request = $this->createRequest( [], $this->url() . '/sells' );
-        $response = $this->request( $request );
-        return $this->getResponseAsJson( $response );
+        return 'v2/commerce/transactions/' . $this->type . '/' . $this->list;
     }
 }

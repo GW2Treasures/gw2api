@@ -16,18 +16,18 @@ class TransactionEndpoint extends AuthenticatedEndpoint {
     /**
      * Get current transactions.
      *
-     * @return ListEndpoint
+     * @return TypeEndpoint
      */
     public function current() {
-        return new ListEndpoint( $this->client, $this->apiKey, 'current' );
+        return new TypeEndpoint( $this->client, $this->apiKey, 'current' );
     }
 
     /**
      * Get transaction history.
      *
-     * @return ListEndpoint
+     * @return TypeEndpoint
      */
     public function history() {
-        return new ListEndpoint( $this->client, $this->apiKey, 'history' );
+        return new TypeEndpoint( $this->client, $this->apiKey, 'history' );
     }
 }
