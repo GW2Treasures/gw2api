@@ -21,7 +21,7 @@ class ExchangeEndpoint extends Endpoint {
      */
     public function gems( $quantity ) {
         $request = $this->createRequest([ 'quantity' => $quantity ], $this->url() . '/gems' );
-        return $this->getClient()->send( $request )->json([ 'object' => true ]);
+        return $this->getResponseAsJson( $this->request( $request ) );
     }
 
     /**
@@ -32,6 +32,6 @@ class ExchangeEndpoint extends Endpoint {
      */
     public function coins( $quantity ) {
         $request = $this->createRequest([ 'quantity' => $quantity ], $this->url() . '/coins' );
-        return $this->getClient()->send( $request )->json([ 'object' => true ]);
+        return $this->getResponseAsJson( $this->request( $request ) );
     }
 }

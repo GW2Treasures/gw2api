@@ -41,7 +41,8 @@ class ListEndpoint extends AuthenticatedEndpoint {
      */
     public function buys() {
         $request = $this->createRequest( [], $this->url() . '/buys' );
-        return $this->getClient()->send( $request )->json([ 'object' => true ]);
+        $response = $this->request( $request );
+        return $this->getResponseAsJson( $response );
     }
 
     /**
@@ -51,6 +52,7 @@ class ListEndpoint extends AuthenticatedEndpoint {
      */
     public function sells() {
         $request = $this->createRequest( [], $this->url() . '/sells' );
-        return $this->getClient()->send( $request )->json([ 'object' => true ]);
+        $response = $this->request( $request );
+        return $this->getResponseAsJson( $response );
     }
 }

@@ -3,6 +3,8 @@
 namespace GW2Treasures\GW2Api\Endpoint;
 
 use GuzzleHttp\Client;
+use GuzzleHttp\Message\RequestInterface;
+use GuzzleHttp\Message\ResponseInterface;
 use GuzzleHttp\Pool;
 
 trait BulkEndpoint {
@@ -36,7 +38,8 @@ trait BulkEndpoint {
      * @return string[]|int[]
      */
     public function ids() {
-        return $this->getClient()->send( $this->createRequest() )->json();
+        $response = $this->request( $this->createRequest() );
+        return $this->getResponseAsJson( $response );
     }
 
     /**
@@ -47,8 +50,8 @@ trait BulkEndpoint {
      */
     public function get( $id ) {
         $request = $this->createRequest([ 'id' => $id ]);
-        $response = $this->getClient()->send( $request );
-        return $response->json(['object' => true]);
+        $response = $this->request( $request );
+        return $this->getResponseAsJson( $response );
     }
 
     /**
@@ -74,7 +77,8 @@ trait BulkEndpoint {
         $result = [];
         /** @var \GuzzleHttp\Message\Response $response */
         foreach( $responses as $response ) {
-            $result = array_merge( $result, $response->json(['object' => true]) );
+            // TODO: handle errors
+            $result = array_merge( $result, $this->getResponseAsJson( $response ));
         }
 
         return $result;
@@ -90,7 +94,9 @@ trait BulkEndpoint {
      */
     public function all() {
         if( $this->supportsIdsAll() ) {
-            return $this->getClient()->send( $this->createRequest([ 'ids' => 'all' ]))->json(['object' => true]);
+            $request = $this->createRequest( [ 'ids' => 'all' ] );
+            $response = $this->request( $request );
+            return $this->getResponseAsJson( $response );
         } else {
             $ids = $this->ids();
             return $this->many( $ids );
@@ -112,4 +118,7 @@ trait BulkEndpoint {
      * @return \GuzzleHttp\Message\Request|\GuzzleHttp\Message\RequestInterface
      */
     protected abstract function createRequest( array $query = [], $url = null, $method = 'GET', $options = [] );
+
+    protected abstract function request( RequestInterface $request );
+    protected abstract function getResponseAsJson( ResponseInterface $response );
 }

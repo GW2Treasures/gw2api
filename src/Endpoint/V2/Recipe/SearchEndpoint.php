@@ -19,7 +19,7 @@ class SearchEndpoint extends Endpoint {
      */
     public function input( $id ) {
         $request = $this->createRequest([ 'input' => $id ]);
-        return $this->getClient()->send( $request )->json([ 'object' => true ]);
+        return $this->getResponseAsJson( $this->request( $request ) );
     }
 
     /**
@@ -28,6 +28,6 @@ class SearchEndpoint extends Endpoint {
      */
     public function output( $id ) {
         $request = $this->createRequest([ 'output' => $id ]);
-        return $this->getClient()->send( $request )->json([ 'object' => true ]);
+        return $this->getResponseAsJson( $this->request( $request ) );
     }
 }
