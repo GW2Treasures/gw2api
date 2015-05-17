@@ -15,6 +15,8 @@ class CommerceEndpoint extends Endpoint {
     }
 
     /**
+     * Current gem/coin exchange rates.
+     *
      * @return ExchangeEndpoint
      */
     public function exchange() {
@@ -22,6 +24,8 @@ class CommerceEndpoint extends Endpoint {
     }
 
     /**
+     * Current trading post listings.
+     *
      * @return ListingEndpoint
      */
     public function listings() {
@@ -29,12 +33,20 @@ class CommerceEndpoint extends Endpoint {
     }
 
     /**
+     * Current trading post prices.
+     *
      * @return PriceEndpoint
      */
     public function prices() {
         return new PriceEndpoint( $this->client );
     }
 
+    /**
+     * Current and completed transactions.
+     *
+     * @param string $apiKey
+     * @return TransactionEndpoint
+     */
     public function transactions( $apiKey ) {
         return new TransactionEndpoint( $this->client, $apiKey );
     }
