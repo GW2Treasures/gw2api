@@ -4,7 +4,9 @@ namespace GW2Treasures\GW2Api\V2\Localization;
 
 use GW2Treasures\GW2Api\V2\Endpoint;
 
-class LocalizedEndpointProxy extends Endpoint {
+use GW2Treasures\GW2Api\V2\Interfaces\ILocalizedEndpoint;
+
+class LocalizedEndpointProxy extends Endpoint implements ILocalizedEndpoint {
     /** @var Endpoint $origin */
     private $origin;
 
@@ -30,8 +32,8 @@ class LocalizedEndpointProxy extends Endpoint {
      * @return mixed
      */
     public function __call( $name, $arguments ) {
-        if( is_callable([ $this->origin, $name ])) {
-            $method = new \ReflectionMethod( $this->origin, $name );
+        $method = new \ReflectionMethod( $this->origin, $name );
+        if( !is_null( $method )) {
             $closure = $method->getClosure( $this->origin )->bindTo( $this, $this->origin );
             return call_user_func_array( $closure, $arguments );
         } else {
@@ -62,6 +64,13 @@ class LocalizedEndpointProxy extends Endpoint {
         return $this->origin->getClient();
     }
 
+    /**
+     * @param string $language
+     * @return $this
+     */
+    public function lang( $language ) {
+        return new LocalizedEndpointProxy( $this->origin, $language );
+    }
 
     /**
      * String representation of this localized endpoint.
