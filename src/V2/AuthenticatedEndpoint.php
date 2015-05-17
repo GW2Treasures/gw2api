@@ -7,8 +7,9 @@ use GuzzleHttp\Message\RequestInterface;
 use GuzzleHttp\Message\ResponseInterface;
 use GW2Treasures\GW2Api\V2\Exception\AuthenticationException;
 use GW2Treasures\GW2Api\V2\Exception\InvalidPermissionsException;
+use GW2Treasures\GW2Api\V2\Interfaces\IAuthenticatedEndpoint;
 
-abstract class AuthenticatedEndpoint extends Endpoint {
+abstract class AuthenticatedEndpoint extends Endpoint implements IAuthenticatedEndpoint {
     protected $apiKey;
 
     public function __construct( Client $client, $apiKey, array $options = [] ) {

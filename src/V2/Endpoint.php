@@ -7,8 +7,9 @@ use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Message\RequestInterface;
 use GuzzleHttp\Message\ResponseInterface;
 use GW2Treasures\GW2Api\Exception\ApiException;
+use GW2Treasures\GW2Api\V2\Interfaces\IEndpoint;
 
-abstract class Endpoint {
+abstract class Endpoint implements IEndpoint {
     /** @var Client $client */
     protected $client;
 
