@@ -42,8 +42,8 @@ class GW2Api {
         ] + $options;
     }
 
-    public function account( $access_token ) {
-        return new AccountEndpoint( $this->client, $access_token );
+    public function account( $apiKey ) {
+        return new AccountEndpoint( $this->client, $apiKey );
     }
 
     public function build() {
