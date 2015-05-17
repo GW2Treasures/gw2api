@@ -48,7 +48,7 @@ abstract class Endpoint implements IEndpoint {
 
     /**
      * @param RequestInterface $request
-     * @return mixed
+     * @return ResponseInterface
      */
     protected function request( RequestInterface $request ) {
         try {

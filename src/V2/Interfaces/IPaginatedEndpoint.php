@@ -25,5 +25,5 @@ interface IPaginatedEndpoint extends IEndpoint {
      * @param int $size
      * @return mixed
      */
-    function page( $index, $size = null );
+    function page( $page, $size = null );
 }

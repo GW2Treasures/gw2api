@@ -24,7 +24,17 @@ trait EndpointTrait {
      */
     protected abstract function createRequest( array $query = [], $url = null, $method = 'GET', $options = [] );
 
+    /**
+     * @param RequestInterface $request
+     * @return ResponseInterface
+     */
     protected abstract function request( RequestInterface $request );
 
+    /**
+     * Returns the json object if the response contains valid json, otherwise null.
+     *
+     * @param ResponseInterface $response
+     * @return mixed|null
+     */
     protected abstract function getResponseAsJson( ResponseInterface $response );
 }

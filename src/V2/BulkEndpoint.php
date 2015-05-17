@@ -2,7 +2,6 @@
 
 namespace GW2Treasures\GW2Api\V2;
 
-use GuzzleHttp\Client;
 use GuzzleHttp\Pool;
 
 trait BulkEndpoint {
@@ -63,8 +62,8 @@ trait BulkEndpoint {
         $responses = Pool::batch( $this->getClient(), $requests, ['pool_size' => 128] );
 
         $result = [];
-        /** @var \GuzzleHttp\Message\Response $response */
         foreach( $responses as $response ) {
+            /** @var \GuzzleHttp\Message\Response $response */
             // TODO: handle errors
             $result = array_merge( $result, $this->getResponseAsJson( $response ));
         }
