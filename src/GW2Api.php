@@ -3,18 +3,18 @@
 namespace GW2Treasures\GW2Api;
 
 use GuzzleHttp\Client;
-use GW2Treasures\GW2Api\Endpoint\V2\Account\AccountEndpoint;
-use GW2Treasures\GW2Api\Endpoint\V2\Build\BuildEndpoint;
-use GW2Treasures\GW2Api\Endpoint\V2\Color\ColorEndpoint;
-use GW2Treasures\GW2Api\Endpoint\V2\Commerce\CommerceEndpoint;
-use GW2Treasures\GW2Api\Endpoint\V2\Continent\ContinentEndpoint;
-use GW2Treasures\GW2Api\Endpoint\V2\File\FileEndpoint;
-use GW2Treasures\GW2Api\Endpoint\V2\Item\ItemEndpoint;
-use GW2Treasures\GW2Api\Endpoint\V2\Map\MapEndpoint;
-use GW2Treasures\GW2Api\Endpoint\V2\Quaggan\QuagganEndpoint;
-use GW2Treasures\GW2Api\Endpoint\V2\Recipe\RecipeEndpoint;
-use GW2Treasures\GW2Api\Endpoint\V2\Skin\SkinEndpoint;
-use GW2Treasures\GW2Api\Endpoint\V2\World\WorldEndpoint;
+use GW2Treasures\GW2Api\V2\Endpoint\Account\AccountEndpoint;
+use GW2Treasures\GW2Api\V2\Endpoint\Build\BuildEndpoint;
+use GW2Treasures\GW2Api\V2\Endpoint\Color\ColorEndpoint;
+use GW2Treasures\GW2Api\V2\Endpoint\Commerce\CommerceEndpoint;
+use GW2Treasures\GW2Api\V2\Endpoint\Continent\ContinentEndpoint;
+use GW2Treasures\GW2Api\V2\Endpoint\File\FileEndpoint;
+use GW2Treasures\GW2Api\V2\Endpoint\Item\ItemEndpoint;
+use GW2Treasures\GW2Api\V2\Endpoint\Map\MapEndpoint;
+use GW2Treasures\GW2Api\V2\Endpoint\Quaggan\QuagganEndpoint;
+use GW2Treasures\GW2Api\V2\Endpoint\Recipe\RecipeEndpoint;
+use GW2Treasures\GW2Api\V2\Endpoint\Skin\SkinEndpoint;
+use GW2Treasures\GW2Api\V2\Endpoint\World\WorldEndpoint;
 
 class GW2Api {
     /** @var string $apiUrl */
