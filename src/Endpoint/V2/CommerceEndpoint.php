@@ -10,7 +10,7 @@ class CommerceEndpoint extends Endpoint {
      * {@inheritdoc}
      */
     protected function url() {
-        return 'v2/build';
+        return 'v2/commerce';
     }
 
     /**
