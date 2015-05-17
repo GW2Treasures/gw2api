@@ -15,5 +15,15 @@ interface IPaginatedEndpoint extends IEndpoint {
      *
      * @return array
      */
-    public function all();
+    function all();
+
+
+    /**
+     * Get a single page.
+     *
+     * @param int $index
+     * @param int $size
+     * @return mixed
+     */
+    function page( $index, $size = null );
 }

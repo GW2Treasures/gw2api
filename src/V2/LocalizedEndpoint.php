@@ -3,6 +3,7 @@
 namespace GW2Treasures\GW2Api\V2;
 
 trait LocalizedEndpoint {
+    use EndpointTrait;
 
     /** @var string $language */
     protected $language = 'en';

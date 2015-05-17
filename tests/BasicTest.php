@@ -12,6 +12,13 @@ class BasicTest extends TestCase {
         $q2 = $quagganEndpoint->many( $quagganEndpoint->ids() );
     }
 
+    public function testPagination() {
+        $quaggans = $this->api()->quaggans()->page(2, 2);
+
+        $this->assertEquals( 'bowl', $quaggans[0]->id );
+        $this->assertEquals( 'box', $quaggans[1]->id );
+    }
+
     public function testWorlds() {
         $anvilRock = $this->api()->worlds()->get(1001);
         $this->assertEquals("Anvil Rock", $anvilRock->name);
