@@ -8,7 +8,7 @@ class LocalizedEndpointTest extends TestCase {
 
         $request = $this->getLastRequest();
         $this->assertTrue( $request->getQuery()->hasKey('lang'),
-            'LocalizedEndpoint sets ?lang query parameter.' );
+            'LocalizedEndpoint sets ?lang query parameter' );
         $this->assertEquals( 'en', $request->getQuery()->get('lang'),
             'LocalizedEndpoint sets correct query parameter value' );
     }
@@ -24,9 +24,9 @@ class LocalizedEndpointTest extends TestCase {
 
         $request = $this->getLastRequest();
         $this->assertTrue( $request->getQuery()->hasKey('lang'),
-            'LocalizedEndpoint sets ?lang query parameter on repeated request.' );
+            'LocalizedEndpoint sets ?lang query parameter on repeated request' );
         $this->assertEquals( 'de', $request->getQuery()->get('lang'),
-            'LocalizedEndpoint sets correct query parameter value pm repeated request.' );
+            'LocalizedEndpoint sets correct query parameter value pm repeated request' );
     }
 
     public function testNested() {
@@ -36,7 +36,7 @@ class LocalizedEndpointTest extends TestCase {
 
         $request = $this->getLastRequest();
         $this->assertTrue( $request->getQuery()->hasKey('lang'),
-            'LocalizedEndpoint sets ?lang query parameter on nested request.' );
+            'LocalizedEndpoint sets ?lang query parameter on nested request' );
         $this->assertEquals( 'fr', $request->getQuery()->get('lang'),
             'LocalizedEndpoint sets correct query parameter value on nested request' );
     }
@@ -52,16 +52,16 @@ class LocalizedEndpointTest extends TestCase {
         $en->all();
         $request = $this->getLastRequest();
         $this->assertTrue( $request->getQuery()->hasKey('lang'),
-            'LocalizedEndpoint sets ?lang query parameter on nested request.' );
+            'LocalizedEndpoint sets ?lang query parameter on first request after creating multiple localized endpoints' );
         $this->assertEquals( 'en', $request->getQuery()->get('lang'),
-            'LocalizedEndpoint sets correct query parameter value on nested request' );
+            'LocalizedEndpoint sets correct query parameter value on first request after creating multiple localized endpoints' );
 
         // send second request
         $de->all();
         $request = $this->getLastRequest();
         $this->assertTrue( $request->getQuery()->hasKey('lang'),
-            'LocalizedEndpoint sets ?lang query parameter on nested request.' );
+            'LocalizedEndpoint sets ?lang query parameter on last request after creating multiple localized endpoints and sending the first' );
         $this->assertEquals( 'de', $request->getQuery()->get('lang'),
-            'LocalizedEndpoint sets correct query parameter value on nested request' );
+            'LocalizedEndpoint sets correct query parameter value on last request after creating multiple localized endpoints and sending the first' );
     }
 }
