@@ -1,10 +1,16 @@
 <?php
 
+use Stubs\LocalizedEndpointStub;
+
 class LocalizedEndpointTest extends TestCase {
+    protected function getLocalizedEndpoint() {
+        return new LocalizedEndpointStub( $this->api()->getClient() );
+    }
+
     public function testBasic() {
         $this->mockResponse('[]');
 
-        $this->api()->worlds()->lang('en')->all();
+        $this->getLocalizedEndpoint()->lang('en')->get();
 
         $request = $this->getLastRequest();
         $this->assertTrue( $request->getQuery()->hasKey('lang'),
@@ -17,10 +23,10 @@ class LocalizedEndpointTest extends TestCase {
         $this->mockResponse('[]');
         $this->mockResponse('[]');
 
-        $worlds_en = $this->api()->worlds()->lang('de');
+        $endpoint_de = $this->getLocalizedEndpoint()->lang('de');
 
-        $worlds_en->all();
-        $worlds_en->all();
+        $endpoint_de->get();
+        $endpoint_de->get();
 
         $request = $this->getLastRequest();
         $this->assertTrue( $request->getQuery()->hasKey('lang'),
@@ -32,7 +38,7 @@ class LocalizedEndpointTest extends TestCase {
     public function testNested() {
         $this->mockResponse('[]');
 
-        $this->api()->worlds()->lang('es')->lang('fr')->all();
+        $this->getLocalizedEndpoint()->lang('es')->lang('fr')->get();
 
         $request = $this->getLastRequest();
         $this->assertTrue( $request->getQuery()->hasKey('lang'),
@@ -45,11 +51,11 @@ class LocalizedEndpointTest extends TestCase {
         $this->mockResponse('[]');
         $this->mockResponse('[]');
 
-        $en = $this->api()->worlds()->lang('en');
-        $de = $this->api()->worlds()->lang('de');
+        $en = $this->getLocalizedEndpoint()->lang('en');
+        $de = $this->getLocalizedEndpoint()->lang('de');
 
         // send first request
-        $en->all();
+        $en->get();
         $request = $this->getLastRequest();
         $this->assertTrue( $request->getQuery()->hasKey('lang'),
             'LocalizedEndpoint sets ?lang query parameter on first request after creating multiple localized endpoints' );
@@ -57,7 +63,7 @@ class LocalizedEndpointTest extends TestCase {
             'LocalizedEndpoint sets correct query parameter value on first request after creating multiple localized endpoints' );
 
         // send second request
-        $de->all();
+        $de->get();
         $request = $this->getLastRequest();
         $this->assertTrue( $request->getQuery()->hasKey('lang'),
             'LocalizedEndpoint sets ?lang query parameter on last request after creating multiple localized endpoints and sending the first' );
