@@ -1,5 +1,7 @@
 <?php
 
+use GuzzleHttp\Message\Response;
+use GuzzleHttp\Stream\Stream;
 use Stub\PaginatedEndpointStub;
 
 class PaginatedEndpointTest extends TestCase {
@@ -23,5 +25,29 @@ class PaginatedEndpointTest extends TestCase {
             'PaginatedEndpoint sets page_size query parameter' );
         $this->assertEquals( 2, $request->getQuery()->get('page_size'),
             'PaginatedEndpoint sets correct page_size query parameter value' );
+    }
+
+    public function testAll() {
+        $firstResponse = new Response(
+            200,
+            [ 'X-Result-Total' => 10, 'Content-Type' => 'application/json; charset=utf-8' ],
+            Stream::factory( '[1,2,3]' )
+        );
+
+        $this->mockResponse( $firstResponse );
+        $this->mockResponse( '[4,5,6]' );
+        $this->mockResponse( '[7,8,9]' );
+        $this->mockResponse( '[10]' );
+
+        $result = $this->getPaginatedEndpoint( 3 )->all();
+        $this->assertCount( 10, $result, 'PaginatedEndpoint gets all results' );
+
+        $requests = $this->history->getRequests();
+        $this->assertCount( 4, $requests, 'PaginatedEndpoint makes exactly as many requests as pages exist' );
+
+        $this->assertEquals( 0, $requests[0]->getQuery()->get('page') );
+        $this->assertEquals( 1, $requests[1]->getQuery()->get('page') );
+        $this->assertEquals( 2, $requests[2]->getQuery()->get('page') );
+        $this->assertEquals( 3, $requests[3]->getQuery()->get('page') );
     }
 }
