@@ -50,4 +50,33 @@ class PaginatedEndpointTest extends TestCase {
         $this->assertEquals( 2, $requests[2]->getQuery()->get('page') );
         $this->assertEquals( 3, $requests[3]->getQuery()->get('page') );
     }
+
+
+    /** @expectedException \OutOfRangeException */
+    public function testPageOutOfRangeLower() {
+        $this->getPaginatedEndpoint()->page( -1 );
+    }
+
+    /**
+     * @expectedException \GW2Treasures\GW2Api\Exception\ApiException
+     * this should be a PageOutOfRangeException, but we need better error handling from within traits for that.
+     */
+    public function testPageOutOfRangeUpper() {
+        $this->mockResponse( new Response(
+            400, [ 'Content-Type' => 'application/json; charset=utf-8' ],
+            Stream::factory( '{"text":"page out of range. Use page values 0 - 1."}' )
+        ));
+
+        $this->getPaginatedEndpoint()->page( 5 );
+    }
+
+    /** @expectedException \OutOfRangeException */
+    public function testPageSizeOutOfRangeLower() {
+        $this->getPaginatedEndpoint()->page( 0, 0 );
+    }
+
+    /** @expectedException \OutOfRangeException */
+    public function testPageSizeOutOfRangeUpper() {
+        $this->getPaginatedEndpoint( 1 )->page( 0, 2 );
+    }
 }
