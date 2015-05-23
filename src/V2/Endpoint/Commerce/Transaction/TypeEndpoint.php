@@ -39,7 +39,7 @@ class TypeEndpoint extends AuthenticatedEndpoint {
      * @return ListEndpoint
      */
     public function buys() {
-        return new ListEndpoint( $this->getClient(), $this->apiKey, $this->type, 'buys' );
+        return new ListEndpoint( $this->getApi(), $this->apiKey, $this->type, 'buys' );
     }
 
     /**
@@ -48,6 +48,6 @@ class TypeEndpoint extends AuthenticatedEndpoint {
      * @return ListEndpoint
      */
     public function sells() {
-        return new ListEndpoint( $this->getClient(), $this->apiKey, $this->type, 'sells' );
+        return new ListEndpoint( $this->getApi(), $this->apiKey, $this->type, 'sells' );
     }
 }
