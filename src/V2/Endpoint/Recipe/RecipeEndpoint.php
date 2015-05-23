@@ -23,6 +23,6 @@ class RecipeEndpoint extends Endpoint implements IBulkEndpoint {
      * @return SearchEndpoint
      */
     public function search() {
-        return new SearchEndpoint( $this->client );
+        return new SearchEndpoint( $this->getApi() );
     }
 }

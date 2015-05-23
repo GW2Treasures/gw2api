@@ -48,54 +48,54 @@ class GW2Api {
     }
 
     public function account( $apiKey ) {
-        return new AccountEndpoint( $this->client, $apiKey );
+        return new AccountEndpoint( $this, $apiKey );
     }
 
     public function build() {
-        return new BuildEndpoint( $this->client );
+        return new BuildEndpoint( $this );
     }
 
     public function characters( $apiKey ) {
-        return new CharacterEndpoint( $this->client, $apiKey );
+        return new CharacterEndpoint( $this, $apiKey );
     }
 
     public function colors() {
-        return new ColorEndpoint( $this->client );
+        return new ColorEndpoint( $this );
     }
 
     public function commerce() {
-        return new CommerceEndpoint( $this->client );
+        return new CommerceEndpoint( $this );
     }
 
     public function continents() {
-        return new ContinentEndpoint( $this->client );
+        return new ContinentEndpoint( $this );
     }
 
     public function files() {
-        return new FileEndpoint( $this->client );
+        return new FileEndpoint( $this );
     }
 
     public function items() {
-        return new ItemEndpoint( $this->client );
+        return new ItemEndpoint( $this );
     }
 
     public function maps() {
-        return new MapEndpoint( $this->client );
+        return new MapEndpoint( $this );
     }
 
     public function quaggans() {
-        return new QuagganEndpoint( $this->client );
+        return new QuagganEndpoint( $this );
     }
 
     public function recipes() {
-        return new RecipeEndpoint( $this->client );
+        return new RecipeEndpoint( $this );
     }
 
     public function skins() {
-        return new SkinEndpoint( $this->client );
+        return new SkinEndpoint( $this );
     }
 
     public function worlds() {
-        return new WorldEndpoint( $this->client );
+        return new WorldEndpoint( $this );
     }
 }

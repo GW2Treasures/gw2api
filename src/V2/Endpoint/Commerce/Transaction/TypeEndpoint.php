@@ -2,7 +2,7 @@
 
 namespace GW2Treasures\GW2Api\V2\Endpoint\Commerce\Transaction;
 
-use GuzzleHttp\Client;
+use GW2Treasures\GW2Api\GW2Api;
 use GW2Treasures\GW2Api\V2\AuthenticatedEndpoint;
 use InvalidArgumentException;
 
@@ -13,7 +13,7 @@ class TypeEndpoint extends AuthenticatedEndpoint {
     /** @var string $type */
     protected $type;
 
-    public function __construct( Client $client, $apiKey, $type ) {
+    public function __construct( GW2Api $api, $apiKey, $type ) {
         if( !in_array( $type, self::$types )) {
             throw new InvalidArgumentException(
                 'Invalid $type ("' . $type . '""), has to be one of: ' . implode(', ', self::$types)
@@ -22,7 +22,7 @@ class TypeEndpoint extends AuthenticatedEndpoint {
 
         $this->type = $type;
 
-        parent::__construct( $client, $apiKey );
+        parent::__construct( $api, $apiKey );
     }
 
 

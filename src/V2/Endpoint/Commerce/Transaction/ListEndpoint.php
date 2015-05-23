@@ -2,7 +2,7 @@
 
 namespace GW2Treasures\GW2Api\V2\Endpoint\Commerce\Transaction;
 
-use GuzzleHttp\Client;
+use GW2Treasures\GW2Api\GW2Api;
 use GW2Treasures\GW2Api\V2\AuthenticatedEndpoint;
 use GW2Treasures\GW2Api\V2\Interfaces\IPaginatedEndpoint;
 use GW2Treasures\GW2Api\V2\PaginatedEndpoint;
@@ -20,7 +20,7 @@ class ListEndpoint extends AuthenticatedEndpoint implements IPaginatedEndpoint {
     /** @var string $list */
     protected $list;
 
-    public function __construct( Client $client, $apiKey, $type, $list ) {
+    public function __construct( GW2Api $api, $apiKey, $type, $list ) {
         if( !in_array( $type, self::$types )) {
             throw new InvalidArgumentException(
                 'Invalid $type ("' . $type . '""), has to be one of: ' . implode(', ', self::$types)
@@ -36,7 +36,7 @@ class ListEndpoint extends AuthenticatedEndpoint implements IPaginatedEndpoint {
         $this->type = $type;
         $this->list = $list;
 
-        parent::__construct( $client, $apiKey );
+        parent::__construct( $api, $apiKey );
     }
 
     /**

@@ -7,24 +7,29 @@ use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Message\RequestInterface;
 use GuzzleHttp\Message\ResponseInterface;
 use GW2Treasures\GW2Api\Exception\ApiException;
+use GW2Treasures\GW2Api\GW2Api;
 use GW2Treasures\GW2Api\V2\Interfaces\IEndpoint;
 
 abstract class Endpoint implements IEndpoint {
-    /** @var Client $client */
-    protected $client;
+    /** @var GW2Api $api */
+    protected $api;
 
     /**
-     * @param Client $client
+     * @param GW2Api $api
      */
-    public function __construct( Client $client ) {
-        $this->client = $client;
+    public function __construct( GW2Api $api ) {
+        $this->api = $api;
     }
 
     /**
      * @return Client
      */
     protected function getClient() {
-        return $this->client;
+        return $this->getApi()->getClient();
+    }
+
+    protected function getApi() {
+        return $this->api;
     }
 
     /**
@@ -38,7 +43,7 @@ abstract class Endpoint implements IEndpoint {
      */
     protected function createRequest( array $query = [], $url = null, $method = 'GET', $options = [] ) {
         $url = !is_null( $url ) ? $url : $this->url();
-        return $this->client->createRequest( $method, $url, $options + [ 'query' => $query ]);
+        return $this->getClient()->createRequest( $method, $url, $options + [ 'query' => $query ]);
     }
 
     /**

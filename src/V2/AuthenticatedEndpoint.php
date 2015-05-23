@@ -2,9 +2,9 @@
 
 namespace GW2Treasures\GW2Api\V2;
 
-use GuzzleHttp\Client;
 use GuzzleHttp\Message\RequestInterface;
 use GuzzleHttp\Message\ResponseInterface;
+use GW2Treasures\GW2Api\GW2Api;
 use GW2Treasures\GW2Api\V2\Exception\AuthenticationException;
 use GW2Treasures\GW2Api\V2\Exception\InvalidPermissionsException;
 use GW2Treasures\GW2Api\V2\Interfaces\IAuthenticatedEndpoint;
@@ -12,10 +12,10 @@ use GW2Treasures\GW2Api\V2\Interfaces\IAuthenticatedEndpoint;
 abstract class AuthenticatedEndpoint extends Endpoint implements IAuthenticatedEndpoint {
     protected $apiKey;
 
-    public function __construct( Client $client, $apiKey ) {
+    public function __construct( GW2Api $api, $apiKey ) {
         $this->apiKey = $apiKey;
 
-        parent::__construct( $client );
+        parent::__construct( $api );
     }
 
     /**

@@ -19,7 +19,7 @@ class TransactionEndpoint extends AuthenticatedEndpoint {
      * @return TypeEndpoint
      */
     public function current() {
-        return new TypeEndpoint( $this->client, $this->apiKey, 'current' );
+        return new TypeEndpoint( $this->getApi(), $this->apiKey, 'current' );
     }
 
     /**
@@ -28,6 +28,6 @@ class TransactionEndpoint extends AuthenticatedEndpoint {
      * @return TypeEndpoint
      */
     public function history() {
-        return new TypeEndpoint( $this->client, $this->apiKey, 'history' );
+        return new TypeEndpoint( $this->getApi(), $this->apiKey, 'history' );
     }
 }

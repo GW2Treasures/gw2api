@@ -20,7 +20,7 @@ class CommerceEndpoint extends Endpoint {
      * @return ExchangeEndpoint
      */
     public function exchange() {
-        return new ExchangeEndpoint( $this->client );
+        return new ExchangeEndpoint( $this->getApi() );
     }
 
     /**
@@ -29,7 +29,7 @@ class CommerceEndpoint extends Endpoint {
      * @return ListingEndpoint
      */
     public function listings() {
-        return new ListingEndpoint( $this->client );
+        return new ListingEndpoint( $this->getApi() );
     }
 
     /**
@@ -38,7 +38,7 @@ class CommerceEndpoint extends Endpoint {
      * @return PriceEndpoint
      */
     public function prices() {
-        return new PriceEndpoint( $this->client );
+        return new PriceEndpoint( $this->getApi() );
     }
 
     /**
@@ -48,6 +48,6 @@ class CommerceEndpoint extends Endpoint {
      * @return TransactionEndpoint
      */
     public function transactions( $apiKey ) {
-        return new TransactionEndpoint( $this->client, $apiKey );
+        return new TransactionEndpoint( $this->getApi(), $apiKey );
     }
 }
