@@ -74,8 +74,8 @@ abstract class Endpoint implements IEndpoint {
      */
     protected function handleRequestError( RequestInterface $request, ResponseInterface $response ) {
         $responseJson = $this->getResponseAsJson( $response );
-        if( !is_null( $responseJson) && isset( $response->text )) {
-            $message = $response->text;
+        if( !is_null( $responseJson) && isset( $responseJson->text )) {
+            $message = $responseJson->text;
         } else {
             $message = 'Unknown GW2Api error';
         }
