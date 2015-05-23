@@ -79,7 +79,7 @@ abstract class Endpoint implements IEndpoint {
             $message = 'Unknown GW2Api error';
         }
 
-        throw new ApiException( $message, $request, $response );
+        throw new ApiException( $message, $response );
     }
 
     /**

@@ -30,9 +30,9 @@ abstract class AuthenticatedEndpoint extends Endpoint implements IAuthenticatedE
         $json = $this->getResponseAsJson( $response );
         if( !is_null( $json ) && isset( $json->text )) {
             if( $json->text === 'invalid key' ||  $json->text === 'endpoint requires authentication' ) {
-                throw new AuthenticationException( $json->text, $request, $response );
+                throw new AuthenticationException( $json->text, $response );
             } elseif( strpos( $json->text, 'requires scope' ) === 0 ) {
-                throw new InvalidPermissionsException( $json->text, $request, $response );
+                throw new InvalidPermissionsException( $json->text, $response );
             }
         }
         parent::handleRequestError( $request, $response );
