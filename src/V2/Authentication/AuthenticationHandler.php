@@ -33,7 +33,7 @@ class AuthenticationHandler extends ApiHandler {
      * @throws AuthenticationException
      * @throws InvalidPermissionsException
      */
-    public function onError( ResponseInterface $response ) {
+    public function onError( ResponseInterface $response = null ) {
         if( is_null( $response )) {
             return;
         }
