@@ -51,6 +51,23 @@ class PaginatedEndpointTest extends TestCase {
         $this->assertEquals( 3, $requests[3]->getQuery()->get('page') );
     }
 
+    public function testAllSmall() {
+        $firstResponse = new Response(
+            200,
+            [ 'X-Result-Total' => 3, 'Content-Type' => 'application/json; charset=utf-8' ],
+            Stream::factory( '[1,2,3]' )
+        );
+
+        $this->mockResponse( $firstResponse );
+
+        $result = $this->getPaginatedEndpoint( 3 )->all();
+        $this->assertCount( 3, $result, 'PaginatedEndpoint gets all results' );
+
+        $requests = $this->history->getRequests();
+        $this->assertCount( 1, $requests, 'PaginatedEndpoint only makes one request if all results fit in one page' );
+        $this->assertEquals( 0, $requests[0]->getQuery()->get('page') );
+    }
+
 
     /** @expectedException \OutOfRangeException */
     public function testPageOutOfRangeLower() {

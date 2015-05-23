@@ -110,6 +110,20 @@ class BulkEndpointTest extends TestCase {
             'BulkEndpoint sets correct query parameter value for ?ids on second request' );
     }
 
+    public function testManyEmpty() {
+        $this->mockResponse('[1,2,3]');
+
+        $endpoint = $this->getBulkEndpoint( true, 3 );
+        $result = $endpoint->many([]);
+
+        $requests = $this->history->getRequests();
+
+        $this->assertCount( 0, $requests,
+            'BulkEndpoint returns instantly without making request when 0 ids were requested' );
+        $this->assertEquals( [], $result,
+            'BulkEndpoint returns empty result when 0 ids were requested' );
+}
+
     /**
      * @expectedException \GW2Treasures\GW2Api\Exception\ApiException
      * @expectedExceptionMessage no such id
