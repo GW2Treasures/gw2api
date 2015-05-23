@@ -12,9 +12,10 @@ use GW2Treasures\GW2Api\V2\Interfaces\IAuthenticatedEndpoint;
 abstract class AuthenticatedEndpoint extends Endpoint implements IAuthenticatedEndpoint {
     protected $apiKey;
 
-    public function __construct( Client $client, $apiKey, array $options = [] ) {
-        parent::__construct( $client, $options );
+    public function __construct( Client $client, $apiKey ) {
         $this->apiKey = $apiKey;
+
+        parent::__construct( $client );
     }
 
     /**

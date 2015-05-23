@@ -13,7 +13,7 @@ class TypeEndpoint extends AuthenticatedEndpoint {
     /** @var string $type */
     protected $type;
 
-    public function __construct( Client $client, $apiKey, $type, array $options = [ ] ) {
+    public function __construct( Client $client, $apiKey, $type ) {
         if( !in_array( $type, self::$types )) {
             throw new InvalidArgumentException(
                 'Invalid $type ("' . $type . '""), has to be one of: ' . implode(', ', self::$types)
@@ -22,7 +22,7 @@ class TypeEndpoint extends AuthenticatedEndpoint {
 
         $this->type = $type;
 
-        parent::__construct( $client, $apiKey, $options );
+        parent::__construct( $client, $apiKey );
     }
 
 

@@ -13,16 +13,11 @@ abstract class Endpoint implements IEndpoint {
     /** @var Client $client */
     protected $client;
 
-    /** @var array $options */
-    private $options;
-
     /**
      * @param Client $client
-     * @param array  $options
      */
-    public function __construct( Client $client, array $options = [] ) {
+    public function __construct( Client $client ) {
         $this->client = $client;
-        $this->options = $options;
     }
 
     /**

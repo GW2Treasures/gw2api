@@ -20,7 +20,7 @@ class ListEndpoint extends AuthenticatedEndpoint implements IPaginatedEndpoint {
     /** @var string $list */
     protected $list;
 
-    public function __construct( Client $client, $apiKey, $type, $list, array $options = [ ] ) {
+    public function __construct( Client $client, $apiKey, $type, $list ) {
         if( !in_array( $type, self::$types )) {
             throw new InvalidArgumentException(
                 'Invalid $type ("' . $type . '""), has to be one of: ' . implode(', ', self::$types)
@@ -36,7 +36,7 @@ class ListEndpoint extends AuthenticatedEndpoint implements IPaginatedEndpoint {
         $this->type = $type;
         $this->list = $list;
 
-        parent::__construct( $client, $apiKey, $options );
+        parent::__construct( $client, $apiKey );
     }
 
     /**
