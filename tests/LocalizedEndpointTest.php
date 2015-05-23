@@ -4,7 +4,7 @@ use Stubs\LocalizedEndpointStub;
 
 class LocalizedEndpointTest extends TestCase {
     protected function getLocalizedEndpoint() {
-        return new LocalizedEndpointStub( $this->api()->getClient() );
+        return new LocalizedEndpointStub( $this->api() );
     }
 
     public function testBasic() {

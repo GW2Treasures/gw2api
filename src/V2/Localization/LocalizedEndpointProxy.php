@@ -4,8 +4,6 @@ namespace GW2Treasures\GW2Api\V2\Localization;
 
 use GW2Treasures\GW2Api\V2\Endpoint;
 
-use GW2Treasures\GW2Api\V2\Interfaces\ILocalizedEndpoint;
-
 class LocalizedEndpointProxy extends Endpoint implements ILocalizedEndpoint {
     /** @var Endpoint $origin */
     private $origin;
