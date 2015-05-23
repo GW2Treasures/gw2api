@@ -3,7 +3,6 @@
 namespace GW2Treasures\GW2Api\Exception;
 
 use Exception;
-use GuzzleHttp\Message\RequestInterface;
 use GuzzleHttp\Message\ResponseInterface;
 
 class ApiException extends Exception {

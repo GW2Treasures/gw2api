@@ -15,11 +15,16 @@ abstract class Endpoint implements IEndpoint {
     /** @var GW2Api $api */
     protected $api;
 
+    /** @var ApiHandler[] */
+    protected $handlers = [];
+
     /**
      * @param GW2Api $api
      */
     public function __construct( GW2Api $api ) {
         $this->api = $api;
+
+        $this->api->attachRegisteredHandlers( $this );
     }
 
     /**
@@ -45,15 +50,28 @@ abstract class Endpoint implements IEndpoint {
     protected function request( array $query = [], $url = null, $method = 'GET', $options = [] ) {
         $request = $this->createRequest( $query, $url, $method, $options );
 
+        foreach( $this->handlers as $handler ) {
+            $handler->onRequest( $request );
+        }
+
         try {
             $response = $this->getClient()->send( $request );
         } catch( ClientException $ex ) {
             if( $ex->hasResponse() ) {
                 $response = $ex->getResponse();
-                $this->handleRequestError( $response );
+
+                foreach( $this->handlers as $handler ) {
+                    $handler->onError( $response );
+                }
+
+                $this->handleUnhandledError( $response );
             } else {
                 throw $ex;
             }
+        }
+
+        foreach( $this->handlers as $handler ) {
+            $handler->onResponse( $response );
         }
 
         return new ApiResponse( $response );
@@ -73,7 +91,13 @@ abstract class Endpoint implements IEndpoint {
         $responses = [];
 
         foreach( $queries as $query ) {
-            $requests[] = $this->createRequest( $query, $url, $method, $options );
+            $request = $this->createRequest( $query, $url, $method, $options );
+
+            foreach( $this->handlers as $handler ) {
+                $handler->onRequest( $request );
+            }
+
+            $requests[] = $request;
         }
 
         $results = Pool::batch( $this->getClient(), $requests, [ 'pool_size' => 128 ]);
@@ -83,10 +107,18 @@ abstract class Endpoint implements IEndpoint {
 
             if( $response instanceof \Exception ) {
                 if( $response instanceof ClientException && $response->hasResponse() ) {
-                    $this->handleRequestError( $response );
+                    foreach( $this->handlers as $handler ) {
+                        $handler->onError( $response );
+                    }
+
+                    $this->handleUnhandledError( $response );
                 }
 
                 throw $response;
+            }
+
+            foreach( $this->handlers as $handler ) {
+                $handler->onResponse( $response );
             }
 
             $responses[] = new ApiResponse( $response );
@@ -116,10 +148,18 @@ abstract class Endpoint implements IEndpoint {
      * @param ResponseInterface $response
      * @throws ApiException
      */
-    protected function handleRequestError( ResponseInterface $response ) {
-        $responseJson = $this->getResponseAsJson( $response );
-        if( !is_null( $responseJson) && isset( $responseJson->text )) {
-            $message = $responseJson->text;
+    private function handleUnhandledError( ResponseInterface $response ) {
+        $responseJson = null;
+
+        if( $response->hasHeader('Content-Type') ) {
+            $contentType = $response->getHeader('Content-Type');
+            if( stripos( $contentType, 'application/json' ) === 0 ) {
+                $responseJson = $response->json([ 'object' => true ]);
+            }
+        }
+
+        if( !is_null( $responseJson) && isset( $response->text )) {
+            $message = $response->text;
         } else {
             $message = 'Unknown GW2Api error';
         }
@@ -128,20 +168,10 @@ abstract class Endpoint implements IEndpoint {
     }
 
     /**
-     * Returns the json object if the response contains valid json, otherwise null.
-     *
-     * @param ResponseInterface $response
-     * @return mixed|null
+     * @param ApiHandler $handler
      */
-    protected function getResponseAsJson( ResponseInterface $response ) {
-        if( $response->hasHeader('Content-Type') ) {
-            $contentType = $response->getHeader('Content-Type');
-            if( stripos( $contentType, 'application/json' ) === 0 ) {
-                return $response->json([ 'object' => true ]);
-            }
-        }
-
-        return null;
+    public function attach( ApiHandler $handler ) {
+        $this->handlers[] = $handler;
     }
 
     /**
