@@ -25,7 +25,7 @@ class AuthenticationHandler extends ApiHandler {
      * @param RequestInterface $request
      */
     public function onRequest( RequestInterface $request ) {
-        $request->addHeader( 'Authorization', 'Bearer ' . $this->getEndpoint()->apiKey() );
+        $request->addHeader( 'Authorization', 'Bearer ' . $this->getEndpoint()->getApiKey() );
     }
 
     /**
