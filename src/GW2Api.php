@@ -36,6 +36,8 @@ class GW2Api {
 
         $this->client = new Client( $this->options );
         $this->options = $options;
+
+        $this->registerHandler( '\GW2Treasures\GW2Api\V2\Authentication\AuthenticationHandler' );
     }
 
     protected function getOptions( array $options = [] ) {

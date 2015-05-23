@@ -4,9 +4,12 @@ namespace GW2Treasures\GW2Api\V2\Endpoint\Commerce\Transaction;
 
 use GW2Treasures\GW2Api\GW2Api;
 use GW2Treasures\GW2Api\V2\Authentication\AuthenticatedEndpoint;
+use GW2Treasures\GW2Api\V2\Authentication\IAuthenticatedEndpoint;
+use GW2Treasures\GW2Api\V2\Endpoint;
 use InvalidArgumentException;
 
-class TypeEndpoint extends AuthenticatedEndpoint {
+class TypeEndpoint extends Endpoint implements IAuthenticatedEndpoint {
+    use AuthenticatedEndpoint;
 
     protected static $types = [ 'current', 'history' ];
 
@@ -21,8 +24,9 @@ class TypeEndpoint extends AuthenticatedEndpoint {
         }
 
         $this->type = $type;
+        $this->apiKey = $apiKey;
 
-        parent::__construct( $api, $apiKey );
+        parent::__construct( $api );
     }
 
 

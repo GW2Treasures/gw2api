@@ -4,12 +4,14 @@ namespace GW2Treasures\GW2Api\V2\Endpoint\Commerce\Transaction;
 
 use GW2Treasures\GW2Api\GW2Api;
 use GW2Treasures\GW2Api\V2\Authentication\AuthenticatedEndpoint;
+use GW2Treasures\GW2Api\V2\Authentication\IAuthenticatedEndpoint;
+use GW2Treasures\GW2Api\V2\Endpoint;
 use GW2Treasures\GW2Api\V2\Pagination\IPaginatedEndpoint;
 use GW2Treasures\GW2Api\V2\Pagination\PaginatedEndpoint;
 use InvalidArgumentException;
 
-class ListEndpoint extends AuthenticatedEndpoint implements IPaginatedEndpoint {
-    use PaginatedEndpoint;
+class ListEndpoint extends Endpoint implements IAuthenticatedEndpoint, IPaginatedEndpoint {
+    use PaginatedEndpoint, AuthenticatedEndpoint;
 
     protected static $types = [ 'current', 'history' ];
     protected static $lists = [ 'buys', 'sells' ];
@@ -35,8 +37,9 @@ class ListEndpoint extends AuthenticatedEndpoint implements IPaginatedEndpoint {
 
         $this->type = $type;
         $this->list = $list;
+        $this->apiKey = $apiKey;
 
-        parent::__construct( $api, $apiKey );
+        parent::__construct( $api );
     }
 
     /**
