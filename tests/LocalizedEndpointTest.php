@@ -46,28 +46,4 @@ class LocalizedEndpointTest extends TestCase {
         $this->assertEquals( 'fr', $request->getQuery()->get('lang'),
             'LocalizedEndpoint sets correct query parameter value on nested request' );
     }
-
-    public function testPersistence() {
-        $this->mockResponse('[]');
-        $this->mockResponse('[]');
-
-        $en = $this->getLocalizedEndpoint()->lang('en');
-        $de = $this->getLocalizedEndpoint()->lang('de');
-
-        // send first request
-        $en->get();
-        $request = $this->getLastRequest();
-        $this->assertTrue( $request->getQuery()->hasKey('lang'),
-            'LocalizedEndpoint sets ?lang query parameter on first request after creating multiple localized endpoints' );
-        $this->assertEquals( 'en', $request->getQuery()->get('lang'),
-            'LocalizedEndpoint sets correct query parameter value on first request after creating multiple localized endpoints' );
-
-        // send second request
-        $de->get();
-        $request = $this->getLastRequest();
-        $this->assertTrue( $request->getQuery()->hasKey('lang'),
-            'LocalizedEndpoint sets ?lang query parameter on last request after creating multiple localized endpoints and sending the first' );
-        $this->assertEquals( 'de', $request->getQuery()->get('lang'),
-            'LocalizedEndpoint sets correct query parameter value on last request after creating multiple localized endpoints and sending the first' );
-    }
 }

@@ -11,13 +11,22 @@ trait LocalizedEndpoint {
     protected $language = 'en';
 
     /**
-     * Get a localized version of this endpoint.
+     * Change the language of this endpoint.
      *
      * @param string $lang
      * @return $this
      */
     public function lang( $lang ) {
-        /** @noinspection PhpParamsInspection */
-        return new LocalizedEndpointProxy( $this, $lang );
+        $this->language = $lang;
+        return $this;
+    }
+
+    /**
+     * Get the current language
+     *
+     * @return string
+     */
+    public function getLang() {
+        return $this->language;
     }
 }

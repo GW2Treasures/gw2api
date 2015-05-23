@@ -31,4 +31,6 @@ trait EndpointTrait {
      * @return ApiResponse[]
      */
     public abstract function requestMany( array $queries = [], $url = null, $method = 'GET', $options = [] );
+
+    public abstract function attach( ApiHandler $handler );
 }
