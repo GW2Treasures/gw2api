@@ -107,6 +107,8 @@ abstract class Endpoint implements IEndpoint {
 
             if( $response instanceof \Exception ) {
                 if( $response instanceof ClientException && $response->hasResponse() ) {
+                    $response = $response->getResponse();
+
                     foreach( $this->handlers as $handler ) {
                         $handler->onError( $response );
                     }
@@ -158,8 +160,8 @@ abstract class Endpoint implements IEndpoint {
             }
         }
 
-        if( !is_null( $responseJson) && isset( $response->text )) {
-            $message = $response->text;
+        if( !is_null( $responseJson ) && isset( $responseJson->text )) {
+            $message = $responseJson->text;
         } else {
             $message = 'Unknown GW2Api error';
         }
