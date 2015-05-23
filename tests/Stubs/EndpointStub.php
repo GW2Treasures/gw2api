@@ -1,6 +1,6 @@
 <?php
 
-namespace Stub;
+namespace Stubs;
 
 use GW2Treasures\GW2Api\V2\Endpoint;
 

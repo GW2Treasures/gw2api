@@ -1,6 +1,6 @@
 <?php
 
-namespace Stub;
+namespace Stubs;
 
 use GW2Treasures\GW2Api\GW2Api;
 use GW2Treasures\GW2Api\V2\Pagination\IPaginatedEndpoint;

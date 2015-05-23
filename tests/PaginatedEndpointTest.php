@@ -2,7 +2,7 @@
 
 use GuzzleHttp\Message\Response;
 use GuzzleHttp\Stream\Stream;
-use Stub\PaginatedEndpointStub;
+use Stubs\PaginatedEndpointStub;
 
 class PaginatedEndpointTest extends TestCase {
     protected function getPaginatedEndpoint( $maxPageSize = 10 ) {
