@@ -5,6 +5,7 @@ namespace GW2Treasures\GW2Api;
 use GuzzleHttp\Client;
 use GW2Treasures\GW2Api\V2\Endpoint\Account\AccountEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Build\BuildEndpoint;
+use GW2Treasures\GW2Api\V2\Endpoint\Character\CharacterEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Color\ColorEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Commerce\CommerceEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Continent\ContinentEndpoint;
@@ -52,6 +53,10 @@ class GW2Api {
 
     public function build() {
         return new BuildEndpoint( $this->client );
+    }
+
+    public function characters( $apiKey ) {
+        return new CharacterEndpoint( $this->client, $apiKey );
     }
 
     public function colors() {
