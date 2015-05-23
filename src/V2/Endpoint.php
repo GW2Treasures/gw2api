@@ -8,7 +8,6 @@ use GuzzleHttp\Message\RequestInterface;
 use GuzzleHttp\Message\ResponseInterface;
 use GW2Treasures\GW2Api\Exception\ApiException;
 use GW2Treasures\GW2Api\GW2Api;
-use GW2Treasures\GW2Api\V2\Interfaces\IEndpoint;
 
 abstract class Endpoint implements IEndpoint {
     /** @var GW2Api $api */

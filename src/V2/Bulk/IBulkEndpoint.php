@@ -1,6 +1,8 @@
 <?php
 
-namespace GW2Treasures\GW2Api\V2\Interfaces;
+namespace GW2Treasures\GW2Api\V2\Bulk;
+
+use GW2Treasures\GW2Api\V2\Pagination\IPaginatedEndpoint;
 
 interface IBulkEndpoint extends IPaginatedEndpoint {
     /**

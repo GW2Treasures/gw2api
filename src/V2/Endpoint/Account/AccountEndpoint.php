@@ -2,7 +2,7 @@
 
 namespace GW2Treasures\GW2Api\V2\Endpoint\Account;
 
-use GW2Treasures\GW2Api\V2\AuthenticatedEndpoint;
+use GW2Treasures\GW2Api\V2\Authentication\AuthenticatedEndpoint;
 
 class AccountEndpoint extends AuthenticatedEndpoint {
 

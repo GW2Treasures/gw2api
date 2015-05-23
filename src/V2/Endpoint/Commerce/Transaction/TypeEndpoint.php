@@ -3,7 +3,7 @@
 namespace GW2Treasures\GW2Api\V2\Endpoint\Commerce\Transaction;
 
 use GW2Treasures\GW2Api\GW2Api;
-use GW2Treasures\GW2Api\V2\AuthenticatedEndpoint;
+use GW2Treasures\GW2Api\V2\Authentication\AuthenticatedEndpoint;
 use InvalidArgumentException;
 
 class TypeEndpoint extends AuthenticatedEndpoint {

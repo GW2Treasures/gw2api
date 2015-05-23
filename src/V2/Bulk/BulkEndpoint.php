@@ -1,8 +1,9 @@
 <?php
 
-namespace GW2Treasures\GW2Api\V2;
+namespace GW2Treasures\GW2Api\V2\Bulk;
 
 use GuzzleHttp\Pool;
+use GW2Treasures\GW2Api\V2\Pagination\PaginatedEndpoint;
 
 trait BulkEndpoint {
     use PaginatedEndpoint;

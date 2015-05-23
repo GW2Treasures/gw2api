@@ -3,9 +3,9 @@
 namespace GW2Treasures\GW2Api\V2\Endpoint\Commerce\Transaction;
 
 use GW2Treasures\GW2Api\GW2Api;
-use GW2Treasures\GW2Api\V2\AuthenticatedEndpoint;
-use GW2Treasures\GW2Api\V2\Interfaces\IPaginatedEndpoint;
-use GW2Treasures\GW2Api\V2\PaginatedEndpoint;
+use GW2Treasures\GW2Api\V2\Authentication\AuthenticatedEndpoint;
+use GW2Treasures\GW2Api\V2\Pagination\IPaginatedEndpoint;
+use GW2Treasures\GW2Api\V2\Pagination\PaginatedEndpoint;
 use InvalidArgumentException;
 
 class ListEndpoint extends AuthenticatedEndpoint implements IPaginatedEndpoint {

@@ -1,6 +1,8 @@
 <?php
 
-namespace GW2Treasures\GW2Api\V2;
+namespace GW2Treasures\GW2Api\V2\Localization;
+
+use GW2Treasures\GW2Api\V2\Endpoint;
 
 class LocalizedEndpointProxy extends Endpoint {
     /** @var Endpoint $origin */
