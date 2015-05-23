@@ -1,5 +1,7 @@
 <?php
 
+use GuzzleHttp\Message\Response;
+use GuzzleHttp\Stream\Stream;
 use Stubs\BulkEndpointStub;
 
 class BulkEndpointTest extends TestCase {
@@ -106,5 +108,31 @@ class BulkEndpointTest extends TestCase {
             'BulkEndpoint sets ?ids query parameter on second request' );
         $this->assertEquals( '4,5', $requests[1]->getQuery()->get('ids'),
             'BulkEndpoint sets correct query parameter value for ?ids on second request' );
+    }
+
+    /**
+     * @expectedException \GW2Treasures\GW2Api\Exception\ApiException
+     * @expectedExceptionMessage no such id
+     */
+    public function testInvalidId() {
+        $this->mockResponse( new Response(
+            404, [ 'Content-Type' => 'application/json; charset=utf-8' ],
+            Stream::factory( '{"text":"no such id"}' )
+        ));
+
+        $this->getBulkEndpoint()->get('invalid');
+    }
+
+    /**
+     * @expectedException \GW2Treasures\GW2Api\Exception\ApiException
+     * @expectedExceptionMessage all ids provided are invalid
+     */
+    public function testInvalidIds() {
+        $this->mockResponse( new Response(
+            404, [ 'Content-Type' => 'application/json; charset=utf-8' ],
+            Stream::factory( '{"text":"all ids provided are invalid"}' )
+        ));
+
+        $this->getBulkEndpoint()->many(['invalid']);
     }
 }
