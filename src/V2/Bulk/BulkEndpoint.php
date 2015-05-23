@@ -2,12 +2,10 @@
 
 namespace GW2Treasures\GW2Api\V2\Bulk;
 
-use GuzzleHttp\Pool;
 use GW2Treasures\GW2Api\V2\Pagination\PaginatedEndpoint;
 
 trait BulkEndpoint {
     use PaginatedEndpoint;
-
 
     /**
      * Support of ?ids=all of this endpoint.
@@ -26,8 +24,7 @@ trait BulkEndpoint {
      * @return string[]|int[]
      */
     public function ids() {
-        $response = $this->request( $this->createRequest() );
-        return $this->getResponseAsJson( $response );
+        return $this->request()->json();
     }
 
     /**
@@ -37,9 +34,7 @@ trait BulkEndpoint {
      * @return mixed
      */
     public function get( $id ) {
-        $request = $this->createRequest([ 'id' => $id ]);
-        $response = $this->request( $request );
-        return $this->getResponseAsJson( $response );
+        return $this->request([ 'id' => $id ])->json();
     }
 
     /**
@@ -57,16 +52,14 @@ trait BulkEndpoint {
 
         $requests = [];
         foreach( $pages as $page ) {
-            $requests[] = $this->createRequest( ['ids' => implode( ',', $page )] );
+            $requests[] = [ 'ids' => implode( ',', $page ) ];
         }
 
-        $responses = Pool::batch( $this->getClient(), $requests, ['pool_size' => 128] );
+        $responses = $this->requestMany( $requests );
 
         $result = [];
         foreach( $responses as $response ) {
-            /** @var \GuzzleHttp\Message\Response $response */
-            // TODO: handle errors
-            $result = array_merge( $result, $this->getResponseAsJson( $response ));
+            $result = array_merge( $result, $response->json() );
         }
 
         return $result;
@@ -82,9 +75,7 @@ trait BulkEndpoint {
      */
     public function all() {
         if( $this->supportsIdsAll() ) {
-            $request = $this->createRequest( [ 'ids' => 'all' ] );
-            $response = $this->request( $request );
-            return $this->getResponseAsJson( $response );
+            return $this->request([ 'ids' => 'all' ])->json();
         } else {
             $ids = $this->ids();
             return $this->many( $ids );

@@ -2,7 +2,6 @@
 
 namespace GW2Treasures\GW2Api\V2\Pagination;
 
-use GuzzleHttp\Pool;
 use GW2Treasures\GW2Api\V2\EndpointTrait;
 use OutOfRangeException;
 
@@ -27,12 +26,11 @@ trait PaginatedEndpoint {
      */
     public function all() {
         $size = $this->maxPageSize();
-        $size = 1;
 
-        $firstPageResponse = $this->request( $this->createPaginatedRequest( 0, $size ) );
-        $total = $firstPageResponse->getHeader('X-Result-Total');
+        $firstPageResponse = $this->request( $this->createPaginatedRequestQuery( 0, $size ) );
+        $total = $firstPageResponse->getResponse()->getHeader('X-Result-Total');
 
-        $result = $this->getResponseAsJson( $firstPageResponse );
+        $result = $firstPageResponse->json();
 
         if( $total <= $size ) {
             return $result;
@@ -40,13 +38,13 @@ trait PaginatedEndpoint {
 
         $requests = [];
         for( $page = 1; $page < ceil( $total / $size ); $page++ ) {
-            $requests[] = $this->createPaginatedRequest( $page, $size );
+            $requests[] = $this->createPaginatedRequestQuery( $page, $size );
         }
 
-        $responses = Pool::batch( $this->getClient(), $requests, ['pool_size' => 128]);
+        $responses = $this->requestMany( $requests );
 
         foreach( $responses as $response ) {
-            $result = array_merge( $result, $this->getResponseAsJson( $response ));
+            $result = array_merge( $result, $response->json() );
         }
 
         return $result;
@@ -72,12 +70,10 @@ trait PaginatedEndpoint {
             throw new OutOfRangeException('$page has to be 0 or greater');
         }
 
-        $request = $this->createPaginatedRequest( $page, $size );
-        $response = $this->request( $request );
-        return $this->getResponseAsJson( $response );
+        return $this->request( $this->createPaginatedRequestQuery( $page, $size ) )->json();
     }
 
-    protected function createPaginatedRequest( $page, $size ) {
-        return $this->createRequest(['page' => $page, 'page_size' => $size ]);
+    protected function createPaginatedRequestQuery( $page, $size ) {
+        return ['page' => $page, 'page_size' => $size ];
     }
 }

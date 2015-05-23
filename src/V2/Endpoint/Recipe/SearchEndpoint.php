@@ -18,8 +18,7 @@ class SearchEndpoint extends Endpoint {
      * @return mixed
      */
     public function input( $id ) {
-        $request = $this->createRequest([ 'input' => $id ]);
-        return $this->getResponseAsJson( $this->request( $request ) );
+        return $this->request([ 'input' => $id ])->json();
     }
 
     /**
@@ -27,7 +26,6 @@ class SearchEndpoint extends Endpoint {
      * @return mixed
      */
     public function output( $id ) {
-        $request = $this->createRequest([ 'output' => $id ]);
-        return $this->getResponseAsJson( $this->request( $request ) );
+        return $this->request([ 'output' => $id ])->json();
     }
 }

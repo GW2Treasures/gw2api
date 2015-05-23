@@ -26,7 +26,7 @@ abstract class AuthenticatedEndpoint extends Endpoint implements IAuthenticatedE
         return parent::createRequest( $query, $url, $method, $options );
     }
 
-    protected function handleRequestError( RequestInterface $request, ResponseInterface $response ) {
+    protected function handleRequestError( ResponseInterface $response ) {
         $json = $this->getResponseAsJson( $response );
         if( !is_null( $json ) && isset( $json->text )) {
             if( $json->text === 'invalid key' ||  $json->text === 'endpoint requires authentication' ) {
@@ -35,6 +35,6 @@ abstract class AuthenticatedEndpoint extends Endpoint implements IAuthenticatedE
                 throw new InvalidPermissionsException( $json->text, $response );
             }
         }
-        parent::handleRequestError( $request, $response );
+        parent::handleRequestError( $response );
     }
 }

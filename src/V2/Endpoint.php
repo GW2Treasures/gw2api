@@ -5,7 +5,9 @@ namespace GW2Treasures\GW2Api\V2;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Message\RequestInterface;
+use GuzzleHttp\Message\Response;
 use GuzzleHttp\Message\ResponseInterface;
+use GuzzleHttp\Pool;
 use GW2Treasures\GW2Api\Exception\ApiException;
 use GW2Treasures\GW2Api\GW2Api;
 
@@ -38,6 +40,69 @@ abstract class Endpoint implements IEndpoint {
      * @param null     $url
      * @param string   $method
      * @param array    $options
+     * @return ApiResponse
+     */
+    protected function request( array $query = [], $url = null, $method = 'GET', $options = [] ) {
+        $request = $this->createRequest( $query, $url, $method, $options );
+
+        try {
+            $response = $this->getClient()->send( $request );
+        } catch( ClientException $ex ) {
+            if( $ex->hasResponse() ) {
+                $response = $ex->getResponse();
+                $this->handleRequestError( $response );
+            } else {
+                throw $ex;
+            }
+        }
+
+        return new ApiResponse( $response );
+    }
+
+    /**
+     * Creates a new Request to this Endpoint.
+     *
+     * @param string[][] $queries
+     * @param null       $url
+     * @param string     $method
+     * @param array      $options
+     * @return ApiResponse[]
+     */
+    protected function requestMany( array $queries = [], $url = null, $method = 'GET', $options = [] ) {
+        $requests = [];
+        $responses = [];
+
+        foreach( $queries as $query ) {
+            $requests[] = $this->createRequest( $query, $url, $method, $options );
+        }
+
+        $results = Pool::batch( $this->getClient(), $requests, [ 'pool_size' => 128 ]);
+
+        foreach( $results as $response ) {
+            /** @var Response|ClientException|\Exception $response */
+
+            if( $response instanceof \Exception ) {
+                if( $response instanceof ClientException && $response->hasResponse() ) {
+                    $this->handleRequestError( $response );
+                }
+
+                throw $response;
+            }
+
+            $responses[] = new ApiResponse( $response );
+        }
+
+        return $responses;
+    }
+
+
+    /**
+     * Creates a new Request to this Endpoint.
+     *
+     * @param string[] $query
+     * @param null     $url
+     * @param string   $method
+     * @param array    $options
      * @return RequestInterface
      */
     protected function createRequest( array $query = [], $url = null, $method = 'GET', $options = [] ) {
@@ -46,32 +111,12 @@ abstract class Endpoint implements IEndpoint {
     }
 
     /**
-     * @param RequestInterface $request
-     * @return ResponseInterface
-     */
-    protected function request( RequestInterface $request ) {
-        try {
-            $response = $this->getClient()->send( $request );
-        } catch( ClientException $ex ) {
-            if( $ex->hasResponse() ) {
-                $response = $ex->getResponse();
-                $this->handleRequestError( $ex->getRequest(), $response );
-            } else {
-                throw $ex;
-            }
-        }
-
-        return $response;
-    }
-
-    /**
      * Handles response codes != 200
      *
-     * @param RequestInterface  $request
      * @param ResponseInterface $response
      * @throws ApiException
      */
-    protected function handleRequestError( RequestInterface $request, ResponseInterface $response ) {
+    protected function handleRequestError( ResponseInterface $response ) {
         $responseJson = $this->getResponseAsJson( $response );
         if( !is_null( $responseJson) && isset( $responseJson->text )) {
             $message = $responseJson->text;

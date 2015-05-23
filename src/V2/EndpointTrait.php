@@ -3,11 +3,8 @@
 namespace GW2Treasures\GW2Api\V2;
 
 use GuzzleHttp\Client;
-use GuzzleHttp\Message\RequestInterface;
-use GuzzleHttp\Message\ResponseInterface;
 
 trait EndpointTrait {
-
     /**
      * @return Client
      */
@@ -20,21 +17,18 @@ trait EndpointTrait {
      * @param null     $url
      * @param string   $method
      * @param array    $options
-     * @return \GuzzleHttp\Message\Request|\GuzzleHttp\Message\RequestInterface
+     * @return ApiResponse
      */
-    protected abstract function createRequest( array $query = [], $url = null, $method = 'GET', $options = [] );
+    protected abstract function request( array $query = [], $url = null, $method = 'GET', $options = [] );
 
     /**
-     * @param RequestInterface $request
-     * @return ResponseInterface
-     */
-    protected abstract function request( RequestInterface $request );
-
-    /**
-     * Returns the json object if the response contains valid json, otherwise null.
+     * Creates a new Request to this Endpoint.
      *
-     * @param ResponseInterface $response
-     * @return mixed|null
+     * @param string[][] $queries
+     * @param null       $url
+     * @param string     $method
+     * @param array      $options
+     * @return ApiResponse[]
      */
-    protected abstract function getResponseAsJson( ResponseInterface $response );
+    public abstract function requestMany( array $queries = [], $url = null, $method = 'GET', $options = [] );
 }

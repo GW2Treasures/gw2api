@@ -20,8 +20,7 @@ class ExchangeEndpoint extends Endpoint {
      * @return mixed
      */
     public function gems( $quantity ) {
-        $request = $this->createRequest([ 'quantity' => $quantity ], $this->url() . '/gems' );
-        return $this->getResponseAsJson( $this->request( $request ) );
+        return $this->request([ 'quantity' => $quantity ], $this->url() . '/gems' )->json();
     }
 
     /**
@@ -31,7 +30,6 @@ class ExchangeEndpoint extends Endpoint {
      * @return mixed
      */
     public function coins( $quantity ) {
-        $request = $this->createRequest([ 'quantity' => $quantity ], $this->url() . '/coins' );
-        return $this->getResponseAsJson( $this->request( $request ) );
+        return $this->request([ 'quantity' => $quantity ], $this->url() . '/coins' )->json();
     }
 }
