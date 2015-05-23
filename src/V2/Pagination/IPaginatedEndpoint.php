@@ -6,13 +6,6 @@ use GW2Treasures\GW2Api\V2\IEndpoint;
 
 interface IPaginatedEndpoint extends IEndpoint {
     /**
-     * Max page size of this endpoint.
-     *
-     * @return int
-     */
-    function maxPageSize();
-
-    /**
      * All entries.
      *
      * @return array
