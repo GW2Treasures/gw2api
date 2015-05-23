@@ -6,7 +6,7 @@ use Stub\PaginatedEndpointStub;
 
 class PaginatedEndpointTest extends TestCase {
     protected function getPaginatedEndpoint( $maxPageSize = 10 ) {
-        return new PaginatedEndpointStub( $this->api()->getClient(), $maxPageSize );
+        return new PaginatedEndpointStub( $this->api(), $maxPageSize );
     }
 
     public function testBasicPage() {

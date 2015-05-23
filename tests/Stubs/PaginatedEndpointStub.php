@@ -2,15 +2,15 @@
 
 namespace Stub;
 
-use GuzzleHttp\Client;
-use GW2Treasures\GW2Api\V2\Interfaces\IPaginatedEndpoint;
-use GW2Treasures\GW2Api\V2\PaginatedEndpoint;
+use GW2Treasures\GW2Api\GW2Api;
+use GW2Treasures\GW2Api\V2\Pagination\IPaginatedEndpoint;
+use GW2Treasures\GW2Api\V2\Pagination\PaginatedEndpoint;
 
 class PaginatedEndpointStub extends EndpointStub implements IPaginatedEndpoint {
     use PaginatedEndpoint;
 
-    public function __construct(  Client $client, $maxPageSize = 10, array $options = [ ] ) {
-        parent::__construct( $client, $options );
+    public function __construct(  GW2Api $api, $maxPageSize = 10, array $options = [ ] ) {
+        parent::__construct( $api, $options );
 
         $this->maxPageSize = $maxPageSize;
     }
