@@ -5,7 +5,9 @@ namespace GW2Treasures\GW2Api\V2\Bulk;
 use GW2Treasures\GW2Api\V2\Pagination\PaginatedEndpoint;
 
 trait BulkEndpoint {
-    use PaginatedEndpoint;
+    use PaginatedEndpoint {
+        PaginatedEndpoint::all as private allPaginated;
+    }
 
     /**
      * Support of ?ids=all of this endpoint.
@@ -77,8 +79,7 @@ trait BulkEndpoint {
         if( $this->supportsIdsAll() ) {
             return $this->request([ 'ids' => 'all' ])->json();
         } else {
-            $ids = $this->ids();
-            return $this->many( $ids );
+            return $this->allPaginated();
         }
     }
 }

@@ -43,29 +43,24 @@ class BulkEndpointTest extends TestCase {
     }
 
     public function testAllNotSupportingIdsAll() {
-        $this->mockResponse('[1,2,3,4,5]'); // get list of ids
-        $this->mockResponse('[1,2,3]');     // get ?ids=1,2,3
-        $this->mockResponse('[4,5]');       // get ?ids=4,5
+        $firstResponse = new Response(
+            200,
+            [ 'X-Result-Total' => 5, 'Content-Type' => 'application/json; charset=utf-8' ],
+            Stream::factory( '[1,2,3]' )
+        );
+        $this->mockResponse( $firstResponse );
+        $this->mockResponse( '[4,5]' );
 
         $endpoint = $this->getBulkEndpoint( false, 3 );
         $result = $endpoint->all();
 
+        $this->assertCount( 5, $result, 'BulkEndpoint gets all results for endpoints not supporting ?ids=all' );
+
         $requests = $this->history->getRequests();
+        $this->assertCount( 2, $requests, 'BulkEndpoint makes exactly as many requests as pages exist for endpoints not supporting ?ids=all' );
 
-        $this->assertCount( 3, $requests,
-            'BulkEndpoint uses minimum amount of requests to get all entries for endpoints not supporting ?ids=all' );
-        $this->assertCount( 5, $result,
-            'BulkEndpoint returns all results for endpoints not supporting ?ids=all' );
-
-        $this->assertTrue( $requests[1]->getQuery()->hasKey('ids'),
-            'BulkEndpoint sets ?ids query parameter on second request for endpoints not supporting ?ids=all' );
-        $this->assertEquals( '1,2,3', $requests[1]->getQuery()->get('ids'),
-            'BulkEndpoint sets correct query parameter value for ?ids on second request for endpoints supporting ?ids=all' );
-
-        $this->assertTrue( $requests[2]->getQuery()->hasKey('ids'),
-            'BulkEndpoint sets ?ids query parameter on third request for endpoints not supporting ?ids=all' );
-        $this->assertEquals( '4,5', $requests[2]->getQuery()->get('ids'),
-            'BulkEndpoint sets correct query parameter value for ?ids on third request for endpoints supporting ?ids=all' );
+        $this->assertEquals( 0, $requests[0]->getQuery()->get('page') );
+        $this->assertEquals( 1, $requests[1]->getQuery()->get('page') );
     }
 
     public function testManySimple() {
