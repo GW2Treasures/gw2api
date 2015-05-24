@@ -1,5 +1,8 @@
 <?php
 
+use GW2Treasures\GW2Api\V2\Endpoint\Commerce\Transaction\ListEndpoint;
+use GW2Treasures\GW2Api\V2\Endpoint\Commerce\Transaction\TypeEndpoint;
+
 class CommerceTransactionEndpointTest extends TestCase {
     public function testCurrentBuys() {
         $this->mockResponse( '[{
@@ -53,5 +56,20 @@ class CommerceTransactionEndpointTest extends TestCase {
 
         $this->assertEquals( 19699,
             $this->api()->commerce()->transactions('api_key')->history()->sells()->page(0, 1)[0]->item_id );
+    }
+
+    /** @expectedException \InvalidArgumentException */
+    public function testTypeEndpointValidation() {
+        new TypeEndpoint( $this->api(), 'api_key', 'invalid' );
+    }
+
+    /** @expectedException \InvalidArgumentException */
+    public function testListEndpointTypeValidation() {
+        new ListEndpoint( $this->api(), 'api_key', 'invalid', 'buys' );
+    }
+
+    /** @expectedException \InvalidArgumentException */
+    public function testListEndpointListValidation() {
+        new ListEndpoint( $this->api(), 'api_key', 'current', 'invalid' );
     }
 }
