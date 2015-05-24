@@ -8,4 +8,8 @@ class EndpointStub extends Endpoint {
     protected function url() {
         return 'test/stub';
     }
+
+    public function test() {
+        return $this->request()->json();
+    }
 }

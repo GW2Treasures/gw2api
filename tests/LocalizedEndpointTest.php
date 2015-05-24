@@ -10,7 +10,7 @@ class LocalizedEndpointTest extends TestCase {
     public function testBasic() {
         $this->mockResponse('[]');
 
-        $this->getLocalizedEndpoint()->lang('en')->get();
+        $this->getLocalizedEndpoint()->lang('en')->test();
 
         $request = $this->getLastRequest();
         $this->assertTrue( $request->getQuery()->hasKey('lang'),
@@ -25,8 +25,8 @@ class LocalizedEndpointTest extends TestCase {
 
         $endpoint_de = $this->getLocalizedEndpoint()->lang('de');
 
-        $endpoint_de->get();
-        $endpoint_de->get();
+        $endpoint_de->test();
+        $endpoint_de->test();
 
         $request = $this->getLastRequest();
         $this->assertTrue( $request->getQuery()->hasKey('lang'),
@@ -38,7 +38,7 @@ class LocalizedEndpointTest extends TestCase {
     public function testNested() {
         $this->mockResponse('[]');
 
-        $this->getLocalizedEndpoint()->lang('es')->lang('fr')->get();
+        $this->getLocalizedEndpoint()->lang('es')->lang('fr')->test();
 
         $request = $this->getLastRequest();
         $this->assertTrue( $request->getQuery()->hasKey('lang'),

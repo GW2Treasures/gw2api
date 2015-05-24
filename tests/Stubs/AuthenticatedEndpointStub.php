@@ -14,12 +14,4 @@ class AuthenticatedEndpointStub extends EndpointStub implements IAuthenticatedEn
 
         $this->apiKey = $apiKey;
     }
-
-    protected function url() {
-        return 'test/stub';
-    }
-
-    public function get() {
-        return $this->request()->json();
-    }
 }

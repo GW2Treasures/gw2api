@@ -12,7 +12,7 @@ class AuthenticatedEndpointTest extends TestCase {
     public function testBasic() {
         $this->mockResponse('[]');
 
-        $this->getAuthenticatedEndpoint('test')->get();
+        $this->getAuthenticatedEndpoint('test')->test();
 
         $request = $this->getLastRequest();
         $this->assertTrue( $request->hasHeader('Authorization'),
@@ -31,7 +31,7 @@ class AuthenticatedEndpointTest extends TestCase {
             Stream::factory( '{"text":"invalid key"}' )
         ));
 
-        $this->getAuthenticatedEndpoint('invalid')->get();
+        $this->getAuthenticatedEndpoint('invalid')->test();
     }
 
 
@@ -45,6 +45,6 @@ class AuthenticatedEndpointTest extends TestCase {
             Stream::factory( '{"text":"requires scope characters"}' )
         ));
 
-        $this->getAuthenticatedEndpoint('invalid')->get();
+        $this->getAuthenticatedEndpoint('invalid')->test();
     }
 }
