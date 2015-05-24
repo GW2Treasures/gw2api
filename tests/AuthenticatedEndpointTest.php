@@ -47,4 +47,17 @@ class AuthenticatedEndpointTest extends TestCase {
 
         $this->getAuthenticatedEndpoint('invalid')->test();
     }
+
+    /**
+     * @expectedException \GW2Treasures\GW2Api\Exception\ApiException
+     * @expectedExceptionMessage unknown error
+     */
+    public function testUnknownError() {
+        $this->mockResponse( new Response(
+            400, [ 'Content-Type' => 'application/json; charset=utf-8' ],
+            Stream::factory( '{"text":"unknown error"}' )
+        ));
+
+        $this->getAuthenticatedEndpoint('invalid')->test();
+    }
 }

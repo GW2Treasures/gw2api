@@ -58,5 +58,5 @@ abstract class ApiHandler {
      *
      * @param ResponseInterface $response
      */
-    public function onError( ResponseInterface $response = null ) { }
+    public function onError( ResponseInterface $response ) { }
 }
