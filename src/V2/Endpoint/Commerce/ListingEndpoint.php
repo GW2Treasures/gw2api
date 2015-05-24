@@ -9,6 +9,7 @@ use GW2Treasures\GW2Api\V2\Endpoint;
 class ListingEndpoint extends Endpoint implements IBulkEndpoint {
     use BulkEndpoint;
 
+    /** @var bool $supportsIdsAll */
     protected $supportsIdsAll = false;
 
     /**

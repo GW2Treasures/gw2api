@@ -22,7 +22,7 @@ trait LocalizedEndpoint {
     }
 
     /**
-     * Get the current language
+     * Get the current language.
      *
      * @return string
      */

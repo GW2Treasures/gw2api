@@ -12,13 +12,14 @@ use GW2Treasures\GW2Api\V2\Endpoint;
 class CharacterEndpoint extends Endpoint implements IAuthenticatedEndpoint, IBulkEndpoint {
     use BulkEndpoint, AuthenticatedEndpoint;
 
+    /** @var bool $supportsIdsAll */
+    protected $supportsIdsAll = false;
+
     public function __construct( GW2Api $api, $apiKey ) {
         parent::__construct( $api );
 
         $this->apiKey = $apiKey;
     }
-
-    protected $supportsIdsAll = false;
 
     /**
      * {@inheritdoc}

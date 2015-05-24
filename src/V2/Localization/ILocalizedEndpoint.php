@@ -14,7 +14,7 @@ interface ILocalizedEndpoint extends IEndpoint {
     public function lang( $language );
 
     /**
-     * Get the current language
+     * Get the current language.
      *
      * @return string
      */

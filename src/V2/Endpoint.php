@@ -34,6 +34,9 @@ abstract class Endpoint implements IEndpoint {
         return $this->getApi()->getClient();
     }
 
+    /**
+     * @return GW2Api
+     */
     protected function getApi() {
         return $this->api;
     }
@@ -42,7 +45,7 @@ abstract class Endpoint implements IEndpoint {
      * Creates a new Request to this Endpoint.
      *
      * @param string[] $query
-     * @param null     $url
+     * @param string   $url
      * @param string   $method
      * @param array    $options
      * @return ApiResponse
@@ -145,7 +148,7 @@ abstract class Endpoint implements IEndpoint {
     }
 
     /**
-     * Handles response codes != 200
+     * Handles response codes != 200.
      *
      * @param ResponseInterface $response
      * @throws ApiException
@@ -170,6 +173,8 @@ abstract class Endpoint implements IEndpoint {
     }
 
     /**
+     * Attach a ApiHandler to this endpoint.
+     *
      * @param ApiHandler $handler
      */
     public function attach( ApiHandler $handler ) {

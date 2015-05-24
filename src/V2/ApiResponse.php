@@ -13,6 +13,8 @@ class ApiResponse {
     }
 
     /**
+     * Get the response.
+     *
      * @return ResponseInterface
      */
     public function getResponse() {
@@ -20,6 +22,8 @@ class ApiResponse {
     }
 
     /**
+     * Get the response as json object.
+     *
      * @param array $config
      * @return mixed
      */

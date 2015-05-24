@@ -11,6 +11,8 @@ class LocalizationHandler extends ApiHandler {
     }
 
     /**
+     * {@inheritdoc}
+     *
      * @return ILocalizedEndpoint
      */
     protected function getEndpoint() {
@@ -18,6 +20,8 @@ class LocalizationHandler extends ApiHandler {
     }
 
     /**
+     * Adds the `lang` query parameter to the request for localized endpoints.
+     *
      * @param RequestInterface $request
      */
     public function onRequest( RequestInterface $request ) {

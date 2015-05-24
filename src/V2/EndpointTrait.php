@@ -32,5 +32,10 @@ trait EndpointTrait {
      */
     public abstract function requestMany( array $queries = [], $url = null, $method = 'GET', $options = [] );
 
+    /**
+     * Attach a ApiHandler to this endpoint.
+     *
+     * @param ApiHandler $handler
+     */
     public abstract function attach( ApiHandler $handler );
 }

@@ -73,6 +73,13 @@ trait PaginatedEndpoint {
         return $this->request( $this->createPaginatedRequestQuery( $page, $size ) )->json();
     }
 
+    /**
+     * Creates the query parameters used for pagination.
+     *
+     * @param int $page
+     * @param int $size
+     * @return string[]
+     */
     protected function createPaginatedRequestQuery( $page, $size ) {
         return ['page' => $page, 'page_size' => $size ];
     }

@@ -13,6 +13,11 @@ abstract class ApiHandler {
         $this->endpoint = $endpoint;
     }
 
+    /**
+     * Get the underlying endpoint that gets handled by this handler.
+     *
+     * @return IEndpoint
+     */
     protected function getEndpoint() {
         return $this->endpoint;
     }
@@ -35,16 +40,22 @@ abstract class ApiHandler {
     }
 
     /**
+     * Modify request before it is getting send.
+     *
      * @param RequestInterface $request
      */
     public function onRequest( RequestInterface $request ) { }
 
     /**
+     * Modify response before it gets processed.
+     *
      * @param ResponseInterface $response
      */
     public function onResponse( ResponseInterface $response ) { }
 
     /**
+     * Handle errors by the api.
+     *
      * @param ResponseInterface $response
      */
     public function onError( ResponseInterface $response = null ) { }

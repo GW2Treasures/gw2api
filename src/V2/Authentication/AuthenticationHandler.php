@@ -14,6 +14,8 @@ class AuthenticationHandler extends ApiHandler {
     }
 
     /**
+     * {@inheritdoc}
+     *
      * @return IAuthenticatedEndpoint
      */
     protected function getEndpoint() {
@@ -22,6 +24,8 @@ class AuthenticationHandler extends ApiHandler {
 
 
     /**
+     * Add the API key as Authorization header.
+     *
      * @param RequestInterface $request
      */
     public function onRequest( RequestInterface $request ) {
@@ -29,6 +33,8 @@ class AuthenticationHandler extends ApiHandler {
     }
 
     /**
+     * Handle invalid/wrong key and invalid permission scope errors.
+     *
      * @param ResponseInterface $response
      * @throws AuthenticationException
      * @throws InvalidPermissionsException

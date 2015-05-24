@@ -16,7 +16,7 @@ interface IPaginatedEndpoint extends IEndpoint {
     /**
      * Get a single page.
      *
-     * @param int $index
+     * @param int $page
      * @param int $size
      * @return mixed
      */
