@@ -7,7 +7,7 @@ use GW2Treasures\GW2Api\V2\ApiHandler;
 
 class LocalizationHandler extends ApiHandler {
     function __construct( ILocalizedEndpoint $endpoint ) {
-        $this->endpoint = $endpoint;
+        parent::__construct( $endpoint );
     }
 
     /**

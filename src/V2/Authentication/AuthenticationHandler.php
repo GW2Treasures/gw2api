@@ -10,7 +10,7 @@ use GW2Treasures\GW2Api\V2\Exception\InvalidPermissionsException;
 
 class AuthenticationHandler extends ApiHandler {
     function __construct( IAuthenticatedEndpoint $endpoint ) {
-        $this->endpoint = $endpoint;
+        parent::__construct( $endpoint );
     }
 
     /**
