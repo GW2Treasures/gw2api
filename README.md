@@ -1,6 +1,6 @@
 # gw2treasures/gw2api
 
-[![version](https://img.shields.io/packagist/v/gw2treasures/gw2api.svg?style=flat-square)](https://packagist.org/packages/gw2treasures/gw2api) [![license](https://img.shields.io/packagist/l/gw2treasures/gw2api.svg?style=flat-square)](https://packagist.org/packages/gw2treasures/gw2api) [![Travis](https://img.shields.io/travis/GW2Treasures/gw2api.svg?style=flat-square)](https://travis-ci.org/GW2Treasures/gw2api)
+[![version](https://img.shields.io/packagist/v/gw2treasures/gw2api.svg?style=flat-square)](https://packagist.org/packages/gw2treasures/gw2api) [![license](https://img.shields.io/packagist/l/gw2treasures/gw2api.svg?style=flat-square)](https://packagist.org/packages/gw2treasures/gw2api) [![Travis](https://img.shields.io/travis/GW2Treasures/gw2api.svg?style=flat-square)](https://travis-ci.org/GW2Treasures/gw2api) [![Coveralls](https://img.shields.io/coveralls/GW2Treasures/gw2api/master.svg?style=flat-square)](https://coveralls.io/r/GW2Treasures/gw2api?branch=master)
 
 PHP wrapper for the Guild Wars 2 API.
 
