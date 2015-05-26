@@ -51,7 +51,18 @@ class GW2Api {
         ] + $options;
     }
 
+    /**
+     * @param string $handler
+     */
     public function registerHandler( $handler ) {
+        if( is_null( $handler )) {
+            throw new \InvalidArgumentException( '$handler can\'t be null' );
+        }
+
+        if( !is_string( $handler )) {
+            throw new \InvalidArgumentException( '$handler has to be a string (class name of a valid ApiHandler)' );
+        }
+
         $handlerClass = new \ReflectionClass( $handler );
         if( !$handlerClass->isSubclassOf( '\GW2Treasures\GW2Api\V2\ApiHandler' )) {
             throw new \InvalidArgumentException( '$handler has to be a ApiHandler');

@@ -39,6 +39,28 @@ class ApiHandlerTest extends TestCase {
         $invalidNoContentType = $this->makeResponse( '{"valid":false}', null );
         $this->assertNull( $handler->responseAsJson( $invalidNoContentType ));
     }
+
+    /**
+     * @expectedException \InvalidArgumentException
+     */
+    public function testRegisterNull() {
+        $this->api()->registerHandler( null );
+    }
+
+
+    /**
+     * @expectedException \InvalidArgumentException
+     */
+    public function testRegisterSubclassOfHandler() {
+        $this->api()->registerHandler( new stdClass() );
+    }
+
+    /**
+     * @expectedException \InvalidArgumentException
+     */
+    public function testRegisterHandler() {
+        $this->api()->registerHandler( $this->getHandler( $this->getEndpoint() ) );
+    }
 }
 
 class TestHandler extends ApiHandler {
