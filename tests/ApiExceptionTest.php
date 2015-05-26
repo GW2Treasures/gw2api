@@ -44,4 +44,16 @@ class ApiExceptionTest extends TestCase {
             $this->assertNotFalse( strstr( $exception->__toString(), 'status: 400' ));
         }
     }
+
+    /**
+     * @expectedException \GW2Treasures\GW2Api\Exception\ApiException
+     * @expectedExceptionMessage Unknown GW2Api error
+     */
+    public function testUnknownException() {
+        $this->mockResponse( new Response(
+            500, [], Stream::factory( 'Internal server error' )
+        ));
+
+        $this->getEndpoint()->test();
+    }
 }
