@@ -5,8 +5,8 @@ namespace GW2Treasures\GW2Api\V2\Authentication;
 use GuzzleHttp\Message\RequestInterface;
 use GuzzleHttp\Message\ResponseInterface;
 use GW2Treasures\GW2Api\V2\ApiHandler;
-use GW2Treasures\GW2Api\V2\Exception\AuthenticationException;
-use GW2Treasures\GW2Api\V2\Exception\InvalidPermissionsException;
+use GW2Treasures\GW2Api\V2\Authentication\Exception\AuthenticationException;
+use GW2Treasures\GW2Api\V2\Authentication\Exception\InvalidPermissionsException;
 
 class AuthenticationHandler extends ApiHandler {
     function __construct( IAuthenticatedEndpoint $endpoint ) {

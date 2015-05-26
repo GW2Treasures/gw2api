@@ -22,7 +22,7 @@ class AuthenticatedEndpointTest extends TestCase {
     }
 
     /**
-     * @expectedException \GW2Treasures\GW2Api\V2\Exception\AuthenticationException
+     * @expectedException \GW2Treasures\GW2Api\V2\Authentication\Exception\AuthenticationException
      * @expectedExceptionMessage invalid key
      */
     public function testInvalidKey() {
@@ -36,7 +36,7 @@ class AuthenticatedEndpointTest extends TestCase {
 
 
     /**
-     * @expectedException \GW2Treasures\GW2Api\V2\Exception\InvalidPermissionsException
+     * @expectedException \GW2Treasures\GW2Api\V2\Authentication\Exception\InvalidPermissionsException
      * @expectedExceptionMessage requires scope characters
      */
     public function testInvalidPermissions() {
