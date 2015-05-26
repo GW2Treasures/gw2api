@@ -39,6 +39,7 @@ class GW2Api {
 
         $this->registerHandler( '\GW2Treasures\GW2Api\V2\Authentication\AuthenticationHandler' );
         $this->registerHandler( '\GW2Treasures\GW2Api\V2\Localization\LocalizationHandler' );
+        $this->registerHandler( '\GW2Treasures\GW2Api\V2\Pagination\PaginationHandler' );
     }
 
     protected function getOptions( array $options = [] ) {

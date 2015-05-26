@@ -75,8 +75,7 @@ class PaginatedEndpointTest extends TestCase {
     }
 
     /**
-     * @expectedException \GW2Treasures\GW2Api\Exception\ApiException
-     * this should be a PageOutOfRangeException, but we need better error handling from within traits for that.
+     * @expectedException GW2Treasures\GW2Api\V2\Pagination\Exception\PageOutOfRangeException
      */
     public function testPageOutOfRangeUpper() {
         $this->mockResponse( new Response(
