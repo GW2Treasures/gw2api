@@ -44,8 +44,8 @@ class AuthenticationHandler extends ApiHandler {
         if( !is_null( $json ) && isset( $json->text )) {
             if( $json->text === 'invalid key' ||  $json->text === 'endpoint requires authentication' ) {
                 throw new AuthenticationException( $json->text, $response );
-            } elseif( strpos( $json->text, 'requires scope' ) === 0 ) {
-                throw new InvalidPermissionsException( $json->text, $response );
+            } elseif( preg_match('/^requires scope (.*)$/', $json->text, $match )) {
+                throw new InvalidPermissionsException( $json->text, $match[1], $response );
             }
         }
     }

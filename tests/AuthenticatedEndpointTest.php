@@ -2,6 +2,7 @@
 
 use GuzzleHttp\Message\Response;
 use GuzzleHttp\Stream\Stream;
+use GW2Treasures\GW2Api\V2\Authentication\Exception\InvalidPermissionsException;
 use Stubs\AuthenticatedEndpointStub;
 
 class AuthenticatedEndpointTest extends TestCase {
@@ -34,18 +35,24 @@ class AuthenticatedEndpointTest extends TestCase {
         $this->getAuthenticatedEndpoint('invalid')->test();
     }
 
-
-    /**
-     * @expectedException \GW2Treasures\GW2Api\V2\Authentication\Exception\InvalidPermissionsException
-     * @expectedExceptionMessage requires scope characters
-     */
     public function testInvalidPermissions() {
         $this->mockResponse( new Response(
             400, [ 'Content-Type' => 'application/json; charset=utf-8' ],
             Stream::factory( '{"text":"requires scope characters"}' )
         ));
 
-        $this->getAuthenticatedEndpoint('invalid')->test();
+        try {
+            $this->getAuthenticatedEndpoint('invalid')->test();
+        } catch( InvalidPermissionsException $ex ) {
+            $this->assertEquals( 'requires scope characters', $ex->getMessage(),
+                'InvalidPermissionsException has correct error message.' );
+            $this->assertEquals( 'characters', $ex->getMissingScope(),
+                'InvalidPermissionsException has correct missing scope' );
+
+            return;
+        }
+
+        $this->fail('Accessing IAuthenticatedEndpoint with an api_key that is missing scopes throws InvalidPermissionsException');
     }
 
     /**
