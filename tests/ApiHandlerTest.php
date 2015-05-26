@@ -52,7 +52,7 @@ class ApiHandlerTest extends TestCase {
      * @expectedException \InvalidArgumentException
      */
     public function testRegisterSubclassOfHandler() {
-        $this->api()->registerHandler( new stdClass() );
+        $this->api()->registerHandler( 'stdClass' );
     }
 
     /**
