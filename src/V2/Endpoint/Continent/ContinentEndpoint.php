@@ -19,9 +19,9 @@ class ContinentEndpoint extends Endpoint implements IBulkEndpoint, ILocalizedEnd
     }
 
     /**
-     * Get floors of this continent.
+     * Get the floors of a continent.
      *
-     * @param int$continent_id
+     * @param int $continent_id
      * @return FloorEndpoint
      */
     public function floors( $continent_id ) {
