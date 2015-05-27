@@ -17,4 +17,14 @@ class ContinentEndpoint extends Endpoint implements IBulkEndpoint, ILocalizedEnd
     protected function url() {
         return 'v2/continent';
     }
+
+    /**
+     * Get floors of this continent.
+     *
+     * @param int$continent_id
+     * @return FloorEndpoint
+     */
+    public function floors( $continent_id ) {
+        return new FloorEndpoint( $this->getApi(), $continent_id );
+    }
 }
