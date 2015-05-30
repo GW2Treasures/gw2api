@@ -50,13 +50,15 @@ abstract class ApiHandler {
      * Modify response before it gets processed.
      *
      * @param ResponseInterface $response
+     * @param RequestInterface  $request
      */
-    public function onResponse( ResponseInterface $response ) { }
+    public function onResponse( ResponseInterface $response, RequestInterface $request ) { }
 
     /**
      * Handle errors by the api.
      *
      * @param ResponseInterface $response
+     * @param RequestInterface  $request
      */
-    public function onError( ResponseInterface $response ) { }
+    public function onError( ResponseInterface $response, RequestInterface $request ) { }
 }

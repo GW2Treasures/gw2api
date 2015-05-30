@@ -64,7 +64,7 @@ abstract class Endpoint implements IEndpoint {
                 $response = $ex->getResponse();
 
                 foreach( $this->handlers as $handler ) {
-                    $handler->onError( $response );
+                    $handler->onError( $response, $request );
                 }
 
                 $this->handleUnhandledError( $response );
@@ -74,7 +74,7 @@ abstract class Endpoint implements IEndpoint {
         }
 
         foreach( $this->handlers as $handler ) {
-            $handler->onResponse( $response );
+            $handler->onResponse( $response, $request );
         }
 
         return new ApiResponse( $response );
@@ -105,15 +105,17 @@ abstract class Endpoint implements IEndpoint {
 
         $results = Pool::batch( $this->getClient(), $requests, [ 'pool_size' => 128 ]);
 
-        foreach( $results as $response ) {
+        foreach( $results as $i => $response ) {
             /** @var Response|BadResponseException|\Exception $response */
+
+            $request = $requests[ $i ];
 
             if( $response instanceof \Exception ) {
                 if( $response instanceof BadResponseException && $response->hasResponse() ) {
                     $response = $response->getResponse();
 
                     foreach( $this->handlers as $handler ) {
-                        $handler->onError( $response );
+                        $handler->onError( $response, $request );
                     }
 
                     $this->handleUnhandledError( $response );
@@ -123,7 +125,7 @@ abstract class Endpoint implements IEndpoint {
             }
 
             foreach( $this->handlers as $handler ) {
-                $handler->onResponse( $response );
+                $handler->onResponse( $response, $request );
             }
 
             $responses[] = new ApiResponse( $response );

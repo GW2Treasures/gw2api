@@ -36,10 +36,12 @@ class AuthenticationHandler extends ApiHandler {
      * Handle invalid/wrong key and invalid permission scope errors.
      *
      * @param ResponseInterface $response
+     * @param RequestInterface  $request
+     *
      * @throws AuthenticationException
      * @throws InvalidPermissionsException
      */
-    public function onError( ResponseInterface $response ) {
+    public function onError( ResponseInterface $response, RequestInterface $request ) {
         $json = $this->getResponseAsJson( $response );
         if( !is_null( $json ) && isset( $json->text )) {
             if( $json->text === 'invalid key' ||  $json->text === 'endpoint requires authentication' ) {
