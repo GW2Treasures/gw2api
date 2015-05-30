@@ -29,7 +29,7 @@ abstract class TestCase extends PHPUnit_Framework_TestCase {
     /**
      * @param Response|RequestException|string $response
      */
-    protected function mockResponse( $response ) {
+    protected function mockResponse( $response, $language = 'en' ) {
         if( !isset( $this->mock )) {
             $this->mock = new Mock();
             $this->history = new History();
@@ -38,7 +38,7 @@ abstract class TestCase extends PHPUnit_Framework_TestCase {
         }
         if( is_string( $response )) {
             $this->mock->addResponse(
-                new Response( 200, ['Content-Type' => 'application/json; charset=utf-8'], Stream::factory( $response ))
+                new Response( 200, ['Content-Type' => 'application/json; charset=utf-8', 'Content-Language' => $language], Stream::factory( $response ))
             );
         } elseif( $response instanceof RequestException ) {
             $this->mock->addException( $response );

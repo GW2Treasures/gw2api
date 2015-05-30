@@ -1,5 +1,6 @@
 <?php
 
+use GW2Treasures\GW2Api\V2\Localization\Exception\InvalidLanguageException;
 use Stubs\LocalizedEndpointStub;
 
 class LocalizedEndpointTest extends TestCase {
@@ -20,8 +21,8 @@ class LocalizedEndpointTest extends TestCase {
     }
 
     public function testRepeated() {
-        $this->mockResponse('[]');
-        $this->mockResponse('[]');
+        $this->mockResponse('[]', 'de');
+        $this->mockResponse('[]', 'de');
 
         $endpoint_de = $this->getLocalizedEndpoint()->lang('de');
 
@@ -36,7 +37,7 @@ class LocalizedEndpointTest extends TestCase {
     }
 
     public function testNested() {
-        $this->mockResponse('[]');
+        $this->mockResponse('[]', 'fr');
 
         $this->getLocalizedEndpoint()->lang('es')->lang('fr')->test();
 
@@ -45,5 +46,22 @@ class LocalizedEndpointTest extends TestCase {
             'LocalizedEndpoint sets ?lang query parameter on nested request' );
         $this->assertEquals( 'fr', $request->getQuery()->get('lang'),
             'LocalizedEndpoint sets correct query parameter value on nested request' );
+    }
+
+    public function testInvalidLanguage() {
+        $this->mockResponse('[]', 'en');
+
+        try {
+            $this->getLocalizedEndpoint()->lang('invalid')->test();
+        } catch( InvalidLanguageException $ex ) {
+            $this->assertEquals( 'en', $ex->getResponseLanguage() );
+            $this->assertEquals( 'invalid', $ex->getRequestLanguage() );
+
+            $this->assertTrue( strstr( $ex->getMessage(), 'Invalid language' ) !== false );
+
+            return;
+        }
+
+        $this->fail();
     }
 }
