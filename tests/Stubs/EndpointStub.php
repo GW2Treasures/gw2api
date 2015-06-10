@@ -12,4 +12,16 @@ class EndpointStub extends Endpoint {
     public function test() {
         return $this->request()->json();
     }
+
+    public function testMany( $count = 2 ) {
+        $requests = array_fill( 0, $count, [] );
+        $responses = $this->requestMany( $requests );
+
+        $result = [];
+        foreach( $responses as $response ) {
+            $result = array_merge( $result, $response->json() );
+        }
+
+        return $result;
+    }
 }

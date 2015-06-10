@@ -1,5 +1,7 @@
 <?php
 
+use GuzzleHttp\Exception\ConnectException;
+use GuzzleHttp\Message\Request;
 use GuzzleHttp\Message\Response;
 use GuzzleHttp\Message\ResponseInterface;
 use GuzzleHttp\Stream\Stream;
@@ -55,5 +57,34 @@ class ApiExceptionTest extends TestCase {
         ));
 
         $this->getEndpoint()->test();
+    }
+
+    /**
+     * @expectedException \GuzzleHttp\Exception\ConnectException
+     * @expectedExceptionMessage RequestExceptionWithoutResponse
+     */
+    public function testRequestExceptionWithoutResponse() {
+        $this->mockResponse(
+            new ConnectException('RequestExceptionWithoutResponse', new Request('GET', 'test/exception'))
+        );
+
+        $this->getEndpoint()->test();
+    }
+
+
+    /**
+     * @expectedException \GuzzleHttp\Exception\ConnectException
+     * @expectedExceptionMessage RequestManyExceptionWithoutResponse
+     */
+    public function testRequestManyExceptionWithoutResponse() {
+        $this->mockResponse( new Response(
+            200, [ 'X-Result-Total' => 10, 'Content-Type' => 'application/json; charset=utf-8' ],
+            Stream::factory( '[1,2,3]' )
+        ));
+        $this->mockResponse(
+            new ConnectException('RequestManyExceptionWithoutResponse', new Request('GET', 'test/exception'))
+        );
+
+        $this->getEndpoint()->testMany(2);
     }
 }

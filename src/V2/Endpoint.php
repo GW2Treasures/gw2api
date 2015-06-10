@@ -3,7 +3,7 @@
 namespace GW2Treasures\GW2Api\V2;
 
 use GuzzleHttp\Client;
-use GuzzleHttp\Exception\BadResponseException;
+use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Message\RequestInterface;
 use GuzzleHttp\Message\Response;
 use GuzzleHttp\Message\ResponseInterface;
@@ -59,7 +59,7 @@ abstract class Endpoint implements IEndpoint {
 
         try {
             $response = $this->getClient()->send( $request );
-        } catch( BadResponseException $ex ) {
+        } catch( RequestException $ex ) {
             if( $ex->hasResponse() ) {
                 $response = $ex->getResponse();
 
@@ -106,12 +106,12 @@ abstract class Endpoint implements IEndpoint {
         $results = Pool::batch( $this->getClient(), $requests, [ 'pool_size' => 128 ]);
 
         foreach( $results as $i => $response ) {
-            /** @var Response|BadResponseException|\Exception $response */
+            /** @var Response|RequestException|\Exception $response */
 
             $request = $requests[ $i ];
 
             if( $response instanceof \Exception ) {
-                if( $response instanceof BadResponseException && $response->hasResponse() ) {
+                if( $response instanceof RequestException && $response->hasResponse() ) {
                     $response = $response->getResponse();
 
                     foreach( $this->handlers as $handler ) {
