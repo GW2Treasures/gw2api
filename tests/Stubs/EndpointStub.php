@@ -5,7 +5,7 @@ namespace Stubs;
 use GW2Treasures\GW2Api\V2\Endpoint;
 
 class EndpointStub extends Endpoint {
-    protected function url() {
+    public function url() {
         return 'test/stub';
     }
 
