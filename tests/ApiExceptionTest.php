@@ -3,10 +3,7 @@
 use GuzzleHttp\Exception\ConnectException;
 use GuzzleHttp\Message\Request;
 use GuzzleHttp\Message\Response;
-use GuzzleHttp\Message\ResponseInterface;
 use GuzzleHttp\Stream\Stream;
-use GW2Treasures\GW2Api\V2\ApiHandler;
-use GW2Treasures\GW2Api\V2\IEndpoint;
 use Stubs\EndpointStub;
 
 class ApiExceptionTest extends TestCase {
