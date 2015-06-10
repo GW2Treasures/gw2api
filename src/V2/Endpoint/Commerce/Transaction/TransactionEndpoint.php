@@ -18,6 +18,7 @@ class TransactionEndpoint extends Endpoint implements IAuthenticatedEndpoint {
 
     /**
      * {@inheritdoc}
+     * @codeCoverageIgnore
      */
     protected function url() {
         return 'v2/commerce/transactions';

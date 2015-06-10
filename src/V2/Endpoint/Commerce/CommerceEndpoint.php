@@ -9,6 +9,7 @@ class CommerceEndpoint extends Endpoint {
 
     /**
      * {@inheritdoc}
+     * @codeCoverageIgnore
      */
     protected function url() {
         return 'v2/commerce';
