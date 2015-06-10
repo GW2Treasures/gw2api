@@ -8,18 +8,12 @@ use GW2Treasures\GW2Api\V2\ApiHandler;
 use GW2Treasures\GW2Api\V2\Authentication\Exception\AuthenticationException;
 use GW2Treasures\GW2Api\V2\Authentication\Exception\InvalidPermissionsException;
 
+/**
+ * @method IAuthenticatedEndpoint getEndpoint()
+ */
 class AuthenticationHandler extends ApiHandler {
     function __construct( IAuthenticatedEndpoint $endpoint ) {
         parent::__construct( $endpoint );
-    }
-
-    /**
-     * {@inheritdoc}
-     *
-     * @return IAuthenticatedEndpoint
-     */
-    protected function getEndpoint() {
-        return parent::getEndpoint();
     }
 
 

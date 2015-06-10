@@ -7,19 +7,14 @@ use GuzzleHttp\Message\ResponseInterface;
 use GW2Treasures\GW2Api\V2\ApiHandler;
 use GW2Treasures\GW2Api\V2\Pagination\Exception\PageOutOfRangeException;
 
+/**
+ * @method IPaginatedEndpoint getEndpoint()
+ */
 class PaginationHandler extends ApiHandler {
     function __construct( IPaginatedEndpoint $endpoint ) {
         parent::__construct( $endpoint );
     }
 
-    /**
-     * {@inheritdoc}
-     *
-     * @return IPaginatedEndpoint
-     */
-    protected function getEndpoint() {
-        return parent::getEndpoint();
-    }
 
     /**
      * Handle PageOutOfRangeExceptions.
