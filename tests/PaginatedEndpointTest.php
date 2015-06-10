@@ -68,6 +68,34 @@ class PaginatedEndpointTest extends TestCase {
         $this->assertEquals( 0, $requests[0]->getQuery()->get('page') );
     }
 
+    public function testBatch() {
+        $firstResponse = new Response(
+            200,
+            [ 'X-Result-Total' => 10, 'Content-Type' => 'application/json; charset=utf-8' ],
+            Stream::factory( '[1,2,3]' )
+        );
+
+        $this->mockResponse( $firstResponse );
+        $this->mockResponse( '[4,5,6]' );
+        $this->mockResponse( '[7,8,9]' );
+        $this->mockResponse( '[10]' );
+
+        $count = 0;
+        $this->getPaginatedEndpoint( 3 )->batch(function( $entries ) use ( &$count ) {
+            $count += count( $entries );
+        });
+        $this->assertEquals( 10, $count, 'PaginatedEndpoint gets all results' );
+
+        $requests = $this->history->getRequests();
+        $this->assertCount( 4, $requests,
+            'PaginatedEndpoint::batch makes exactly as many requests as pages exist' );
+
+        $this->assertEquals( 0, $requests[0]->getQuery()->get('page') );
+        $this->assertEquals( 1, $requests[1]->getQuery()->get('page') );
+        $this->assertEquals( 2, $requests[2]->getQuery()->get('page') );
+        $this->assertEquals( 3, $requests[3]->getQuery()->get('page') );
+    }
+
 
     /** @expectedException \OutOfRangeException */
     public function testPageOutOfRangeLower() {

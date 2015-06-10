@@ -2,6 +2,7 @@
 
 namespace GW2Treasures\GW2Api\V2\Pagination;
 
+use Closure;
 use GW2Treasures\GW2Api\V2\EndpointTrait;
 use OutOfRangeException;
 
@@ -71,6 +72,52 @@ trait PaginatedEndpoint {
         }
 
         return $this->request( $this->createPaginatedRequestQuery( $page, $size ) )->json();
+    }
+
+    /**
+     * Get all entries in multiple small batches.
+     *
+     * @param int|null $parallelRequests [optional]
+     * @param Closure $callback
+     * @return void
+     */
+    public function batch( $parallelRequests = null, Closure $callback = null ) {
+        if( !isset( $callback ) && $parallelRequests instanceof Closure ) {
+            $callback = $parallelRequests;
+            $parallelRequests = null;
+        }
+
+        if( is_null( $parallelRequests )) {
+            $parallelRequests = 6;
+        }
+
+        $size = $this->maxPageSize();
+
+        $firstPageResponse = $this->request( $this->createPaginatedRequestQuery( 0, $size ) );
+        $total = $firstPageResponse->getResponse()->getHeader('X-Result-Total');
+
+        $callback( $firstPageResponse->json() );
+        unset( $firstPageResponse );
+
+        $lastPage = ceil( $total / $size );
+
+        for( $page = 1; $page < $lastPage; ) {
+            $batchRequests = [];
+
+            for( $batchPage = 0; $batchPage < $parallelRequests && $page + $batchPage < $lastPage; $batchPage++ ) {
+                $batchRequests[] = $this->createPaginatedRequestQuery( $page + $batchPage, $size );
+            }
+
+            $responses = $this->requestMany( $batchRequests );
+
+            foreach( $responses as $response ) {
+                $callback( $response->json() );
+            }
+
+            unset( $responses );
+
+            $page += $parallelRequests;
+        }
     }
 
     /**

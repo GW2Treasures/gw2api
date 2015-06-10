@@ -2,6 +2,7 @@
 
 namespace GW2Treasures\GW2Api\V2\Pagination;
 
+use Closure;
 use GW2Treasures\GW2Api\V2\IEndpoint;
 
 interface IPaginatedEndpoint extends IEndpoint {
@@ -21,4 +22,14 @@ interface IPaginatedEndpoint extends IEndpoint {
      * @return mixed
      */
     function page( $page, $size = null );
+
+
+    /**
+     * Get all entries in multiple small batches to minimize memory usage.
+     *
+     * @param int|null $parallelRequests [optional]
+     * @param Closure $callback
+     * @return void
+     */
+    function batch( $parallelRequests = null, Closure $callback );
 }
