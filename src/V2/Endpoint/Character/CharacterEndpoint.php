@@ -27,4 +27,24 @@ class CharacterEndpoint extends Endpoint implements IAuthenticatedEndpoint, IBul
     protected function url() {
         return 'v2/characters';
     }
+
+    /**
+     * Get the equipment of a character.
+     *
+     * @param string $character
+     * @return EquipmentEndpoint
+     */
+    public function equipment( $character ) {
+        return new EquipmentEndpoint( $this->api, $this->apiKey, $character );
+    }
+
+    /**
+     * Get the inventory of a character.
+     *
+     * @param string $character
+     * @return InventoryEndpoint
+     */
+    public function inventory( $character ) {
+        return new InventoryEndpoint( $this->api, $this->apiKey, $character );
+    }
 }

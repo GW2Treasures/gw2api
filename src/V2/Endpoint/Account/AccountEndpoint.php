@@ -32,4 +32,22 @@ class AccountEndpoint extends Endpoint implements IAuthenticatedEndpoint {
     public function info() {
         return $this->request()->json();
     }
+
+    /**
+     * Get the account bank.
+     *
+     * @return BankEndpoint
+     */
+    public function bank() {
+        return new BankEndpoint( $this->api, $this->apiKey );
+    }
+
+    /**
+     * Get the account material storage.
+     *
+     * @return MaterialEndpoint
+     */
+    public function materials() {
+        return new MaterialEndpoint( $this->api, $this->apiKey );
+    }
 }

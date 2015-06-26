@@ -12,6 +12,7 @@ use GW2Treasures\GW2Api\V2\Endpoint\Continent\ContinentEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\File\FileEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Item\ItemEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Map\MapEndpoint;
+use GW2Treasures\GW2Api\V2\Endpoint\Material\MaterialEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Quaggan\QuagganEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Recipe\RecipeEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Skin\SkinEndpoint;
@@ -111,6 +112,10 @@ class GW2Api {
 
     public function maps() {
         return new MapEndpoint( $this );
+    }
+
+    public function materials() {
+        return new MaterialEndpoint( $this );
     }
 
     public function quaggans() {

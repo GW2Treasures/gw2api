@@ -1,0 +1,20 @@
+<?php
+
+namespace GW2Treasures\GW2Api\V2\Endpoint\Material;
+
+use GW2Treasures\GW2Api\V2\Bulk\BulkEndpoint;
+use GW2Treasures\GW2Api\V2\Bulk\IBulkEndpoint;
+use GW2Treasures\GW2Api\V2\Endpoint;
+use GW2Treasures\GW2Api\V2\Localization\ILocalizedEndpoint;
+use GW2Treasures\GW2Api\V2\Localization\LocalizedEndpoint;
+
+class MaterialEndpoint extends Endpoint implements IBulkEndpoint, ILocalizedEndpoint {
+    use BulkEndpoint, LocalizedEndpoint;
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function url() {
+        return 'v2/materials';
+    }
+}
