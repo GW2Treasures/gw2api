@@ -23,7 +23,7 @@ class EquipmentEndpoint extends Endpoint implements IAuthenticatedEndpoint {
      * {@inheritdoc}
      */
     protected function url() {
-        return 'v2/characters/' . urlencode( $this->character ) . '/equipment';
+        return 'v2/characters/' . rawurlencode( $this->character ) . '/equipment';
     }
 
     /**

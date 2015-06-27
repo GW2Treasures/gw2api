@@ -23,7 +23,7 @@ class InventoryEndpoint extends Endpoint implements IAuthenticatedEndpoint {
      * {@inheritdoc}
      */
     protected function url() {
-        return 'v2/characters/' . urlencode( $this->character ) . '/inventory';
+        return 'v2/characters/' . rawurlencode( $this->character ) . '/inventory';
     }
 
     /**
