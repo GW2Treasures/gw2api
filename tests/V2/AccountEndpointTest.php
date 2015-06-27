@@ -13,7 +13,7 @@ class AccountEndpointTest extends TestCase {
             ]
         }');
 
-        $account = $this->api()->account('api_key')->info();
+        $account = $this->api()->account('api_key')->get();
         $this->assertEquals( 'Lawton.1234', $account->name );
     }
 }
