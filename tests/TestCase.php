@@ -53,8 +53,4 @@ abstract class TestCase extends PHPUnit_Framework_TestCase {
     protected function getLastRequest() {
         return $this->history->getLastRequest();
     }
-
-    protected function setUp() {
-        ini_set('memory_limit','256M');
-    }
 }
