@@ -2,8 +2,12 @@
 
 class ContinentEndpointTest extends TestCase {
     public function testIds() {
-        $this->mockResponse('[1,2]');
+        $endpoint = $this->api()->continents();
 
-        $this->assertEquals( [1,2], $this->api()->continents()->ids() );
+        $this->assertEndpointIsBulk( $endpoint );
+        $this->assertEndpointIsLocalized( $endpoint );
+
+        $this->mockResponse('[1,2]');
+        $this->assertEquals( [1,2], $endpoint->ids() );
     }
 }

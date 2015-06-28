@@ -2,12 +2,18 @@
 
 class CharacterEndpointTest extends TestCase {
     public function testIds() {
-        $this->mockResponse('["Hello"]');
+        $endpoint = $this->api()->characters('api_key');
 
-        $this->assertEquals( ['Hello'], $this->api()->characters('api_key')->ids() );
+        $this->assertEndpointIsAuthenticated( $endpoint );
+        $this->assertEndpointIsBulk( $endpoint );
+
+        $this->mockResponse('["Hello"]');
+        $this->assertEquals( ['Hello'], $endpoint->ids() );
     }
 
     public function testGet() {
+        $endpoint = $this->api()->characters('api_key');
+
         $this->mockResponse('{
             "name": "Hello",
             "race": "Human",
@@ -17,7 +23,7 @@ class CharacterEndpointTest extends TestCase {
             "guild": "1F5F70AA-1DB6-E411-A2C4-00224D566B58"
         }');
 
-        $character = $this->api()->characters('api_key')->get('Hello');
+        $character = $endpoint->get('Hello');
         $this->assertEquals( 80, $character->level );
     }
 }

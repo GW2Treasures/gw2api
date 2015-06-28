@@ -2,6 +2,10 @@
 
 class AccountEndpointTest extends TestCase {
     public function test() {
+        $endpoint = $this->api()->account('api_key');
+
+        $this->assertEndpointIsAuthenticated( $endpoint );
+
         $this->mockResponse('{
             "id":"account-guid",
             "name"   : "Lawton.1234",
@@ -12,8 +16,6 @@ class AccountEndpointTest extends TestCase {
                 "8B211747-3B86-E411-B57A-00224D566B58"
             ]
         }');
-
-        $account = $this->api()->account('api_key')->get();
-        $this->assertEquals( 'Lawton.1234', $account->name );
+        $this->assertEquals( 'Lawton.1234', $endpoint->get()->name );
     }
 }

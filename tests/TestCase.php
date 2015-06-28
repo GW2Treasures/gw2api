@@ -7,6 +7,11 @@ use GuzzleHttp\Stream\Stream;
 use GuzzleHttp\Subscriber\History;
 use GuzzleHttp\Subscriber\Mock;
 use GW2Treasures\GW2Api\GW2Api;
+use GW2Treasures\GW2Api\V2\Authentication\IAuthenticatedEndpoint;
+use GW2Treasures\GW2Api\V2\Bulk\IBulkEndpoint;
+use GW2Treasures\GW2Api\V2\IEndpoint;
+use GW2Treasures\GW2Api\V2\Localization\ILocalizedEndpoint;
+use GW2Treasures\GW2Api\V2\Pagination\IPaginatedEndpoint;
 
 abstract class TestCase extends PHPUnit_Framework_TestCase {
     /** @var GW2Api $api */
@@ -52,5 +57,21 @@ abstract class TestCase extends PHPUnit_Framework_TestCase {
      */
     protected function getLastRequest() {
         return $this->history->getLastRequest();
+    }
+
+    public function assertEndpointIsAuthenticated( IEndpoint $endpoint ) {
+        $this->assertInstanceOf( IAuthenticatedEndpoint::class, $endpoint );
+    }
+
+    public function assertEndpointIsBulk( IEndpoint $endpoint ) {
+        $this->assertInstanceOf( IBulkEndpoint::class, $endpoint );
+    }
+
+    public function assertEndpointIsLocalized( IEndpoint $endpoint ) {
+        $this->assertInstanceOf( ILocalizedEndpoint::class, $endpoint );
+    }
+
+    public function assertEndpointIsPaginated( IEndpoint $endpoint ) {
+        $this->assertInstanceOf( IPaginatedEndpoint::class, $endpoint );
     }
 }

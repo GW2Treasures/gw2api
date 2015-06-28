@@ -13,6 +13,10 @@ class BulkEndpointTest extends TestCase {
         $this->mockResponse('{}');
 
         $endpoint = $this->getBulkEndpoint();
+
+        $this->assertEndpointIsBulk( $endpoint );
+        $this->assertEndpointIsPaginated( $endpoint );
+
         $endpoint->get('test');
 
         $request = $this->getLastRequest();

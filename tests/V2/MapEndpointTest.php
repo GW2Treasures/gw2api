@@ -2,6 +2,11 @@
 
 class MapEndpointTest extends TestCase {
     public function test() {
+        $endpoint = $this->api()->maps();
+
+        $this->assertEndpointIsBulk( $endpoint );
+        $this->assertEndpointIsLocalized( $endpoint );
+
         $this->mockResponse('{
             "id": 15,
             "name": "Queensdale",
@@ -16,7 +21,6 @@ class MapEndpointTest extends TestCase {
             "map_rect": [[-43008,-27648],[43008,30720]],
             "continent_rect": [[9856,11648],[13440,14080]]
         }');
-
-        $this->assertEquals( 'Queensdale', $this->api()->maps()->get(15)->name );
+        $this->assertEquals( 'Queensdale', $endpoint->get(15)->name );
     }
 }

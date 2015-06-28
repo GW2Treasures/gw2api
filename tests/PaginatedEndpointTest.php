@@ -12,7 +12,11 @@ class PaginatedEndpointTest extends TestCase {
     public function testBasicPage() {
         $this->mockResponse('[]');
 
-        $this->getPaginatedEndpoint()->page( 1, 2 );
+        $endpoint = $this->getPaginatedEndpoint();
+
+        $this->assertEndpointIsPaginated( $endpoint );
+
+        $endpoint->page( 1, 2 );
 
         $request = $this->getLastRequest();
 

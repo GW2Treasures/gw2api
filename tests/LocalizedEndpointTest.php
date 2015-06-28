@@ -11,7 +11,11 @@ class LocalizedEndpointTest extends TestCase {
     public function testBasic() {
         $this->mockResponse('[]');
 
-        $this->getLocalizedEndpoint()->lang('en')->test();
+        $endpoint = $this->getLocalizedEndpoint();
+
+        $this->assertEndpointIsLocalized( $endpoint );
+
+        $endpoint->lang('en')->test();
 
         $request = $this->getLastRequest();
         $this->assertTrue( $request->getQuery()->hasKey('lang'),
@@ -25,6 +29,8 @@ class LocalizedEndpointTest extends TestCase {
         $this->mockResponse('[]', 'de');
 
         $endpoint_de = $this->getLocalizedEndpoint()->lang('de');
+
+        $this->assertEndpointIsLocalized( $endpoint_de );
 
         $endpoint_de->test();
         $endpoint_de->test();

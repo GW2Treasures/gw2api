@@ -13,7 +13,11 @@ class AuthenticatedEndpointTest extends TestCase {
     public function testBasic() {
         $this->mockResponse('[]');
 
-        $this->getAuthenticatedEndpoint('test')->test();
+        $endpoint = $this->getAuthenticatedEndpoint('test');
+
+        $this->assertEndpointIsAuthenticated( $endpoint );
+
+        $endpoint->test();
 
         $request = $this->getLastRequest();
         $this->assertTrue( $request->hasHeader('Authorization'),
