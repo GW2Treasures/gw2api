@@ -60,18 +60,18 @@ abstract class TestCase extends PHPUnit_Framework_TestCase {
     }
 
     public function assertEndpointIsAuthenticated( IEndpoint $endpoint ) {
-        $this->assertInstanceOf( IAuthenticatedEndpoint::class, $endpoint );
+        $this->assertInstanceOf( '\GW2Treasures\GW2Api\V2\Authentication\IAuthenticatedEndpoint', $endpoint );
     }
 
     public function assertEndpointIsBulk( IEndpoint $endpoint ) {
-        $this->assertInstanceOf( IBulkEndpoint::class, $endpoint );
+        $this->assertInstanceOf( '\GW2Treasures\GW2Api\V2\Bulk\IBulkEndpoint', $endpoint );
     }
 
     public function assertEndpointIsLocalized( IEndpoint $endpoint ) {
-        $this->assertInstanceOf( ILocalizedEndpoint::class, $endpoint );
+        $this->assertInstanceOf( '\GW2Treasures\GW2Api\V2\Localization\ILocalizedEndpoint', $endpoint );
     }
 
     public function assertEndpointIsPaginated( IEndpoint $endpoint ) {
-        $this->assertInstanceOf( IPaginatedEndpoint::class, $endpoint );
+        $this->assertInstanceOf( '\GW2Treasures\GW2Api\V2\Pagination\IPaginatedEndpoint', $endpoint );
     }
 }
