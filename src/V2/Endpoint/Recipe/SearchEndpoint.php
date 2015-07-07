@@ -14,16 +14,16 @@ class SearchEndpoint extends Endpoint {
     }
 
     /**
-     * @param int|string $id
-     * @return mixed
+     * @param int $id
+     * @return int[]
      */
     public function input( $id ) {
         return $this->request([ 'input' => $id ])->json();
     }
 
     /**
-     * @param int|string $id
-     * @return mixed
+     * @param int $id
+     * @return int[]
      */
     public function output( $id ) {
         return $this->request([ 'output' => $id ])->json();
