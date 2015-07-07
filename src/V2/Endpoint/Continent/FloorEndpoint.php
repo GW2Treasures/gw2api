@@ -27,6 +27,6 @@ class FloorEndpoint extends Endpoint implements IBulkEndpoint {
      * {@inheritdoc}
      */
     protected function url() {
-        return 'v2/continent/' . $this->continent_id . '/floors';
+        return 'v2/continents/' . $this->continent_id . '/floors';
     }
 }
