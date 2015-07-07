@@ -32,7 +32,7 @@ trait BulkEndpoint {
     /**
      * Single entry by id.
      *
-     * @param $id
+     * @param int|string $id
      * @return mixed
      */
     public function get( $id ) {
