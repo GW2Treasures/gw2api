@@ -36,6 +36,8 @@ class GW2Api {
     function __construct( array $options = [] ) {
         $this->options = $this->getOptions( $options );
 
+        $this->extractCacertFile();
+
         $this->client = new Client( $this->options );
         $this->options = $options;
 
@@ -48,9 +50,44 @@ class GW2Api {
         return [
            'base_url' => $this->apiUrl,
            'defaults' => [
-               'verify' => __DIR__ . DIRECTORY_SEPARATOR . 'cacert.pem'
+               'verify' => $this->getCacertFilePath()
            ]
         ] + $options;
+    }
+
+    /**
+     * Returns the path to cacert.pem.
+     *
+     * @return string
+     */
+    protected function getCacertFilePath() {
+        if( $this->isIncludedAsPhar() ) {
+            return sys_get_temp_dir() . '/gw2api-cacert.pem';
+        } else {
+            return __DIR__ . '/cacert.pem';
+        }
+    }
+
+    /**
+     * Copies the phar cacert from the phar into the temp directory.
+     */
+    protected function extractCacertFile() {
+        if( $this->isIncludedAsPhar() ) {
+            $cacertFilePath = $this->getCacertFilePath();
+
+            if( !file_exists( $cacertFilePath )) {
+                copy( __DIR__ . '/cacert.pem', $cacertFilePath );
+            }
+        }
+    }
+
+    /**
+     * Checks if the library is included as phar file.
+     *
+     * @return bool
+     */
+    protected function isIncludedAsPhar() {
+        return strpos( __FILE__, 'phar://' ) === 0;
     }
 
     /**
