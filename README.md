@@ -25,10 +25,29 @@
 
 ## Setup
 
-### Using [composer](https://getcomposer.org):
+### Using [composer](https://getcomposer.org) (recommended)
 
 ```sh
 composer require gw2treasures/gw2api
+```
+
+If you haven't included composers autoloader yet,
+you will have to add this before being able to use the GW2 API Wrapper.
+
+```php
+include 'vendor/autoload.php';
+```
+
+### Using the gw2api.phar archive
+
+You need to download the [latest gw2api.phar](https://github.com/GW2Treasures/gw2api/releases/tag/latest)
+and the [guzzle.phar of the latest 5.x version](https://github.com/guzzle/guzzle/releases/tag/5.3.0) of the
+[guzzle](https://github.com/guzzle/guzzle) library and place both files in your project directory. 
+Now you can include both files to start using the GW2 API wrapper.
+
+```php
+include __DIR__ .  '/gw2api.phar';
+include __DIR__ .  '/guzzle.phar';
 ```
 
 ## Examples

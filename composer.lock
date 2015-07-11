@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "56c6524dea0a89f0c8038e30af031617",
+    "hash": "e7e06ce258d4119fedcd25435d176b71",
     "packages": [
         {
             "name": "guzzlehttp/guzzle",
@@ -359,6 +359,47 @@
                 "web service"
             ],
             "time": "2015-03-18 18:23:50"
+        },
+        {
+            "name": "mtdowling/burgomaster",
+            "version": "0.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mtdowling/Burgomaster.git",
+                "reference": "31624f429cf53d6f9715533ded5ea6ac7ac584b3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mtdowling/Burgomaster/zipball/31624f429cf53d6f9715533ded5ea6ac7ac584b3",
+                "reference": "31624f429cf53d6f9715533ded5ea6ac7ac584b3",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "src/Burgomaster.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Michael Dowling",
+                    "email": "mtdowling@gmail.com",
+                    "homepage": "https://github.com/mtdowling"
+                }
+            ],
+            "description": "Packages up PHP packages into zips and phars",
+            "keywords": [
+                "phar",
+                "zip"
+            ],
+            "time": "2014-09-12 20:50:51"
         },
         {
             "name": "phpdocumentor/reflection-docblock",
