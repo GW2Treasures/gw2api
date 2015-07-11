@@ -40,7 +40,7 @@ include 'vendor/autoload.php';
 
 ### Using the gw2api.phar archive
 
-You need to download the [latest gw2api.phar](https://github.com/GW2Treasures/gw2api/releases/tag/latest)
+You need to download the [latest gw2api.phar](https://github.com/GW2Treasures/gw2api/releases/latest)
 and the [guzzle.phar of the latest 5.x version](https://github.com/guzzle/guzzle/releases/tag/5.3.0) of the
 [guzzle](https://github.com/guzzle/guzzle) library and place both files in your project directory. 
 Now you can include both files to start using the GW2 API wrapper.
