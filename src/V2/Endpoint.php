@@ -188,7 +188,7 @@ abstract class Endpoint implements IEndpoint {
      *
      * @return string
      */
-    protected abstract function url();
+    abstract public function url();
 
     /**
      * String representation of this endpoint.

@@ -14,7 +14,7 @@ class MaterialEndpoint extends Endpoint implements IBulkEndpoint, ILocalizedEndp
     /**
      * {@inheritdoc}
      */
-    protected function url() {
+    public function url() {
         return 'v2/materials';
     }
 }

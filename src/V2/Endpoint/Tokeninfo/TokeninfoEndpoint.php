@@ -20,7 +20,7 @@ class TokeninfoEndpoint extends Endpoint implements IAuthenticatedEndpoint {
     /**
      * @inheritdoc
      */
-    protected function url() {
+    public function url() {
         return 'v2/tokeninfo';
     }
 

@@ -9,7 +9,7 @@ class BuildEndpoint extends Endpoint {
     /**
      * {@inheritdoc}
      */
-    protected function url() {
+    public function url() {
         return 'v2/build';
     }
 

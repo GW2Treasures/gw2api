@@ -14,7 +14,7 @@ class ColorEndpoint extends Endpoint implements IBulkEndpoint, ILocalizedEndpoin
     /**
      * {@inheritdoc}
      */
-    protected function url() {
+    public function url() {
         return 'v2/colors';
     }
 }

@@ -24,7 +24,7 @@ class CharacterEndpoint extends Endpoint implements IAuthenticatedEndpoint, IBul
     /**
      * {@inheritdoc}
      */
-    protected function url() {
+    public function url() {
         return 'v2/characters';
     }
 

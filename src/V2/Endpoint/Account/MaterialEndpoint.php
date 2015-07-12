@@ -19,7 +19,7 @@ class MaterialEndpoint extends Endpoint implements IAuthenticatedEndpoint {
     /**
      * {@inheritdoc}
      */
-    protected function url() {
+    public function url() {
         return 'v2/account/materials';
     }
 

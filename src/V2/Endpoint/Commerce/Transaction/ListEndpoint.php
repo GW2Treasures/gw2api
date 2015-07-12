@@ -45,7 +45,7 @@ class ListEndpoint extends Endpoint implements IAuthenticatedEndpoint, IPaginate
     /**
      * {@inheritdoc}
      */
-    protected function url() {
+    public function url() {
         return 'v2/commerce/transactions/' . $this->type . '/' . $this->list;
     }
 }

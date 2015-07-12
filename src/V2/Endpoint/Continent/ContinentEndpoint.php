@@ -14,7 +14,7 @@ class ContinentEndpoint extends Endpoint implements IBulkEndpoint, ILocalizedEnd
     /**
      * {@inheritdoc}
      */
-    protected function url() {
+    public function url() {
         return 'v2/continent';
     }
 

@@ -12,7 +12,7 @@ class FileEndpoint extends Endpoint implements IBulkEndpoint {
     /**
      * {@inheritdoc}
      */
-    protected function url() {
+    public function url() {
         return 'v2/files';
     }
 }

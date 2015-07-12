@@ -9,4 +9,11 @@ interface IEndpoint {
      * @param ApiHandler $handler
      */
     public function attach( ApiHandler $handler );
+
+    /**
+     * The url of this endpoint.
+     *
+     * @return string
+     */
+    public function url();
 }

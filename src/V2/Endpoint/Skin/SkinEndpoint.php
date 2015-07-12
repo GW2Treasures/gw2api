@@ -17,7 +17,7 @@ class SkinEndpoint extends Endpoint implements IBulkEndpoint, ILocalizedEndpoint
     /**
      * {@inheritdoc}
      */
-    protected function url() {
+    public function url() {
         return 'v2/skins';
     }
 }
