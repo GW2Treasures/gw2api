@@ -10,7 +10,7 @@ class ExchangeEndpoint extends Endpoint {
      * {@inheritdoc}
      */
     public function url() {
-        return 'v2/commerce/prices';
+        return 'v2/commerce/exchange';
     }
 
     /**

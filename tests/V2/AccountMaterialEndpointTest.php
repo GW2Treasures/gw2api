@@ -9,6 +9,7 @@ class AccountMaterialEndpointTest extends Testcase {
         $endpoint = $this->api()->account('test')->materials();
 
         $this->assertEndpointIsAuthenticated( $endpoint );
+        $this->assertEndpointUrl( 'v2/account/materials', $endpoint );
 
         $this->mockResponse('[{"id":19699,"category":5,"count":250},{"id":19670,"category":5,"count":0}]');
         $this->assertEquals(5, $endpoint->get()[1]->category);

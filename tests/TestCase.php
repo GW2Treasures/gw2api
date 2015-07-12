@@ -74,4 +74,12 @@ abstract class TestCase extends PHPUnit_Framework_TestCase {
     public function assertEndpointIsPaginated( IEndpoint $endpoint ) {
         $this->assertInstanceOf( '\GW2Treasures\GW2Api\V2\Pagination\IPaginatedEndpoint', $endpoint );
     }
+
+    /**
+     * @param string    $expected
+     * @param IEndpoint $endpoint
+     */
+    public function assertEndpointUrl( $expected, IEndpoint $endpoint ) {
+        $this->assertEquals( $expected, $endpoint->url() );
+    }
 }

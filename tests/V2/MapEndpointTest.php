@@ -6,6 +6,7 @@ class MapEndpointTest extends TestCase {
 
         $this->assertEndpointIsBulk( $endpoint );
         $this->assertEndpointIsLocalized( $endpoint );
+        $this->assertEndpointUrl( 'v2/maps', $endpoint );
 
         $this->mockResponse('{
             "id": 15,

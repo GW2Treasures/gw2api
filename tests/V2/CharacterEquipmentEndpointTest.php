@@ -9,8 +9,15 @@ class CharacterEquipmentEndpointTest extends TestCase {
         $endpoint = $this->api()->characters('test')->equipment('char');
 
         $this->assertEndpointIsAuthenticated( $endpoint );
+        $this->assertEndpointUrl( 'v2/characters/char/equipment', $endpoint );
 
         $this->mockResponse('{"equipment":[{"id":6472,"slot":"Coat"},{"id":6470,"slot":"Boots"}]}');
         $this->assertEquals(6472, $endpoint->get()[0]->id);
+    }
+
+    public function testCharacterNameEncoding() {
+        $endpoint = $this->api()->characters('test')->equipment('Character Namè');
+
+        $this->assertEndpointUrl( 'v2/characters/Character%20Nam%C3%A8/equipment', $endpoint );
     }
 }

@@ -4,11 +4,20 @@ use GW2Treasures\GW2Api\V2\Endpoint\Commerce\Transaction\ListEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Commerce\Transaction\TypeEndpoint;
 
 class CommerceTransactionEndpointTest extends TestCase {
+    public function testTransactionUrls() {
+        $endpoint = $this->api()->commerce()->transactions('api_key');
+
+        $this->assertEndpointUrl( 'v2/commerce/transactions', $endpoint );
+        $this->assertEndpointUrl( 'v2/commerce/transactions/current', $endpoint->current() );
+        $this->assertEndpointUrl( 'v2/commerce/transactions/history', $endpoint->history() );
+    }
+
     public function testCurrentBuys() {
         $endpoint = $this->api()->commerce()->transactions('api_key')->current()->buys();
 
         $this->assertEndpointIsAuthenticated( $endpoint );
         $this->assertEndpointIsPaginated( $endpoint );
+        $this->assertEndpointUrl( 'v2/commerce/transactions/current/buys', $endpoint );
 
         $this->mockResponse( '[{
             "id": 1999,
@@ -25,6 +34,7 @@ class CommerceTransactionEndpointTest extends TestCase {
 
         $this->assertEndpointIsAuthenticated( $endpoint );
         $this->assertEndpointIsPaginated( $endpoint );
+        $this->assertEndpointUrl( 'v2/commerce/transactions/current/sells', $endpoint );
 
         $this->mockResponse( '[{
             "id": 1997,
@@ -41,6 +51,7 @@ class CommerceTransactionEndpointTest extends TestCase {
 
         $this->assertEndpointIsAuthenticated( $endpoint );
         $this->assertEndpointIsPaginated( $endpoint );
+        $this->assertEndpointUrl( 'v2/commerce/transactions/history/buys', $endpoint );
 
         $this->mockResponse( '[{
             "id": 1000,
@@ -58,6 +69,7 @@ class CommerceTransactionEndpointTest extends TestCase {
 
         $this->assertEndpointIsAuthenticated( $endpoint );
         $this->assertEndpointIsPaginated( $endpoint );
+        $this->assertEndpointUrl( 'v2/commerce/transactions/history/sells', $endpoint );
 
         $this->mockResponse( '[{
             "id": 999,

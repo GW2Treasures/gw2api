@@ -6,6 +6,7 @@ class CharacterEndpointTest extends TestCase {
 
         $this->assertEndpointIsAuthenticated( $endpoint );
         $this->assertEndpointIsBulk( $endpoint );
+        $this->assertEndpointUrl( 'v2/characters', $endpoint );
 
         $this->mockResponse('["Hello"]');
         $this->assertEquals( ['Hello'], $endpoint->ids() );
@@ -13,6 +14,8 @@ class CharacterEndpointTest extends TestCase {
 
     public function testGet() {
         $endpoint = $this->api()->characters('api_key');
+
+        $this->assertEndpointUrl( 'v2/characters', $endpoint );
 
         $this->mockResponse('{
             "name": "Hello",

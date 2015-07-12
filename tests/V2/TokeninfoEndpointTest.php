@@ -5,6 +5,7 @@ class TokeninfoEndpointTest extends TestCase {
         $endpoint = $this->api()->tokeninfo('api_key');
 
         $this->assertEndpointIsAuthenticated( $endpoint );
+        $this->assertEndpointUrl( 'v2/tokeninfo', $endpoint );
 
         $this->mockResponse('{
             "id": "017A2B0C-A6C5-CC4D-A055-680F427CE8FD",

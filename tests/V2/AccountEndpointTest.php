@@ -5,6 +5,7 @@ class AccountEndpointTest extends TestCase {
         $endpoint = $this->api()->account('api_key');
 
         $this->assertEndpointIsAuthenticated( $endpoint );
+        $this->assertEndpointUrl( 'v2/account', $endpoint );
 
         $this->mockResponse('{
             "id":"account-guid",
@@ -23,6 +24,7 @@ class AccountEndpointTest extends TestCase {
         $endpoint = $this->api()->account('api_key');
 
         $this->assertEndpointIsAuthenticated( $endpoint );
+        $this->assertEndpointUrl( 'v2/account', $endpoint );
 
         $this->mockResponse('{
             "id":"account-guid",
