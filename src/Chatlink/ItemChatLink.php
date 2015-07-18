@@ -98,4 +98,70 @@ class ItemChatLink extends ChatLink {
 
         return $id;
     }
+
+    public function encode() {
+        $data = [ $this->getType() ];
+
+        $itemStack = $this->getItemStack();
+
+        $this->writeItemCount( $data, $itemStack->count );
+        $this->writeItemId( $data, $itemStack->id );
+
+        $hasSkin = $itemStack->skin !== null;
+        $hasUpgrade1 = count($itemStack->upgrades) >= 1;
+        $hasUpgrade2 = count($itemStack->upgrades) >= 2;
+
+        $upgradeFlag = self::UPGRADE_TYPE_NONE;
+
+        if( $hasSkin ) {
+            $upgradeFlag |= self::UPGRADE_HAS_SKIN;
+        }
+
+        if( $hasUpgrade1 ) {
+            $upgradeFlag |= self::UPGRADE_HAS_UPGRADE_1;
+        }
+
+        if( $hasUpgrade2 ) {
+            $upgradeFlag |= self::UPGRADE_HAS_UPGRADE_2;
+        }
+
+        $this->writeUpgradeFlag( $data, $upgradeFlag );
+
+        if( $hasSkin ) {
+            $this->writeUpgradeItemId( $data, $itemStack->skin );
+        }
+
+        if( $hasUpgrade1 ) {
+            $this->writeUpgradeItemId( $data, $itemStack->upgrades[0] );
+        }
+
+        if( $hasUpgrade2 ) {
+            $this->writeUpgradeItemId( $data, $itemStack->upgrades[1] );
+        }
+
+        $chatcode = '';
+        foreach( $data as $char ) {
+            $chatcode .= chr( $char );
+        }
+        return '[&'.base64_encode($chatcode).']';
+    }
+
+    protected function writeItemCount( &$data, $count ) {
+        $data[] = $count;
+    }
+
+    protected function writeItemId( &$data, $id ) {
+        $data[] = ($id >> 0x00) & 0xFF;
+        $data[] = ($id >> 0x08) & 0xFF;
+        $data[] = ($id >> 0x10) & 0xFF;
+    }
+
+    protected function writeUpgradeFlag( &$data, $upgradeFlag ) {
+        $data[] = $upgradeFlag;
+    }
+
+    protected function writeUpgradeItemId( &$data, $itemId ) {
+        $this->writeItemId( $data, $itemId );
+        $data[] = 0x00;
+    }
 }

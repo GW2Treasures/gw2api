@@ -2,6 +2,7 @@
 
 use GW2Treasures\GW2Api\Chatlink\Chatlink;
 use GW2Treasures\GW2Api\Chatlink\ItemChatLink;
+use GW2Treasures\GW2Api\Model\ItemStack;
 
 class ChatlinkTest extends TestCase {
     public function testItemChatLinkDecodeSimple() {
@@ -37,7 +38,7 @@ class ChatlinkTest extends TestCase {
     }
 
     public function testItemChatLinkEncodeSimple() {
-        $itemStack = \GW2Treasures\GW2Api\Model\ItemStack::fromArray([
+        $itemStack = ItemStack::fromArray([
             'count' => 1,
             'id' => 19721
         ]);
@@ -45,5 +46,24 @@ class ChatlinkTest extends TestCase {
         $chatlink = new ItemChatLink( $itemStack );
 
         $this->assertEquals( 19721, $chatlink->getItemStack()->id );
+
+        $chatcode = $chatlink->encode();
+
+        $this->assertEquals( '[&AgEJTQAA]', $chatcode );
+    }
+
+
+    public function testItemChatLinkEncodeUpgrades() {
+        $itemStack = ItemStack::fromArray([
+            'count' => 1,
+            'id' => 46762,
+            'skin' => 3709,
+            'upgrades' => [24575, 24615]
+        ]);
+
+        $chatlink = new ItemChatLink( $itemStack );
+
+        $chatcode = $chatlink->encode();
+        $this->assertEquals( '[&AgGqtgDgfQ4AAP9fAAAnYAAA]', $chatcode );
     }
 }
