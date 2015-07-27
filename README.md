@@ -311,7 +311,7 @@ try {
 } catch(InvalidLanguageException $exception) {
     $exception->getMessage() === "Invalid language (expected: invalid; actual: en)"
     $exception->getRequestLanguage() === "invalid"
-    $exception->getResponseLanguage() === "invalid"
+    $exception->getResponseLanguage() === "en"
 }
 ```
 
