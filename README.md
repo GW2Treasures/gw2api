@@ -4,15 +4,15 @@
 [![version][packagist-badge]][packagist]
 [![license][license-badge]][packagist]
 [![Travis][travis-badge]][travis]
-[![Coveralls][coveralls-badge]][coveralls]
+[![Coverage][coverage-badge]][coverage]
 
 [packagist-badge]: https://img.shields.io/packagist/v/gw2treasures/gw2api.svg?style=flat-square
 [license-badge]: https://img.shields.io/packagist/l/gw2treasures/gw2api.svg?style=flat-square
 [travis-badge]: https://img.shields.io/travis/GW2Treasures/gw2api.svg?style=flat-square
-[coveralls-badge]: https://img.shields.io/coveralls/GW2Treasures/gw2api/master.svg?style=flat-square
+[coverage-badge]: https://img.shields.io/codecov/c/GW2Treasures/gw2api/example-python.svg?style=flat-square
 [packagist]: https://packagist.org/packages/gw2treasures/gw2api
 [travis]: https://travis-ci.org/GW2Treasures/gw2api
-[coveralls]: https://coveralls.io/r/GW2Treasures/gw2api?branch=master
+[coverage]: https://codecov.io/github/GW2Treasures/gw2api
 
 **PHP wrapper for the Guild Wars 2 API**.
 
