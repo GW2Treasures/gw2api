@@ -9,7 +9,7 @@
 [packagist-badge]: https://img.shields.io/packagist/v/gw2treasures/gw2api.svg?style=flat-square
 [license-badge]: https://img.shields.io/packagist/l/gw2treasures/gw2api.svg?style=flat-square
 [travis-badge]: https://img.shields.io/travis/GW2Treasures/gw2api.svg?style=flat-square
-[coverage-badge]: https://img.shields.io/codecov/c/GW2Treasures/gw2api/example-python.svg?style=flat-square
+[coverage-badge]: https://img.shields.io/codecov/c/github/GW2Treasures/gw2api.svg?style=flat-square
 [packagist]: https://packagist.org/packages/gw2treasures/gw2api
 [travis]: https://travis-ci.org/GW2Treasures/gw2api
 [coverage]: https://codecov.io/github/GW2Treasures/gw2api
