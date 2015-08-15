@@ -16,6 +16,7 @@ use GW2Treasures\GW2Api\V2\Endpoint\Material\MaterialEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Quaggan\QuagganEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Recipe\RecipeEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Skin\SkinEndpoint;
+use GW2Treasures\GW2Api\V2\Endpoint\Specialization\SpecializationEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Tokeninfo\TokeninfoEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\World\WorldEndpoint;
 use GW2Treasures\GW2Api\V2\IEndpoint;
@@ -165,6 +166,10 @@ class GW2Api {
 
     public function skins() {
         return new SkinEndpoint( $this );
+    }
+
+    public function specializations() {
+        return new SpecializationEndpoint( $this );
     }
 
     public function tokeninfo( $apiKey ) {
