@@ -114,7 +114,8 @@ For all examples it is assumed that you have a variable `$api = new GW2Api()`.
  /v2/recipes                  | [Recipe\RecipeEndpoint][RecipeEndpoint]                    <br>`GW2Api::recipes()`                 | 📦
  /v2/recipes/search           | [Recipe\SearchEndpoint][Recipe\SearchEndpoint]             <br>`GW2Api::recipes()->search()`       |
  ~~/v2/skills~~               | *disabled*                                                                                         | 🚫
- /v2/skins                    | [Skin\SkinEndpoint][SkinEndpoint]                     <br>`GW2Api::skins()`                   | 📦🌏
+ /v2/skins                    | [Skin\SkinEndpoint][SkinEndpoint]                          <br>`GW2Api::skins()`                   | 📦🌏
+ /v2/specializations          | [Specialization\SpecializationEndpoint][SpecializationEndpoint] <br>`GW2Api::specializations()`    | 📦🌏
  /v2/tokeninfo                | [Tokeninfo\TokeninfoEndpoint][TokeninfoEndpoint]           <br>`GW2Api::tokeninfo()`               | 🔒
  ~~/v2/traits~~               | *disabled*                                                                                         | 🚫
  /v2/worlds                   | [World\WorldEndpoint][WorldEndpoint]                       <br>`GW2Api::worlds()`                  | 📦🌏
@@ -775,6 +776,25 @@ Implements [📦BulkEndpoint][BulkEndpoint] and [🌏LocalizedEndpoint][Localize
 ```php
 $api->skins()->get(1);
 // => { name: "Chainmail Leggings", type: "Armor", … }
+```
+
+
+#### /v2/specializations
+[SpecializationEndpoint]: #v2specializations
+
+`\GW2Treasures\GW2Api\V2\Endpoint\Specialization\SpecializationEndpoint`
+([source](src/V2/Endpoint/Specialization/SpecializationEndpoint.php))
+
+Implements [📦BulkEndpoint][BulkEndpoint] and [🌏LocalizedEndpoint][LocalizedEndpoint].
+
+##### Methods
+ - Inherited methods from [📦BulkEndpoint][BulkEndpoint]
+ - Inherited methods from [🌏LocalizedEndpoint][LocalizedEndpoint]
+
+##### Example
+```php
+$api->specializations()->get(1);
+// => { id: 1, name: "Dueling", profession: "Mesmer", … }
 ```
 
 
