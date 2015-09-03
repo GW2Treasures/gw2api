@@ -69,4 +69,13 @@ class AccountEndpoint extends Endpoint implements IAuthenticatedEndpoint {
     public function materials() {
         return new MaterialEndpoint( $this->api, $this->apiKey );
     }
+
+    /**
+     * Get the unlocked skins.
+     *
+     * @return SkinEndpoint
+     */
+    public function skins() {
+        return new SkinEndpoint( $this->api, $this->apiKey );
+    }
 }
