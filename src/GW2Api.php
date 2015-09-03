@@ -9,6 +9,7 @@ use GW2Treasures\GW2Api\V2\Endpoint\Character\CharacterEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Color\ColorEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Commerce\CommerceEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Continent\ContinentEndpoint;
+use GW2Treasures\GW2Api\V2\Endpoint\Currency\CurrencyEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\File\FileEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Item\ItemEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Map\MapEndpoint;
@@ -138,6 +139,10 @@ class GW2Api {
 
     public function continents() {
         return new ContinentEndpoint( $this );
+    }
+
+    public function currencies() {
+        return new CurrencyEndpoint( $this );
     }
 
     public function files() {
