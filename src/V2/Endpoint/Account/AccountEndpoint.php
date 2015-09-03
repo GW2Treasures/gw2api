@@ -53,6 +53,15 @@ class AccountEndpoint extends Endpoint implements IAuthenticatedEndpoint {
     }
 
     /**
+     * Get a list of all unlocked dyes (ids).
+     *
+     * @return DyeEndpoint
+     */
+    public function dyes() {
+        return new DyeEndpoint( $this->api, $this->apiKey );
+    }
+
+    /**
      * Get the account material storage.
      *
      * @return MaterialEndpoint
