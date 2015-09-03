@@ -87,7 +87,7 @@ For all examples it is assumed that you have a variable `$api = new GW2Api()`.
  /v2/account/bank             | [Account\BankEndpoint][Account\BankEndpoint]               <br>`GW2Api::account()->bank()`         | 🔒
  /v2/account/dyes             | [Account\DyeEndpoint][Account\DyeEndpoint]                 <br>`GW2Api::account()->dyes()`         | 🔒
  /v2/account/materials        | [Account\MaterialEndpoint][Account\MaterialEndpoint]       <br>`GW2Api::account()->materials()`    | 🔒
- /v2/account/skins            | [Account\SkinsEndpoint][Account\SkinsEndpoint]             <br>`GW2Api::account()->skins()`        | 🔒
+ /v2/account/skins            | [Account\SkinEndpoint][Account\SkinEndpoint]               <br>`GW2Api::account()->skins()`        | 🔒
  /v2/account/wallet           | [Account\WalletEndpoint][Account\WalletEndpoint]           <br>`GW2Api::account()->wallet()`       | 🔒
  /v2/build                    | [Build\BuildEndpoint][BuildEndpoint]                       <br>`GW2Api::build()`                   |
  /v2/characters               | [Character\CharacterEndpoint][CharacterEndpoint]           <br>`GW2Api::characters()`              | 🔒📦
@@ -391,7 +391,7 @@ $api->account('API_KEY')->bank()->get();
 `\GW2Treasures\GW2Api\V2\Endpoint\Account\DyeEndpoint`
 ([source](src/V2/Endpoint/Account/DyeEndpoint.php))
 
-The [ColorEndpoint][Color\ColorEndpoint] can be used to look up the skins used by this endpoint.
+The [ColorEndpoint][ColorEndpoint] can be used to look up the skins used by this endpoint.
 Implements [🔒AuthenticatedEndpoint][AuthenticatedEndpoint].
 
 ##### Methods
@@ -410,7 +410,7 @@ $api->account('API_KEY')->dyes()->get();
 `\GW2Treasures\GW2Api\V2\Endpoint\Account\MaterialEndpoint`
 ([source](src/V2/Endpoint/Account/MaterialEndpoint.php))
 
-The [Material\MaterialEndpoint][MaterialEndpoint] can be used to get the categories used by this endpoint.
+The [MaterialEndpoint][MaterialEndpoint] can be used to get the categories used by this endpoint.
 Implements [🔒AuthenticatedEndpoint][AuthenticatedEndpoint].
 
 ##### Methods
@@ -429,7 +429,7 @@ $api->account('API_KEY')->materials()->get();
 `\GW2Treasures\GW2Api\V2\Endpoint\Account\SkinEndpoint`
 ([source](src/V2/Endpoint/Account/SkinEndpoint.php))
 
-The [SkinEndpoint][Skins\SkinEndpoint] can be used to look up the skins used by this endpoint.
+The [SkinEndpoint][SkinEndpoint] can be used to look up the skins used by this endpoint.
 Implements [🔒AuthenticatedEndpoint][AuthenticatedEndpoint].
 
 ##### Methods
@@ -448,7 +448,7 @@ $api->account('API_KEY')->skins()->get();
 `\GW2Treasures\GW2Api\V2\Endpoint\Account\WalletEndpoint`
 ([source](src/V2/Endpoint/Account/WalletEndpoint.php))
 
-The [CurrencyEndpoint](Currency\CurrencyEndpoint) can be used to look up the currencies used by this endpoint.
+The [CurrencyEndpoint][CurrencyEndpoint] can be used to look up the currencies used by this endpoint.
 Implements [🔒AuthenticatedEndpoint][AuthenticatedEndpoint].
 
 ##### Methods
@@ -680,7 +680,7 @@ $api->continents()->get(1);
 
 
 #### /v2/currencies
-[CurrencyEndpoint]: #v2currencys
+[CurrencyEndpoint]: #v2currencies
 
 `\GW2Treasures\GW2Api\V2\Endpoint\Currency\CurrencyEndpoint`
 ([source](src/V2/Endpoint/Currency/CurrencyEndpoint.php))
