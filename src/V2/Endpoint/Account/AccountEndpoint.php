@@ -78,4 +78,13 @@ class AccountEndpoint extends Endpoint implements IAuthenticatedEndpoint {
     public function skins() {
         return new SkinEndpoint( $this->api, $this->apiKey );
     }
+
+    /**
+     * Get the account wallet.
+     *
+     * @return WalletEndpoint
+     */
+    public function wallet()  {
+        return new WalletEndpoint( $this->api, $this->apiKey );
+    }
 }
