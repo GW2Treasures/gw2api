@@ -42,7 +42,7 @@ include 'vendor/autoload.php';
 
 You need to download the [latest gw2api.phar](https://github.com/GW2Treasures/gw2api/releases/latest)
 and the [guzzle.phar of the latest 5.x version](https://github.com/guzzle/guzzle/releases/tag/5.3.0) of the
-[guzzle](https://github.com/guzzle/guzzle) library and place both files in your project directory. 
+[guzzle](https://github.com/guzzle/guzzle) library and place both files in your project directory.
 Now you can include both files to start using the GW2 API wrapper.
 
 ```php
@@ -85,17 +85,23 @@ For all examples it is assumed that you have a variable `$api = new GW2Api()`.
  -----------------------------|----------------------------------------------------------------------------------------------------|-------------------
  /v2/account                  | [Account\AccountEndpoint][AccountEndpoint]                 <br>`GW2Api::account()`                 | 🔒
  /v2/account/bank             | [Account\BankEndpoint][Account\BankEndpoint]               <br>`GW2Api::account()->bank()`         | 🔒
+ /v2/account/dyes             | [Account\DyeEndpoint][Account\DyeEndpoint]                 <br>`GW2Api::account()->dyes()`         | 🔒
  /v2/account/materials        | [Account\MaterialEndpoint][Account\MaterialEndpoint]       <br>`GW2Api::account()->materials()`    | 🔒
+ /v2/account/skins            | [Account\SkinsEndpoint][Account\SkinsEndpoint]             <br>`GW2Api::account()->skins()`        | 🔒
+ /v2/account/wallet           | [Account\WalletEndpoint][Account\WalletEndpoint]           <br>`GW2Api::account()->wallet()`       | 🔒
  /v2/build                    | [Build\BuildEndpoint][BuildEndpoint]                       <br>`GW2Api::build()`                   |
  /v2/characters               | [Character\CharacterEndpoint][CharacterEndpoint]           <br>`GW2Api::characters()`              | 🔒📦
  /v2/characters/:id/equipment | [Character\EquipmentEndpoint][Character\EquipmentEndpoint] <br>`GW2Api::characters()->equipment()` | 🔒
  /v2/characters/:id/inventory | [Character\InventoryEndpoint][Character\InventoryEndpoint] <br>`GW2Api::characters()->inventory()` | 🔒
+ ~~/v2/characters/:id/recipes~~ | *disabled*                                                                                       | 🔒🚫
+ ~~/v2/characters/:id/specializations~~ | *disabled*                                                                               | 🔒🚫
  /v2/colors                   | [Color\ColorEndpoint][ColorEndpoint]                       <br>`GW2Api::colors()`                  | 📦🌏
  /v2/commerce/exchange        | [Commerce\ExchangeEndpoint][Commerce\ExchangeEndpoint]     <br>`GW2Api::commerce()->exchange()`    |
  /v2/commerce/listings        | [Commerce\ListingEndpoint][Commerce\ListingEndpoint]       <br>`GW2Api::commerce()->listings()`    | 📦
  /v2/commerce/prices          | [Commerce\PriceEndpoint][Commerce\PriceEndpoint]           <br>`GW2Api::commerce()->prices()`      | 📦
  /v2/commerce/transactions    | [Commerce\Transaction\TransactionEndpoint][Commerce\TransactionEndpoint] <br>`GW2Api::commerce()->transactions()` | 🔒📄
  /v2/continents               | [Continent\ContinentEndpoint][ContinentEndpoint]           <br>`GW2Api::continents()`              | 📦🌏
+ /v2/currencies               | [Currency\CurrencyEndpoint][CurrencyEndpoint]              <br>`GW2Api::currencies()`              | 📦🌏
  ~~/v2/events~~               | *disabled*                                                                                         | 🌏🚫
  ~~/v2/events-state~~         | *disabled*                                                                                         | 🚫
  /v2/files                    | [File\FileEndpoint][FileEndpoint]                          <br>`GW2Api::files()`                   | 📦
@@ -110,6 +116,9 @@ For all examples it is assumed that you have a variable `$api = new GW2Api()`.
  ~~/v2/leaderboards~~         | *disabled*                                                                                         | 🚫
  /v2/maps                     | [Map\MapEndpoint][MapEndpoint]                             <br>`GW2Api::maps()`                    | 📦🌏
  /v2/materials                | [Material\MaterialEndpoint][MaterialEndpoint]              <br>`GW2Api::materials()`               | 📦🌏
+ ~~/v2/pvp~~                  | *disabled*                                                                                         | 🚫
+ ~~/v2/pvp/games~~            | *disabled*                                                                                         | 🚫
+ ~~/v2/pvp/stats~~            | *disabled*                                                                                         | 🚫
  /v2/quaggans                 | [Quaggan\QuagganEndpoint][QuagganEndpoint]                 <br>`GW2Api::quaggans()`                | 📦
  /v2/recipes                  | [Recipe\RecipeEndpoint][RecipeEndpoint]                    <br>`GW2Api::recipes()`                 | 📦
  /v2/recipes/search           | [Recipe\SearchEndpoint][Recipe\SearchEndpoint]             <br>`GW2Api::recipes()->search()`       |
@@ -376,6 +385,25 @@ $api->account('API_KEY')->bank()->get();
 ```
 
 
+#### /v2/account/dyes
+[Account\DyeEndpoint]: #v2accountdyes
+
+`\GW2Treasures\GW2Api\V2\Endpoint\Account\DyeEndpoint`
+([source](src/V2/Endpoint/Account/DyeEndpoint.php))
+
+The [ColorEndpoint][Color\ColorEndpoint] can be used to look up the skins used by this endpoint.
+Implements [🔒AuthenticatedEndpoint][AuthenticatedEndpoint].
+
+##### Methods
+ - `get():array` Get unlocked dyes.
+
+##### Example
+```php
+$api->account('API_KEY')->dyes()->get();
+// => [ 8, 12, 14, 17, … ]
+```
+
+
 #### /v2/account/materials
 [Account\MaterialEndpoint]: #v2accountmaterials
 
@@ -392,6 +420,44 @@ Implements [🔒AuthenticatedEndpoint][AuthenticatedEndpoint].
 ```php
 $api->account('API_KEY')->materials()->get();
 // => [ { id: 19699, category: 5, count: 250 }, … ]
+```
+
+
+#### /v2/account/skins
+[Account\SkinEndpoint]: #v2accountskins
+
+`\GW2Treasures\GW2Api\V2\Endpoint\Account\SkinEndpoint`
+([source](src/V2/Endpoint/Account/SkinEndpoint.php))
+
+The [SkinEndpoint][Skins\SkinEndpoint] can be used to look up the skins used by this endpoint.
+Implements [🔒AuthenticatedEndpoint][AuthenticatedEndpoint].
+
+##### Methods
+ - `get():array` Get unlocked skins.
+
+##### Example
+```php
+$api->account('API_KEY')->skins()->get();
+// => [ 1, 2, 3, 4, … ]
+```
+
+
+#### /v2/account/wallet
+[Account\WalletEndpoint]: #v2accountwallet
+
+`\GW2Treasures\GW2Api\V2\Endpoint\Account\WalletEndpoint`
+([source](src/V2/Endpoint/Account/WalletEndpoint.php))
+
+The [CurrencyEndpoint](Currency\CurrencyEndpoint) can be used to look up the currencies used by this endpoint.
+Implements [🔒AuthenticatedEndpoint][AuthenticatedEndpoint].
+
+##### Methods
+ - `get():array` Get the account wallet.
+
+##### Example
+```php
+$api->account('API_KEY')->wallet()->get();
+// => [ { id: 1, value: 234885 }, … ]
 ```
 
 
@@ -610,6 +676,25 @@ Implements [📦BulkEndpoint][BulkEndpoint] and [🌏LocalizedEndpoint][Localize
 ```php
 $api->continents()->get(1);
 // => { name: "Tyria", … }
+```
+
+
+#### /v2/currencies
+[CurrencyEndpoint]: #v2currencys
+
+`\GW2Treasures\GW2Api\V2\Endpoint\Currency\CurrencyEndpoint`
+([source](src/V2/Endpoint/Currency/CurrencyEndpoint.php))
+
+Implements [📦BulkEndpoint][BulkEndpoint] and [🌏LocalizedEndpoint][LocalizedEndpoint].
+
+##### Methods
+ - Inherited methods from [📦BulkEndpoint][BulkEndpoint]
+ - Inherited methods from [🌏LocalizedEndpoint][LocalizedEndpoint]
+
+##### Example
+```php
+$api->currencies()->get(1);
+// => { id: 1, name: "Coin", … }
 ```
 
 
