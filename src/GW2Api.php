@@ -19,6 +19,7 @@ use GW2Treasures\GW2Api\V2\Endpoint\Recipe\RecipeEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Skin\SkinEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Specialization\SpecializationEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Tokeninfo\TokeninfoEndpoint;
+use GW2Treasures\GW2Api\V2\Endpoint\Traits\TraitEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\World\WorldEndpoint;
 use GW2Treasures\GW2Api\V2\IEndpoint;
 
@@ -179,6 +180,10 @@ class GW2Api {
 
     public function tokeninfo( $apiKey ) {
         return new TokeninfoEndpoint( $this, $apiKey );
+    }
+
+    public function traits() {
+        return new TraitEndpoint( $this );
     }
 
     public function worlds() {
