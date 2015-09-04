@@ -126,7 +126,7 @@ For all examples it is assumed that you have a variable `$api = new GW2Api()`.
  /v2/skins                    | [Skin\SkinEndpoint][SkinEndpoint]                          <br>`GW2Api::skins()`                   | 📦🌏
  /v2/specializations          | [Specialization\SpecializationEndpoint][SpecializationEndpoint] <br>`GW2Api::specializations()`    | 📦🌏
  /v2/tokeninfo                | [Tokeninfo\TokeninfoEndpoint][TokeninfoEndpoint]           <br>`GW2Api::tokeninfo()`               | 🔒
- ~~/v2/traits~~               | *disabled*                                                                                         | 🚫
+ /v2/traits                   | [Traits\TraitEndpoint][TraitEndpoint]                      <br>`GW2Api::traits()`                  | 📦🌏
  /v2/worlds                   | [World\WorldEndpoint][WorldEndpoint]                       <br>`GW2Api::worlds()`                  | 📦🌏
  ~~/v2/wvw/matches~~          | *disabled*                                                                                         | 🚫
  ~~/v2/wvw/objectives~~       | *disabled*                                                                                         | 🚫🌏
@@ -898,6 +898,25 @@ Implements [🔒AuthenticatedEndpoint][AuthenticatedEndpoint].
 ```php
 $api->tokeninfo('API_KEY')->get();
 // => { id: "API_KEY", name: "key name", permissions: [ "account", … ] }
+```
+
+
+#### /v2/traits
+[TraitEndpoint]: #v2traits
+
+`\GW2Treasures\GW2Api\V2\Endpoint\Traits\TraitEndpoint`
+([source](src/V2/Endpoint/Traits/TraitEndpoint.php))
+
+Implements [📦BulkEndpoint][BulkEndpoint] and [🌏LocalizedEndpoint][LocalizedEndpoint].
+
+##### Methods
+ - Inherited methods from [📦BulkEndpoint][BulkEndpoint]
+ - Inherited methods from [🌏LocalizedEndpoint][LocalizedEndpoint]
+
+##### Example
+```php
+$api->traits()->get(214);
+// => { id: 214, tier:2, name: "Aeromancer's Training", … }
 ```
 
 
