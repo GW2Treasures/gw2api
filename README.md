@@ -115,10 +115,9 @@ For all examples it is assumed that you have a variable `$api = new GW2Api()`.
  /v2/items                    | [Item\ItemEndpoint][ItemEndpoint]                          <br>`GW2Api::items()`                   | 📦🌏
  ~~/v2/leaderboards~~         | *disabled*                                                                                         | 🚫
  /v2/maps                     | [Map\MapEndpoint][MapEndpoint]                             <br>`GW2Api::maps()`                    | 📦🌏
- /v2/materials                | [Material\MaterialEndpoint][MaterialEndpoint]              <br>`GW2Api::materials()`               | 📦🌏
- ~~/v2/pvp~~                  | *disabled*                                                                                         | 🚫
- ~~/v2/pvp/games~~            | *disabled*                                                                                         | 🚫
- ~~/v2/pvp/stats~~            | *disabled*                                                                                         | 🚫
+ /v2/materials                | [Material\MaterialEndpoint][MaterialEndpoint]              <br>`GW2Api::materials()`               | 📦🌏                                                                                    | 🚫
+ /v2/pvp/games                | [Pvp\GameEndpoint][Pvp\GameEndpoint]                       <br>`GW2Api::pvp()->games()`            | 🔒📦
+ /v2/pvp/stats                | [Pvp\StatsEndpoint][Pvp\StatsEndpoint]                     <br>`GW2Api::pvp()->stats()`            | 🔒
  /v2/quaggans                 | [Quaggan\QuagganEndpoint][QuagganEndpoint]                 <br>`GW2Api::quaggans()`                | 📦
  /v2/recipes                  | [Recipe\RecipeEndpoint][RecipeEndpoint]                    <br>`GW2Api::recipes()`                 | 📦
  /v2/recipes/search           | [Recipe\SearchEndpoint][Recipe\SearchEndpoint]             <br>`GW2Api::recipes()->search()`       |
@@ -788,6 +787,42 @@ Implements [📦BulkEndpoint][BulkEndpoint] and [🌏LocalizedEndpoint][Localize
 ```php
 $api->materials()->lang('es')->all();
 // => [ { id:5, name: "Materiales de cocina", items: [ 12134, … ] }, … ]
+```
+
+
+#### /v2/pvp/games
+[Pvp\GameEndpoint]: #v2pvpgames
+
+`\GW2Treasures\GW2Api\V2\Endpoint\Pvp\GameEndpoint`
+([source](src/V2/Endpoint/Pvp/GameEndpoint.php))
+
+Implements [🔒AuthenticatedEndpoint][AuthenticatedEndpoint] and [📦BulkEndpoint][BulkEndpoint].
+
+##### Methods
+ - Inherited from [📦BulkEndpoint][BulkEndpoint].
+
+##### Example
+```php
+$api->pvp('API_KEY')->games()->get('A9F9FD97-F114-4F97-B2CA-5E814DF0340E');
+// => { id: "A9F9FD97-F114-4F97-B2CA-5E814DF0340E", map_id: 795, … }
+```
+
+
+#### /v2/pvp/stats
+[Pvp\StatsEndpoint]: #v2pvpstats
+
+`\GW2Treasures\GW2Api\V2\Endpoint\Pvp\StatsEndpoint`
+([source](src/V2/Endpoint/Pvp/StatsEndpoint.php))
+
+Implements [🔒AuthenticatedEndpoint][AuthenticatedEndpoint].
+
+##### Methods
+ - `get():mixed` Get pvp stats.
+
+##### Example
+```php
+$api->pvp('API_KEY')->stats()->get();
+// => { pvp_rank: 57, aggregate: { wins: 343, … }, … }
 ```
 
 
