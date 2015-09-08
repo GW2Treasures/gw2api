@@ -3,6 +3,7 @@
 namespace GW2Treasures\GW2Api\V2\Authentication;
 
 trait AuthenticatedEndpoint {
+    /** @var string $apiKey */
     protected $apiKey;
 
     /**
