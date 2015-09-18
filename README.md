@@ -94,7 +94,7 @@ For all examples it is assumed that you have a variable `$api = new GW2Api()`.
  /v2/characters/:id/equipment | [Character\EquipmentEndpoint][Character\EquipmentEndpoint] <br>`GW2Api::characters()->equipment()` | 🔒
  /v2/characters/:id/inventory | [Character\InventoryEndpoint][Character\InventoryEndpoint] <br>`GW2Api::characters()->inventory()` | 🔒
  ~~/v2/characters/:id/recipes~~ | *disabled*                                                                                       | 🔒🚫
- ~~/v2/characters/:id/specializations~~ | *disabled*                                                                               | 🔒🚫
+ /v2/characters/:id/specializations | [Character\SpecializationEndpoint][Character\SpecializationEndpoint] <br>`GW2Api::characters()->specializations()` | 🔒
  /v2/colors                   | [Color\ColorEndpoint][ColorEndpoint]                       <br>`GW2Api::colors()`                  | 📦🌏
  /v2/commerce/exchange        | [Commerce\ExchangeEndpoint][Commerce\ExchangeEndpoint]     <br>`GW2Api::commerce()->exchange()`    |
  /v2/commerce/listings        | [Commerce\ListingEndpoint][Commerce\ListingEndpoint]       <br>`GW2Api::commerce()->listings()`    | 📦
@@ -531,6 +531,25 @@ Implements [🔒AuthenticatedEndpoint][AuthenticatedEndpoint].
 ```php
 $api->characters('API_KEY')->inventory('Character Name')->get();
 // => [ { id: 8941, size: 4 inventory: [ null, { id: 32134, count: 1 }, … ] }, … ]
+```
+
+
+
+#### /v2/characters/:id/specializations
+[Character\SpecializationEndpoint]: #v2charactersidspecializations
+
+`\GW2Treasures\GW2Api\V2\Endpoint\Character\SpecializationEndpoint`
+([source](src/V2/Endpoint/Character/SpecializationEndpoint.php))
+
+Implements [🔒AuthenticatedEndpoint][AuthenticatedEndpoint].
+
+##### Methods
+ - `get():array` Gets the characters specializations.
+
+##### Example
+```php
+$api->characters('API_KEY')->specializations('Character Name')->get();
+// => { pve: [ { id: 41, traits: [232, 214, 226] }, … ], … }
 ```
 
 

@@ -47,4 +47,14 @@ class CharacterEndpoint extends Endpoint implements IAuthenticatedEndpoint, IBul
     public function inventory( $character ) {
         return new InventoryEndpoint( $this->api, $this->apiKey, $character );
     }
+
+    /**
+     * Get the specializations of a character.
+     *
+     * @param string $character
+     * @return SpecializationEndpoint
+     */
+    public function specializations( $character ) {
+        return new SpecializationEndpoint( $this->api, $this->apiKey, $character );
+    }
 }
