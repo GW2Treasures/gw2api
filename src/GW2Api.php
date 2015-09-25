@@ -22,6 +22,7 @@ use GW2Treasures\GW2Api\V2\Endpoint\Specialization\SpecializationEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Tokeninfo\TokeninfoEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Traits\TraitEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\World\WorldEndpoint;
+use GW2Treasures\GW2Api\V2\Endpoint\WvW\WvWEndpoint;
 use GW2Treasures\GW2Api\V2\IEndpoint;
 
 class GW2Api {
@@ -193,6 +194,10 @@ class GW2Api {
 
     public function worlds() {
         return new WorldEndpoint( $this );
+    }
+
+    public function wvw() {
+        return new WvWEndpoint( $this );
     }
 
     public function attachRegisteredHandlers( IEndpoint $endpoint ) {
