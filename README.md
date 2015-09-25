@@ -128,7 +128,7 @@ For all examples it is assumed that you have a variable `$api = new GW2Api()`.
  /v2/traits                   | [Traits\TraitEndpoint][TraitEndpoint]                      <br>`GW2Api::traits()`                  | 📦🌏
  /v2/worlds                   | [World\WorldEndpoint][WorldEndpoint]                       <br>`GW2Api::worlds()`                  | 📦🌏
  ~~/v2/wvw/matches~~          | *disabled*                                                                                         | 🚫
- ~~/v2/wvw/objectives~~       | *disabled*                                                                                         | 🚫🌏
+ /v2/wvw/objectives           | [WvW\ObjectiveEndpoint][WvW\ObjectiveEndpoint]             <br>`GW2Api::wvw()->objectives()`       | 📦🌏
 
 † Not FQN, all endpoints are in the namespace `\GW2Treasures\GW2Api\V2\Endpoint`  
 ‡ Flags:  
@@ -990,6 +990,26 @@ Implements [📦BulkEndpoint][BulkEndpoint] and [🌏LocalizedEndpoint][Localize
 ```php
 $api->worlds()->all();
 // => [ { id: 1001, name: "Anvil Rock" }, … ]
+```
+
+
+#### /v2/wvw/objectives
+[WvW\ObjectiveEndpoint]: #v2wvwobjectives
+
+`\GW2Treasures\GW2Api\V2\Endpoint\WvW\ObjectiveEndpoint`
+([source](src/V2/Endpoint/WvW/ObjectiveEndpoint.php))
+
+Implements [📦BulkEndpoint][BulkEndpoint] and [🌏LocalizedEndpoint][LocalizedEndpoint].
+
+##### Methods
+ - Inherited methods from [📦BulkEndpoint][BulkEndpoint]
+ - Inherited methods from [🌏LocalizedEndpoint][LocalizedEndpoint]
+
+##### Example
+```php
+$api->wvw()->objectives()->get('968-98');
+
+// => { id: "968-98", name: "Wurm Tunnel", … }
 ```
 
 
