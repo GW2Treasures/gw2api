@@ -2,6 +2,7 @@
 
 namespace GW2Treasures\GW2Api\V2;
 
+use GuzzleHttp\Psr7;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
@@ -30,10 +31,11 @@ abstract class ApiHandler {
      */
     protected function getResponseAsJson( ResponseInterface $response ) {
         if( $response->hasHeader('Content-Type') ) {
-            $header_values = $response->getHeader('Content-Type');
-            $contentType = array_shift($header_values);
+            $typeHeader = $response->getHeader('Content-Type');
+            $contentType = array_shift($typeHeader);
+
             if( stripos( $contentType, 'application/json' ) === 0 ) {
-                return \json_decode($response->getBody(), FALSE);
+                return json_decode($response->getBody(), false);
             }
         }
 
@@ -43,22 +45,12 @@ abstract class ApiHandler {
     /**
      * Returns the parsed query string for the passed request as key-value array.
      *
-     * @param \Psr\Http\Message\RequestInterface $request
+     * @param RequestInterface $request
      *
      * @return array
      */
     protected function getQueryAsArray( RequestInterface $request ) {
-        $query = $request->getUri()->getQuery();
-        $pairs = explode('&', $query);
-        $query_array = [];
-        foreach ($pairs AS $pair) {
-            if (empty($pair)) {
-                continue;
-            }
-            list($key, $value) = explode('=', $pair);
-            $query_array[$key] = $value;
-        }
-        return $query_array;
+        return Psr7\parse_query($request->getUri()->getQuery());
     }
 
     /**
@@ -69,7 +61,7 @@ abstract class ApiHandler {
      * @return RequestInterface
      */
     public function onRequest( RequestInterface $request ) {
-      return $request;
+        return $request;
     }
 
     /**

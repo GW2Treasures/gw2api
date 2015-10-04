@@ -4,14 +4,14 @@ namespace GW2Treasures\GW2Api\V2;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
+use GuzzleHttp\Pool;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
 use GuzzleHttp\Psr7\Uri;
-use Psr\Http\Message\RequestInterface;
-use Psr\Http\Message\ResponseInterface;
-use GuzzleHttp\Pool;
 use GW2Treasures\GW2Api\Exception\ApiException;
 use GW2Treasures\GW2Api\GW2Api;
+use Psr\Http\Message\RequestInterface;
+use Psr\Http\Message\ResponseInterface;
 
 abstract class Endpoint implements IEndpoint {
     /** @var GW2Api $api */

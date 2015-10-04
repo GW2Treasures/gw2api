@@ -20,17 +20,8 @@ class PaginatedEndpointTest extends TestCase {
 
         $request = $this->getLastRequest();
 
-        $query_array = $this->getQueryArray($request);
-
-        $this->assertArrayHasKey('page', $query_array,
-            'PaginatedEndpoint sets page query parameter' );
-        $this->assertEquals( 1, $query_array['page'],
-            'PaginatedEndpoint sets correct page query parameter value' );
-
-        $this->assertArrayHasKey('page_size', $query_array,
-            'PaginatedEndpoint sets page_size query parameter' );
-        $this->assertEquals( 2, $query_array['page_size'],
-            'PaginatedEndpoint sets correct page_size query parameter value' );
+        $this->assertHasQuery( $request, 'page', 1 );
+        $this->assertHasQuery( $request, 'page_size', 2 );
     }
 
     public function testAll() {
@@ -51,14 +42,10 @@ class PaginatedEndpointTest extends TestCase {
         $requests = $this->getRequests();
         $this->assertCount( 4, $requests, 'PaginatedEndpoint makes exactly as many requests as pages exist' );
 
-        $query_array = $this->getQueryArray($requests[0]);
-        $this->assertEquals( 0, $query_array['page'] );
-        $query_array = $this->getQueryArray($requests[1]);
-        $this->assertEquals( 1, $query_array['page'] );
-        $query_array = $this->getQueryArray($requests[2]);
-        $this->assertEquals( 2, $query_array['page'] );
-        $query_array = $this->getQueryArray($requests[3]);
-        $this->assertEquals( 3, $query_array['page'] );
+        $this->assertHasQuery( $requests[0], 'page', 0 );
+        $this->assertHasQuery( $requests[1], 'page', 1 );
+        $this->assertHasQuery( $requests[2], 'page', 2 );
+        $this->assertHasQuery( $requests[3], 'page', 3 );
     }
 
     public function testAllSmall() {
@@ -75,8 +62,7 @@ class PaginatedEndpointTest extends TestCase {
 
         $requests = $this->getRequests();
         $this->assertCount( 1, $requests, 'PaginatedEndpoint only makes one request if all results fit in one page' );
-        $query_array = $this->getQueryArray($requests[0]);
-        $this->assertEquals( 0, $query_array['page'] );
+        $this->assertHasQuery( $requests[0], 'page', 0 );
     }
 
     public function testBatch() {
@@ -101,14 +87,10 @@ class PaginatedEndpointTest extends TestCase {
         $this->assertCount( 4, $requests,
             'PaginatedEndpoint::batch makes exactly as many requests as pages exist' );
 
-        $query_array = $this->getQueryArray($requests[0]);
-        $this->assertEquals( 0, $query_array['page'] );
-        $query_array = $this->getQueryArray($requests[1]);
-        $this->assertEquals( 1, $query_array['page'] );
-        $query_array = $this->getQueryArray($requests[2]);
-        $this->assertEquals( 2, $query_array['page'] );
-        $query_array = $this->getQueryArray($requests[3]);
-        $this->assertEquals( 3, $query_array['page'] );
+        $this->assertHasQuery( $requests[0], 'page', 0 );
+        $this->assertHasQuery( $requests[1], 'page', 1 );
+        $this->assertHasQuery( $requests[2], 'page', 2 );
+        $this->assertHasQuery( $requests[3], 'page', 3 );
     }
 
 

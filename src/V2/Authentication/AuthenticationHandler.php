@@ -2,11 +2,12 @@
 
 namespace GW2Treasures\GW2Api\V2\Authentication;
 
-use Psr\Http\Message\RequestInterface;
-use Psr\Http\Message\ResponseInterface;
 use GW2Treasures\GW2Api\V2\ApiHandler;
 use GW2Treasures\GW2Api\V2\Authentication\Exception\AuthenticationException;
 use GW2Treasures\GW2Api\V2\Authentication\Exception\InvalidPermissionsException;
+use Psr\Http\Message\MessageInterface;
+use Psr\Http\Message\RequestInterface;
+use Psr\Http\Message\ResponseInterface;
 
 /**
  * @method IAuthenticatedEndpoint getEndpoint()
@@ -21,7 +22,7 @@ class AuthenticationHandler extends ApiHandler {
      *
      * @param RequestInterface $request
      *
-     * @return \Psr\Http\Message\MessageInterface|\Psr\Http\Message\RequestInterface
+     * @return MessageInterface|RequestInterface
      */
     public function onRequest( RequestInterface $request ) {
         return $request->withHeader( 'Authorization', 'Bearer ' . $this->getEndpoint()->getApiKey() );

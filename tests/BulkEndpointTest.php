@@ -21,11 +21,7 @@ class BulkEndpointTest extends TestCase {
 
         $request = $this->getLastRequest();
 
-        $query_array = $this->getQueryArray($request);
-        $this->assertArrayHasKey( 'id', $query_array,
-            'BulkEndpoint sets ?id query parameter' );
-        $this->assertEquals( 'test', $query_array['id'],
-            'BulkEndpoint sets correct query parameter value for ?ids' );
+        $this->assertHasQuery( $request, 'id', 'test' );
     }
 
     public function testAllSupportingIdsAll() {
@@ -41,11 +37,7 @@ class BulkEndpointTest extends TestCase {
         $this->assertCount( 2, $result,
             'BulkEndpoint returns all results for endpoints supporting ?ids=all' );
 
-        $query_array = $this->getQueryArray($request);
-        $this->assertArrayHasKey( 'ids', $query_array,
-            'BulkEndpoint sets ?ids query parameter for endpoints supporting ?ids=all' );
-        $this->assertEquals( 'all', $query_array['ids'],
-            'BulkEndpoint sets correct query parameter value for ?ids for endpoints supporting ?ids=all' );
+        $this->assertHasQuery( $request, 'ids', 'all' );
     }
 
     public function testAllNotSupportingIdsAll() {
@@ -63,12 +55,11 @@ class BulkEndpointTest extends TestCase {
         $this->assertCount( 5, $result, 'BulkEndpoint gets all results for endpoints not supporting ?ids=all' );
 
         $requests = $this->getRequests();
-        $this->assertCount( 2, $requests, 'BulkEndpoint makes exactly as many requests as pages exist for endpoints not supporting ?ids=all' );
+        $this->assertCount( 2, $requests,
+            'BulkEndpoint makes exactly as many requests as pages exist for endpoints not supporting ?ids=all' );
 
-        $query_array = $this->getQueryArray($requests[0]);
-        $this->assertEquals( 0, $query_array['page'] );
-        $query_array = $this->getQueryArray($requests[1]);
-        $this->assertEquals( 1, $query_array['page'] );
+        $this->assertHasQuery( $requests[0], 'page', 0 );
+        $this->assertHasQuery( $requests[1], 'page', 1 );
     }
 
     public function testManySimple() {
@@ -82,11 +73,7 @@ class BulkEndpointTest extends TestCase {
         $this->assertCount( 1, $this->getRequests(),
             'BulkEndpoint only uses one request to get many entries' );
 
-        $query_array = $this->getQueryArray($request);
-        $this->assertArrayHasKey( 'ids', $query_array,
-            'BulkEndpoint sets ?ids query parameter' );
-        $this->assertEquals( '1,2,3', $query_array['ids'],
-            'BulkEndpoint sets correct query parameter value for ?ids' );
+        $this->assertHasQuery( $request, 'ids', '1,2,3' );
     }
 
     public function testManyMultiple() {
@@ -103,17 +90,8 @@ class BulkEndpointTest extends TestCase {
         $this->assertCount( 5, $result,
             'BulkEndpoint returns all results when using many' );
 
-        $query_array = $this->getQueryArray($requests[0]);
-        $this->assertArrayHasKey( 'ids', $query_array,
-            'BulkEndpoint sets ?ids query parameter on first request' );
-        $this->assertEquals( '1,2,3', $query_array['ids'],
-            'BulkEndpoint sets correct query parameter value for ?ids on first request' );
-
-        $query_array = $this->getQueryArray($requests[1]);
-        $this->assertArrayHasKey( 'ids', $query_array,
-            'BulkEndpoint sets ?ids query parameter on second request' );
-        $this->assertEquals( '4,5', $query_array['ids'],
-            'BulkEndpoint sets correct query parameter value for ?ids on second request' );
+        $this->assertHasQuery( $requests[0], 'ids', '1,2,3' );
+        $this->assertHasQuery( $requests[1], 'ids', '4,5' );
     }
 
     public function testManyEmpty() {

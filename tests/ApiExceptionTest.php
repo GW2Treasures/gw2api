@@ -11,7 +11,6 @@ class ApiExceptionTest extends TestCase {
         return new EndpointStub( $this->api() );
     }
 
-
     /**
      * @expectedException \GW2Treasures\GW2Api\Exception\ApiException
      * @expectedExceptionMessage this is the error message.
@@ -26,22 +25,24 @@ class ApiExceptionTest extends TestCase {
     }
 
     public function testResponse() {
+        $endpoint = $this->getEndpoint();
+
         $this->mockResponse( new Response(
             400, [ 'Content-Type' => 'application/json; charset=utf-8', 'foo' => 'bar' ],
             Psr7\stream_for( '{"text":"this is the error message."}' )
         ));
 
         try {
-            $this->getEndpoint()->test();
+            $endpoint->test();
         } catch( \GW2Treasures\GW2Api\Exception\ApiException $exception ) {
             $this->assertNotNull( $exception->getResponse() );
-            $header_values = $exception->getResponse()->getHeader('foo');
-            $this->assertEquals( 'bar', array_shift($header_values) );
+            $this->assertHasHeader( $exception->getResponse(), 'foo', 'bar' );
             $this->assertEquals( 400, $exception->getCode() );
             $this->assertEquals( 400, $exception->getResponse()->getStatusCode() );
 
             $this->assertStringStartsWith( $exception->getMessage(), $exception->__toString() );
             $this->assertNotFalse( strstr( $exception->__toString(), 'status: 400' ));
+            $this->assertNotFalse( strstr( $exception->__toString(), 'url: '. $endpoint->url() ));
         }
     }
 

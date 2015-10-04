@@ -2,10 +2,10 @@
 
 namespace GW2Treasures\GW2Api\V2\Pagination;
 
-use Psr\Http\Message\RequestInterface;
-use Psr\Http\Message\ResponseInterface;
 use GW2Treasures\GW2Api\V2\ApiHandler;
 use GW2Treasures\GW2Api\V2\Pagination\Exception\PageOutOfRangeException;
+use Psr\Http\Message\RequestInterface;
+use Psr\Http\Message\ResponseInterface;
 
 /**
  * @method IPaginatedEndpoint getEndpoint()
@@ -14,7 +14,6 @@ class PaginationHandler extends ApiHandler {
     function __construct( IPaginatedEndpoint $endpoint ) {
         parent::__construct( $endpoint );
     }
-
 
     /**
      * Handle PageOutOfRangeExceptions.

@@ -29,6 +29,6 @@ class ApiResponse {
      */
     public function json( array $config = [] ) {
         $options = isset($config['big_int_strings']) ? JSON_BIGINT_AS_STRING : 0;
-        return \json_decode($this->response->getBody(), FALSE, 512, $options);
+        return json_decode($this->response->getBody(), false, 512, $options);
     }
 }

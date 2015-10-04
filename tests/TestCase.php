@@ -1,18 +1,19 @@
 <?php
 
 use GuzzleHttp\Exception\RequestException;
-use GuzzleHttp\HandlerStack;
-use Psr\Http\Message\RequestInterface;
-use GuzzleHttp\Middleware;
-use GuzzleHttp\Psr7\Response;
-use GuzzleHttp\Psr7;
 use GuzzleHttp\Handler\MockHandler;
+use GuzzleHttp\HandlerStack;
+use GuzzleHttp\Middleware;
+use GuzzleHttp\Psr7;
+use GuzzleHttp\Psr7\Response;
 use GW2Treasures\GW2Api\GW2Api;
 use GW2Treasures\GW2Api\V2\Authentication\IAuthenticatedEndpoint;
 use GW2Treasures\GW2Api\V2\Bulk\IBulkEndpoint;
 use GW2Treasures\GW2Api\V2\IEndpoint;
 use GW2Treasures\GW2Api\V2\Localization\ILocalizedEndpoint;
 use GW2Treasures\GW2Api\V2\Pagination\IPaginatedEndpoint;
+use Psr\Http\Message\MessageInterface;
+use Psr\Http\Message\RequestInterface;
 
 abstract class TestCase extends PHPUnit_Framework_TestCase {
     /** @var GW2Api $api */
@@ -21,11 +22,8 @@ abstract class TestCase extends PHPUnit_Framework_TestCase {
     /** @var MockHandler $mock */
     protected $mock;
 
-    /** @var callable $history */
-    protected $history;
-
-    /** @var  @var array $container */
-    protected $container;
+    /** @var array $history */
+    protected $history = [];
 
     /**
      * @return GW2Api
@@ -33,10 +31,9 @@ abstract class TestCase extends PHPUnit_Framework_TestCase {
     protected function api() {
         if( !isset( $this->api )) {
             $this->mock = new MockHandler();
-            $this->container = [];
-            $this->history = Middleware::history($this->container);
             $stack = HandlerStack::create($this->mock);
-            $stack->push($this->history);
+            $stack->push(Middleware::history($this->history));
+
             $this->api = new GW2Api(['handler' => $stack]);
         }
         return $this->api;
@@ -44,14 +41,17 @@ abstract class TestCase extends PHPUnit_Framework_TestCase {
 
     /**
      * @param Response|RequestException|string $response
+     * @param string $language
      */
     protected function mockResponse( $response, $language = 'en' ) {
-        if( !isset( $this->mock )) {
-            $this->api();
-        }
+        $this->api();
+
         if( is_string( $response )) {
             $this->mock->append(
-                new Response( 200, ['Content-Type' => 'application/json; charset=utf-8', 'Content-Language' => $language], Psr7\stream_for( $response ))
+                new Response( 200, [
+                    'Content-Type' => 'application/json; charset=utf-8',
+                    'Content-Language' => $language
+                ], Psr7\stream_for( $response ))
             );
         } elseif( $response instanceof RequestException ) {
             $this->mock->append( $response );
@@ -64,7 +64,7 @@ abstract class TestCase extends PHPUnit_Framework_TestCase {
      * @return RequestInterface
      */
     protected function getLastRequest() {
-        $transaction = end($this->container);
+        $transaction = end($this->history);
         return $transaction['request'];
     }
 
@@ -73,44 +73,82 @@ abstract class TestCase extends PHPUnit_Framework_TestCase {
      */
     protected function getRequests() {
         $requests = [];
-        foreach ($this->container AS $transaction) {
+        foreach( $this->history as $transaction ) {
             $requests[] = $transaction['request'];
         }
         return $requests;
     }
 
     /**
-     * @param RequestInterface $request
-     * @return array
+     * Asserts that the given header exists.
+     *
+     * If provided with a value, the value of the header will also be compared.
+     *
+     * @param MessageInterface $message
+     * @param string $name
+     * @param string|array|null $value
      */
-    protected function getQueryArray(RequestInterface $request) {
-        $query = $request->getUri()->getQuery();
-        $pairs = explode('&', $query);
-        $query_array = [];
-        foreach ($pairs AS $pair) {
-            if (empty($pair)) {
-                continue;
+    public function assertHasHeader(MessageInterface $message, $name, $value = null) {
+        $this->assertTrue( $message->hasHeader( $name ), "The message does not contain the header $name." );
+
+        if( !is_null( $value )) {
+            $header = $message->getHeader( $name );
+
+            if( count( $header ) === 1 && is_string( $value )) {
+                $this->assertEquals( $value, array_shift( $header ),
+                    "The message contains the header $name, but with the wrong value.");
+            } else {
+                $this->assertEquals( $value, $header,
+                    "The message contains the header $name, but with the wrong value." );
             }
-            list($key, $value) = explode('=', $pair);
-            $query_array[$key] = $value;
         }
-        return $query_array;
+    }
+
+    /**
+     * Asserts that the response does not contain the specified header.
+     *
+     * @param MessageInterface $message
+     * @param string $name
+     */
+    public function assertHasNotHeader(MessageInterface $message, $name) {
+        $this->assertFalse( $message->hasHeader( $name ),
+            "The message contains the header $name" );
+    }
+
+    /**
+     * Asserts that the query string of the request contains the specified query parameter.
+     *
+     * If value is provided, the value will also be comaped
+     *
+     * @param RequestInterface $request
+     * @param string $name
+     * @param string|null $value
+     */
+    public function assertHasQuery(RequestInterface $request, $name, $value = null) {
+        $query = Psr7\parse_query( $request->getUri()->getQuery() );
+
+        $this->assertArrayHasKey( $name, $query, "The request does not contain the query parameter $name");
+
+        if( !is_null( $value )) {
+            $this->assertEquals( $value, $query[$name],
+                "The request contains the query parameter $name, but with the wrong value." );
+        }
     }
 
     public function assertEndpointIsAuthenticated( IEndpoint $endpoint ) {
-        $this->assertInstanceOf( '\GW2Treasures\GW2Api\V2\Authentication\IAuthenticatedEndpoint', $endpoint );
+        $this->assertInstanceOf( IAuthenticatedEndpoint::class, $endpoint );
     }
 
     public function assertEndpointIsBulk( IEndpoint $endpoint ) {
-        $this->assertInstanceOf( '\GW2Treasures\GW2Api\V2\Bulk\IBulkEndpoint', $endpoint );
+        $this->assertInstanceOf( IBulkEndpoint::class, $endpoint );
     }
 
     public function assertEndpointIsLocalized( IEndpoint $endpoint ) {
-        $this->assertInstanceOf( '\GW2Treasures\GW2Api\V2\Localization\ILocalizedEndpoint', $endpoint );
+        $this->assertInstanceOf( ILocalizedEndpoint::class, $endpoint );
     }
 
     public function assertEndpointIsPaginated( IEndpoint $endpoint ) {
-        $this->assertInstanceOf( '\GW2Treasures\GW2Api\V2\Pagination\IPaginatedEndpoint', $endpoint );
+        $this->assertInstanceOf( IPaginatedEndpoint::class, $endpoint );
     }
 
     /**

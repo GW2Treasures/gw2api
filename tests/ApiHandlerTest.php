@@ -43,25 +43,6 @@ class ApiHandlerTest extends TestCase {
         $this->assertNull( $handler->responseAsJson( $invalidNoContentType ));
     }
 
-    public function testQueryParser() {
-        $endpoint = $this->getEndpoint();
-        $handler = $this->getHandler( $endpoint );
-        $request = new Request('GET', new Uri($endpoint->url()));
-
-        $uri = $request->getUri()->withQuery('abc=123&def=456&ghi=789');
-        $query_array = $handler->queryAsArray($request->withUri($uri));
-        $this->assertEquals(3, count($query_array));
-        $this->assertArrayHasKey('abc', $query_array);
-        $this->assertArrayHasKey('def', $query_array);
-        $this->assertArrayHasKey('ghi', $query_array);
-
-        $uri = $request->getUri()->withQuery('abc=123&&ghi=789');
-        $query_array = $handler->queryAsArray($request->withUri($uri));
-        $this->assertEquals(2, count($query_array));
-        $this->assertArrayHasKey('abc', $query_array);
-        $this->assertArrayHasKey('ghi', $query_array);
-    }
-
     /**
      * @expectedException \InvalidArgumentException
      */

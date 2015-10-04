@@ -21,7 +21,7 @@
  - Parallel requests for pagination and bulk expansion
 
 ## Requirements
- - PHP >= 5.4
+ - PHP >= 5.5
 
 ## Setup
 
@@ -41,13 +41,13 @@ include 'vendor/autoload.php';
 ### Using the gw2api.phar archive
 
 You need to download the [latest gw2api.phar](https://github.com/GW2Treasures/gw2api/releases/latest)
-and the [guzzle.phar of the latest 5.x version](https://github.com/guzzle/guzzle/releases/tag/5.3.0) of the
+and the [guzzle.phar of the latest 6.x version](https://github.com/guzzle/guzzle/releases/latest) of the
 [guzzle](https://github.com/guzzle/guzzle) library and place both files in your project directory.
 Now you can include both files to start using the GW2 API wrapper.
 
 ```php
-include __DIR__ .  '/gw2api.phar';
-include __DIR__ .  '/guzzle.phar';
+include __DIR__ . '/gw2api.phar';
+include __DIR__ . '/guzzle.phar';
 ```
 
 ## Examples

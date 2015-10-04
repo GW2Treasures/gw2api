@@ -5,6 +5,8 @@ namespace GW2Treasures\GW2Api;
 use GuzzleHttp\Client;
 use GuzzleHttp\HandlerStack;
 use GW2Treasures\GW2Api\Middleware\EffectiveUrlMiddleware;
+use GW2Treasures\GW2Api\V2\ApiHandler;
+use GW2Treasures\GW2Api\V2\Authentication\AuthenticationHandler;
 use GW2Treasures\GW2Api\V2\Endpoint\Account\AccountEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Build\BuildEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Character\CharacterEndpoint;
@@ -26,6 +28,8 @@ use GW2Treasures\GW2Api\V2\Endpoint\Traits\TraitEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\World\WorldEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\WvW\WvWEndpoint;
 use GW2Treasures\GW2Api\V2\IEndpoint;
+use GW2Treasures\GW2Api\V2\Localization\LocalizationHandler;
+use GW2Treasures\GW2Api\V2\Pagination\PaginationHandler;
 
 class GW2Api {
     /** @var string $apiUrl */
@@ -48,20 +52,19 @@ class GW2Api {
         $this->client = new Client( $this->options );
         $this->options = $options;
 
-        $this->registerHandler( '\GW2Treasures\GW2Api\V2\Authentication\AuthenticationHandler' );
-        $this->registerHandler( '\GW2Treasures\GW2Api\V2\Localization\LocalizationHandler' );
-        $this->registerHandler( '\GW2Treasures\GW2Api\V2\Pagination\PaginationHandler' );
+        $this->registerDefaultHandlers();
     }
 
     protected function getOptions( array $options = [] ) {
-        $handler_stack = (isset($options['handler'])) ? $options['handler'] : HandlerStack::create();
-        $handler_stack->push(EffectiveUrlMiddleware::middleware());
+        $handler = isset($options['handler']) ? $options['handler'] : HandlerStack::create();
+        $handler->push(EffectiveUrlMiddleware::middleware());
+
         return [
            'base_url' => $this->apiUrl,
            'defaults' => [
                'verify' => $this->getCacertFilePath()
            ],
-           'handler' => $handler_stack
+           'handler' => $handler
         ] + $options;
     }
 
@@ -113,12 +116,18 @@ class GW2Api {
         }
 
         $handlerClass = new \ReflectionClass( $handler );
-        if( !$handlerClass->isSubclassOf( '\GW2Treasures\GW2Api\V2\ApiHandler' )) {
+        if( !$handlerClass->isSubclassOf( ApiHandler::class )) {
             throw new \InvalidArgumentException( '$handler has to be a ApiHandler');
         }
 
         $firstConstructorParameter = $handlerClass->getConstructor()->getParameters()[0];
         $this->handlers[ $handler ] = $firstConstructorParameter->getClass()->getName();
+    }
+
+    protected function registerDefaultHandlers() {
+        $this->registerHandler(AuthenticationHandler::class);
+        $this->registerHandler(LocalizationHandler::class);
+        $this->registerHandler(PaginationHandler::class);
     }
 
     public function getClient() {

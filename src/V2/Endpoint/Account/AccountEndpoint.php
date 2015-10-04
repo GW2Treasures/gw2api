@@ -15,8 +15,7 @@ class AccountEndpoint extends Endpoint implements IAuthenticatedEndpoint {
 
         $this->apiKey = $apiKey;
     }
-
-
+    
     /**
      * {@inheritdoc}
      */

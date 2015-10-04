@@ -3,10 +3,10 @@
 namespace GW2Treasures\GW2Api\V2\Localization;
 
 use GuzzleHttp\Psr7\Uri;
-use Psr\Http\Message\RequestInterface;
-use Psr\Http\Message\ResponseInterface;
 use GW2Treasures\GW2Api\V2\ApiHandler;
 use GW2Treasures\GW2Api\V2\Localization\Exception\InvalidLanguageException;
+use Psr\Http\Message\RequestInterface;
+use Psr\Http\Message\ResponseInterface;
 
 /**
  * @method ILocalizedEndpoint getEndpoint()
@@ -24,16 +24,16 @@ class LocalizationHandler extends ApiHandler {
      * @return \Psr\Http\Message\RequestInterface
      */
     public function onRequest( RequestInterface $request ) {
-        $new_uri = Uri::withQueryValue( $request->getUri(), 'lang', $this->getEndpoint()->getLang() );
-        return $request->withUri($new_uri);
+        $localizedUri = Uri::withQueryValue( $request->getUri(), 'lang', $this->getEndpoint()->getLang() );
+        return $request->withUri($localizedUri);
     }
 
     public function onResponse( ResponseInterface $response, RequestInterface $request ) {
         $query = $this->getQueryAsArray($request);
-        $header_values = $response->getHeader( 'Content-Language' );
+        $languageHeader = $response->getHeader( 'Content-Language' );
 
-        $requestLanguage = (isset($query['lang'])) ? $query['lang'] : NULL;
-        $responseLanguage = (!empty($header_values)) ? array_shift($header_values) : NULL;
+        $requestLanguage = isset($query['lang']) ? $query['lang'] : null;
+        $responseLanguage = array_shift($languageHeader);
 
         if( $requestLanguage !== $responseLanguage) {
             $message = 'Invalid language (expected: ' . $requestLanguage . '; actual: ' . $responseLanguage . ')';
