@@ -2,8 +2,8 @@
 
 namespace GW2Treasures\GW2Api\V2;
 
-use GuzzleHttp\Message\RequestInterface;
-use GuzzleHttp\Message\ResponseInterface;
+use Psr\Http\Message\RequestInterface;
+use Psr\Http\Message\ResponseInterface;
 
 abstract class ApiHandler {
     /** @var IEndpoint $endpoint */
@@ -30,9 +30,9 @@ abstract class ApiHandler {
      */
     protected function getResponseAsJson( ResponseInterface $response ) {
         if( $response->hasHeader('Content-Type') ) {
-            $contentType = $response->getHeader('Content-Type');
+            $contentType = array_shift($response->getHeader('Content-Type'));
             if( stripos( $contentType, 'application/json' ) === 0 ) {
-                return $response->json([ 'object' => true ]);
+                return \json_decode($response->getBody(), FALSE);
             }
         }
 
@@ -40,11 +40,15 @@ abstract class ApiHandler {
     }
 
     /**
-     * Modify request before it is getting send.
+     * Return an updated request that should be send.
      *
      * @param RequestInterface $request
+     *
+     * @return RequestInterface
      */
-    public function onRequest( RequestInterface $request ) { }
+    public function onRequest( RequestInterface $request ) {
+      return $request;
+    }
 
     /**
      * Modify response before it gets processed.

@@ -29,7 +29,7 @@ trait PaginatedEndpoint {
         $size = $this->maxPageSize();
 
         $firstPageResponse = $this->request( $this->createPaginatedRequestQuery( 0, $size ) );
-        $total = $firstPageResponse->getResponse()->getHeader('X-Result-Total');
+        $total = array_shift($firstPageResponse->getResponse()->getHeader('X-Result-Total'));
 
         $result = $firstPageResponse->json();
 
@@ -94,7 +94,7 @@ trait PaginatedEndpoint {
         $size = $this->maxPageSize();
 
         $firstPageResponse = $this->request( $this->createPaginatedRequestQuery( 0, $size ) );
-        $total = $firstPageResponse->getResponse()->getHeader('X-Result-Total');
+        $total = array_shift($firstPageResponse->getResponse()->getHeader('X-Result-Total'));
 
         $callback( $firstPageResponse->json() );
         unset( $firstPageResponse );

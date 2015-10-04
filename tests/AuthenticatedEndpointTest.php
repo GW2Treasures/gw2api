@@ -1,7 +1,7 @@
 <?php
 
-use GuzzleHttp\Message\Response;
-use GuzzleHttp\Stream\Stream;
+use GuzzleHttp\Psr7\Response;
+use GuzzleHttp\Psr7;
 use GW2Treasures\GW2Api\V2\Authentication\Exception\InvalidPermissionsException;
 use Stubs\AuthenticatedEndpointStub;
 
@@ -22,7 +22,7 @@ class AuthenticatedEndpointTest extends TestCase {
         $request = $this->getLastRequest();
         $this->assertTrue( $request->hasHeader('Authorization'),
             'AuthenticatedEndpoint sets Authorization header' );
-        $this->assertEquals( 'Bearer test', $request->getHeader('Authorization'),
+        $this->assertEquals( 'Bearer test', array_shift($request->getHeader('Authorization')),
             'AuthenticatedEndpoint sets correct Authorization header' );
     }
 
@@ -33,7 +33,7 @@ class AuthenticatedEndpointTest extends TestCase {
     public function testInvalidKey() {
         $this->mockResponse( new Response(
             400, [ 'Content-Type' => 'application/json; charset=utf-8' ],
-            Stream::factory( '{"text":"invalid key"}' )
+            Psr7\stream_for( '{"text":"invalid key"}' )
         ));
 
         $this->getAuthenticatedEndpoint('invalid')->test();
@@ -42,7 +42,7 @@ class AuthenticatedEndpointTest extends TestCase {
     public function testInvalidPermissions() {
         $this->mockResponse( new Response(
             400, [ 'Content-Type' => 'application/json; charset=utf-8' ],
-            Stream::factory( '{"text":"requires scope characters"}' )
+            Psr7\stream_for( '{"text":"requires scope characters"}' )
         ));
 
         try {
@@ -66,7 +66,7 @@ class AuthenticatedEndpointTest extends TestCase {
     public function testUnknownError() {
         $this->mockResponse( new Response(
             400, [ 'Content-Type' => 'application/json; charset=utf-8' ],
-            Stream::factory( '{"text":"unknown error"}' )
+            Psr7\stream_for( '{"text":"unknown error"}' )
         ));
 
         $this->getAuthenticatedEndpoint('invalid')->test();

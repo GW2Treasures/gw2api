@@ -2,8 +2,8 @@
 
 namespace GW2Treasures\GW2Api\V2\Pagination;
 
-use GuzzleHttp\Message\RequestInterface;
-use GuzzleHttp\Message\ResponseInterface;
+use Psr\Http\Message\RequestInterface;
+use Psr\Http\Message\ResponseInterface;
 use GW2Treasures\GW2Api\V2\ApiHandler;
 use GW2Treasures\GW2Api\V2\Pagination\Exception\PageOutOfRangeException;
 

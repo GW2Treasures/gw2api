@@ -3,7 +3,7 @@
 namespace GW2Treasures\GW2Api\Exception;
 
 use Exception;
-use GuzzleHttp\Message\ResponseInterface;
+use Psr\Http\Message\ResponseInterface;
 
 class ApiException extends Exception {
     /** @var ResponseInterface $response */
@@ -25,6 +25,6 @@ class ApiException extends Exception {
     public function __toString() {
         return $this->message . ' (' .
                'status: ' . $this->response->getStatusCode() . '; ' .
-               'url: ' . $this->response->getEffectiveUrl() . ')';
+               'url: ' . $this->response->getHeaderLine('X-GUZZLE-EFFECTIVE-URL') . ')';
     }
 }

@@ -3,6 +3,8 @@
 namespace GW2Treasures\GW2Api;
 
 use GuzzleHttp\Client;
+use GuzzleHttp\HandlerStack;
+use GW2Treasures\GW2Api\Middleware\EffectiveUrlMiddleware;
 use GW2Treasures\GW2Api\V2\Endpoint\Account\AccountEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Build\BuildEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Character\CharacterEndpoint;
@@ -52,11 +54,14 @@ class GW2Api {
     }
 
     protected function getOptions( array $options = [] ) {
+        $handler_stack = (isset($options['handler'])) ? $options['handler'] : HandlerStack::create();
+        $handler_stack->push(EffectiveUrlMiddleware::middleware());
         return [
            'base_url' => $this->apiUrl,
            'defaults' => [
                'verify' => $this->getCacertFilePath()
-           ]
+           ],
+           'handler' => $handler_stack
         ] + $options;
     }
 

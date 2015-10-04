@@ -1,8 +1,8 @@
 <?php
 
-use GuzzleHttp\Message\Response;
-use GuzzleHttp\Message\ResponseInterface;
-use GuzzleHttp\Stream\Stream;
+use GuzzleHttp\Psr7\Response;
+use GuzzleHttp\Psr7;
+use Psr\Http\Message\ResponseInterface;
 use GW2Treasures\GW2Api\V2\ApiHandler;
 use GW2Treasures\GW2Api\V2\IEndpoint;
 use Stubs\EndpointStub;
@@ -23,7 +23,7 @@ class ApiHandlerTest extends TestCase {
             ? [ 'Content-Type' => $contentType ]
             : [];
 
-        return new Response( 200, $header, Stream::factory( $content ));
+        return new Response( 200, $header, Psr7\stream_for( $content ));
     }
 
     public function testAsJson() {

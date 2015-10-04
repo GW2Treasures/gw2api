@@ -1,11 +1,12 @@
 <?php
 
 use GuzzleHttp\Exception\RequestException;
-use GuzzleHttp\Message\RequestInterface;
-use GuzzleHttp\Message\Response;
-use GuzzleHttp\Stream\Stream;
-use GuzzleHttp\Subscriber\History;
-use GuzzleHttp\Subscriber\Mock;
+use GuzzleHttp\HandlerStack;
+use Psr\Http\Message\RequestInterface;
+use GuzzleHttp\Middleware;
+use GuzzleHttp\Psr7\Response;
+use GuzzleHttp\Psr7;
+use GuzzleHttp\Handler\MockHandler;
 use GW2Treasures\GW2Api\GW2Api;
 use GW2Treasures\GW2Api\V2\Authentication\IAuthenticatedEndpoint;
 use GW2Treasures\GW2Api\V2\Bulk\IBulkEndpoint;
@@ -17,17 +18,27 @@ abstract class TestCase extends PHPUnit_Framework_TestCase {
     /** @var GW2Api $api */
     protected $api;
 
-    /** @var Mock $mock */
+    /** @var MockHandler $mock */
     protected $mock;
 
-    /** @var History $history */
+    /** @var callable $history */
     protected $history;
+
+    /** @var  @var array $container */
+    protected $container;
 
     /**
      * @return GW2Api
      */
     protected function api() {
-        $this->api = $this->api ?: new GW2Api();
+        if( !isset( $this->api )) {
+            $this->mock = new MockHandler();
+            $this->container = [];
+            $this->history = Middleware::history($this->container);
+            $stack = HandlerStack::create($this->mock);
+            $stack->push($this->history);
+            $this->api = new GW2Api(['handler' => $stack]);
+        }
         return $this->api;
     }
 
@@ -36,19 +47,16 @@ abstract class TestCase extends PHPUnit_Framework_TestCase {
      */
     protected function mockResponse( $response, $language = 'en' ) {
         if( !isset( $this->mock )) {
-            $this->mock = new Mock();
-            $this->history = new History();
-            $this->api()->getClient()->getEmitter()->attach( $this->mock );
-            $this->api()->getClient()->getEmitter()->attach( $this->history );
+            $this->api();
         }
         if( is_string( $response )) {
-            $this->mock->addResponse(
-                new Response( 200, ['Content-Type' => 'application/json; charset=utf-8', 'Content-Language' => $language], Stream::factory( $response ))
+            $this->mock->append(
+                new Response( 200, ['Content-Type' => 'application/json; charset=utf-8', 'Content-Language' => $language], Psr7\stream_for( $response ))
             );
         } elseif( $response instanceof RequestException ) {
-            $this->mock->addException( $response );
+            $this->mock->append( $response );
         } else {
-            $this->mock->addResponse( $response );
+            $this->mock->append( $response );
         }
     }
 
@@ -56,7 +64,37 @@ abstract class TestCase extends PHPUnit_Framework_TestCase {
      * @return RequestInterface
      */
     protected function getLastRequest() {
-        return $this->history->getLastRequest();
+        $transaction = end($this->container);
+        return $transaction['request'];
+    }
+
+    /**
+     * @return RequestInterface[]
+     */
+    protected function getRequests() {
+        $requests = [];
+        foreach ($this->container AS $transaction) {
+            $requests[] = $transaction['request'];
+        }
+        return $requests;
+    }
+
+    /**
+     * @param RequestInterface $request
+     * @return array
+     */
+    protected function getQueryArray(RequestInterface $request) {
+        $query = $request->getUri()->getQuery();
+        $pairs = explode('&', $query);
+        $query_array = [];
+        foreach ($pairs AS $pair) {
+            if (empty($pair)) {
+                continue;
+            }
+            list($key, $value) = explode('=', $pair);
+            $query_array[$key] = $value;
+        }
+        return $query_array;
     }
 
     public function assertEndpointIsAuthenticated( IEndpoint $endpoint ) {

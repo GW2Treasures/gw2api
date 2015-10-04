@@ -2,7 +2,7 @@
 
 namespace GW2Treasures\GW2Api\V2;
 
-use GuzzleHttp\Message\ResponseInterface;
+use Psr\Http\Message\ResponseInterface;
 
 class ApiResponse {
     /** @var ResponseInterface $response*/
@@ -28,6 +28,7 @@ class ApiResponse {
      * @return mixed
      */
     public function json( array $config = [] ) {
-        return $this->response->json( ['object' => true] + $config );
+        $options = isset($config['big_int_strings']) ? JSON_BIGINT_AS_STRING : 0;
+        return \json_decode($this->response->getBody(), FALSE, 512, $options);
     }
 }

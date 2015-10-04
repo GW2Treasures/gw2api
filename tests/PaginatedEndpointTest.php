@@ -1,7 +1,7 @@
 <?php
 
-use GuzzleHttp\Message\Response;
-use GuzzleHttp\Stream\Stream;
+use GuzzleHttp\Psr7\Response;
+use GuzzleHttp\Psr7;
 use Stubs\PaginatedEndpointStub;
 
 class PaginatedEndpointTest extends TestCase {
@@ -20,14 +20,16 @@ class PaginatedEndpointTest extends TestCase {
 
         $request = $this->getLastRequest();
 
-        $this->assertTrue( $request->getQuery()->hasKey('page'),
+        $query_array = $this->getQueryArray($request);
+
+        $this->assertArrayHasKey('page', $query_array,
             'PaginatedEndpoint sets page query parameter' );
-        $this->assertEquals( 1, $request->getQuery()->get('page'),
+        $this->assertEquals( 1, $query_array['page'],
             'PaginatedEndpoint sets correct page query parameter value' );
 
-        $this->assertTrue( $request->getQuery()->hasKey('page_size'),
+        $this->assertArrayHasKey('page_size', $query_array,
             'PaginatedEndpoint sets page_size query parameter' );
-        $this->assertEquals( 2, $request->getQuery()->get('page_size'),
+        $this->assertEquals( 2, $query_array['page_size'],
             'PaginatedEndpoint sets correct page_size query parameter value' );
     }
 
@@ -35,7 +37,7 @@ class PaginatedEndpointTest extends TestCase {
         $firstResponse = new Response(
             200,
             [ 'X-Result-Total' => 10, 'Content-Type' => 'application/json; charset=utf-8' ],
-            Stream::factory( '[1,2,3]' )
+            Psr7\stream_for( '[1,2,3]' )
         );
 
         $this->mockResponse( $firstResponse );
@@ -46,20 +48,24 @@ class PaginatedEndpointTest extends TestCase {
         $result = $this->getPaginatedEndpoint( 3 )->all();
         $this->assertCount( 10, $result, 'PaginatedEndpoint gets all results' );
 
-        $requests = $this->history->getRequests();
+        $requests = $this->getRequests();
         $this->assertCount( 4, $requests, 'PaginatedEndpoint makes exactly as many requests as pages exist' );
 
-        $this->assertEquals( 0, $requests[0]->getQuery()->get('page') );
-        $this->assertEquals( 1, $requests[1]->getQuery()->get('page') );
-        $this->assertEquals( 2, $requests[2]->getQuery()->get('page') );
-        $this->assertEquals( 3, $requests[3]->getQuery()->get('page') );
+        $query_array = $this->getQueryArray($requests[0]);
+        $this->assertEquals( 0, $query_array['page'] );
+        $query_array = $this->getQueryArray($requests[1]);
+        $this->assertEquals( 1, $query_array['page'] );
+        $query_array = $this->getQueryArray($requests[2]);
+        $this->assertEquals( 2, $query_array['page'] );
+        $query_array = $this->getQueryArray($requests[3]);
+        $this->assertEquals( 3, $query_array['page'] );
     }
 
     public function testAllSmall() {
         $firstResponse = new Response(
             200,
             [ 'X-Result-Total' => 3, 'Content-Type' => 'application/json; charset=utf-8' ],
-            Stream::factory( '[1,2,3]' )
+            Psr7\stream_for( '[1,2,3]' )
         );
 
         $this->mockResponse( $firstResponse );
@@ -67,16 +73,17 @@ class PaginatedEndpointTest extends TestCase {
         $result = $this->getPaginatedEndpoint( 3 )->all();
         $this->assertCount( 3, $result, 'PaginatedEndpoint gets all results' );
 
-        $requests = $this->history->getRequests();
+        $requests = $this->getRequests();
         $this->assertCount( 1, $requests, 'PaginatedEndpoint only makes one request if all results fit in one page' );
-        $this->assertEquals( 0, $requests[0]->getQuery()->get('page') );
+        $query_array = $this->getQueryArray($requests[0]);
+        $this->assertEquals( 0, $query_array['page'] );
     }
 
     public function testBatch() {
         $firstResponse = new Response(
             200,
             [ 'X-Result-Total' => 10, 'Content-Type' => 'application/json; charset=utf-8' ],
-            Stream::factory( '[1,2,3]' )
+            Psr7\stream_for( '[1,2,3]' )
         );
 
         $this->mockResponse( $firstResponse );
@@ -90,14 +97,18 @@ class PaginatedEndpointTest extends TestCase {
         });
         $this->assertEquals( 10, $count, 'PaginatedEndpoint gets all results' );
 
-        $requests = $this->history->getRequests();
+        $requests = $this->getRequests();
         $this->assertCount( 4, $requests,
             'PaginatedEndpoint::batch makes exactly as many requests as pages exist' );
 
-        $this->assertEquals( 0, $requests[0]->getQuery()->get('page') );
-        $this->assertEquals( 1, $requests[1]->getQuery()->get('page') );
-        $this->assertEquals( 2, $requests[2]->getQuery()->get('page') );
-        $this->assertEquals( 3, $requests[3]->getQuery()->get('page') );
+        $query_array = $this->getQueryArray($requests[0]);
+        $this->assertEquals( 0, $query_array['page'] );
+        $query_array = $this->getQueryArray($requests[1]);
+        $this->assertEquals( 1, $query_array['page'] );
+        $query_array = $this->getQueryArray($requests[2]);
+        $this->assertEquals( 2, $query_array['page'] );
+        $query_array = $this->getQueryArray($requests[3]);
+        $this->assertEquals( 3, $query_array['page'] );
     }
 
 
@@ -112,7 +123,7 @@ class PaginatedEndpointTest extends TestCase {
     public function testPageOutOfRangeUpper() {
         $this->mockResponse( new Response(
             400, [ 'Content-Type' => 'application/json; charset=utf-8' ],
-            Stream::factory( '{"text":"page out of range. Use page values 0 - 1."}' )
+            Psr7\stream_for( '{"text":"page out of range. Use page values 0 - 1."}' )
         ));
 
         $this->getPaginatedEndpoint()->page( 5 );
