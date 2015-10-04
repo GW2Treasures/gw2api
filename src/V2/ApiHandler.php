@@ -41,6 +41,27 @@ abstract class ApiHandler {
     }
 
     /**
+     * Returns the parsed query string for the passed request as key-value array.
+     *
+     * @param \Psr\Http\Message\RequestInterface $request
+     *
+     * @return array
+     */
+    protected function getQueryAsArray( RequestInterface $request ) {
+        $query = $request->getUri()->getQuery();
+        $pairs = explode('&', $query);
+        $query_array = [];
+        foreach ($pairs AS $pair) {
+            if (empty($pair)) {
+                continue;
+            }
+            list($key, $value) = explode('=', $pair);
+            $query_array[$key] = $value;
+        }
+        return $query_array;
+    }
+
+    /**
      * Return an updated request that should be send.
      *
      * @param RequestInterface $request

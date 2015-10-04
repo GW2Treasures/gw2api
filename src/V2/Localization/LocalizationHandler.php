@@ -29,19 +29,10 @@ class LocalizationHandler extends ApiHandler {
     }
 
     public function onResponse( ResponseInterface $response, RequestInterface $request ) {
-        $query = $request->getUri()->getQuery();
-        $pairs = explode('&', $query);
-        $query_array = [];
-        foreach ($pairs AS $pair) {
-            if (empty($pair)) {
-                continue;
-            }
-            list($key, $value) = explode('=', $pair);
-            $query_array[$key] = $value;
-        }
+        $query = $this->getQueryAsArray($request);
         $header_values = $response->getHeader( 'Content-Language' );
 
-        $requestLanguage = (isset($query_array['lang'])) ? $query_array['lang'] : NULL;
+        $requestLanguage = (isset($query['lang'])) ? $query['lang'] : NULL;
         $responseLanguage = (!empty($header_values)) ? array_shift($header_values) : NULL;
 
         if( $requestLanguage !== $responseLanguage) {

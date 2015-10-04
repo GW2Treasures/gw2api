@@ -1,7 +1,10 @@
 <?php
 
+use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
 use GuzzleHttp\Psr7;
+use GuzzleHttp\Psr7\Uri;
+use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use GW2Treasures\GW2Api\V2\ApiHandler;
 use GW2Treasures\GW2Api\V2\IEndpoint;
@@ -40,6 +43,25 @@ class ApiHandlerTest extends TestCase {
         $this->assertNull( $handler->responseAsJson( $invalidNoContentType ));
     }
 
+    public function testQueryParser() {
+        $endpoint = $this->getEndpoint();
+        $handler = $this->getHandler( $endpoint );
+        $request = new Request('GET', new Uri($endpoint->url()));
+
+        $uri = $request->getUri()->withQuery('abc=123&def=456&ghi=789');
+        $query_array = $handler->queryAsArray($request->withUri($uri));
+        $this->assertEquals(3, count($query_array));
+        $this->assertArrayHasKey('abc', $query_array);
+        $this->assertArrayHasKey('def', $query_array);
+        $this->assertArrayHasKey('ghi', $query_array);
+
+        $uri = $request->getUri()->withQuery('abc=123&&ghi=789');
+        $query_array = $handler->queryAsArray($request->withUri($uri));
+        $this->assertEquals(2, count($query_array));
+        $this->assertArrayHasKey('abc', $query_array);
+        $this->assertArrayHasKey('ghi', $query_array);
+    }
+
     /**
      * @expectedException \InvalidArgumentException
      */
@@ -66,5 +88,9 @@ class ApiHandlerTest extends TestCase {
 class TestHandler extends ApiHandler {
     public function responseAsJson( ResponseInterface $response ) {
         return $this->getResponseAsJson( $response );
+    }
+
+    public function queryAsArray( RequestInterface $request ) {
+        return $this->getQueryAsArray($request);
     }
 }
