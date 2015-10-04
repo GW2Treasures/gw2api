@@ -1,7 +1,7 @@
 <?php
 
-use GuzzleHttp\Message\Response;
-use GuzzleHttp\Stream\Stream;
+use GuzzleHttp\Psr7\Response;
+use GuzzleHttp\Psr7;
 use Stubs\BulkEndpointStub;
 
 class BulkEndpointTest extends TestCase {
@@ -21,9 +21,10 @@ class BulkEndpointTest extends TestCase {
 
         $request = $this->getLastRequest();
 
-        $this->assertTrue( $request->getQuery()->hasKey('id'),
+        $query_array = $this->getQueryArray($request);
+        $this->assertArrayHasKey( 'id', $query_array,
             'BulkEndpoint sets ?id query parameter' );
-        $this->assertEquals( 'test', $request->getQuery()->get('id'),
+        $this->assertEquals( 'test', $query_array['id'],
             'BulkEndpoint sets correct query parameter value for ?ids' );
     }
 
@@ -35,14 +36,15 @@ class BulkEndpointTest extends TestCase {
 
         $request = $this->getLastRequest();
 
-        $this->assertCount( 1, $this->history->getRequests(),
+        $this->assertCount( 1, $this->getRequests(),
             'BulkEndpoint only uses one request to get all entries for endpoints supporting ?ids=all' );
         $this->assertCount( 2, $result,
             'BulkEndpoint returns all results for endpoints supporting ?ids=all' );
 
-        $this->assertTrue( $request->getQuery()->hasKey('ids'),
+        $query_array = $this->getQueryArray($request);
+        $this->assertArrayHasKey( 'ids', $query_array,
             'BulkEndpoint sets ?ids query parameter for endpoints supporting ?ids=all' );
-        $this->assertEquals( 'all', $request->getQuery()->get('ids'),
+        $this->assertEquals( 'all', $query_array['ids'],
             'BulkEndpoint sets correct query parameter value for ?ids for endpoints supporting ?ids=all' );
     }
 
@@ -50,7 +52,7 @@ class BulkEndpointTest extends TestCase {
         $firstResponse = new Response(
             200,
             [ 'X-Result-Total' => 5, 'Content-Type' => 'application/json; charset=utf-8' ],
-            Stream::factory( '[1,2,3]' )
+            Psr7\stream_for( '[1,2,3]' )
         );
         $this->mockResponse( $firstResponse );
         $this->mockResponse( '[4,5]' );
@@ -60,11 +62,13 @@ class BulkEndpointTest extends TestCase {
 
         $this->assertCount( 5, $result, 'BulkEndpoint gets all results for endpoints not supporting ?ids=all' );
 
-        $requests = $this->history->getRequests();
+        $requests = $this->getRequests();
         $this->assertCount( 2, $requests, 'BulkEndpoint makes exactly as many requests as pages exist for endpoints not supporting ?ids=all' );
 
-        $this->assertEquals( 0, $requests[0]->getQuery()->get('page') );
-        $this->assertEquals( 1, $requests[1]->getQuery()->get('page') );
+        $query_array = $this->getQueryArray($requests[0]);
+        $this->assertEquals( 0, $query_array['page'] );
+        $query_array = $this->getQueryArray($requests[1]);
+        $this->assertEquals( 1, $query_array['page'] );
     }
 
     public function testManySimple() {
@@ -75,12 +79,13 @@ class BulkEndpointTest extends TestCase {
 
         $request = $this->getLastRequest();
 
-        $this->assertCount( 1, $this->history->getRequests(),
+        $this->assertCount( 1, $this->getRequests(),
             'BulkEndpoint only uses one request to get many entries' );
 
-        $this->assertTrue( $request->getQuery()->hasKey('ids'),
+        $query_array = $this->getQueryArray($request);
+        $this->assertArrayHasKey( 'ids', $query_array,
             'BulkEndpoint sets ?ids query parameter' );
-        $this->assertEquals( '1,2,3', $request->getQuery()->get('ids'),
+        $this->assertEquals( '1,2,3', $query_array['ids'],
             'BulkEndpoint sets correct query parameter value for ?ids' );
     }
 
@@ -91,21 +96,23 @@ class BulkEndpointTest extends TestCase {
         $endpoint = $this->getBulkEndpoint( true, 3 );
         $result = $endpoint->many([1,2,3,4,5]);
 
-        $requests = $this->history->getRequests();
+        $requests = $this->getRequests();
 
         $this->assertCount( 2, $requests,
             'BulkEndpoint uses minimum amount of requests to get many entries' );
         $this->assertCount( 5, $result,
             'BulkEndpoint returns all results when using many' );
 
-        $this->assertTrue( $requests[0]->getQuery()->hasKey('ids'),
+        $query_array = $this->getQueryArray($requests[0]);
+        $this->assertArrayHasKey( 'ids', $query_array,
             'BulkEndpoint sets ?ids query parameter on first request' );
-        $this->assertEquals( '1,2,3', $requests[0]->getQuery()->get('ids'),
+        $this->assertEquals( '1,2,3', $query_array['ids'],
             'BulkEndpoint sets correct query parameter value for ?ids on first request' );
 
-        $this->assertTrue( $requests[1]->getQuery()->hasKey('ids'),
+        $query_array = $this->getQueryArray($requests[1]);
+        $this->assertArrayHasKey( 'ids', $query_array,
             'BulkEndpoint sets ?ids query parameter on second request' );
-        $this->assertEquals( '4,5', $requests[1]->getQuery()->get('ids'),
+        $this->assertEquals( '4,5', $query_array['ids'],
             'BulkEndpoint sets correct query parameter value for ?ids on second request' );
     }
 
@@ -115,7 +122,7 @@ class BulkEndpointTest extends TestCase {
         $endpoint = $this->getBulkEndpoint( true, 3 );
         $result = $endpoint->many([]);
 
-        $requests = $this->history->getRequests();
+        $requests = $this->getRequests();
 
         $this->assertCount( 0, $requests,
             'BulkEndpoint returns instantly without making request when 0 ids were requested' );
@@ -130,7 +137,7 @@ class BulkEndpointTest extends TestCase {
     public function testInvalidId() {
         $this->mockResponse( new Response(
             404, [ 'Content-Type' => 'application/json; charset=utf-8' ],
-            Stream::factory( '{"text":"no such id"}' )
+            Psr7\stream_for( '{"text":"no such id"}' )
         ));
 
         $this->getBulkEndpoint()->get('invalid');
@@ -143,7 +150,7 @@ class BulkEndpointTest extends TestCase {
     public function testInvalidIds() {
         $this->mockResponse( new Response(
             404, [ 'Content-Type' => 'application/json; charset=utf-8' ],
-            Stream::factory( '{"text":"all ids provided are invalid"}' )
+            Psr7\stream_for( '{"text":"all ids provided are invalid"}' )
         ));
 
         $this->getBulkEndpoint()->many(['invalid']);

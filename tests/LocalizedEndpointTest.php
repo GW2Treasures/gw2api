@@ -18,9 +18,10 @@ class LocalizedEndpointTest extends TestCase {
         $endpoint->lang('en')->test();
 
         $request = $this->getLastRequest();
-        $this->assertTrue( $request->getQuery()->hasKey('lang'),
+        $query_array = $this->getQueryArray($request);
+        $this->assertArrayHasKey( 'lang', $query_array,
             'LocalizedEndpoint sets ?lang query parameter' );
-        $this->assertEquals( 'en', $request->getQuery()->get('lang'),
+        $this->assertEquals( 'en', $query_array['lang'],
             'LocalizedEndpoint sets correct query parameter value' );
     }
 
@@ -36,9 +37,10 @@ class LocalizedEndpointTest extends TestCase {
         $endpoint_de->test();
 
         $request = $this->getLastRequest();
-        $this->assertTrue( $request->getQuery()->hasKey('lang'),
+        $query_array = $this->getQueryArray($request);
+        $this->assertArrayHasKey( 'lang', $query_array,
             'LocalizedEndpoint sets ?lang query parameter on repeated request' );
-        $this->assertEquals( 'de', $request->getQuery()->get('lang'),
+        $this->assertEquals( 'de', $query_array['lang'],
             'LocalizedEndpoint sets correct query parameter value pm repeated request' );
     }
 
@@ -48,9 +50,10 @@ class LocalizedEndpointTest extends TestCase {
         $this->getLocalizedEndpoint()->lang('es')->lang('fr')->test();
 
         $request = $this->getLastRequest();
-        $this->assertTrue( $request->getQuery()->hasKey('lang'),
+        $query_array = $this->getQueryArray($request);
+        $this->assertArrayHasKey( 'lang', $query_array,
             'LocalizedEndpoint sets ?lang query parameter on nested request' );
-        $this->assertEquals( 'fr', $request->getQuery()->get('lang'),
+        $this->assertEquals( 'fr', $query_array['lang'],
             'LocalizedEndpoint sets correct query parameter value on nested request' );
     }
 

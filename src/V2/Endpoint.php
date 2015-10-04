@@ -4,9 +4,11 @@ namespace GW2Treasures\GW2Api\V2;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
-use GuzzleHttp\Message\RequestInterface;
-use GuzzleHttp\Message\Response;
-use GuzzleHttp\Message\ResponseInterface;
+use GuzzleHttp\Psr7\Request;
+use GuzzleHttp\Psr7\Response;
+use GuzzleHttp\Psr7\Uri;
+use Psr\Http\Message\RequestInterface;
+use Psr\Http\Message\ResponseInterface;
 use GuzzleHttp\Pool;
 use GW2Treasures\GW2Api\Exception\ApiException;
 use GW2Treasures\GW2Api\GW2Api;
@@ -54,7 +56,7 @@ abstract class Endpoint implements IEndpoint {
         $request = $this->createRequest( $query, $url, $method, $options );
 
         foreach( $this->handlers as $handler ) {
-            $handler->onRequest( $request );
+            $request = $handler->onRequest( $request );
         }
 
         try {
@@ -97,7 +99,7 @@ abstract class Endpoint implements IEndpoint {
             $request = $this->createRequest( $query, $url, $method, $options );
 
             foreach( $this->handlers as $handler ) {
-                $handler->onRequest( $request );
+                $request = $handler->onRequest( $request );
             }
 
             $requests[] = $request;
@@ -146,7 +148,11 @@ abstract class Endpoint implements IEndpoint {
      */
     protected function createRequest( array $query = [], $url = null, $method = 'GET', $options = [] ) {
         $url = !is_null( $url ) ? $url : $this->url();
-        return $this->getClient()->createRequest( $method, $url, $options + [ 'query' => $query ]);
+        $uri = new Uri($url);
+        foreach ($query AS $key => $value) {
+            $uri = Uri::withQueryValue($uri, $key, $value);
+        }
+        return new Request($method, $uri, $options);
     }
 
     /**
@@ -159,9 +165,10 @@ abstract class Endpoint implements IEndpoint {
         $responseJson = null;
 
         if( $response->hasHeader('Content-Type') ) {
-            $contentType = $response->getHeader('Content-Type');
+            $header_values = $response->getHeader('Content-Type');
+            $contentType = array_shift($header_values);
             if( stripos( $contentType, 'application/json' ) === 0 ) {
-                $responseJson = $response->json([ 'object' => true ]);
+                $responseJson = \json_decode($response->getBody());
             }
         }
 

@@ -1,9 +1,9 @@
 <?php
 
 use GuzzleHttp\Exception\ConnectException;
-use GuzzleHttp\Message\Request;
-use GuzzleHttp\Message\Response;
-use GuzzleHttp\Stream\Stream;
+use GuzzleHttp\Psr7\Request;
+use GuzzleHttp\Psr7\Response;
+use GuzzleHttp\Psr7;
 use Stubs\EndpointStub;
 
 class ApiExceptionTest extends TestCase {
@@ -19,7 +19,7 @@ class ApiExceptionTest extends TestCase {
     public function testMessage() {
         $this->mockResponse( new Response(
             400, [ 'Content-Type' => 'application/json; charset=utf-8' ],
-            Stream::factory( '{"text":"this is the error message."}' )
+            Psr7\stream_for( '{"text":"this is the error message."}' )
         ));
 
         $this->getEndpoint()->test();
@@ -28,14 +28,15 @@ class ApiExceptionTest extends TestCase {
     public function testResponse() {
         $this->mockResponse( new Response(
             400, [ 'Content-Type' => 'application/json; charset=utf-8', 'foo' => 'bar' ],
-            Stream::factory( '{"text":"this is the error message."}' )
+            Psr7\stream_for( '{"text":"this is the error message."}' )
         ));
 
         try {
             $this->getEndpoint()->test();
         } catch( \GW2Treasures\GW2Api\Exception\ApiException $exception ) {
             $this->assertNotNull( $exception->getResponse() );
-            $this->assertEquals( 'bar', $exception->getResponse()->getHeader('foo') );
+            $header_values = $exception->getResponse()->getHeader('foo');
+            $this->assertEquals( 'bar', array_shift($header_values) );
             $this->assertEquals( 400, $exception->getCode() );
             $this->assertEquals( 400, $exception->getResponse()->getStatusCode() );
 
@@ -50,7 +51,7 @@ class ApiExceptionTest extends TestCase {
      */
     public function testUnknownException() {
         $this->mockResponse( new Response(
-            500, [], Stream::factory( 'Internal server error' )
+            500, [], Psr7\stream_for( 'Internal server error' )
         ));
 
         $this->getEndpoint()->test();
@@ -76,7 +77,7 @@ class ApiExceptionTest extends TestCase {
     public function testRequestManyExceptionWithoutResponse() {
         $this->mockResponse( new Response(
             200, [ 'X-Result-Total' => 10, 'Content-Type' => 'application/json; charset=utf-8' ],
-            Stream::factory( '[1,2,3]' )
+            Psr7\stream_for( '[1,2,3]' )
         ));
         $this->mockResponse(
             new ConnectException('RequestManyExceptionWithoutResponse', new Request('GET', 'test/exception'))

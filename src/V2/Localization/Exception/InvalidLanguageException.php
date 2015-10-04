@@ -2,7 +2,7 @@
 
 namespace GW2Treasures\GW2Api\V2\Localization\Exception;
 
-use GuzzleHttp\Message\ResponseInterface;
+use Psr\Http\Message\ResponseInterface;
 use GW2Treasures\GW2Api\Exception\ApiException;
 
 class InvalidLanguageException extends ApiException {

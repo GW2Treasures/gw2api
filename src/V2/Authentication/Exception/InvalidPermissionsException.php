@@ -2,7 +2,7 @@
 
 namespace GW2Treasures\GW2Api\V2\Authentication\Exception;
 
-use GuzzleHttp\Message\ResponseInterface;
+use Psr\Http\Message\ResponseInterface;
 
 class InvalidPermissionsException extends AuthenticationException {
     /** @var string $missingScope */

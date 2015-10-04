@@ -2,8 +2,8 @@
 
 namespace GW2Treasures\GW2Api\V2\Authentication;
 
-use GuzzleHttp\Message\RequestInterface;
-use GuzzleHttp\Message\ResponseInterface;
+use Psr\Http\Message\RequestInterface;
+use Psr\Http\Message\ResponseInterface;
 use GW2Treasures\GW2Api\V2\ApiHandler;
 use GW2Treasures\GW2Api\V2\Authentication\Exception\AuthenticationException;
 use GW2Treasures\GW2Api\V2\Authentication\Exception\InvalidPermissionsException;
@@ -16,14 +16,15 @@ class AuthenticationHandler extends ApiHandler {
         parent::__construct( $endpoint );
     }
 
-
     /**
      * Add the API key as Authorization header.
      *
      * @param RequestInterface $request
+     *
+     * @return \Psr\Http\Message\MessageInterface|\Psr\Http\Message\RequestInterface
      */
     public function onRequest( RequestInterface $request ) {
-        $request->addHeader( 'Authorization', 'Bearer ' . $this->getEndpoint()->getApiKey() );
+        return $request->withHeader( 'Authorization', 'Bearer ' . $this->getEndpoint()->getApiKey() );
     }
 
     /**
