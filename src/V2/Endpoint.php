@@ -165,7 +165,8 @@ abstract class Endpoint implements IEndpoint {
         $responseJson = null;
 
         if( $response->hasHeader('Content-Type') ) {
-            $contentType = array_shift($response->getHeader('Content-Type'));
+            $header_values = $response->getHeader('Content-Type');
+            $contentType = array_shift($header_values);
             if( stripos( $contentType, 'application/json' ) === 0 ) {
                 $responseJson = \json_decode($response->getBody());
             }

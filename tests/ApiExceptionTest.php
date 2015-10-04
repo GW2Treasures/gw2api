@@ -35,7 +35,8 @@ class ApiExceptionTest extends TestCase {
             $this->getEndpoint()->test();
         } catch( \GW2Treasures\GW2Api\Exception\ApiException $exception ) {
             $this->assertNotNull( $exception->getResponse() );
-            $this->assertEquals( 'bar', array_shift($exception->getResponse()->getHeader('foo')) );
+            $header_values = $exception->getResponse()->getHeader('foo');
+            $this->assertEquals( 'bar', array_shift($header_values) );
             $this->assertEquals( 400, $exception->getCode() );
             $this->assertEquals( 400, $exception->getResponse()->getStatusCode() );
 

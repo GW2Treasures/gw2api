@@ -22,7 +22,8 @@ class AuthenticatedEndpointTest extends TestCase {
         $request = $this->getLastRequest();
         $this->assertTrue( $request->hasHeader('Authorization'),
             'AuthenticatedEndpoint sets Authorization header' );
-        $this->assertEquals( 'Bearer test', array_shift($request->getHeader('Authorization')),
+        $header_values = $request->getHeader('Authorization');
+        $this->assertEquals( 'Bearer test', array_shift($header_values),
             'AuthenticatedEndpoint sets correct Authorization header' );
     }
 

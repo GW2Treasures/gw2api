@@ -30,7 +30,8 @@ abstract class ApiHandler {
      */
     protected function getResponseAsJson( ResponseInterface $response ) {
         if( $response->hasHeader('Content-Type') ) {
-            $contentType = array_shift($response->getHeader('Content-Type'));
+            $header_values = $response->getHeader('Content-Type');
+            $contentType = array_shift($header_values);
             if( stripos( $contentType, 'application/json' ) === 0 ) {
                 return \json_decode($response->getBody(), FALSE);
             }
