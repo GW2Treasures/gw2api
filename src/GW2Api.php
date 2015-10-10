@@ -60,7 +60,7 @@ class GW2Api {
         $handler->push(EffectiveUrlMiddleware::middleware());
 
         return [
-           'base_url' => $this->apiUrl,
+           'base_uri' => $this->apiUrl,
            'defaults' => [
                'verify' => $this->getCacertFilePath()
            ],
