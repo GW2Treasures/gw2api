@@ -19,6 +19,7 @@ class StatsEndpoint extends Endpoint implements IAuthenticatedEndpoint {
 
         parent::__construct($api);
     }
+
     /**
      * The url of this endpoint.
      *

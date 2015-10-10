@@ -137,6 +137,7 @@ abstract class TestCase extends PHPUnit_Framework_TestCase {
 
     public function assertEndpointIsAuthenticated( IEndpoint $endpoint ) {
         $this->assertInstanceOf( IAuthenticatedEndpoint::class, $endpoint );
+        $this->assertNotNull( $endpoint->getApiKey() );
     }
 
     public function assertEndpointIsBulk( IEndpoint $endpoint ) {
