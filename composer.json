@@ -20,7 +20,7 @@
         "guzzlehttp/guzzle": "~6.0.2"
     },
     "require-dev": {
-        "phpunit/phpunit": "~4.6",
+        "phpunit/phpunit": "~4.8",
         "mtdowling/burgomaster": "^0.0.2"
     },
     "autoload": {
