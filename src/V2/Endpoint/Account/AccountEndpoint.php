@@ -26,16 +26,6 @@ class AccountEndpoint extends Endpoint implements IAuthenticatedEndpoint {
     /**
      * Get your basic account info.
      *
-     * @deprecated since 1.5.0
-     * @return mixed
-     */
-    public function info() {
-        return $this->get();
-    }
-
-    /**
-     * Get your basic account info.
-     *
      * @return mixed
      */
     public function get() {
