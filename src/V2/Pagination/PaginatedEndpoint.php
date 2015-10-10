@@ -2,7 +2,6 @@
 
 namespace GW2Treasures\GW2Api\V2\Pagination;
 
-use Closure;
 use GW2Treasures\GW2Api\V2\EndpointTrait;
 use OutOfRangeException;
 
@@ -79,11 +78,12 @@ trait PaginatedEndpoint {
      * Get all entries in multiple small batches.
      *
      * @param int|null $parallelRequests [optional]
-     * @param Closure $callback
+     * @param callable $callback
      * @return void
      */
-    public function batch( $parallelRequests = null, Closure $callback = null ) {
-        if( !isset( $callback ) && $parallelRequests instanceof Closure ) {
+    public function batch( $parallelRequests = null, callable $callback = null ) {
+        /** @noinspection PhpParamsInspection */
+        if( !isset( $callback ) && is_callable( $parallelRequests )) {
             $callback = $parallelRequests;
             $parallelRequests = null;
         }
@@ -98,7 +98,7 @@ trait PaginatedEndpoint {
         $header_values = $firstPageResponse->getResponse()->getHeader('X-Result-Total');
         $total = array_shift($header_values);
 
-        $callback( $firstPageResponse->json() );
+        call_user_func( $callback, $firstPageResponse->json() );
         unset( $firstPageResponse );
 
         $lastPage = ceil( $total / $size );
@@ -113,7 +113,7 @@ trait PaginatedEndpoint {
             $responses = $this->requestMany( $batchRequests );
 
             foreach( $responses as $response ) {
-                $callback( $response->json() );
+                call_user_func( $callback, $response->json() );
             }
 
             unset( $responses );
