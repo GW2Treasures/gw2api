@@ -17,5 +17,12 @@ class EndpointTest extends TestCase {
 
         $this->assertNotFalse( strstr( $string, $endpoint->url() ),
             'Endpoint::toString() should contain endpoint url');
+
+        $this->mockResponse('{}');
+        $endpoint->test();
+
+        $request = $this->getLastRequest();
+        $this->assertNotNull( $request );
+        $this->assertEquals( 'https://api.guildwars2.com/' . $endpoint->url(), $request->getUri() );
     }
 }

@@ -42,7 +42,8 @@ class ApiExceptionTest extends TestCase {
 
             $this->assertStringStartsWith( $exception->getMessage(), $exception->__toString() );
             $this->assertNotFalse( strstr( $exception->__toString(), 'status: 400' ));
-            $this->assertNotFalse( strstr( $exception->__toString(), 'url: '. $endpoint->url() ));
+            $this->assertNotFalse(
+                strstr( $exception->__toString(), 'url: https://api.guildwars2.com/'. $endpoint->url() ));
         }
     }
 
