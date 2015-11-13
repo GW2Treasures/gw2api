@@ -17,4 +17,14 @@ class WvWEndpointTest extends TestCase {
         $this->mockResponse('{"id": "968-98","name": "Wurm Tunnel"}');
         $this->assertEquals( 'Wurm Tunnel', $endpoint->get('968-98')->name );
     }
+
+    public function testMatchEndpoint() {
+        $endpoint = $this->api()->wvw()->matches();
+
+        $this->assertEndpointIsBulk( $endpoint );
+        $this->assertEndpointUrl( 'v2/wvw/matches', $endpoint );
+
+        $this->mockResponse('{"id":"2-6","scores":{"red":169331,"blue":246780,"green":216241}}');
+        $this->assertEquals(169331, $endpoint->get('2-6')->scores->red);
+    }
 }

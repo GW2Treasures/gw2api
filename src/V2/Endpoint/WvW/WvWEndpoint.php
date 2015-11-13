@@ -12,6 +12,10 @@ class WvWEndpoint extends Endpoint {
         return 'v2/wvw';
     }
 
+    public function matches() {
+        return new MatchEndpoint( $this->api );
+    }
+
     public function objectives() {
         return new ObjectiveEndpoint( $this->api );
     }
