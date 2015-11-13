@@ -60,6 +60,15 @@ class AccountEndpoint extends Endpoint implements IAuthenticatedEndpoint {
     }
 
     /**
+     * Get the account material storage.
+     *
+     * @return MiniEndpoint
+     */
+    public function minis() {
+        return new MiniEndpoint( $this->api, $this->apiKey );
+    }
+
+    /**
      * Get the unlocked skins.
      *
      * @return SkinEndpoint
