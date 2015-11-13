@@ -87,6 +87,7 @@ For all examples it is assumed that you have a variable `$api = new GW2Api()`.
  /v2/account/bank             | [Account\BankEndpoint][Account\BankEndpoint]               <br>`GW2Api::account()->bank()`         | 🔒
  /v2/account/dyes             | [Account\DyeEndpoint][Account\DyeEndpoint]                 <br>`GW2Api::account()->dyes()`         | 🔒
  /v2/account/materials        | [Account\MaterialEndpoint][Account\MaterialEndpoint]       <br>`GW2Api::account()->materials()`    | 🔒
+ /v2/account/minis            | [Account\MiniEndpoint][Account\MiniEndpoint]               <br>`GW2Api::account()->minis()`        | 🔒
  /v2/account/skins            | [Account\SkinEndpoint][Account\SkinEndpoint]               <br>`GW2Api::account()->skins()`        | 🔒
  /v2/account/wallet           | [Account\WalletEndpoint][Account\WalletEndpoint]           <br>`GW2Api::account()->wallet()`       | 🔒
  /v2/build                    | [Build\BuildEndpoint][BuildEndpoint]                       <br>`GW2Api::build()`                   |
@@ -116,6 +117,7 @@ For all examples it is assumed that you have a variable `$api = new GW2Api()`.
  ~~/v2/leaderboards~~         | *disabled*                                                                                         | 🚫
  /v2/maps                     | [Map\MapEndpoint][MapEndpoint]                             <br>`GW2Api::maps()`                    | 📦🌏
  /v2/materials                | [Material\MaterialEndpoint][MaterialEndpoint]              <br>`GW2Api::materials()`               | 📦🌏                                                                                    | 🚫
+ /v2/minis                    | [Mini\MiniEndpoint][MiniEndpoint]                          <br>`GW2Api::minis()`                   | 📦🌏                                                                                    | 🚫
  /v2/pvp/games                | [Pvp\GameEndpoint][Pvp\GameEndpoint]                       <br>`GW2Api::pvp()->games()`            | 🔒📦
  /v2/pvp/stats                | [Pvp\StatsEndpoint][Pvp\StatsEndpoint]                     <br>`GW2Api::pvp()->stats()`            | 🔒
  /v2/quaggans                 | [Quaggan\QuagganEndpoint][QuagganEndpoint]                 <br>`GW2Api::quaggans()`                | 📦
@@ -420,6 +422,25 @@ Implements [🔒AuthenticatedEndpoint][AuthenticatedEndpoint].
 ```php
 $api->account('API_KEY')->materials()->get();
 // => [ { id: 19699, category: 5, count: 250 }, … ]
+```
+
+
+#### /v2/account/minis
+[Account\MiniEndpoint]: #v2accountminis
+
+`\GW2Treasures\GW2Api\V2\Endpoint\Account\MiniEndpoint`
+([source](src/V2/Endpoint/Account/MiniEndpoint.php))
+
+The [MiniEndpoint][MiniEndpoint] can be used to look up the minis returned by this endpoint.
+Implements [🔒AuthenticatedEndpoint][AuthenticatedEndpoint].
+
+##### Methods
+ - `get():array` Get unlocked minis.
+
+##### Example
+```php
+$api->account('API_KEY')->minis()->get();
+// => [ 1, 2, 3, 4, … ]
 ```
 
 
@@ -807,6 +828,25 @@ Implements [📦BulkEndpoint][BulkEndpoint] and [🌏LocalizedEndpoint][Localize
 ```php
 $api->materials()->lang('es')->all();
 // => [ { id:5, name: "Materiales de cocina", items: [ 12134, … ] }, … ]
+```
+
+
+#### /v2/minis
+[MiniEndpoint]: #v2minis
+
+`\GW2Treasures\GW2Api\V2\Endpoint\Mini\MiniEndpoint`
+([source](src/V2/Endpoint/Mini/MiniEndpoint.php))
+
+Implements [📦BulkEndpoint][BulkEndpoint] and [🌏LocalizedEndpoint][LocalizedEndpoint].
+
+##### Methods
+ - Inherited methods from [📦BulkEndpoint][BulkEndpoint]
+ - Inherited methods from [🌏LocalizedEndpoint][LocalizedEndpoint]
+
+##### Example
+```php
+$api->minis()->get(1);
+// => { id: 1, name: "Miniature Rytlock", … }
 ```
 
 
