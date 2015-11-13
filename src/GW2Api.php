@@ -18,6 +18,7 @@ use GW2Treasures\GW2Api\V2\Endpoint\File\FileEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Item\ItemEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Map\MapEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Material\MaterialEndpoint;
+use GW2Treasures\GW2Api\V2\Endpoint\Mini\MiniEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Pvp\PvpEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Quaggan\QuagganEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Recipe\RecipeEndpoint;
@@ -176,6 +177,10 @@ class GW2Api {
 
     public function materials() {
         return new MaterialEndpoint( $this );
+    }
+
+    public function minis() {
+        return new MiniEndpoint( $this );
     }
 
     public function pvp( $apiKey ) {
