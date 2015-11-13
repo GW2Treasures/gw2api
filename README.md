@@ -128,6 +128,7 @@ For all examples it is assumed that you have a variable `$api = new GW2Api()`.
  /v2/traits                   | [Traits\TraitEndpoint][TraitEndpoint]                      <br>`GW2Api::traits()`                  | 📦🌏
  /v2/worlds                   | [World\WorldEndpoint][WorldEndpoint]                       <br>`GW2Api::worlds()`                  | 📦🌏
  ~~/v2/wvw/matches~~          | *disabled*                                                                                         | 🚫
+ /v2/wvw/matches              | [WvW\MatchEndpoint][WvW\MatchEndpoint]                     <br>`GW2Api::wvw()->matches()`          | 📦
  /v2/wvw/objectives           | [WvW\ObjectiveEndpoint][WvW\ObjectiveEndpoint]             <br>`GW2Api::wvw()->objectives()`       | 📦🌏
 
 † Not FQN, all endpoints are in the namespace `\GW2Treasures\GW2Api\V2\Endpoint`  
@@ -990,6 +991,25 @@ Implements [📦BulkEndpoint][BulkEndpoint] and [🌏LocalizedEndpoint][Localize
 ```php
 $api->worlds()->all();
 // => [ { id: 1001, name: "Anvil Rock" }, … ]
+```
+
+
+#### /v2/wvw/matches
+[WvW\MatchEndpoint]: #v2wvwmatches
+
+`\GW2Treasures\GW2Api\V2\Endpoint\WvW\MatchEndpoint`
+([source](src/V2/Endpoint/WvW/MatchEndpoint.php))
+
+Implements [📦BulkEndpoint][BulkEndpoint].
+
+##### Methods
+ - Inherited methods from [📦BulkEndpoint][BulkEndpoint]
+
+##### Example
+```php
+$api->wvw()->matches()->get('2-6');
+
+// => { id: "2-6", "scores": { red: 169331, blue: 246780, green: 216241 }, … }
 ```
 
 
