@@ -23,6 +23,9 @@ foreach(['README.md', 'LICENSE'] as $file) {
 // include source
 $packager->recursiveCopy( 'src', 'GW2Treasures/GW2Api', ['php'] );
 
+// include cacert.pem
+$packager->deepCopy('src/cacert.pem', 'GW2Treasures/GW2Api/cacert.pem');
+
 // create the autoloader
 $packager->createAutoloader();
 
