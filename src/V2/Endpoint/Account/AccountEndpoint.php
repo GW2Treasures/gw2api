@@ -33,6 +33,15 @@ class AccountEndpoint extends Endpoint implements IAuthenticatedEndpoint {
     }
 
     /**
+     * Get account achievement progression.
+     *
+     * @return AchievementEndpoint
+     */
+    public function achievements() {
+        return new AchievementEndpoint( $this->api, $this->apiKey );
+    }
+
+    /**
      * Get the account bank.
      *
      * @return BankEndpoint
