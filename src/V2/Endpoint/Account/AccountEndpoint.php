@@ -69,7 +69,7 @@ class AccountEndpoint extends Endpoint implements IAuthenticatedEndpoint {
     }
 
     /**
-     * Get the account material storage.
+     * Get unlocked minis.
      *
      * @return MiniEndpoint
      */
