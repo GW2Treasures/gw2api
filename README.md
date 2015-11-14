@@ -118,8 +118,8 @@ For all examples it is assumed that you have a variable `$api = new GW2Api()`.
  /v2/items                    | [Item\ItemEndpoint][ItemEndpoint]                          <br>`GW2Api::items()`                   | 📦🌏
  ~~/v2/leaderboards~~         | *disabled*                                                                                         | 🚫
  /v2/maps                     | [Map\MapEndpoint][MapEndpoint]                             <br>`GW2Api::maps()`                    | 📦🌏
- /v2/materials                | [Material\MaterialEndpoint][MaterialEndpoint]              <br>`GW2Api::materials()`               | 📦🌏                                                                                    | 🚫
- /v2/minis                    | [Mini\MiniEndpoint][MiniEndpoint]                          <br>`GW2Api::minis()`                   | 📦🌏                                                                                    | 🚫
+ /v2/materials                | [Material\MaterialEndpoint][MaterialEndpoint]              <br>`GW2Api::materials()`               | 📦🌏
+ /v2/minis                    | [Mini\MiniEndpoint][MiniEndpoint]                          <br>`GW2Api::minis()`                   | 📦🌏
  /v2/pvp/games                | [Pvp\GameEndpoint][Pvp\GameEndpoint]                       <br>`GW2Api::pvp()->games()`            | 🔒📦
  /v2/pvp/stats                | [Pvp\StatsEndpoint][Pvp\StatsEndpoint]                     <br>`GW2Api::pvp()->stats()`            | 🔒
  /v2/quaggans                 | [Quaggan\QuagganEndpoint][QuagganEndpoint]                 <br>`GW2Api::quaggans()`                | 📦
