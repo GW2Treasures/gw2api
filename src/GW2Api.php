@@ -8,6 +8,7 @@ use GW2Treasures\GW2Api\Middleware\EffectiveUrlMiddleware;
 use GW2Treasures\GW2Api\V2\ApiHandler;
 use GW2Treasures\GW2Api\V2\Authentication\AuthenticationHandler;
 use GW2Treasures\GW2Api\V2\Endpoint\Account\AccountEndpoint;
+use GW2Treasures\GW2Api\V2\Endpoint\Achievement\AchievementEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Build\BuildEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Character\CharacterEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Color\ColorEndpoint;
@@ -137,6 +138,10 @@ class GW2Api {
 
     public function account( $apiKey ) {
         return new AccountEndpoint( $this, $apiKey );
+    }
+
+    public function achievements() {
+        return new AchievementEndpoint( $this );
     }
 
     public function build() {
