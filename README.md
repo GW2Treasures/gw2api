@@ -84,13 +84,15 @@ For all examples it is assumed that you have a variable `$api = new GW2Api()`.
  API Endpoint                 | Class<sup>†</sup>                                          <br>Instance                            | Flags<sup>‡</sup>
  -----------------------------|----------------------------------------------------------------------------------------------------|-------------------
  /v2/account                  | [Account\AccountEndpoint][AccountEndpoint]                 <br>`GW2Api::account()`                 | 🔒
+ /v2/account/achievements     | [Account\AchievementEndpoint][Account\AchievementEndpoint] <br>`GW2Api::account()->achievement()`  | 🔒
  /v2/account/bank             | [Account\BankEndpoint][Account\BankEndpoint]               <br>`GW2Api::account()->bank()`         | 🔒
  /v2/account/dyes             | [Account\DyeEndpoint][Account\DyeEndpoint]                 <br>`GW2Api::account()->dyes()`         | 🔒
  /v2/account/materials        | [Account\MaterialEndpoint][Account\MaterialEndpoint]       <br>`GW2Api::account()->materials()`    | 🔒
  /v2/account/minis            | [Account\MiniEndpoint][Account\MiniEndpoint]               <br>`GW2Api::account()->minis()`        | 🔒
  /v2/account/skins            | [Account\SkinEndpoint][Account\SkinEndpoint]               <br>`GW2Api::account()->skins()`        | 🔒
  /v2/account/wallet           | [Account\WalletEndpoint][Account\WalletEndpoint]           <br>`GW2Api::account()->wallet()`       | 🔒
- /v2/build                    | [Build\BuildEndpoint][BuildEndpoint]                       <br>`GW2Api::build()`                   |
+ /v2/achievements             | [Achievement\AchievementEndpoint][AchievementEndpoint]     <br>`GW2Api::achievements()`            | 📦🌏
+ /v2/build                    | [Build\BuildEndpoint][BuildEndpoint]                       <br>`GW2Api::build()`                   | 🚫
  /v2/characters               | [Character\CharacterEndpoint][CharacterEndpoint]           <br>`GW2Api::characters()`              | 🔒📦
  /v2/characters/:id/equipment | [Character\EquipmentEndpoint][Character\EquipmentEndpoint] <br>`GW2Api::characters()->equipment()` | 🔒
  /v2/characters/:id/inventory | [Character\InventoryEndpoint][Character\InventoryEndpoint] <br>`GW2Api::characters()->inventory()` | 🔒
@@ -369,6 +371,25 @@ $api->account('API_KEY')->get();
 ```
 
 
+#### /v2/account/achievements
+[Account\AchievementEndpoint]: #v2accountachievements
+
+`\GW2Treasures\GW2Api\V2\Endpoint\Account\AchievementEndpoint`
+([source](src/V2/Endpoint/Account/AchievementEndpoint.php))
+
+The [AchievementEndpoint][AchievementEndpoint] can be used to look up the achievements returned by this endpoint.
+Implements [🔒AuthenticatedEndpoint][AuthenticatedEndpoint].
+
+##### Methods
+ - `get():array` Get account achievement progression.
+
+##### Example
+```php
+$api->account('API_KEY')->achievements()->get();
+// => [ { id: 1, current: 1, max: 1000, done: false }, … ]
+```
+
+
 #### /v2/account/bank
 [Account\BankEndpoint]: #v2accountbank
 
@@ -479,6 +500,25 @@ Implements [🔒AuthenticatedEndpoint][AuthenticatedEndpoint].
 ```php
 $api->account('API_KEY')->wallet()->get();
 // => [ { id: 1, value: 234885 }, … ]
+```
+
+
+#### /v2/achievements
+[AchievementEndpoint]: #v2achievements
+
+`\GW2Treasures\GW2Api\V2\Endpoint\Achievement\AchievementEndpoint`
+([source](src/V2/Endpoint/Achievement/AchievementEndpoint.php))
+
+Implements [📦BulkEndpoint][BulkEndpoint] and [🌏LocalizedEndpoint][LocalizedEndpoint].
+
+##### Methods
+ - Inherited methods from [📦BulkEndpoint][BulkEndpoint]
+ - Inherited methods from [🌏LocalizedEndpoint][LocalizedEndpoint]
+
+##### Example
+```php
+$api->achievements()->get(1);
+// => { id: 1, name: "Centaur Slayer", … }
 ```
 
 
