@@ -10,6 +10,9 @@ use GW2Treasures\GW2Api\V2\Localization\LocalizedEndpoint;
 
 class AchievementEndpoint extends Endpoint implements IBulkEndpoint, ILocalizedEndpoint {
     use BulkEndpoint, LocalizedEndpoint;
+    
+    /** @var bool $supportsIdsAll */
+    protected $supportsIdsAll = false;
 
     /**
      * The url of this endpoint.
