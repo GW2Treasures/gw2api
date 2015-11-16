@@ -92,7 +92,7 @@ For all examples it is assumed that you have a variable `$api = new GW2Api()`.
  /v2/account/skins            | [Account\SkinEndpoint][Account\SkinEndpoint]               <br>`GW2Api::account()->skins()`        | 🔒
  /v2/account/wallet           | [Account\WalletEndpoint][Account\WalletEndpoint]           <br>`GW2Api::account()->wallet()`       | 🔒
  /v2/achievements             | [Achievement\AchievementEndpoint][AchievementEndpoint]     <br>`GW2Api::achievements()`            | 📦🌏
- /v2/build                    | [Build\BuildEndpoint][BuildEndpoint]                       <br>`GW2Api::build()`                   | 🚫
+ /v2/build                    | [Build\BuildEndpoint][BuildEndpoint]                       <br>`GW2Api::build()`                   |
  /v2/characters               | [Character\CharacterEndpoint][CharacterEndpoint]           <br>`GW2Api::characters()`              | 🔒📦
  /v2/characters/:id/equipment | [Character\EquipmentEndpoint][Character\EquipmentEndpoint] <br>`GW2Api::characters()->equipment()` | 🔒
  /v2/characters/:id/inventory | [Character\InventoryEndpoint][Character\InventoryEndpoint] <br>`GW2Api::characters()->inventory()` | 🔒
@@ -131,7 +131,7 @@ For all examples it is assumed that you have a variable `$api = new GW2Api()`.
  /v2/tokeninfo                | [Tokeninfo\TokeninfoEndpoint][TokeninfoEndpoint]           <br>`GW2Api::tokeninfo()`               | 🔒
  /v2/traits                   | [Traits\TraitEndpoint][TraitEndpoint]                      <br>`GW2Api::traits()`                  | 📦🌏
  /v2/worlds                   | [World\WorldEndpoint][WorldEndpoint]                       <br>`GW2Api::worlds()`                  | 📦🌏
- ~~/v2/wvw/matches~~          | *disabled*                                                                                         | 🚫
+ ~~/v2/wvw/abilities~~        | *disabled*                                                                                         | 🌏🚫
  /v2/wvw/matches              | [WvW\MatchEndpoint][WvW\MatchEndpoint]                     <br>`GW2Api::wvw()->matches()`          | 📦
  /v2/wvw/objectives           | [WvW\ObjectiveEndpoint][WvW\ObjectiveEndpoint]             <br>`GW2Api::wvw()->objectives()`       | 📦🌏
 
