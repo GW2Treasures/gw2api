@@ -63,10 +63,8 @@ class GW2Api {
 
         return [
            'base_uri' => $this->apiUrl,
-           'defaults' => [
-               'verify' => $this->getCacertFilePath()
-           ],
-           'handler' => $handler
+           'handler' => $handler,
+           'verify' => $this->getCacertFilePath()
         ] + $options;
     }
 
