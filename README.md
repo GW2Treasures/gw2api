@@ -105,6 +105,7 @@ For all examples it is assumed that you have a variable `$api = new GW2Api()`.
  /v2/commerce/transactions    | [Commerce\Transaction\TransactionEndpoint][Commerce\TransactionEndpoint] <br>`GW2Api::commerce()->transactions()` | 🔒📄
  /v2/continents               | [Continent\ContinentEndpoint][ContinentEndpoint]           <br>`GW2Api::continents()`              | 📦🌏
  /v2/currencies               | [Currency\CurrencyEndpoint][CurrencyEndpoint]              <br>`GW2Api::currencies()`              | 📦🌏
+ /v2/emblem                   | [Emblem\EmblemEndpoint][EmblemEndpoint]                    <br>`GW2Api::emblem()`                  |
  ~~/v2/events~~               | *disabled*                                                                                         | 🌏🚫
  ~~/v2/events-state~~         | *disabled*                                                                                         | 🚫
  /v2/files                    | [File\FileEndpoint][FileEndpoint]                          <br>`GW2Api::files()`                   | 📦
@@ -793,6 +794,37 @@ Implements [📦BulkEndpoint][BulkEndpoint].
 ```php
 $api->continents()->floors(1)->get(0);
 // => { texture_dims: [ 32768, 32768 ], … }
+```
+
+
+#### /v2/emblem
+[EmblemEndpoint]: #v2emblem
+
+`\GW2Treasures\GW2Api\V2\Endpoint\Emblem\EmblemEndpoint`
+([source](src/V2/Endpoint/Emblem/EmblemEndpoint.php))
+
+##### Methods
+ - `backgrounds():Emblem\LayerEndpoint`
+   Gets a new [Emblem\LayerEndpoint][Emblem\LayerEndpoint] instance of all background layers.
+ - `foregrounds():Emblem\LayerEndpoint`
+   Gets a new [Emblem\LayerEndpoint][Emblem\LayerEndpoint] instance of all foreground layers.
+
+
+#### /v2/emblem/:type
+[Emblem\LayerEndpoint]: #v2emblemtype
+
+`\GW2Treasures\GW2Api\V2\Endpoint\Emblem\LayerEndpoint`
+([source](src/V2/Endpoint/Emblem/LayerEndpoint.php))
+
+Implements [📦BulkEndpoint][BulkEndpoint].
+
+##### Methods
+ - Inherited methods from [📦BulkEndpoint][BulkEndpoint]
+
+##### Example
+```php
+$api->emblem()->foregrounds()->get(1);
+// => { id: 1, layers: [ "59641.png", "59643.png", "59645.png" ] }
 ```
 
 
