@@ -69,7 +69,7 @@ abstract class Endpoint implements IEndpoint {
                     $handler->onError( $response, $request );
                 }
 
-                return $this->handleUnhandledError( $response );
+                $this->handleUnhandledError( $response );
             } else {
                 throw $ex;
             }
@@ -90,6 +90,8 @@ abstract class Endpoint implements IEndpoint {
      * @param string     $method
      * @param array      $options
      * @return ApiResponse[]
+     * @throws ApiException
+     * @throws Response
      */
     protected function requestMany( array $queries = [], $url = null, $method = 'GET', $options = [] ) {
         $requests = [];
@@ -120,7 +122,7 @@ abstract class Endpoint implements IEndpoint {
                         $handler->onError( $response, $request );
                     }
 
-                    return $this->handleUnhandledError( $response );
+                    $this->handleUnhandledError( $response );
                 }
 
                 throw $response;

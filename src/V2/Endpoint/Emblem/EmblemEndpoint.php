@@ -2,8 +2,6 @@
 
 namespace GW2Treasures\GW2Api\V2\Endpoint\Emblem;
 
-use GW2Treasures\GW2Api\V2\Bulk\BulkEndpoint;
-use GW2Treasures\GW2Api\V2\Bulk\IBulkEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint;
 
 class EmblemEndpoint extends Endpoint {
