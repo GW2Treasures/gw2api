@@ -5,12 +5,21 @@ php:
   - 5.6
   - 7.0
 
-matrix:
-  allow_failures:
-    - php: 7.0
-  fast_finish: true
+env:
+  global:
+    - setup=basic
 
-before_script: composer install --no-interaction --prefer-source --dev
+matrix:
+  include:
+    - php: 5.5
+      env: setup=lowest
+    - php: 5.5
+      env: setup=stable
+
+install:
+  - if [[ $setup = 'basic' ]]; then travis_retry composer install --no-interaction --prefer-source; fi
+  - if [[ $setup = 'stable' ]]; then travis_retry composer update --prefer-source --no-interaction --prefer-stable; fi
+  - if [[ $setup = 'lowest' ]]; then travis_retry composer update --prefer-source --no-interaction --prefer-lowest --prefer-stable; fi
 
 script:
   - phpunit --configuration phpunit.xml --coverage-clover clover.xml
