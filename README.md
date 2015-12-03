@@ -92,6 +92,7 @@ For all examples it is assumed that you have a variable `$api = new GW2Api()`.
  /v2/account/skins            | [Account\SkinEndpoint][Account\SkinEndpoint]               <br>`GW2Api::account()->skins()`        | 🔒
  /v2/account/wallet           | [Account\WalletEndpoint][Account\WalletEndpoint]           <br>`GW2Api::account()->wallet()`       | 🔒
  /v2/achievements             | [Achievement\AchievementEndpoint][AchievementEndpoint]     <br>`GW2Api::achievements()`            | 📦🌏
+ /v2/achievements/daily       | [Achievement\DailyEndpoint][Achievement\DailyEndpoint]     <br>`GW2Api::achievements()->daily()`   |
  /v2/build                    | [Build\BuildEndpoint][BuildEndpoint]                       <br>`GW2Api::build()`                   |
  /v2/characters               | [Character\CharacterEndpoint][CharacterEndpoint]           <br>`GW2Api::characters()`              | 🔒📦
  /v2/characters/:id/equipment | [Character\EquipmentEndpoint][Character\EquipmentEndpoint] <br>`GW2Api::characters()->equipment()` | 🔒
@@ -515,11 +516,28 @@ Implements [📦BulkEndpoint][BulkEndpoint] and [🌏LocalizedEndpoint][Localize
 ##### Methods
  - Inherited methods from [📦BulkEndpoint][BulkEndpoint]
  - Inherited methods from [🌏LocalizedEndpoint][LocalizedEndpoint]
+ - `daily():Achievement\DailyEndpoint` Gets a new [Achievement\DailyEndpoint][Achievement\DailyEndpoint] instance.
 
 ##### Example
 ```php
 $api->achievements()->get(1);
 // => { id: 1, name: "Centaur Slayer", … }
+```
+
+
+#### /v2/achievements/daily
+[Achievement\DailyEndpoint]: #v2achievementsdaily
+
+`\GW2Treasures\GW2Api\V2\Endpoint\Achievement\DailyEndpoint`
+([source](src/V2/Endpoint/Achievement/DailyEndpoint.php))
+
+##### Methods
+ - `get():mixed` Get the current daily achievements.
+
+##### Example
+```php
+$api->achievements()->daily()->get();
+// => { pve: [ { id: 1984, level: { min:1, max: 80 } }, … ], pvp: [ … ], wvw: [ … ] }
 ```
 
 

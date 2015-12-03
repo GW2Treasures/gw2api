@@ -1,7 +1,7 @@
 <?php
 
 class MiniEndpointTest extends TestCase {
-    public function testIds() {
+    public function testAchievements() {
         $endpoint = $this->api()->achievements();
 
         $this->assertEndpointIsBulk( $endpoint );
@@ -10,5 +10,14 @@ class MiniEndpointTest extends TestCase {
 
         $this->mockResponse('{"id":1,"name":"Centaur Slayer"}');
         $this->assertEquals('Centaur Slayer', $endpoint->get(1)->name);
+    }
+
+    public function testDaily() {
+        $endpoint = $this->api()->achievements()->daily();
+
+        $this->assertEndpointUrl( 'v2/achievements/daily', $endpoint );
+
+        $this->mockResponse('{"pve":[{"id":1984,"level":{"min":1,"max":80}}]}');
+        $this->assertEquals(1984, $endpoint->get()->pve[0]->id);
     }
 }
