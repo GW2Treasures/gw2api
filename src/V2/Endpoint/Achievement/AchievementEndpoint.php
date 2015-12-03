@@ -22,4 +22,13 @@ class AchievementEndpoint extends Endpoint implements IBulkEndpoint, ILocalizedE
     public function url() {
         return 'v2/achievements';
     }
+
+    /**
+     * Get the current daily achievements.
+     *
+     * @return DailyEndpoint
+     */
+    public function daily() {
+        return new DailyEndpoint($this->api);
+    }
 }
