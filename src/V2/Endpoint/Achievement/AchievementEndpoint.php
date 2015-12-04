@@ -24,11 +24,29 @@ class AchievementEndpoint extends Endpoint implements IBulkEndpoint, ILocalizedE
     }
 
     /**
+     * Get achievement categories.
+     *
+     * @return CategoryEndpoint
+     */
+    public function categories() {
+        return new CategoryEndpoint($this->api);
+    }
+
+    /**
      * Get the current daily achievements.
      *
      * @return DailyEndpoint
      */
     public function daily() {
         return new DailyEndpoint($this->api);
+    }
+
+    /**
+     * Get achievement groups.
+     *
+     * @return GroupEndpoint
+     */
+    public function groups() {
+        return new GroupEndpoint($this->api);
     }
 }

@@ -92,7 +92,9 @@ For all examples it is assumed that you have a variable `$api = new GW2Api()`.
  /v2/account/skins            | [Account\SkinEndpoint][Account\SkinEndpoint]               <br>`GW2Api::account()->skins()`        | 🔒
  /v2/account/wallet           | [Account\WalletEndpoint][Account\WalletEndpoint]           <br>`GW2Api::account()->wallet()`       | 🔒
  /v2/achievements             | [Achievement\AchievementEndpoint][AchievementEndpoint]     <br>`GW2Api::achievements()`            | 📦🌏
+ /v2/achievements/categories  | [Achievement\CategoryEndpoint][Achievement\CategoryEndpoint]<br>`GW2Api::achievements()->categories()`| 📦🌏
  /v2/achievements/daily       | [Achievement\DailyEndpoint][Achievement\DailyEndpoint]     <br>`GW2Api::achievements()->daily()`   |
+ /v2/achievements/groups      | [Achievement\GroupEndpoint][Achievement\GroupEndpoint]     <br>`GW2Api::achievements()->groups()`  | 📦🌏
  /v2/build                    | [Build\BuildEndpoint][BuildEndpoint]                       <br>`GW2Api::build()`                   |
  /v2/characters               | [Character\CharacterEndpoint][CharacterEndpoint]           <br>`GW2Api::characters()`              | 🔒📦
  /v2/characters/:id/equipment | [Character\EquipmentEndpoint][Character\EquipmentEndpoint] <br>`GW2Api::characters()->equipment()` | 🔒
@@ -516,12 +518,31 @@ Implements [📦BulkEndpoint][BulkEndpoint] and [🌏LocalizedEndpoint][Localize
 ##### Methods
  - Inherited methods from [📦BulkEndpoint][BulkEndpoint]
  - Inherited methods from [🌏LocalizedEndpoint][LocalizedEndpoint]
+ - `categories():Achievement\CategoryEndpoint` Gets a new [Achievement\CategoryEndpoint][Achievement\CategoryEndpoint] instance.
  - `daily():Achievement\DailyEndpoint` Gets a new [Achievement\DailyEndpoint][Achievement\DailyEndpoint] instance.
+ - `groups():Achievement\GroupEndpoint` Gets a new [Achievement\GroupEndpoint][Achievement\GroupEndpoint] instance.
 
 ##### Example
 ```php
 $api->achievements()->get(1);
 // => { id: 1, name: "Centaur Slayer", … }
+```
+
+
+#### /v2/achievements/categories
+[Achievement\CategoryEndpoint]: #v2achievementscategories
+
+`\GW2Treasures\GW2Api\V2\Endpoint\Achievement\CategoryEndpoint`
+([source](src/V2/Endpoint/Achievement/CategoryEndpoint.php))
+
+##### Methods
+ - Inherited methods from [📦BulkEndpoint][BulkEndpoint]
+ - Inherited methods from [🌏LocalizedEndpoint][LocalizedEndpoint]
+
+##### Example
+```php
+$api->achievements()->categories()->get(50);
+// => { id: 50, name: "Twilight Assault", … }
 ```
 
 
@@ -538,6 +559,23 @@ $api->achievements()->get(1);
 ```php
 $api->achievements()->daily()->get();
 // => { pve: [ { id: 1984, level: { min:1, max: 80 } }, … ], pvp: [ … ], wvw: [ … ] }
+```
+
+
+#### /v2/achievements/groups
+[Achievement\GroupEndpoint]: #v2achievementsgroups
+
+`\GW2Treasures\GW2Api\V2\Endpoint\Achievement\GroupEndpoint`
+([source](src/V2/Endpoint/Achievement/GroupEndpoint.php))
+
+##### Methods
+ - Inherited methods from [📦BulkEndpoint][BulkEndpoint]
+ - Inherited methods from [🌏LocalizedEndpoint][LocalizedEndpoint]
+
+##### Example
+```php
+$api->achievements()->groups()->get('65B4B678-607E-4D97-B458-076C3E96A810');
+// => { id: "65B4B678-607E-4D97-B458-076C3E96A810", name: "Heart of Thorns", … }
 ```
 
 
