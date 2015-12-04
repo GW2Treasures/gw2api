@@ -118,7 +118,7 @@ For all examples it is assumed that you have a variable `$api = new GW2Api()`.
  ~~/v2/guild/:id/members~~    | *disabled*                                                                                         | 🔒🚫
  ~~/v2/guild/:id/ranks~~      | *disabled*                                                                                         | 🔒🚫
  ~~/v2/guild/permissions~~    | *disabled*                                                                                         | 🔒🌏🚫
- ~~/v2/guild/upgrades~~       | *disabled*                                                                                         | 🔒🌏🚫
+ /v2/guild/upgrades           | [Guild\UpgradeEndpoint][Guild\UpgradeEndpoint]             <br>`GW2Api::guild()->upgrades()`       | 📦🌏
  /v2/items                    | [Item\ItemEndpoint][ItemEndpoint]                          <br>`GW2Api::items()`                   | 📦🌏
  ~~/v2/leaderboards~~         | *disabled*                                                                                         | 🚫
  /v2/maps                     | [Map\MapEndpoint][MapEndpoint]                             <br>`GW2Api::maps()`                    | 📦🌏
@@ -920,6 +920,25 @@ Implements [📦BulkEndpoint][BulkEndpoint].
 ```php
 $api->files()->ids();
 // => [ "map_complete", "map_dungeon", … ]
+```
+
+
+#### /v2/guild/upgrades
+[Guild\UpgradeEndpoint]: #v2guildupgrades
+
+`\GW2Treasures\GW2Api\V2\Endpoint\Guild\UpgradeEndpoint`
+([source](src/V2/Endpoint/Guild/UpgradeEndpoint.php))
+
+Implements [📦BulkEndpoint][BulkEndpoint] and [🌏LocalizedEndpoint][LocalizedEndpoint].
+
+##### Methods
+ - Inherited methods from [📦BulkEndpoint][BulkEndpoint]
+ - Inherited methods from [🌏LocalizedEndpoint][LocalizedEndpoint]
+
+##### Example
+```php
+$api->guild()->upgrades()->get(38);
+// => { id: 38, name: "Guild Armorer 1", … }
 ```
 
 
