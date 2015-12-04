@@ -99,7 +99,7 @@ For all examples it is assumed that you have a variable `$api = new GW2Api()`.
  /v2/characters               | [Character\CharacterEndpoint][CharacterEndpoint]           <br>`GW2Api::characters()`              | 🔒📦
  /v2/characters/:id/equipment | [Character\EquipmentEndpoint][Character\EquipmentEndpoint] <br>`GW2Api::characters()->equipment()` | 🔒
  /v2/characters/:id/inventory | [Character\InventoryEndpoint][Character\InventoryEndpoint] <br>`GW2Api::characters()->inventory()` | 🔒
- ~~/v2/characters/:id/recipes~~ | *disabled*                                                                                       | 🔒🚫
+ /v2/characters/:id/recipes   | [Character\RecipeEndpoint][Character\RecipeEndpoint]       <br>`GW2Api::characters()->recipes()`   | 🔒
  /v2/characters/:id/specializations | [Character\SpecializationEndpoint][Character\SpecializationEndpoint] <br>`GW2Api::characters()->specializations()` | 🔒
  /v2/colors                   | [Color\ColorEndpoint][ColorEndpoint]                       <br>`GW2Api::colors()`                  | 📦🌏
  /v2/commerce/exchange        | [Commerce\ExchangeEndpoint][Commerce\ExchangeEndpoint]     <br>`GW2Api::commerce()->exchange()`    |
@@ -608,6 +608,10 @@ Implements [🔒AuthenticatedEndpoint][AuthenticatedEndpoint] and [📦BulkEndpo
    Gets a new [Character\EquipmentEndpoint][Character\EquipmentEndpoint] instance.
  - `inventory():Character\InventoryEndpoint`
    Gets a new [Character\InventoryEndpoint][Character\InventoryEndpoint] instance.
+ - `recipes():Character\RecipeEndpoint`
+   Gets a new [Character\RecipeEndpoint][Character\RecipeEndpoint] instance.
+ - `specializations():Character\SpecializationEndpoint`
+   Gets a new [Character\SpecializationEndpoint][Character\SpecializationEndpoint] instance.
  - Inherited from [📦BulkEndpoint][BulkEndpoint].
 
 ##### Example
@@ -652,6 +656,23 @@ $api->characters('API_KEY')->inventory('Character Name')->get();
 // => [ { id: 8941, size: 4 inventory: [ null, { id: 32134, count: 1 }, … ] }, … ]
 ```
 
+
+#### /v2/characters/:id/recipes
+[Character\RecipeEndpoint]: #v2charactersidrecipes
+
+`\GW2Treasures\GW2Api\V2\Endpoint\Character\RecipeEndpoint`
+([source](src/V2/Endpoint/Character/RecipeEndpoint.php))
+
+Implements [🔒AuthenticatedEndpoint][AuthenticatedEndpoint].
+
+##### Methods
+ - `get():array` Get unlocked recipes of a character.
+
+##### Example
+```php
+$api->characters('API_KEY')->recipes('Character Name')->get();
+// => [ 7, 8, 9, 10, 11, … ]
+```
 
 
 #### /v2/characters/:id/specializations
