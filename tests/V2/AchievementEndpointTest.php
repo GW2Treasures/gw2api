@@ -31,4 +31,15 @@ class MiniEndpointTest extends TestCase {
         $this->mockResponse('{"pve":[{"id":1984,"level":{"min":1,"max":80}}]}');
         $this->assertEquals(1984, $endpoint->get()->pve[0]->id);
     }
+
+    public function testGroups() {
+        $endpoint = $this->api()->achievements()->groups();
+
+        $this->assertEndpointUrl( 'v2/achievements/groups', $endpoint );
+        $this->assertEndpointIsBulk($endpoint);
+        $this->assertEndpointIsLocalized($endpoint);
+
+        $this->mockResponse('{"id":"65B4B678-607E-4D97-B458-076C3E96A810","name":"Heart of Thorns"}');
+        $this->assertEquals('Heart of Thorns', $endpoint->get('65B4B678-607E-4D97-B458-076C3E96A810')->name);
+    }
 }
