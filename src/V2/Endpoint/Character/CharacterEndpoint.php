@@ -49,6 +49,16 @@ class CharacterEndpoint extends Endpoint implements IAuthenticatedEndpoint, IBul
     }
 
     /**
+     * Get unlocked recipes of a character.
+     *
+     * @param $character
+     * @return RecipeEndpoint
+     */
+    public function recipes( $character ) {
+        return new RecipeEndpoint( $this->api, $this->apiKey, $character );
+    }
+
+    /**
      * Get the specializations of a character.
      *
      * @param string $character
