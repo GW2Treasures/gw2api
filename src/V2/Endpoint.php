@@ -69,7 +69,7 @@ abstract class Endpoint implements IEndpoint {
                     $handler->onError( $response, $request );
                 }
 
-                $this->handleUnhandledError( $response );
+                return $this->handleUnhandledError( $response );
             } else {
                 throw $ex;
             }
@@ -122,7 +122,7 @@ abstract class Endpoint implements IEndpoint {
                         $handler->onError( $response, $request );
                     }
 
-                    $this->handleUnhandledError( $response );
+                    return $this->handleUnhandledError( $response );
                 }
 
                 throw $response;
