@@ -12,6 +12,17 @@ class MiniEndpointTest extends TestCase {
         $this->assertEquals('Centaur Slayer', $endpoint->get(1)->name);
     }
 
+    public function testCategories() {
+        $endpoint = $this->api()->achievements()->categories();
+
+        $this->assertEndpointUrl('v2/achievements/categories', $endpoint);
+        $this->assertEndpointIsBulk($endpoint);
+        $this->assertEndpointIsLocalized($endpoint);
+
+        $this->mockResponse('{"id":50,"name":"Twilight Assault","description":"","order":0,"achievements":[947]}');
+        $this->assertEquals(947, $endpoint->get(50)->achievements[0]);
+    }
+
     public function testDaily() {
         $endpoint = $this->api()->achievements()->daily();
 
