@@ -15,14 +15,21 @@ matrix:
       env: setup=lowest
     - php: 5.5
       env: setup=stable
+    - php: 5.6
+      env: setup=phar
 
 install:
   - if [[ $setup = 'basic' ]]; then travis_retry composer install --no-interaction --prefer-source; fi
   - if [[ $setup = 'stable' ]]; then travis_retry composer update --prefer-source --no-interaction --prefer-stable; fi
   - if [[ $setup = 'lowest' ]]; then travis_retry composer update --prefer-source --no-interaction --prefer-lowest --prefer-stable; fi
+  - if [[ $setup = 'phar' ]]; then travis_retry composer install --no-interaction --prefer-source; fi
+
+before_script:
+  - if [[ $setup = 'phar' ]]; then php build/build.php; fi
 
 script:
-  - phpunit --configuration phpunit.xml --coverage-clover clover.xml
+  - if [[ $setup != 'phar' ]]; then vendor/bin/phpunit --configuration phpunit.xml --coverage-clover clover.xml; fi
+  - if [[ $setup = 'phar' ]]; then vendor/bin/phpunit --configuration phpunit.xml --bootstrap build/autoload.php; fi
 
 after_script:
   - bash <(curl -s https://codecov.io/bash)
