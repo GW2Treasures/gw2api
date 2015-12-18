@@ -117,7 +117,7 @@ For all examples it is assumed that you have a variable `$api = new GW2Api()`.
  ~~/v2/guild/:id/log~~        | *disabled*                                                                                         | 🔒🚫
  ~~/v2/guild/:id/members~~    | *disabled*                                                                                         | 🔒🚫
  ~~/v2/guild/:id/ranks~~      | *disabled*                                                                                         | 🔒🚫
- ~~/v2/guild/permissions~~    | *disabled*                                                                                         | 🔒🌏🚫
+ /v2/guild/permissions        | [Guild\PermissionEndpoint][Guild\PermissionEndpoint]       <br>`GW2Api::guild()->permissions()`    | 📦🌏
  /v2/guild/upgrades           | [Guild\UpgradeEndpoint][Guild\UpgradeEndpoint]             <br>`GW2Api::guild()->upgrades()`       | 📦🌏
  /v2/items                    | [Item\ItemEndpoint][ItemEndpoint]                          <br>`GW2Api::items()`                   | 📦🌏
  ~~/v2/leaderboards~~         | *disabled*                                                                                         | 🚫
@@ -920,6 +920,25 @@ Implements [📦BulkEndpoint][BulkEndpoint].
 ```php
 $api->files()->ids();
 // => [ "map_complete", "map_dungeon", … ]
+```
+
+
+#### /v2/guild/permissions
+[Guild\PermissionEndpoint]: #v2guildpermissions
+
+`\GW2Treasures\GW2Api\V2\Endpoint\Guild\PermissionEndpoint`
+([source](src/V2/Endpoint/Guild/PermissionEndpoint.php))
+
+Implements [📦BulkEndpoint][BulkEndpoint] and [🌏LocalizedEndpoint][LocalizedEndpoint].
+
+##### Methods
+ - Inherited methods from [📦BulkEndpoint][BulkEndpoint]
+ - Inherited methods from [🌏LocalizedEndpoint][LocalizedEndpoint]
+
+##### Example
+```php
+$api->guild()->permissions()->ids();
+// => [ "ClaimableEditOptions", "EditBGM", "ActivatePlaceables", … ]
 ```
 
 

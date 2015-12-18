@@ -14,6 +14,20 @@ class GuildEndpoint extends Endpoint {
         return 'v2/guild';
     }
 
+    /**
+     * Get guild permissions.
+     *
+     * @return PermissionEndpoint
+     */
+    public function permissions() {
+        return new PermissionEndpoint($this->api);
+    }
+
+    /**
+     * Get guild upgrades.
+     *
+     * @return UpgradeEndpoint
+     */
     public function upgrades() {
         return new UpgradeEndpoint($this->api);
     }
