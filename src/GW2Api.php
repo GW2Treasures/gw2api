@@ -54,7 +54,6 @@ class GW2Api {
         $this->extractCacertFile();
 
         $this->client = new Client( $this->options );
-        $this->options = $options;
 
         $this->registerDefaultHandlers();
     }
@@ -63,11 +62,11 @@ class GW2Api {
         $handler = isset($options['handler']) ? $options['handler'] : HandlerStack::create();
         $handler->push(EffectiveUrlMiddleware::middleware());
 
-        return [
+        return $options + [
            'base_uri' => $this->apiUrl,
            'handler' => $handler,
            'verify' => $this->getCacertFilePath()
-        ] + $options;
+        ];
     }
 
     /**

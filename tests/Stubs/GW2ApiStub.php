@@ -38,4 +38,8 @@ class GW2ApiStub extends GW2Api {
     public function extractCacertFile() {
         parent::extractCacertFile();
     }
+
+    public function getRealOptions() {
+        return $this->options;
+    }
 }

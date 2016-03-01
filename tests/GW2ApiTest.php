@@ -24,4 +24,15 @@ class GW2ApiTest extends TestCase {
         $this->assertFileExists( $path, 'extracted cacert file should exist after extracting' );
         $this->assertFileEquals( $sourcePath, $path, 'extracted cacert file should match source cacert file' );
     }
+
+    public function testOverrideOptions() {
+        $api1 = new \Stubs\GW2ApiStub(false, []);
+        $options1 = $api1->getRealOptions();
+        $this->assertEquals($options1['base_uri'], 'https://api.guildwars2.com/');
+
+        $testBaseUrl = 'http://localhost:8080/';
+        $api2 = new \Stubs\GW2ApiStub(false, ['base_uri' => $testBaseUrl]);
+        $options2 = $api2->getRealOptions();
+        $this->assertEquals($options2['base_uri'], $testBaseUrl);
+    }
 }
