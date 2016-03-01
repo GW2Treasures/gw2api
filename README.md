@@ -87,6 +87,7 @@ For all examples it is assumed that you have a variable `$api = new GW2Api()`.
  /v2/account/achievements     | [Account\AchievementEndpoint][Account\AchievementEndpoint] <br>`GW2Api::account()->achievement()`  | 🔒
  /v2/account/bank             | [Account\BankEndpoint][Account\BankEndpoint]               <br>`GW2Api::account()->bank()`         | 🔒
  /v2/account/dyes             | [Account\DyeEndpoint][Account\DyeEndpoint]                 <br>`GW2Api::account()->dyes()`         | 🔒
+ /v2/account/inventory        | [Account\InventoryEndpoint][Account\InventoryEndpoint]     <br>`GW2Api::account()->inventory()`    | 🔒
  /v2/account/materials        | [Account\MaterialEndpoint][Account\MaterialEndpoint]       <br>`GW2Api::account()->materials()`    | 🔒
  /v2/account/minis            | [Account\MiniEndpoint][Account\MiniEndpoint]               <br>`GW2Api::account()->minis()`        | 🔒
  /v2/account/skins            | [Account\SkinEndpoint][Account\SkinEndpoint]               <br>`GW2Api::account()->skins()`        | 🔒
@@ -488,6 +489,24 @@ Implements [🔒AuthenticatedEndpoint][AuthenticatedEndpoint].
 ```php
 $api->account('API_KEY')->dyes()->get();
 // => [ 8, 12, 14, 17, … ]
+```
+
+
+#### /v2/account/inventory
+[Account\InventoryEndpoint]: #v2accountinventory
+
+`\GW2Treasures\GW2Api\V2\Endpoint\Account\InventoryEndpoint`
+([source](src/V2/Endpoint/Account/InventoryEndpoint.php))
+
+Implements [🔒AuthenticatedEndpoint][AuthenticatedEndpoint].
+
+##### Methods
+ - `get():array` Returns a list of item stacks representing the account's shared inventory slots.
+
+##### Example
+```php
+$api->account('API_KEY')->inventory()->get();
+// => [ null, { id: 12138, count: 250 }, null ]
 ```
 
 

@@ -50,6 +50,16 @@ class AccountEndpointTest extends TestCase {
         $this->assertEquals(8, $endpoint->get()[0]);
     }
 
+    public function testInventory() {
+        $endpoint = $this->api()->account('test')->inventory();
+
+        $this->assertEndpointIsAuthenticated( $endpoint );
+        $this->assertEndpointUrl( 'v2/account/inventory', $endpoint );
+
+        $this->mockResponse('[null,{"id":12138,"count":250},null]');
+        $this->assertEquals(12138, $endpoint->get()[1]->id);
+    }
+
     public function testMaterials() {
         $endpoint = $this->api()->account('test')->materials();
 

@@ -60,6 +60,15 @@ class AccountEndpoint extends Endpoint implements IAuthenticatedEndpoint {
     }
 
     /**
+     * Get a list of item stacks representing the account's shared inventory slots.
+     *
+     * @return InventoryEndpoint
+     */
+    public function inventory() {
+        return new InventoryEndpoint( $this->api, $this->apiKey );
+    }
+
+    /**
      * Get the account material storage.
      *
      * @return MaterialEndpoint
