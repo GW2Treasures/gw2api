@@ -26,6 +26,7 @@ use GW2Treasures\GW2Api\V2\Endpoint\Mini\MiniEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Pvp\PvpEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Quaggan\QuagganEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Recipe\RecipeEndpoint;
+use GW2Treasures\GW2Api\V2\Endpoint\Skill\SkillEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Skin\SkinEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Specialization\SpecializationEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Tokeninfo\TokeninfoEndpoint;
@@ -207,6 +208,10 @@ class GW2Api {
 
     public function recipes() {
         return new RecipeEndpoint( $this );
+    }
+
+    public function skills() {
+        return new SkillEndpoint( $this );
     }
 
     public function skins() {
