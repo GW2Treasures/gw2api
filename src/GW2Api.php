@@ -18,6 +18,7 @@ use GW2Treasures\GW2Api\V2\Endpoint\Currency\CurrencyEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Emblem\EmblemEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\File\FileEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Guild\GuildEndpoint;
+use GW2Treasures\GW2Api\V2\Endpoint\Guild\RestrictedGuildHandler;
 use GW2Treasures\GW2Api\V2\Endpoint\Item\ItemEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Map\MapEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Material\MaterialEndpoint;
@@ -129,6 +130,7 @@ class GW2Api {
         $this->registerHandler(AuthenticationHandler::class);
         $this->registerHandler(LocalizationHandler::class);
         $this->registerHandler(PaginationHandler::class);
+        $this->registerHandler(RestrictedGuildHandler::class);
     }
 
     public function getClient() {

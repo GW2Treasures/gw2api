@@ -15,12 +15,34 @@ class GuildEndpoint extends Endpoint {
     }
 
     /**
+     * Get guild members.
+     *
+     * @param string $apiKey
+     * @param string $guildId
+     * @return MemberEndpoint
+     */
+    public function members($apiKey, $guildId) {
+        return new MemberEndpoint($this->api, $apiKey, $guildId);
+    }
+
+    /**
      * Get guild permissions.
      *
      * @return PermissionEndpoint
      */
     public function permissions() {
         return new PermissionEndpoint($this->api);
+    }
+
+    /**
+     * Get guild ranks.
+     *
+     * @param string $apiKey
+     * @param string $guildId
+     * @return RankEndpoint
+     */
+    public function ranks($apiKey, $guildId) {
+        return new RankEndpoint($this->api, $apiKey, $guildId);
     }
 
     /**

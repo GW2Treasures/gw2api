@@ -115,8 +115,8 @@ For all examples it is assumed that you have a variable `$api = new GW2Api()`.
  ~~/v2/guild/:id~~            | *disabled*                                                                                         | 🚫
  ~~/v2/guild/:id/inventory~~  | *disabled*                                                                                         | 🔒🚫
  ~~/v2/guild/:id/log~~        | *disabled*                                                                                         | 🔒🚫
- ~~/v2/guild/:id/members~~    | *disabled*                                                                                         | 🔒🚫
- ~~/v2/guild/:id/ranks~~      | *disabled*                                                                                         | 🔒🚫
+ /v2/guild/:id/members        | [Guild\MemberEndpoint][Guild\MemberEndpoint]               <br>`GW2Api::guild()->members()`        | 🔒
+ /v2/guild/:id/ranks          | [Guild\RankEndpoint][Guild\RankEndpoint]                   <br>`GW2Api::guild()->ranks()`          | 🔒
  /v2/guild/permissions        | [Guild\PermissionEndpoint][Guild\PermissionEndpoint]       <br>`GW2Api::guild()->permissions()`    | 📦🌏
  /v2/guild/upgrades           | [Guild\UpgradeEndpoint][Guild\UpgradeEndpoint]             <br>`GW2Api::guild()->upgrades()`       | 📦🌏
  /v2/items                    | [Item\ItemEndpoint][ItemEndpoint]                          <br>`GW2Api::items()`                   | 📦🌏
@@ -244,6 +244,16 @@ $api->items()->batch(function($items) {
 });
 ```
 
+#### RestrictedGuildEndpoint
+[RestrictedGuildEndpoint]: #restrictedguildendpoint
+
+`\GW2Treasures\GW2Api\V2\Endpoint\Guild\IRestrictedGuildEndpoint` ([source](src/V2/Endpoint/Guild/IRestrictedGuildEndpoint.php))
+
+All guild endpoints requiring you to be a member implement the interface `RestrictedGuildEndpoint`.
+Throws [GuildLeaderRequiredException][GuildLeaderRequiredException] or [MembershipRequiredException][MembershipRequiredException].
+
+
+
 ### Exceptions
 
 #### ApiException
@@ -349,6 +359,56 @@ try {
     $api->items()->page(9001);
 } catch(PageOutOfRangeException $exception) {
     $exception->getMessage() === "page out of range. Use page values 0 - 826."
+}
+```
+
+
+#### GuildException
+[GuildException]: #guildexception
+
+`\GW2Treasures\GW2Api\V2\Endpoint\Guild\Exception\GuildException`
+([source](src/V2/Endpoint/Guild/Exception/GuildException.php))
+
+Parent class of all guild exceptions.
+Extends [ApiException][ApiException].
+
+
+#### GuildLeaderRequiredException
+[GuildLeaderRequiredException]: #guildleaderrequiredexception
+
+`\GW2Treasures\GW2Api\V2\Endpoint\Guild\Exception\GuildLeaderRequiredException`
+([source](src/V2/Endpoint/Guild/Exception/GuildLeaderRequiredException.php))
+
+Gets thrown by [RestrictedGuildEndpoint][RestrictedGuildEndpoint] when requesting informations of a guild you are not
+the leader of.
+Extends [GuildException][GuildException].
+
+##### Example
+```php
+try {
+    $api->guild()->members('API_KEY', 'GUILD_ID_YOU_ARE_NOT_LEADER_OF');
+} catch(GuildLeaderRequiredException $exception) {
+    $exception->getMessage() === "access restricted to guild leaders"
+}
+```
+
+
+#### MembershipRequiredException
+[MembershipRequiredException]: #membershiprequiredexception
+
+`\GW2Treasures\GW2Api\V2\Endpoint\Guild\Exception\GuildLeaderRequiredException`
+([source](src/V2/Endpoint/Guild/Exception/GuildLeaderRequiredException.php))
+
+Gets thrown by [RestrictedGuildEndpoint][RestrictedGuildEndpoint] when requesting informations of a guild you are not
+a member of.
+Extends [GuildException][GuildException].
+
+##### Example
+```php
+try {
+    $api->guild()->members('API_KEY', 'GUILD_ID_YOU_ARE_NOT_A_MEMBER_OF');
+} catch(GuildLeaderRequiredException $exception) {
+    $exception->getMessage() === "membership required"
 }
 ```
 
@@ -920,6 +980,42 @@ Implements [📦BulkEndpoint][BulkEndpoint].
 ```php
 $api->files()->ids();
 // => [ "map_complete", "map_dungeon", … ]
+```
+
+
+#### /v2/guild/:id/members
+[Guild\MemberEndpoint]: #v2guildidmembers
+
+`\GW2Treasures\GW2Api\V2\Endpoint\Guild\MemberEndpoint`
+([source](src/V2/Endpoint/Guild/MemberEndpoint.php))
+
+Implements [🔒AuthenticatedEndpoint][AuthenticatedEndpoint] and [RestrictedGuildEndpoint][RestrictedGuildEndpoint].
+
+##### Methods
+ - Inherited methods from [🔒AuthenticatedEndpoint][AuthenticatedEndpoint]
+
+##### Example
+```php
+$api->guild()->members('API_KEY', 'GUILD_ID');
+// => [ { name: "darthmaim.6017", rank: "Leader", joined: "2015-12-16T02:50:26.000Z" } ]
+```
+
+
+#### /v2/guild/:id/ranks
+[Guild\RankEndpoint]: #v2guildidranks
+
+`\GW2Treasures\GW2Api\V2\Endpoint\Guild\RankEndpoint`
+([source](src/V2/Endpoint/Guild/RankEndpoint.php))
+
+Implements [🔒AuthenticatedEndpoint][AuthenticatedEndpoint] and [RestrictedGuildEndpoint][RestrictedGuildEndpoint].
+
+##### Methods
+- Inherited methods from [🔒AuthenticatedEndpoint][AuthenticatedEndpoint]
+
+##### Example
+```php
+$api->guild()->ranks('API_KEY', 'GUILD_ID');
+// => [ { id: "Leader", order: 1, permissions: [ "Admin", … ], icon: "…" }, … ]
 ```
 
 
