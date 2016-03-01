@@ -77,7 +77,7 @@ class GW2Api {
      */
     protected function getCacertFilePath() {
         if( $this->isIncludedAsPhar() ) {
-            return sys_get_temp_dir() . '/gw2api-cacert.pem';
+            return sys_get_temp_dir() . '/gw2api-cacert2.pem';
         } else {
             return __DIR__ . '/cacert.pem';
         }
