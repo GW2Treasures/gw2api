@@ -129,7 +129,7 @@ For all examples it is assumed that you have a variable `$api = new GW2Api()`.
  /v2/quaggans                 | [Quaggan\QuagganEndpoint][QuagganEndpoint]                 <br>`GW2Api::quaggans()`                | 📦
  /v2/recipes                  | [Recipe\RecipeEndpoint][RecipeEndpoint]                    <br>`GW2Api::recipes()`                 | 📦
  /v2/recipes/search           | [Recipe\SearchEndpoint][Recipe\SearchEndpoint]             <br>`GW2Api::recipes()->search()`       |
- ~~/v2/skills~~               | *disabled*                                                                                         | 🚫
+ /v2/skills                   | [Skill\SkillEndpoint][SkillEndpoint]                       <br>`GW2Api::skills()`                  | 📦🌏
  /v2/skins                    | [Skin\SkinEndpoint][SkinEndpoint]                          <br>`GW2Api::skins()`                   | 📦🌏
  /v2/specializations          | [Specialization\SpecializationEndpoint][SpecializationEndpoint] <br>`GW2Api::specializations()`    | 📦🌏
  /v2/tokeninfo                | [Tokeninfo\TokeninfoEndpoint][TokeninfoEndpoint]           <br>`GW2Api::tokeninfo()`               | 🔒
@@ -1220,6 +1220,25 @@ $api->recipes()->ids();
 ```php
 $api->recipes()->search()->input(43775);
 // => [ 7259, 7260, 7261, 7262, … ]
+```
+
+
+#### /v2/skills
+[SkillEndpoint]: #v2skills
+
+`\GW2Treasures\GW2Api\V2\Endpoint\Skill\SkillEndpoint`
+([source](src/V2/Endpoint/Skill/SkillEndpoint.php))
+
+Implements [📦BulkEndpoint][BulkEndpoint] and [🌏LocalizedEndpoint][LocalizedEndpoint].
+
+##### Methods
+ - Inherited methods from [📦BulkEndpoint][BulkEndpoint]
+ - Inherited methods from [🌏LocalizedEndpoint][LocalizedEndpoint]
+
+##### Example
+```php
+$api->skills()->get(1);
+// => { name: "Bandage", facts: [ { text: "Recharge", type: "Recharge", icon: "…", value: 5 } ], … }
 ```
 
 
