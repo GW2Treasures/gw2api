@@ -53,4 +53,15 @@ class GuildEndpoint extends Endpoint {
     public function upgrades() {
         return new UpgradeEndpoint($this->api);
     }
+
+    /**
+     * Get guild log.
+     *
+     * @param string $apiKey
+     * @param string $guildId
+     * @return LogEndpoint
+     */
+    public function log($apiKey, $guildId) {
+        return new LogEndpoint($this->api, $apiKey, $guildId);
+    }
 }

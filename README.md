@@ -115,7 +115,7 @@ For all examples it is assumed that you have a variable `$api = new GW2Api()`.
  /v2/files                    | [File\FileEndpoint][FileEndpoint]                          <br>`GW2Api::files()`                   | 📦
  ~~/v2/guild/:id~~            | *disabled*                                                                                         | 🚫
  ~~/v2/guild/:id/inventory~~  | *disabled*                                                                                         | 🔒🚫
- ~~/v2/guild/:id/log~~        | *disabled*                                                                                         | 🔒🚫
+ /v2/guild/:id/log            | [Guild\LogEndpoint][Guild\LogEndpoint]                     <br>`GW2Api::guild()->log()`            | 🔒
  /v2/guild/:id/members        | [Guild\MemberEndpoint][Guild\MemberEndpoint]               <br>`GW2Api::guild()->members()`        | 🔒
  /v2/guild/:id/ranks          | [Guild\RankEndpoint][Guild\RankEndpoint]                   <br>`GW2Api::guild()->ranks()`          | 🔒
  /v2/guild/permissions        | [Guild\PermissionEndpoint][Guild\PermissionEndpoint]       <br>`GW2Api::guild()->permissions()`    | 📦🌏
@@ -1001,6 +1001,22 @@ $api->files()->ids();
 // => [ "map_complete", "map_dungeon", … ]
 ```
 
+#### /v2/guild/:id/log
+[Guild\LogEndpoint]: #v2guildidlog
+
+`\GW2Treasures\GW2Api\V2\Endpoint\Guild\LogEndpoint`
+([source](src/V2/Endpoint/Guild/LogEndpoint.php))
+
+Implements [🔒AuthenticatedEndpoint][AuthenticatedEndpoint] and [RestrictedGuildEndpoint][RestrictedGuildEndpoint].
+
+##### Methods
+ - Inherited methods from [🔒AuthenticatedEndpoint][AuthenticatedEndpoint]
+
+##### Example
+```php
+$api->guild()->log('API_KEY', 'GUILD_ID');
+// => [ { "id": 1190, "time": "2015-12-10T23:58:49.106Z", "type": "treasury", "user": "Lawton Campbell.9413", "item_id": 24299, "count": 150 } ]
+```
 
 #### /v2/guild/:id/members
 [Guild\MemberEndpoint]: #v2guildidmembers
