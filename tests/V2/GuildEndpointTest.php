@@ -14,6 +14,17 @@ class GuildEndpointTest extends TestCase {
         $this->assertEndpointUrl('v2/guild', $endpoint);
     }
 
+    public function testLog() {
+        $endpoint = $this->api()->guild()->log('API_KEY', 'GUILD_ID');
+
+        $this->assertEndpointUrl('v2/guild/GUILD_ID/log', $endpoint);
+        $this->assertEndpointIsAuthenticated($endpoint);
+        $this->assertInstanceOf(IRestrictedGuildEndpoint::class, $endpoint);
+
+        $this->mockResponse('[{"id":1190,"time":"2015-12-10T23:58:49.106Z","type":"treasury","user":"Lawton Campbell.9413","item_id":24299,"count":150}]');
+        $this->assertEquals(1190, $endpoint->get()[0]->id);
+    }
+
     public function testMembers() {
         $endpoint = $this->api()->guild()->members('API_KEY', 'GUILD_ID');
 
@@ -56,17 +67,6 @@ class GuildEndpointTest extends TestCase {
 
         $this->mockResponse('[38,43,44,51,55]');
         $this->assertEquals( [38,43,44,51,55], $endpoint->ids() );
-    }
-
-    public function testLog() {
-        $endpoint = $this->api()->guild()->log('API_KEY', 'GUILD_ID');
-
-        $this->assertEndpointUrl('v2/guild/GUILD_ID/log', $endpoint);
-        $this->assertEndpointIsAuthenticated($endpoint);
-        $this->assertInstanceOf(IRestrictedGuildEndpoint::class, $endpoint);
-
-        $this->mockResponse('[{"id": 1190, "time": "2015-12-10T23:58:49.106Z", "type": "treasury", "user": "Lawton Campbell.9413", "item_id": 24299, "count": 150}]');
-        $this->assertEquals('1190', $endpoint->get()[0]->id);
     }
 
     public function testMembershipRequiredException() {

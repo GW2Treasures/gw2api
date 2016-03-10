@@ -1015,7 +1015,7 @@ Implements [🔒AuthenticatedEndpoint][AuthenticatedEndpoint] and [RestrictedGui
 ##### Example
 ```php
 $api->guild()->log('API_KEY', 'GUILD_ID');
-// => [ { "id": 1190, "time": "2015-12-10T23:58:49.106Z", "type": "treasury", "user": "Lawton Campbell.9413", "item_id": 24299, "count": 150 } ]
+// => [ { id: 1190, time: "…", type: "treasury", user: "Lawton Campbell.9413", … }, … ]
 ```
 
 #### /v2/guild/:id/members
