@@ -8,14 +8,13 @@ class PvpEndpointTest extends TestCase {
         $endpoint = $this->api()->pvp('API_KEY');
 
         $this->assertEndpointUrl( 'v2/pvp', $endpoint );
-        $this->assertEndpointIsAuthenticated( $endpoint );
 
-        $this->assertInstanceOf( GameEndpoint::class, $endpoint->games() );
-        $this->assertInstanceOf( StatsEndpoint::class, $endpoint->stats() );
+        $this->assertInstanceOf( GameEndpoint::class, $endpoint->games('API_KEY') );
+        $this->assertInstanceOf( StatsEndpoint::class, $endpoint->stats('API_KEY') );
     }
 
     public function testGames() {
-        $endpoint = $this->api()->pvp('API_KEY')->games();
+        $endpoint = $this->api()->pvp()->games('API_KEY');
 
         $this->assertEndpointUrl( 'v2/pvp/games', $endpoint );
         $this->assertEndpointIsAuthenticated( $endpoint );
@@ -26,7 +25,7 @@ class PvpEndpointTest extends TestCase {
     }
 
     public function testStats() {
-        $endpoint = $this->api()->pvp('API_KEY')->stats();
+        $endpoint = $this->api()->pvp()->stats('API_KEY');
 
         $this->assertEndpointUrl( 'v2/pvp/stats', $endpoint );
         $this->assertEndpointIsAuthenticated( $endpoint );

@@ -7,19 +7,7 @@ use GW2Treasures\GW2Api\V2\Authentication\AuthenticatedEndpoint;
 use GW2Treasures\GW2Api\V2\Authentication\IAuthenticatedEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint;
 
-class PvpEndpoint extends Endpoint implements IAuthenticatedEndpoint {
-    use AuthenticatedEndpoint;
-
-    /**
-     * @param GW2Api $api
-     * @param string $apiKey
-     */
-    public function __construct(GW2Api $api, $apiKey) {
-        $this->apiKey = $apiKey;
-
-        parent::__construct($api);
-    }
-
+class PvpEndpoint extends Endpoint {
     /**
      * The url of this endpoint.
      *
@@ -30,16 +18,18 @@ class PvpEndpoint extends Endpoint implements IAuthenticatedEndpoint {
     }
 
     /**
+     * @param string $apiKey
      * @return GameEndpoint
      */
-    public function games() {
-        return new GameEndpoint( $this->api, $this->apiKey );
+    public function games($apiKey) {
+        return new GameEndpoint($this->api, $apiKey);
     }
 
     /**
+     * @param string $apiKey
      * @return StatsEndpoint
      */
-    public function stats() {
-        return new StatsEndpoint($this->api, $this->apiKey);
+    public function stats($apiKey) {
+        return new StatsEndpoint($this->api, $apiKey);
     }
 }

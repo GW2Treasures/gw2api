@@ -198,8 +198,8 @@ class GW2Api {
         return new MiniEndpoint( $this );
     }
 
-    public function pvp( $apiKey ) {
-        return new PvpEndpoint( $this, $apiKey );
+    public function pvp() {
+        return new PvpEndpoint( $this );
     }
 
     public function quaggans() {
