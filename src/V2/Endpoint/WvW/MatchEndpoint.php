@@ -15,4 +15,14 @@ class MatchEndpoint extends Endpoint implements IBulkEndpoint {
     public function url() {
         return 'v2/wvw/matches';
     }
+
+    /**
+     * Get the current match of a world.
+     *
+     * @param int $id
+     * @return mixed
+     */
+    public function world($id) {
+        return $this->request(['world' => $id])->json();
+    }
 }
