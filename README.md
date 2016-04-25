@@ -1381,6 +1381,7 @@ Implements [📦BulkEndpoint][BulkEndpoint].
 
 ##### Methods
  - Inherited methods from [📦BulkEndpoint][BulkEndpoint]
+ - `world(int $id):mixed` Get the current match of a world.
 
 ##### Example
 ```php

@@ -25,6 +25,6 @@ class WvWEndpointTest extends TestCase {
         $this->assertEndpointUrl( 'v2/wvw/matches', $endpoint );
 
         $this->mockResponse('{"id":"2-6","scores":{"red":169331,"blue":246780,"green":216241}}');
-        $this->assertEquals(169331, $endpoint->get('2-6')->scores->red);
+        $this->assertEquals(169331, $endpoint->world('id')->scores->red);
     }
 }
