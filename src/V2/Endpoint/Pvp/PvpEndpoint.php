@@ -32,4 +32,11 @@ class PvpEndpoint extends Endpoint {
     public function stats($apiKey) {
         return new StatsEndpoint($this->api, $apiKey);
     }
+
+    /**
+     * @return AmuletEndpoint
+     */
+    public function amulets() {
+        return new AmuletEndpoint($this->api);
+    }
 }
