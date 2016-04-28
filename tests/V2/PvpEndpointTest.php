@@ -33,4 +33,15 @@ class PvpEndpointTest extends TestCase {
         $this->mockResponse( '{"pvp_rank":57}' );
         $this->assertEquals( 57, $endpoint->get()->pvp_rank );
     }
+
+    public function testAmulets() {
+        $endpoint = $this->api()->pvp()->amulets();
+        
+        $this->assertEndpointUrl('v2/pvp/amulets', $endpoint);
+        $this->assertEndpointIsBulk($endpoint);
+        $this->assertEndpointIsLocalized($endpoint);
+
+        $this->mockResponse('{"id": "4","name": "Assassin Amulet"}');
+        $this->assertEquals('Assassin Amulet', $endpoint->get(4)->name);
+    }
 }
