@@ -35,6 +35,24 @@ class PvpEndpointTest extends TestCase {
         $this->assertContains('4FDC931F-677F-4369-B20A-9FBB6A63B2B4', $endpoint->ids());
     }
 
+    public function testSeasons() {
+        $endpoint = $this->api()->pvp()->seasons();
+
+        $this->assertEndpointUrl('v2/pvp/seasons', $endpoint);
+        $this->assertEndpointIsBulk($endpoint);
+        $this->assertEndpointIsLocalized($endpoint);
+
+        $this->mockResponse('{
+            "id": "44B85826-B5ED-4890-8C77-82DDF9F2CF2B",
+            "name": "PvP League Season One", 
+            "start": "2015-12-01T20:00:00.000Z", 
+            "end": "2016-01-28T01:00:00.000Z", 
+            "active": false, 
+            "divisions": []
+        }');
+        $this->assertEquals('PvP League Season One', $endpoint->get("44B85826-B5ED-4890-8C77-82DDF9F2CF2B")->name);
+    }
+
     public function testStanding() {
         $endpoint = $this->api()->pvp()->standings('API_KEY');
 

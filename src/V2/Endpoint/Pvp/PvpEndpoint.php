@@ -33,6 +33,13 @@ class PvpEndpoint extends Endpoint {
     }
 
     /**
+     * @return SeasonEndpoint
+     */
+    public function seasons() {
+        return new SeasonEndpoint($this->api);
+    }
+
+    /**
      * @param string $apiKey
      * @return StandingEndpoint
      */
