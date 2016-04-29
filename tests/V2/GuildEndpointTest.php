@@ -58,6 +58,17 @@ class GuildEndpointTest extends TestCase {
         $this->assertEquals('Leader', $endpoint->get()[0]->id);
     }
 
+    public function testStash() {
+        $endpoint = $this->api()->guild()->stash('API_KEY', 'GUILD_ID');
+
+        $this->assertEndpointUrl('v2/guild/GUILD_ID/stash', $endpoint);
+        $this->assertEndpointIsAuthenticated($endpoint);
+        $this->assertInstanceOf(IRestrictedGuildEndpoint::class, $endpoint);
+
+        $this->mockResponse('[{"upgrade_id":1,"size":100,"coins":1002,"note":"stash test","inventory":[]}]');
+        $this->assertEquals(100, $endpoint->get()[0]->size);
+    }
+
     public function testTeams() {
         $endpoint = $this->api()->guild()->teams('API_KEY', 'GUILD_ID');
 
@@ -67,6 +78,17 @@ class GuildEndpointTest extends TestCase {
 
         $this->mockResponse('[{"id":1,"members":[],"name":"ez game"}]');
         $this->assertEquals('ez game', $endpoint->get()[0]->name);
+    }
+
+    public function testTreasury() {
+        $endpoint = $this->api()->guild()->treasury('API_KEY', 'GUILD_ID');
+
+        $this->assertEndpointUrl('v2/guild/GUILD_ID/treasury', $endpoint);
+        $this->assertEndpointIsAuthenticated($endpoint);
+        $this->assertInstanceOf(IRestrictedGuildEndpoint::class, $endpoint);
+
+        $this->mockResponse('[{"id":123,"count":100,"needed_by":[]}]');
+        $this->assertEquals(123, $endpoint->get()[0]->id);
     }
 
     public function testUpgrades() {
