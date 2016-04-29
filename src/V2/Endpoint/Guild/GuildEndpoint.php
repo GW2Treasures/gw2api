@@ -3,6 +3,13 @@
 namespace GW2Treasures\GW2Api\V2\Endpoint\Guild;
 
 use GW2Treasures\GW2Api\V2\Endpoint;
+use GW2Treasures\GW2Api\V2\Endpoint\Guild\Authenticated\LogEndpoint;
+use GW2Treasures\GW2Api\V2\Endpoint\Guild\Authenticated\MemberEndpoint;
+use GW2Treasures\GW2Api\V2\Endpoint\Guild\Authenticated\RankEndpoint;
+use GW2Treasures\GW2Api\V2\Endpoint\Guild\Authenticated\StashEndpoint;
+use GW2Treasures\GW2Api\V2\Endpoint\Guild\Authenticated\TeamEndpoint;
+use GW2Treasures\GW2Api\V2\Endpoint\Guild\Authenticated\TreasuryEndpoint;
+use GW2Treasures\GW2Api\V2\Endpoint\Guild\Authenticated\UpgradeEndpoint as AuthenticatedUpgradeEndpoint;
 
 class GuildEndpoint extends Endpoint {
     /**
@@ -87,6 +94,17 @@ class GuildEndpoint extends Endpoint {
      */
     public function treasury($apiKey, $guildId) {
         return new TreasuryEndpoint($this->api, $apiKey, $guildId);
+    }
+
+    /**
+     * Get guild upgrades.
+     *
+     * @param string $apiKey
+     * @param string $guildId
+     * @return AuthenticatedUpgradeEndpoint
+     */
+    public function upgradesOf($apiKey, $guildId) {
+        return new AuthenticatedUpgradeEndpoint($this->api, $apiKey, $guildId);
     }
 
     /**

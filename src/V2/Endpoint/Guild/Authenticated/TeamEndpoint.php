@@ -1,13 +1,14 @@
 <?php
 
-namespace GW2Treasures\GW2Api\V2\Endpoint\Guild;
+namespace GW2Treasures\GW2Api\V2\Endpoint\Guild\Authenticated;
 
 use GW2Treasures\GW2Api\GW2Api;
 use GW2Treasures\GW2Api\V2\Authentication\AuthenticatedEndpoint;
 use GW2Treasures\GW2Api\V2\Authentication\IAuthenticatedEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint;
+use GW2Treasures\GW2Api\V2\Endpoint\Guild\IRestrictedGuildEndpoint;
 
-class RankEndpoint extends Endpoint implements IAuthenticatedEndpoint, IRestrictedGuildEndpoint {
+class TeamEndpoint extends Endpoint implements IAuthenticatedEndpoint, IRestrictedGuildEndpoint {
     use AuthenticatedEndpoint;
 
     /** @var string $guildId */
@@ -26,7 +27,7 @@ class RankEndpoint extends Endpoint implements IAuthenticatedEndpoint, IRestrict
      * @return string
      */
     public function url() {
-        return 'v2/guild/'.$this->guildId.'/ranks';
+        return 'v2/guild/'.$this->guildId.'/teams';
     }
 
     /**

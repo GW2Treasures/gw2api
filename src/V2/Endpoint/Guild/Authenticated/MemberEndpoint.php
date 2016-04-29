@@ -1,11 +1,12 @@
 <?php
 
-namespace GW2Treasures\GW2Api\V2\Endpoint\Guild;
+namespace GW2Treasures\GW2Api\V2\Endpoint\Guild\Authenticated;
 
 use GW2Treasures\GW2Api\GW2Api;
 use GW2Treasures\GW2Api\V2\Authentication\AuthenticatedEndpoint;
 use GW2Treasures\GW2Api\V2\Authentication\IAuthenticatedEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint;
+use GW2Treasures\GW2Api\V2\Endpoint\Guild\IRestrictedGuildEndpoint;
 
 class MemberEndpoint extends Endpoint implements IAuthenticatedEndpoint, IRestrictedGuildEndpoint {
     use AuthenticatedEndpoint;
