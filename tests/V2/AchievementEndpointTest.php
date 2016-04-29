@@ -1,6 +1,6 @@
 <?php
 
-class MiniEndpointTest extends TestCase {
+class AchievementEndpointTest extends TestCase {
     public function testAchievements() {
         $endpoint = $this->api()->achievements();
 

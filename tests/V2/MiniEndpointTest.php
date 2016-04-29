@@ -1,7 +1,7 @@
 <?php
 
-class AchievementEndpointTest extends TestCase {
-    public function testIds() {
+class MiniEndpointTest extends TestCase {
+    public function testMinis() {
         $endpoint = $this->api()->minis();
 
         $this->assertEndpointIsBulk( $endpoint );
