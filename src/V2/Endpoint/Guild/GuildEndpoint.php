@@ -57,14 +57,36 @@ class GuildEndpoint extends Endpoint {
     }
 
     /**
+     * Get guild stash.
+     *
+     * @param string $apiKey
+     * @param string $guildId
+     * @return StashEndpoint
+     */
+    public function stash($apiKey, $guildId) {
+        return new StashEndpoint($this->api, $apiKey, $guildId);
+    }
+
+    /**
      * Get guild teams.
      *
      * @param string $apiKey
      * @param string $guildId
-     * @return RankEndpoint
+     * @return TeamEndpoint
      */
     public function teams($apiKey, $guildId) {
         return new TeamEndpoint($this->api, $apiKey, $guildId);
+    }
+
+    /**
+     * Get guild treasury.
+     *
+     * @param string $apiKey
+     * @param string $guildId
+     * @return TreasuryEndpoint
+     */
+    public function treasury($apiKey, $guildId) {
+        return new TreasuryEndpoint($this->api, $apiKey, $guildId);
     }
 
     /**
