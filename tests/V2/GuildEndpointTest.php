@@ -102,6 +102,17 @@ class GuildEndpointTest extends TestCase {
         $this->assertEquals( [38,43,44,51,55], $endpoint->ids() );
     }
 
+    public function testUpgradesOf() {
+        $endpoint = $this->api()->guild()->upgradesOf('API_KEY', 'GUILD_ID');
+
+        $this->assertEndpointUrl('v2/guild/GUILD_ID/upgrades', $endpoint);
+        $this->assertEndpointIsAuthenticated( $endpoint );
+        $this->assertInstanceOf(IRestrictedGuildEndpoint::class, $endpoint);
+
+        $this->mockResponse('[38,43,44,51,55]');
+        $this->assertEquals( [38,43,44,51,55], $endpoint->get() );
+    }
+
     public function testMembershipRequiredException() {
         $this->setExpectedException(MembershipRequiredException::class);
 
