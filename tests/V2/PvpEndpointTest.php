@@ -35,6 +35,23 @@ class PvpEndpointTest extends TestCase {
         $this->assertContains('4FDC931F-677F-4369-B20A-9FBB6A63B2B4', $endpoint->ids());
     }
 
+    public function testStanding() {
+        $endpoint = $this->api()->pvp()->standings('API_KEY');
+
+        $this->assertEndpointUrl( 'v2/pvp/standings', $endpoint );
+        $this->assertEndpointIsAuthenticated( $endpoint );
+
+        $this->mockResponse('{
+                "current" : {
+                    "total_points": 101,
+                    "division": 4,
+                    "tier": 1
+                },
+                "season_id" : "ABC-123"
+        }');
+        $this->assertEquals(4, $endpoint->get()->current->division);
+    }
+
     public function testStats() {
         $endpoint = $this->api()->pvp()->stats('API_KEY');
 

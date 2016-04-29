@@ -34,6 +34,14 @@ class PvpEndpoint extends Endpoint {
 
     /**
      * @param string $apiKey
+     * @return StandingEndpoint
+     */
+    public function standings($apiKey) {
+        return new StandingEndpoint($this->api, $apiKey);
+    }
+
+    /**
+     * @param string $apiKey
      * @return StatsEndpoint
      */
     public function stats($apiKey) {
