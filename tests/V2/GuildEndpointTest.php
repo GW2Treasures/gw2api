@@ -58,6 +58,17 @@ class GuildEndpointTest extends TestCase {
         $this->assertEquals('Leader', $endpoint->get()[0]->id);
     }
 
+    public function testTeams() {
+        $endpoint = $this->api()->guild()->teams('API_KEY', 'GUILD_ID');
+
+        $this->assertEndpointUrl('v2/guild/GUILD_ID/teams', $endpoint);
+        $this->assertEndpointIsAuthenticated($endpoint);
+        $this->assertInstanceOf(IRestrictedGuildEndpoint::class, $endpoint);
+
+        $this->mockResponse('[{"id":1,"members":[],"name":"ez game"}]');
+        $this->assertEquals('ez game', $endpoint->get()[0]->name);
+    }
+
     public function testUpgrades() {
         $endpoint = $this->api()->guild()->upgrades();
 

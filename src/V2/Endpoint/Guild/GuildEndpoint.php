@@ -57,6 +57,17 @@ class GuildEndpoint extends Endpoint {
     }
 
     /**
+     * Get guild teams.
+     *
+     * @param string $apiKey
+     * @param string $guildId
+     * @return RankEndpoint
+     */
+    public function teams($apiKey, $guildId) {
+        return new TeamEndpoint($this->api, $apiKey, $guildId);
+    }
+
+    /**
      * Get guild upgrades.
      *
      * @return UpgradeEndpoint
