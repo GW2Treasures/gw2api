@@ -6,7 +6,7 @@ use TestCase;
 
 class CharacterInventoryEndpointTest extends TestCase {
     public function test() {
-        $endpoint = $this->api()->characters('test')->inventory('char');
+        $endpoint = $this->api()->characters('test')->inventoryOf('char');
 
         $this->assertEndpointIsAuthenticated( $endpoint );
         $this->assertEndpointUrl( 'v2/characters/char/inventory', $endpoint );

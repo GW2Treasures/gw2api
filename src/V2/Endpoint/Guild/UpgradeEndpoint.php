@@ -16,8 +16,7 @@ class UpgradeEndpoint extends Endpoint implements IBulkEndpoint, ILocalizedEndpo
      *
      * @return string
      */
-    public function url()
-    {
+    public function url() {
         return 'v2/guild/upgrades';
     }
 }

@@ -10,23 +10,22 @@ use GW2Treasures\GW2Api\V2\Localization\ILocalizedEndpoint;
 use GW2Treasures\GW2Api\V2\Localization\LocalizedEndpoint;
 
 class RegionEndpoint extends Endpoint implements IBulkEndpoint, ILocalizedEndpoint {
-    use BulkEndpoint;
-    use LocalizedEndpoint;
+    use BulkEndpoint, LocalizedEndpoint;
 
-    /** @var int $continent_id */
-    protected $continent_id;
+    /** @var int $continent */
+    protected $continent;
 
-    /** @var int $floor_id */
-    protected $floor_id;
+    /** @var int $floor */
+    protected $floor;
 
     /**
      * @param GW2Api $api
-     * @param        $continent_id
-     * @param        $floor_id
+     * @param int    $continent
+     * @param int    $floor
      */
-    public function __construct( GW2Api $api, $continent_id, $floor_id ) {
-        $this->continent_id = $continent_id;
-        $this->floor_id = $floor_id;
+    public function __construct( GW2Api $api, $continent, $floor ) {
+        $this->continent = $continent;
+        $this->floor = $floor;
 
         parent::__construct( $api );
     }
@@ -35,17 +34,17 @@ class RegionEndpoint extends Endpoint implements IBulkEndpoint, ILocalizedEndpoi
      * {@inheritdoc}
      */
     public function url() {
-        return 'v2/continents/' . $this->continent_id . '/floors/' . $this->floor_id .'/regions';
+        return 'v2/continents/'.$this->continent.'/floors/'.$this->floor.'/regions';
     }
 
     /**
-     * Get the  region map.
+     * Get the regions maps.
      *
-     * @param $region_id
+     * @param int $region
      *
      * @return MapEndpoint
      */
-    public function map( $region_id ) {
-        return new MapEndpoint( $this->api, $this->continent_id, $this->floor_id, $region_id );
+    public function mapsOf( $region ) {
+        return new MapEndpoint( $this->api, $this->continent, $this->floor, $region );
     }
 }

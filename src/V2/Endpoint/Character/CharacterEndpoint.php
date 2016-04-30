@@ -34,7 +34,7 @@ class CharacterEndpoint extends Endpoint implements IAuthenticatedEndpoint, IBul
      * @param string $character
      * @return EquipmentEndpoint
      */
-    public function equipment( $character ) {
+    public function equipmentOf( $character ) {
         return new EquipmentEndpoint( $this->api, $this->apiKey, $character );
     }
 
@@ -44,7 +44,7 @@ class CharacterEndpoint extends Endpoint implements IAuthenticatedEndpoint, IBul
      * @param string $character
      * @return InventoryEndpoint
      */
-    public function inventory( $character ) {
+    public function inventoryOf( $character ) {
         return new InventoryEndpoint( $this->api, $this->apiKey, $character );
     }
 
@@ -54,7 +54,7 @@ class CharacterEndpoint extends Endpoint implements IAuthenticatedEndpoint, IBul
      * @param $character
      * @return RecipeEndpoint
      */
-    public function recipes( $character ) {
+    public function recipesOf( $character ) {
         return new RecipeEndpoint( $this->api, $this->apiKey, $character );
     }
 
@@ -64,7 +64,7 @@ class CharacterEndpoint extends Endpoint implements IAuthenticatedEndpoint, IBul
      * @param string $character
      * @return SpecializationEndpoint
      */
-    public function specializations( $character ) {
+    public function specializationsOf( $character ) {
         return new SpecializationEndpoint( $this->api, $this->apiKey, $character );
     }
 }

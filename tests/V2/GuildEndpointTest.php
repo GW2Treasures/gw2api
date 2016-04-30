@@ -15,7 +15,7 @@ class GuildEndpointTest extends TestCase {
     }
 
     public function testLog() {
-        $endpoint = $this->api()->guild()->log('API_KEY', 'GUILD_ID');
+        $endpoint = $this->api()->guild()->logOf('API_KEY', 'GUILD_ID');
 
         $this->assertEndpointUrl('v2/guild/GUILD_ID/log', $endpoint);
         $this->assertEndpointIsAuthenticated($endpoint);
@@ -26,7 +26,7 @@ class GuildEndpointTest extends TestCase {
     }
 
     public function testMembers() {
-        $endpoint = $this->api()->guild()->members('API_KEY', 'GUILD_ID');
+        $endpoint = $this->api()->guild()->membersOf('API_KEY', 'GUILD_ID');
 
         $this->assertEndpointUrl('v2/guild/GUILD_ID/members', $endpoint);
         $this->assertEndpointIsAuthenticated($endpoint);
@@ -48,7 +48,7 @@ class GuildEndpointTest extends TestCase {
     }
 
     public function testRanks() {
-        $endpoint = $this->api()->guild()->ranks('API_KEY', 'GUILD_ID');
+        $endpoint = $this->api()->guild()->ranksOf('API_KEY', 'GUILD_ID');
 
         $this->assertEndpointUrl('v2/guild/GUILD_ID/ranks', $endpoint);
         $this->assertEndpointIsAuthenticated($endpoint);
@@ -59,7 +59,7 @@ class GuildEndpointTest extends TestCase {
     }
 
     public function testStash() {
-        $endpoint = $this->api()->guild()->stash('API_KEY', 'GUILD_ID');
+        $endpoint = $this->api()->guild()->stashOf('API_KEY', 'GUILD_ID');
 
         $this->assertEndpointUrl('v2/guild/GUILD_ID/stash', $endpoint);
         $this->assertEndpointIsAuthenticated($endpoint);
@@ -70,7 +70,7 @@ class GuildEndpointTest extends TestCase {
     }
 
     public function testTeams() {
-        $endpoint = $this->api()->guild()->teams('API_KEY', 'GUILD_ID');
+        $endpoint = $this->api()->guild()->teamsOf('API_KEY', 'GUILD_ID');
 
         $this->assertEndpointUrl('v2/guild/GUILD_ID/teams', $endpoint);
         $this->assertEndpointIsAuthenticated($endpoint);
@@ -81,7 +81,7 @@ class GuildEndpointTest extends TestCase {
     }
 
     public function testTreasury() {
-        $endpoint = $this->api()->guild()->treasury('API_KEY', 'GUILD_ID');
+        $endpoint = $this->api()->guild()->treasuryOf('API_KEY', 'GUILD_ID');
 
         $this->assertEndpointUrl('v2/guild/GUILD_ID/treasury', $endpoint);
         $this->assertEndpointIsAuthenticated($endpoint);
@@ -116,7 +116,7 @@ class GuildEndpointTest extends TestCase {
     public function testMembershipRequiredException() {
         $this->setExpectedException(MembershipRequiredException::class);
 
-        $endpoint = $this->api()->guild()->ranks('API_KEY', 'GUILD_ID');
+        $endpoint = $this->api()->guild()->ranksOf('API_KEY', 'GUILD_ID');
 
         $this->assertInstanceOf(IRestrictedGuildEndpoint::class, $endpoint);
 
@@ -131,7 +131,7 @@ class GuildEndpointTest extends TestCase {
     public function testGuildLeaderRequiredException() {
         $this->setExpectedException(GuildLeaderRequiredException::class);
 
-        $endpoint = $this->api()->guild()->ranks('API_KEY', 'GUILD_ID');
+        $endpoint = $this->api()->guild()->ranksOf('API_KEY', 'GUILD_ID');
 
         $this->assertInstanceOf(IRestrictedGuildEndpoint::class, $endpoint);
 
@@ -149,7 +149,7 @@ class GuildEndpointTest extends TestCase {
     public function testOtherException() {
         $this->setExpectedException(ApiException::class);
 
-        $endpoint = $this->api()->guild()->members('API_KEY', 'GUILD_ID');
+        $endpoint = $this->api()->guild()->membersOf('API_KEY', 'GUILD_ID');
 
         $this->assertInstanceOf(IRestrictedGuildEndpoint::class, $endpoint);
 

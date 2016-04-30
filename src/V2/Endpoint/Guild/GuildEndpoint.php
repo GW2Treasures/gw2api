@@ -22,24 +22,24 @@ class GuildEndpoint extends Endpoint {
     }
 
     /**
-     * Get guild log.
+     * Get log of a guild.
      *
      * @param string $apiKey
      * @param string $guildId
      * @return LogEndpoint
      */
-    public function log($apiKey, $guildId) {
+    public function logOf($apiKey, $guildId) {
         return new LogEndpoint($this->api, $apiKey, $guildId);
     }
 
     /**
-     * Get guild members.
+     * Get members of a guild.
      *
      * @param string $apiKey
      * @param string $guildId
      * @return MemberEndpoint
      */
-    public function members($apiKey, $guildId) {
+    public function membersOf($apiKey, $guildId) {
         return new MemberEndpoint($this->api, $apiKey, $guildId);
     }
 
@@ -53,51 +53,51 @@ class GuildEndpoint extends Endpoint {
     }
 
     /**
-     * Get guild ranks.
+     * Get ranks of a guild.
      *
      * @param string $apiKey
      * @param string $guildId
      * @return RankEndpoint
      */
-    public function ranks($apiKey, $guildId) {
+    public function ranksOf($apiKey, $guildId) {
         return new RankEndpoint($this->api, $apiKey, $guildId);
     }
 
     /**
-     * Get guild stash.
+     * Get stash of a guild.
      *
      * @param string $apiKey
      * @param string $guildId
      * @return StashEndpoint
      */
-    public function stash($apiKey, $guildId) {
+    public function stashOf($apiKey, $guildId) {
         return new StashEndpoint($this->api, $apiKey, $guildId);
     }
 
     /**
-     * Get guild teams.
+     * Get temas of a guild.
      *
      * @param string $apiKey
      * @param string $guildId
      * @return TeamEndpoint
      */
-    public function teams($apiKey, $guildId) {
+    public function teamsOf($apiKey, $guildId) {
         return new TeamEndpoint($this->api, $apiKey, $guildId);
     }
 
     /**
-     * Get guild treasury.
+     * Get treasury of a guild.
      *
      * @param string $apiKey
      * @param string $guildId
      * @return TreasuryEndpoint
      */
-    public function treasury($apiKey, $guildId) {
+    public function treasuryOf($apiKey, $guildId) {
         return new TreasuryEndpoint($this->api, $apiKey, $guildId);
     }
 
     /**
-     * Get guild upgrades.
+     * Get upgrades of a guild.
      *
      * @param string $apiKey
      * @param string $guildId

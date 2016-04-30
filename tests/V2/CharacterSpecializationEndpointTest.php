@@ -6,7 +6,7 @@ use TestCase;
 
 class SpecializationEquipmentEndpointTest extends TestCase {
     public function test() {
-        $endpoint = $this->api()->characters('test')->specializations('char');
+        $endpoint = $this->api()->characters('test')->specializationsOf('char');
 
         $this->assertEndpointIsAuthenticated( $endpoint );
         $this->assertEndpointUrl( 'v2/characters/char/specializations', $endpoint );
@@ -16,8 +16,8 @@ class SpecializationEquipmentEndpointTest extends TestCase {
     }
 
     public function testCharacterNameEncoding() {
-        $endpoint = $this->api()->characters('test')->equipment('Character Namè');
+        $endpoint = $this->api()->characters('test')->specializationsOf('Character Namè');
 
-        $this->assertEndpointUrl( 'v2/characters/Character%20Nam%C3%A8/equipment', $endpoint );
+        $this->assertEndpointUrl( 'v2/characters/Character%20Nam%C3%A8/specializations', $endpoint );
     }
 }
