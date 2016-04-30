@@ -33,7 +33,7 @@ class AchievementEndpoint extends Endpoint implements IBulkEndpoint, ILocalizedE
     }
 
     /**
-     * Get the current daily achievements.
+     * Get daily achievements.
      *
      * @return DailyEndpoint
      */
