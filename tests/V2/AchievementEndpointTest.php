@@ -32,6 +32,15 @@ class AchievementEndpointTest extends TestCase {
         $this->assertEquals(1984, $endpoint->get()->pve[0]->id);
     }
 
+    public function testDailyTomorrow() {
+        $endpoint = $this->api()->achievements()->daily()->tomorrow();
+
+        $this->assertEndpointUrl( 'v2/achievements/daily/tomorrow', $endpoint );
+
+        $this->mockResponse('{"pve":[{"id":1837,"level":{"min":1,"max":80}}]}');
+        $this->assertEquals(1837, $endpoint->get()->pve[0]->id);
+    }
+
     public function testGroups() {
         $endpoint = $this->api()->achievements()->groups();
 
