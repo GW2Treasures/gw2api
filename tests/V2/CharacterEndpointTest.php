@@ -31,7 +31,7 @@ class CharacterEndpointTest extends TestCase {
     }
 
     public function testRecipes() {
-        $endpoint = $this->api()->characters('test')->recipes('char');
+        $endpoint = $this->api()->characters('test')->recipesOf('char');
 
         $this->assertEndpointIsAuthenticated( $endpoint );
         $this->assertEndpointUrl( 'v2/characters/char/recipes', $endpoint );

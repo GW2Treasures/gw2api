@@ -16,8 +16,7 @@ class PermissionEndpoint extends Endpoint implements IBulkEndpoint, ILocalizedEn
      *
      * @return string
      */
-    public function url()
-    {
+    public function url() {
         return 'v2/guild/permissions';
     }
 }

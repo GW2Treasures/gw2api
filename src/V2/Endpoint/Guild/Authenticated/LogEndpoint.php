@@ -8,8 +8,7 @@ use GW2Treasures\GW2Api\V2\Endpoint;
 use GW2Treasures\GW2Api\V2\Authentication\IAuthenticatedEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Guild\IRestrictedGuildEndpoint;
 
-class LogEndpoint extends Endpoint implements IAuthenticatedEndpoint, IRestrictedGuildEndpoint
-{
+class LogEndpoint extends Endpoint implements IAuthenticatedEndpoint, IRestrictedGuildEndpoint {
     use AuthenticatedEndpoint;
 
     /** @var string $guildId */

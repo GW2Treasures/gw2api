@@ -10,18 +10,17 @@ use GW2Treasures\GW2Api\V2\Localization\ILocalizedEndpoint;
 use GW2Treasures\GW2Api\V2\Localization\LocalizedEndpoint;
 
 class FloorEndpoint extends Endpoint implements IBulkEndpoint, ILocalizedEndpoint {
-    use BulkEndpoint;
-    use LocalizedEndpoint;
+    use BulkEndpoint, LocalizedEndpoint;
 
-    /** @var int $continent_id */
-    protected $continent_id;
+    /** @var int $continent */
+    protected $continent;
 
     /**
      * @param GW2Api $api
-     * @param int    $continent_id
+     * @param int    $continent
      */
-    public function __construct( GW2Api $api, $continent_id ) {
-        $this->continent_id = $continent_id;
+    public function __construct( GW2Api $api, $continent ) {
+        $this->continent = $continent;
 
         parent::__construct( $api );
     }
@@ -30,17 +29,17 @@ class FloorEndpoint extends Endpoint implements IBulkEndpoint, ILocalizedEndpoin
      * {@inheritdoc}
      */
     public function url() {
-        return 'v2/continents/' . $this->continent_id . '/floors';
+        return 'v2/continents/'.$this->continent.'/floors';
     }
 
     /**
-     * Get the floor region.
+     * Get the floors regions.
      *
-     * @param $floor_id
+     * @param int $floor
      *
      * @return RegionEndpoint
      */
-    public function region( $floor_id ) {
-        return new RegionEndpoint( $this->api, $this->continent_id, $floor_id );
+    public function regionsOf( $floor ) {
+        return new RegionEndpoint( $this->api, $this->continent, $floor );
     }
 }

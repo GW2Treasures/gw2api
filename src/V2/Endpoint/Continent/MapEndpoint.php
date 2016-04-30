@@ -10,28 +10,27 @@ use GW2Treasures\GW2Api\V2\Localization\ILocalizedEndpoint;
 use GW2Treasures\GW2Api\V2\Localization\LocalizedEndpoint;
 
 class MapEndpoint extends Endpoint implements IBulkEndpoint, ILocalizedEndpoint {
-    use BulkEndpoint;
-    use LocalizedEndpoint;
+    use BulkEndpoint, LocalizedEndpoint;
 
-    /** @var int $continent_id */
-    protected $continent_id;
+    /** @var int $continent */
+    protected $continent;
 
-    /** @var int $floor_id */
-    protected $floor_id;
+    /** @var int $floor */
+    protected $floor;
 
-    /** @var int $region_id */
-    protected $region_id;
+    /** @var int $region */
+    protected $region;
 
     /**
      * @param GW2Api $api
-     * @param        $continent_id
-     * @param        $floor_id
-     * @param        $region_id
+     * @param int    $continent
+     * @param int    $floor
+     * @param int    $region
      */
-    public function __construct( GW2Api $api, $continent_id, $floor_id, $region_id ) {
-        $this->continent_id = $continent_id;
-        $this->floor_id = $floor_id;
-        $this->region_id = $region_id;
+    public function __construct( GW2Api $api, $continent, $floor, $region ) {
+        $this->continent = $continent;
+        $this->floor = $floor;
+        $this->region = $region;
 
         parent::__construct( $api );
     }
@@ -40,39 +39,39 @@ class MapEndpoint extends Endpoint implements IBulkEndpoint, ILocalizedEndpoint 
      * {@inheritdoc}
      */
     public function url() {
-        return 'v2/continents/' . $this->continent_id . '/floors/' . $this->floor_id . '/regions/' . $this->region_id . '/maps';
+        return 'v2/continents/'.$this->continent.'/floors/'.$this->floor.'/regions/'.$this->region.'/maps';
     }
 
     /**
-     * Get the  map poi.
+     * Get the maps points of interest.
      *
-     * @param $map_id
+     * @param int $map
      *
      * @return PoiEndpoint
      */
-    public function poi( $map_id ) {
-        return new PoiEndpoint( $this->api, $this->continent_id, $this->floor_id, $this->region_id, $map_id );
+    public function poisOf( $map ) {
+        return new PoiEndpoint( $this->api, $this->continent, $this->floor, $this->region, $map );
     }
 
     /**
-     * Get the  map task.
+     * Get the maps tasks.
      *
-     * @param $map_id
+     * @param int $map
      *
      * @return TaskEndpoint
      */
-    public function task( $map_id ) {
-        return new TaskEndpoint( $this->api, $this->continent_id, $this->floor_id, $this->region_id, $map_id );
+    public function tasksOf( $map ) {
+        return new TaskEndpoint( $this->api, $this->continent, $this->floor, $this->region, $map );
     }
 
     /**
-     * Get the  map sector.
+     * Get the maps sectors.
      *
-     * @param $map_id
+     * @param int $map
      *
      * @return SectorEndpoint
      */
-    public function sector( $map_id ) {
-        return new SectorEndpoint( $this->api, $this->continent_id, $this->floor_id, $this->region_id, $map_id );
+    public function sectorsOf( $map ) {
+        return new SectorEndpoint( $this->api, $this->continent, $this->floor, $this->region, $map );
     }
 }

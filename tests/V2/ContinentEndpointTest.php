@@ -13,7 +13,7 @@ class ContinentEndpointTest extends TestCase {
     }
 
     public function testFloor() {
-        $endpoint = $this->api()->continents()->floors(1);
+        $endpoint = $this->api()->continents()->floorsOf(1);
 
         $this->assertEndpointIsBulk( $endpoint );
         $this->assertEndpointIsLocalized( $endpoint );
@@ -24,7 +24,7 @@ class ContinentEndpointTest extends TestCase {
     }
 
     public function testRegion() {
-        $endpoint = $this->api()->continents()->floors(1)->region(1);
+        $endpoint = $this->api()->continents()->floorsOf(1)->regionsOf(1);
 
         $this->assertEndpointIsBulk( $endpoint );
         $this->assertEndpointIsLocalized( $endpoint );
@@ -35,7 +35,7 @@ class ContinentEndpointTest extends TestCase {
     }
 
     public function testMap() {
-        $endpoint = $this->api()->continents()->floors(1)->region(1)->map(1);
+        $endpoint = $this->api()->continents()->floorsOf(1)->regionsOf(1)->mapsOf(1);
 
         $this->assertEndpointIsBulk( $endpoint );
         $this->assertEndpointIsLocalized( $endpoint );
@@ -46,7 +46,7 @@ class ContinentEndpointTest extends TestCase {
     }
 
     public function testPoi() {
-        $endpoint = $this->api()->continents()->floors(1)->region(1)->map(1)->poi(26);
+        $endpoint = $this->api()->continents()->floorsOf(1)->regionsOf(1)->mapsOf(1)->poisOf(26);
 
         $this->assertEndpointIsBulk( $endpoint );
         $this->assertEndpointIsLocalized( $endpoint );
@@ -57,7 +57,7 @@ class ContinentEndpointTest extends TestCase {
     }
 
     public function testTask() {
-        $endpoint = $this->api()->continents()->floors(1)->region(1)->map(1)->task(26);
+        $endpoint = $this->api()->continents()->floorsOf(1)->regionsOf(1)->mapsOf(1)->tasksOf(26);
 
         $this->assertEndpointIsBulk( $endpoint );
         $this->assertEndpointIsLocalized( $endpoint );
@@ -68,7 +68,7 @@ class ContinentEndpointTest extends TestCase {
     }
 
     public function testSector() {
-        $endpoint = $this->api()->continents()->floors(1)->region(1)->map(1)->sector(26);
+        $endpoint = $this->api()->continents()->floorsOf(1)->regionsOf(1)->mapsOf(1)->sectorsOf(26);
 
         $this->assertEndpointIsBulk( $endpoint );
         $this->assertEndpointIsLocalized( $endpoint );
