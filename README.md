@@ -130,6 +130,7 @@ For all examples it is assumed that you have a variable `$api = new GW2Api()`.
  /v2/pets                     | [Pet\PetEndpoint][PetEndpoint]                             <br>`GW2Api::pets()`                    | 📦🌏
  /v2/pvp/amulets              | [Pvp\AmuletEndpoint][Pvp\AmuletEndpoint]                   <br>`GW2Api::pvp()->amulets()`          | 📦🌏
  /v2/pvp/games                | [Pvp\GameEndpoint][Pvp\GameEndpoint]                       <br>`GW2Api::pvp()->games()`            | 🔒📦
+ /v2/pvp/standings            | [Pvp\StandingEndpoint][Pvp\StandingEndpoint]               <br>`GW2Api::pvp()->standings()`        | 🔒
  /v2/pvp/stats                | [Pvp\StatsEndpoint][Pvp\StatsEndpoint]                     <br>`GW2Api::pvp()->stats()`            | 🔒
  /v2/quaggans                 | [Quaggan\QuagganEndpoint][QuagganEndpoint]                 <br>`GW2Api::quaggans()`                | 📦
  /v2/recipes                  | [Recipe\RecipeEndpoint][RecipeEndpoint]                    <br>`GW2Api::recipes()`                 | 📦
@@ -1261,6 +1262,24 @@ Implements [🔒AuthenticatedEndpoint][AuthenticatedEndpoint] and [📦BulkEndpo
 ```php
 $api->pvp('API_KEY')->games()->get('A9F9FD97-F114-4F97-B2CA-5E814DF0340E');
 // => { id: "A9F9FD97-F114-4F97-B2CA-5E814DF0340E", map_id: 795, … }
+```
+
+
+#### /v2/pvp/standings
+[Pvp\StandingEndpoint]: #v2pvpstandings
+
+`\GW2Treasures\GW2Api\V2\Endpoint\Pvp\StandingEndpoint`
+([source](src/V2/Endpoint/Pvp/StandingEndpoint.php))
+
+Implements [🔒AuthenticatedEndpoint][AuthenticatedEndpoint].
+
+##### Methods
+ - `get():mixed` Get pvp standings.
+
+##### Example
+```php
+$api->pvp()->standings('API-KEY')->get();
+// => [{ current: { total_points: 101, … }, best: { total_points: 200, … }, … }]
 ```
 
 
