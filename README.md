@@ -95,6 +95,7 @@ For all examples it is assumed that you have a variable `$api = new GW2Api()`.
  /v2/achievements             | [Achievement\AchievementEndpoint][AchievementEndpoint]     <br>`GW2Api::achievements()`            | 📦🌏
  /v2/achievements/categories  | [Achievement\CategoryEndpoint][Achievement\CategoryEndpoint]<br>`GW2Api::achievements()->categories()`| 📦🌏
  /v2/achievements/daily       | [Achievement\DailyEndpoint][Achievement\DailyEndpoint]     <br>`GW2Api::achievements()->daily()`   |
+ /v2/achievements/daily/tomorrow | [Achievement\DailyTomorrowEndpoint][Achievement\DailyTomorrowEndpoint] <br>`GW2Api::achievements()->daily()->tomorrow()` |
  /v2/achievements/groups      | [Achievement\GroupEndpoint][Achievement\GroupEndpoint]     <br>`GW2Api::achievements()->groups()`  | 📦🌏
  /v2/build                    | [Build\BuildEndpoint][BuildEndpoint]                       <br>`GW2Api::build()`                   |
  /v2/characters               | [Character\CharacterEndpoint][CharacterEndpoint]           <br>`GW2Api::characters()`              | 🔒📦
@@ -633,11 +634,28 @@ $api->achievements()->categories()->get(50);
 
 ##### Methods
  - `get():mixed` Get the current daily achievements.
+ - `tomorrow():DailyTomorrowEndpoint` Get tomorrows daily achievements.
 
 ##### Example
 ```php
 $api->achievements()->daily()->get();
 // => { pve: [ { id: 1984, level: { min:1, max: 80 } }, … ], pvp: [ … ], wvw: [ … ] }
+```
+
+
+#### /v2/achievements/daily/tomorrow
+[Achievement\DailyTomorrowEndpoint]: #v2achievementsdailytomorrow
+
+`\GW2Treasures\GW2Api\V2\Endpoint\Achievement\DailyTomorrowEndpoint`
+([source](src/V2/Endpoint/Achievement/DailyTomorrowEndpoint.php))
+
+##### Methods
+ - `get():mixed` Get the current daily achievements.
+
+##### Example
+```php
+$api->achievements()->daily()->tomorrow()->get();
+// => { pve: [ { id: 1973, level: { min:1, max: 79 } }, … ], pvp: [ … ], wvw: [ … ] }
 ```
 
 
