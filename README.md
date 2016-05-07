@@ -130,6 +130,7 @@ For all examples it is assumed that you have a variable `$api = new GW2Api()`.
  /v2/pets                     | [Pet\PetEndpoint][PetEndpoint]                             <br>`GW2Api::pets()`                    | 📦🌏
  /v2/pvp/amulets              | [Pvp\AmuletEndpoint][Pvp\AmuletEndpoint]                   <br>`GW2Api::pvp()->amulets()`          | 📦🌏
  /v2/pvp/games                | [Pvp\GameEndpoint][Pvp\GameEndpoint]                       <br>`GW2Api::pvp()->games()`            | 🔒📦
+ /v2/pvp/seasons              | [Pvp\SeasonEndpoint][Pvp\SeasonEndpoint]                   <br>`GW2Api::pvp()->seasons()`          | 📦🌏
  /v2/pvp/standings            | [Pvp\StandingEndpoint][Pvp\StandingEndpoint]               <br>`GW2Api::pvp()->standings()`        | 🔒
  /v2/pvp/stats                | [Pvp\StatsEndpoint][Pvp\StatsEndpoint]                     <br>`GW2Api::pvp()->stats()`            | 🔒
  /v2/quaggans                 | [Quaggan\QuagganEndpoint][QuagganEndpoint]                 <br>`GW2Api::quaggans()`                | 📦
@@ -1262,6 +1263,25 @@ Implements [🔒AuthenticatedEndpoint][AuthenticatedEndpoint] and [📦BulkEndpo
 ```php
 $api->pvp('API_KEY')->games()->get('A9F9FD97-F114-4F97-B2CA-5E814DF0340E');
 // => { id: "A9F9FD97-F114-4F97-B2CA-5E814DF0340E", map_id: 795, … }
+```
+
+
+#### /v2/pvp/seasons
+[PvP\SeasonEndpoint]: #v2pvpseasons
+
+`\GW2Treasures\GW2Api\V2\Endpoint\Pvp\SeasonEndpoint`
+([source](src/V2/Endpoint/Pvp/SeasonEndpoint.php))
+
+Implements [📦BulkEndpoint][BulkEndpoint] and [🌏LocalizedEndpoint][LocalizedEndpoint].
+
+##### Methods
+ - Inherited methods from [📦BulkEndpoint][BulkEndpoint]
+ - Inherited methods from [🌏LocalizedEndpoint][LocalizedEndpoint]
+
+##### Example
+```php
+$api->pvp()->seasons()->get('44B85826-B5ED-4890-8C77-82DDF9F2CF2B');
+// => { id: "44B85826-B5ED-4890-8C77-82DDF9F2CF2B", name: "PvP League Season One", … }
 ```
 
 
