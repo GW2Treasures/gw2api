@@ -31,6 +31,7 @@ class StatsEndpoint extends Endpoint implements IAuthenticatedEndpoint {
 
     /**
      * Get pvp stats.
+     * 
      * @return mixed
      */
     public function get() {
