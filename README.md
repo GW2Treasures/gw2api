@@ -95,6 +95,7 @@ For all examples it is assumed that you have a variable `$api = new GW2Api()`.
  /v2/achievements             | [Achievement\AchievementEndpoint][AchievementEndpoint]     <br>`GW2Api::achievements()`            | 📦🌏
  /v2/achievements/categories  | [Achievement\CategoryEndpoint][Achievement\CategoryEndpoint]<br>`GW2Api::achievements()->categories()`| 📦🌏
  /v2/achievements/daily       | [Achievement\DailyEndpoint][Achievement\DailyEndpoint]     <br>`GW2Api::achievements()->daily()`   |
+ /v2/achievements/daily/tomorrow | [Achievement\DailyTomorrowEndpoint][Achievement\DailyTomorrowEndpoint] <br>`GW2Api::achievements()->daily()->tomorrow()` |
  /v2/achievements/groups      | [Achievement\GroupEndpoint][Achievement\GroupEndpoint]     <br>`GW2Api::achievements()->groups()`  | 📦🌏
  /v2/build                    | [Build\BuildEndpoint][BuildEndpoint]                       <br>`GW2Api::build()`                   |
  /v2/characters               | [Character\CharacterEndpoint][CharacterEndpoint]           <br>`GW2Api::characters()`              | 🔒📦
@@ -122,10 +123,15 @@ For all examples it is assumed that you have a variable `$api = new GW2Api()`.
  /v2/guild/upgrades           | [Guild\UpgradeEndpoint][Guild\UpgradeEndpoint]             <br>`GW2Api::guild()->upgrades()`       | 📦🌏
  /v2/items                    | [Item\ItemEndpoint][ItemEndpoint]                          <br>`GW2Api::items()`                   | 📦🌏
  ~~/v2/leaderboards~~         | *disabled*                                                                                         | 🚫
+ /v2/legends                  | [Legend\LegendEndpoint][LegendEndpoint]                    <br>`GW2Api::legends()`                 | 📦🌏
  /v2/maps                     | [Map\MapEndpoint][MapEndpoint]                             <br>`GW2Api::maps()`                    | 📦🌏
  /v2/materials                | [Material\MaterialEndpoint][MaterialEndpoint]              <br>`GW2Api::materials()`               | 📦🌏
  /v2/minis                    | [Mini\MiniEndpoint][MiniEndpoint]                          <br>`GW2Api::minis()`                   | 📦🌏
+ /v2/pets                     | [Pet\PetEndpoint][PetEndpoint]                             <br>`GW2Api::pets()`                    | 📦🌏
+ /v2/pvp/amulets              | [Pvp\AmuletEndpoint][Pvp\AmuletEndpoint]                   <br>`GW2Api::pvp()->amulets()`          | 📦🌏
  /v2/pvp/games                | [Pvp\GameEndpoint][Pvp\GameEndpoint]                       <br>`GW2Api::pvp()->games()`            | 🔒📦
+ /v2/pvp/seasons              | [Pvp\SeasonEndpoint][Pvp\SeasonEndpoint]                   <br>`GW2Api::pvp()->seasons()`          | 📦🌏
+ /v2/pvp/standings            | [Pvp\StandingEndpoint][Pvp\StandingEndpoint]               <br>`GW2Api::pvp()->standings()`        | 🔒
  /v2/pvp/stats                | [Pvp\StatsEndpoint][Pvp\StatsEndpoint]                     <br>`GW2Api::pvp()->stats()`            | 🔒
  /v2/quaggans                 | [Quaggan\QuagganEndpoint][QuagganEndpoint]                 <br>`GW2Api::quaggans()`                | 📦
  /v2/recipes                  | [Recipe\RecipeEndpoint][RecipeEndpoint]                    <br>`GW2Api::recipes()`                 | 📦
@@ -633,11 +639,28 @@ $api->achievements()->categories()->get(50);
 
 ##### Methods
  - `get():mixed` Get the current daily achievements.
+ - `tomorrow():DailyTomorrowEndpoint` Get tomorrows daily achievements.
 
 ##### Example
 ```php
 $api->achievements()->daily()->get();
 // => { pve: [ { id: 1984, level: { min:1, max: 80 } }, … ], pvp: [ … ], wvw: [ … ] }
+```
+
+
+#### /v2/achievements/daily/tomorrow
+[Achievement\DailyTomorrowEndpoint]: #v2achievementsdailytomorrow
+
+`\GW2Treasures\GW2Api\V2\Endpoint\Achievement\DailyTomorrowEndpoint`
+([source](src/V2/Endpoint/Achievement/DailyTomorrowEndpoint.php))
+
+##### Methods
+ - `get():mixed` Get the current daily achievements.
+
+##### Example
+```php
+$api->achievements()->daily()->tomorrow()->get();
+// => { pve: [ { id: 1973, level: { min:1, max: 79 } }, … ], pvp: [ … ], wvw: [ … ] }
 ```
 
 
@@ -1111,6 +1134,25 @@ $api->items()->ids();
 ```
 
 
+#### /v2/legends
+[LegendEndpoint]: #v2legends
+
+`\GW2Treasures\GW2Api\V2\Endpoint\Legend\LegendEndpoint`
+([source](src/V2/Endpoint/Legend/LegendEndpoint.php))
+
+Implements [📦BulkEndpoint][BulkEndpoint] and [🌏LocalizedEndpoint][LocalizedEndpoint].
+
+##### Methods
+ - Inherited methods from [📦BulkEndpoint][BulkEndpoint]
+ - Inherited methods from [🌏LocalizedEndpoint][LocalizedEndpoint]
+
+##### Example
+```php
+$api->legends()->get('Legend1');
+// => { id: "Legend1", swap: 28229, heal: 27220, … }
+```
+
+
 #### /v2/maps
 [MapEndpoint]: #v2maps
 
@@ -1168,6 +1210,44 @@ $api->minis()->get(1);
 ```
 
 
+#### /v2/pets
+[PetEndpoint]: #v2pets
+
+`\GW2Treasures\GW2Api\V2\Endpoint\Pet\PetEndpoint`
+([source](src/V2/Endpoint/Pet/PetEndpoint.php))
+
+Implements [📦BulkEndpoint][BulkEndpoint] and [🌏LocalizedEndpoint][LocalizedEndpoint].
+
+##### Methods
+ - Inherited methods from [📦BulkEndpoint][BulkEndpoint]
+ - Inherited methods from [🌏LocalizedEndpoint][LocalizedEndpoint]
+
+##### Example
+```php
+$api->pets()->get(1);
+// => { id: 1, name: "Juvenile Jungle Stalker", … }
+```
+
+
+#### /v2/pvp/amulets
+[PvP\AmuletEndpoint]: #v2pvpamulets
+
+`\GW2Treasures\GW2Api\V2\Endpoint\Pvp\AmuletEndpoint`
+([source](src/V2/Endpoint/Pvp/AmuletEndpoint.php))
+
+Implements [📦BulkEndpoint][BulkEndpoint] and [🌏LocalizedEndpoint][LocalizedEndpoint].
+
+##### Methods
+ - Inherited methods from [📦BulkEndpoint][BulkEndpoint]
+ - Inherited methods from [🌏LocalizedEndpoint][LocalizedEndpoint]
+
+##### Example
+```php
+$api->pvp()->amulets()->get(4);
+// => { id: 4, name: "Assassin Amulet", … }
+```
+
+
 #### /v2/pvp/games
 [Pvp\GameEndpoint]: #v2pvpgames
 
@@ -1183,6 +1263,43 @@ Implements [🔒AuthenticatedEndpoint][AuthenticatedEndpoint] and [📦BulkEndpo
 ```php
 $api->pvp('API_KEY')->games()->get('A9F9FD97-F114-4F97-B2CA-5E814DF0340E');
 // => { id: "A9F9FD97-F114-4F97-B2CA-5E814DF0340E", map_id: 795, … }
+```
+
+
+#### /v2/pvp/seasons
+[PvP\SeasonEndpoint]: #v2pvpseasons
+
+`\GW2Treasures\GW2Api\V2\Endpoint\Pvp\SeasonEndpoint`
+([source](src/V2/Endpoint/Pvp/SeasonEndpoint.php))
+
+Implements [📦BulkEndpoint][BulkEndpoint] and [🌏LocalizedEndpoint][LocalizedEndpoint].
+
+##### Methods
+ - Inherited methods from [📦BulkEndpoint][BulkEndpoint]
+ - Inherited methods from [🌏LocalizedEndpoint][LocalizedEndpoint]
+
+##### Example
+```php
+$api->pvp()->seasons()->get('44B85826-B5ED-4890-8C77-82DDF9F2CF2B');
+// => { id: "44B85826-B5ED-4890-8C77-82DDF9F2CF2B", name: "PvP League Season One", … }
+```
+
+
+#### /v2/pvp/standings
+[Pvp\StandingEndpoint]: #v2pvpstandings
+
+`\GW2Treasures\GW2Api\V2\Endpoint\Pvp\StandingEndpoint`
+([source](src/V2/Endpoint/Pvp/StandingEndpoint.php))
+
+Implements [🔒AuthenticatedEndpoint][AuthenticatedEndpoint].
+
+##### Methods
+ - `get():mixed` Get pvp standings.
+
+##### Example
+```php
+$api->pvp()->standings('API-KEY')->get();
+// => [{ current: { total_points: 101, … }, best: { total_points: 200, … }, … }]
 ```
 
 
