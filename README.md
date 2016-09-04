@@ -115,10 +115,13 @@ For all examples it is assumed that you have a variable `$api = new GW2Api()`.
  ~~/v2/events-state~~         | *disabled*                                                                                         | 🚫
  /v2/files                    | [File\FileEndpoint][FileEndpoint]                          <br>`GW2Api::files()`                   | 📦
  ~~/v2/guild/:id~~            | *disabled*                                                                                         | 🚫
- ~~/v2/guild/:id/inventory~~  | *disabled*                                                                                         | 🔒🚫
- /v2/guild/:id/log            | [Guild\LogEndpoint][Guild\LogEndpoint]                     <br>`GW2Api::guild()->logOf()`          | 🔒
- /v2/guild/:id/members        | [Guild\MemberEndpoint][Guild\MemberEndpoint]               <br>`GW2Api::guild()->membersOf()`      | 🔒
- /v2/guild/:id/ranks          | [Guild\RankEndpoint][Guild\RankEndpoint]                   <br>`GW2Api::guild()->ranksOf()`        | 🔒
+ /v2/guild/:id/log            | [Guild\Authenticated\LogEndpoint][Guild\Authenticated\LogEndpoint] <br>`GW2Api::guild()->logOf()`  | 🔒
+ /v2/guild/:id/members        | [Guild\Authenticated\MemberEndpoint][Guild\Authenticated\MemberEndpoint] <br>`GW2Api::guild()->membersOf()`     | 🔒
+ /v2/guild/:id/ranks          | [Guild\Authenticated\RankEndpoint][Guild\Authenticated\RankEndpoint] <br>`GW2Api::guild()->ranksOf()`           | 🔒
+ /v2/guild/:id/stash          | [Guild\Authenticated\StashEndpoint][Guild\Authenticated\StashEndpoint] <br>`GW2Api::guild()->stashOf()`         | 🔒
+ /v2/guild/:id/teams          | [Guild\Authenticated\TeamEndpoint][Guild\Authenticated\TeamEndpoint] <br>`GW2Api::guild()->teamsOf()`           | 🔒
+ /v2/guild/:id/treasury       | [Guild\Authenticated\TreasuryEndpoint][Guild\Authenticated\TreasuryEndpoint] <br>`GW2Api::guild()->treasuryOf()`| 🔒
+ /v2/guild/:id/upgrades       | [Guild\Authenticated\UpgradeEndpoint][Guild\Authenticated\UpgradeEndpoint] <br>`GW2Api::guild()->upgradesOf()`  | 🔒
  /v2/guild/permissions        | [Guild\PermissionEndpoint][Guild\PermissionEndpoint]       <br>`GW2Api::guild()->permissionsOf()`  | 📦🌏
  /v2/guild/upgrades           | [Guild\UpgradeEndpoint][Guild\UpgradeEndpoint]             <br>`GW2Api::guild()->upgradesOf()`     | 📦🌏
  /v2/items                    | [Item\ItemEndpoint][ItemEndpoint]                          <br>`GW2Api::items()`                   | 📦🌏
@@ -1026,10 +1029,10 @@ $api->files()->ids();
 ```
 
 #### /v2/guild/:id/log
-[Guild\LogEndpoint]: #v2guildidlog
+[Guild\Authenticated\LogEndpoint]: #v2guildidlog
 
-`\GW2Treasures\GW2Api\V2\Endpoint\Guild\LogEndpoint`
-([source](src/V2/Endpoint/Guild/LogEndpoint.php))
+`\GW2Treasures\GW2Api\V2\Endpoint\Guild\Authenticated\LogEndpoint`
+([source](src/V2/Endpoint/Guild/Authenticated/LogEndpoint.php))
 
 Implements [🔒AuthenticatedEndpoint][AuthenticatedEndpoint] and [RestrictedGuildEndpoint][RestrictedGuildEndpoint].
 
@@ -1043,10 +1046,10 @@ $api->guild()->logOf('API_KEY', 'GUILD_ID');
 ```
 
 #### /v2/guild/:id/members
-[Guild\MemberEndpoint]: #v2guildidmembers
+[Guild\Authenticated\MemberEndpoint]: #v2guildidmembers
 
-`\GW2Treasures\GW2Api\V2\Endpoint\Guild\MemberEndpoint`
-([source](src/V2/Endpoint/Guild/MemberEndpoint.php))
+`\GW2Treasures\GW2Api\V2\Endpoint\Guild\Authenticated\MemberEndpoint`
+([source](src/V2/Endpoint/Guild/Authenticated/MemberEndpoint.php))
 
 Implements [🔒AuthenticatedEndpoint][AuthenticatedEndpoint] and [RestrictedGuildEndpoint][RestrictedGuildEndpoint].
 
@@ -1061,10 +1064,10 @@ $api->guild()->membersOf('API_KEY', 'GUILD_ID');
 
 
 #### /v2/guild/:id/ranks
-[Guild\RankEndpoint]: #v2guildidranks
+[Guild\Authenticated\RankEndpoint]: #v2guildidranks
 
-`\GW2Treasures\GW2Api\V2\Endpoint\Guild\RankEndpoint`
-([source](src/V2/Endpoint/Guild/RankEndpoint.php))
+`\GW2Treasures\GW2Api\V2\Endpoint\Guild\Authenticated\RankEndpoint`
+([source](src/V2/Endpoint/Guild/Authenticated/RankEndpoint.php))
 
 Implements [🔒AuthenticatedEndpoint][AuthenticatedEndpoint] and [RestrictedGuildEndpoint][RestrictedGuildEndpoint].
 
@@ -1075,6 +1078,78 @@ Implements [🔒AuthenticatedEndpoint][AuthenticatedEndpoint] and [RestrictedGui
 ```php
 $api->guild()->ranksOf('API_KEY', 'GUILD_ID');
 // => [ { id: "Leader", order: 1, permissions: [ "Admin", … ], icon: "…" }, … ]
+```
+
+
+#### /v2/guild/:id/stash
+[Guild\Authenticated\StashEndpoint]: #v2guildidstash
+
+`\GW2Treasures\GW2Api\V2\Endpoint\Guild\Authenticated\StashEndpoint`
+([source](src/V2/Endpoint/Guild/Authenticated/StashEndpoint.php))
+
+Implements [🔒AuthenticatedEndpoint][AuthenticatedEndpoint] and [RestrictedGuildEndpoint][RestrictedGuildEndpoint].
+
+##### Methods
+- Inherited methods from [🔒AuthenticatedEndpoint][AuthenticatedEndpoint]
+
+##### Example
+```php
+$api->guild()->stashOf('API_KEY', 'GUILD_ID')->get();
+// => [ { upgrade_id: 1, size: 100, coins: 1002, note: "stash test", inventory: [] } ]
+```
+
+
+#### /v2/guild/:id/teams
+[Guild\Authenticated\TeamEndpoint]: #v2guildidteams
+
+`\GW2Treasures\GW2Api\V2\Endpoint\Guild\Authenticated\TeamEndpoint`
+([source](src/V2/Endpoint/Guild/Authenticated/TeamEndpoint.php))
+
+Implements [🔒AuthenticatedEndpoint][AuthenticatedEndpoint] and [RestrictedGuildEndpoint][RestrictedGuildEndpoint].
+
+##### Methods
+- Inherited methods from [🔒AuthenticatedEndpoint][AuthenticatedEndpoint]
+
+##### Example
+```php
+$api->guild()->teamsOf('API_KEY', 'GUILD_ID')->get();
+// => [ { id: 1, members: [], name: "ez game" } ]
+```
+
+
+#### /v2/guild/:id/treasury
+[Guild\Authenticated\TreasuryEndpoint]: #v2guildidtreasury
+
+`\GW2Treasures\GW2Api\V2\Endpoint\Guild\Authenticated\TreasuryEndpoint`
+([source](src/V2/Endpoint/Guild/Authenticated/TreasuryEndpoint.php))
+
+Implements [🔒AuthenticatedEndpoint][AuthenticatedEndpoint] and [RestrictedGuildEndpoint][RestrictedGuildEndpoint].
+
+##### Methods
+- Inherited methods from [🔒AuthenticatedEndpoint][AuthenticatedEndpoint]
+
+##### Example
+```php
+$api->guild()->treasuryOf('API_KEY', 'GUILD_ID')->get();
+// => [ { id: 123, count: 100, needed_by: [] } ]
+```
+
+
+#### /v2/guild/:id/upgrades
+[Guild\Authenticated\UpgradeEndpoint]: #v2guildidupgrades
+
+`\GW2Treasures\GW2Api\V2\Endpoint\Guild\Authenticated\UpgradeEndpoint`
+([source](src/V2/Endpoint/Guild/Authenticated/UpgradeEndpoint.php))
+
+Implements [🔒AuthenticatedEndpoint][AuthenticatedEndpoint] and [RestrictedGuildEndpoint][RestrictedGuildEndpoint].
+
+##### Methods
+- Inherited methods from [🔒AuthenticatedEndpoint][AuthenticatedEndpoint]
+
+##### Example
+```php
+$api->guild()->upgradesOf('API_KEY', 'GUILD_ID')->get();
+// => [ 38, 43, 44, 51, 55, … ]
 ```
 
 
