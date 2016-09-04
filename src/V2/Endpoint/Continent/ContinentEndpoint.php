@@ -25,6 +25,6 @@ class ContinentEndpoint extends Endpoint implements IBulkEndpoint, ILocalizedEnd
      * @return FloorEndpoint
      */
     public function floorsOf( $continent ) {
-        return new FloorEndpoint( $this->getApi(), $continent );
+        return new FloorEndpoint( $this->getParent(), $continent );
     }
 }

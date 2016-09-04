@@ -11,4 +11,13 @@ interface IAuthenticatedEndpoint extends IEndpoint {
      * @return string
      */
     public function getApiKey();
+
+
+    /**
+     * Set the API key that should be used to request this endpoint.
+     *
+     * @param string $apiKey
+     * @return static
+     */
+    public function auth($apiKey);
 }

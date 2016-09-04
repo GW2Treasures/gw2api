@@ -29,6 +29,6 @@ class DailyEndpoint extends Endpoint {
      * @return DailyTomorrowEndpoint
      */
     public function tomorrow() {
-        return new DailyTomorrowEndpoint($this->api);
+        return new DailyTomorrowEndpoint($this->parent);
     }
 }

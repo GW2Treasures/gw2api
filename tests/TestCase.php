@@ -25,6 +25,9 @@ abstract class TestCase extends PHPUnit_Framework_TestCase {
     /** @var array $history */
     protected $history = [];
 
+    /** @var string $apiKey */
+    protected $apiKey;
+
     /**
      * @return GW2Api
      */
@@ -35,6 +38,13 @@ abstract class TestCase extends PHPUnit_Framework_TestCase {
             $stack->push(Middleware::history($this->history));
 
             $this->api = new GW2Api(['handler' => $stack]);
+
+            if(!isset($this->apiKey)) {
+                $this->apiKey = 'API_KEY_'.rand(100, 999);
+            }
+
+            $this->api->auth($this->apiKey);
+
         }
         return $this->api;
     }
@@ -135,9 +145,15 @@ abstract class TestCase extends PHPUnit_Framework_TestCase {
         }
     }
 
-    public function assertEndpointIsAuthenticated( IEndpoint $endpoint ) {
+    public function assertEndpointIsAuthenticated( IEndpoint $endpoint, $apiKey = null ) {
         $this->assertInstanceOf( IAuthenticatedEndpoint::class, $endpoint );
-        $this->assertNotNull( $endpoint->getApiKey() );
+        /** @var IAuthenticatedEndpoint $endpoint */
+
+        if($apiKey === null) {
+            $apiKey = $this->apiKey;
+        }
+
+        $this->assertEquals( $apiKey, $endpoint->getApiKey() );
     }
 
     public function assertEndpointIsBulk( IEndpoint $endpoint ) {

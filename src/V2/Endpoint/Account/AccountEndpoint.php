@@ -2,7 +2,6 @@
 
 namespace GW2Treasures\GW2Api\V2\Endpoint\Account;
 
-use GW2Treasures\GW2Api\GW2Api;
 use GW2Treasures\GW2Api\V2\Authentication\AuthenticatedEndpoint;
 use GW2Treasures\GW2Api\V2\Authentication\IAuthenticatedEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint;
@@ -10,12 +9,6 @@ use GW2Treasures\GW2Api\V2\Endpoint;
 class AccountEndpoint extends Endpoint implements IAuthenticatedEndpoint {
     use AuthenticatedEndpoint;
 
-    public function __construct( GW2Api $api, $apiKey ) {
-        parent::__construct( $api );
-
-        $this->apiKey = $apiKey;
-    }
-    
     /**
      * {@inheritdoc}
      */
@@ -38,7 +31,7 @@ class AccountEndpoint extends Endpoint implements IAuthenticatedEndpoint {
      * @return AchievementEndpoint
      */
     public function achievements() {
-        return new AchievementEndpoint( $this->api, $this->apiKey );
+        return new AchievementEndpoint( $this->parent );
     }
 
     /**
@@ -47,7 +40,7 @@ class AccountEndpoint extends Endpoint implements IAuthenticatedEndpoint {
      * @return BankEndpoint
      */
     public function bank() {
-        return new BankEndpoint( $this->api, $this->apiKey );
+        return new BankEndpoint( $this->parent );
     }
 
     /**
@@ -56,7 +49,7 @@ class AccountEndpoint extends Endpoint implements IAuthenticatedEndpoint {
      * @return DyeEndpoint
      */
     public function dyes() {
-        return new DyeEndpoint( $this->api, $this->apiKey );
+        return new DyeEndpoint( $this->parent );
     }
 
     /**
@@ -65,7 +58,7 @@ class AccountEndpoint extends Endpoint implements IAuthenticatedEndpoint {
      * @return InventoryEndpoint
      */
     public function inventory() {
-        return new InventoryEndpoint( $this->api, $this->apiKey );
+        return new InventoryEndpoint( $this->parent );
     }
 
     /**
@@ -74,7 +67,7 @@ class AccountEndpoint extends Endpoint implements IAuthenticatedEndpoint {
      * @return MaterialEndpoint
      */
     public function materials() {
-        return new MaterialEndpoint( $this->api, $this->apiKey );
+        return new MaterialEndpoint( $this->parent );
     }
 
     /**
@@ -83,7 +76,7 @@ class AccountEndpoint extends Endpoint implements IAuthenticatedEndpoint {
      * @return MiniEndpoint
      */
     public function minis() {
-        return new MiniEndpoint( $this->api, $this->apiKey );
+        return new MiniEndpoint( $this->parent );
     }
 
     /**
@@ -92,7 +85,7 @@ class AccountEndpoint extends Endpoint implements IAuthenticatedEndpoint {
      * @return SkinEndpoint
      */
     public function skins() {
-        return new SkinEndpoint( $this->api, $this->apiKey );
+        return new SkinEndpoint( $this->parent );
     }
 
     /**
@@ -101,6 +94,6 @@ class AccountEndpoint extends Endpoint implements IAuthenticatedEndpoint {
      * @return WalletEndpoint
      */
     public function wallet()  {
-        return new WalletEndpoint( $this->api, $this->apiKey );
+        return new WalletEndpoint( $this->parent );
     }
 }

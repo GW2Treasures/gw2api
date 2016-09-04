@@ -37,10 +37,11 @@ use GW2Treasures\GW2Api\V2\Endpoint\Traits\TraitEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\World\WorldEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\WvW\WvWEndpoint;
 use GW2Treasures\GW2Api\V2\IEndpoint;
+use GW2Treasures\GW2Api\V2\IParent;
 use GW2Treasures\GW2Api\V2\Localization\LocalizationHandler;
 use GW2Treasures\GW2Api\V2\Pagination\PaginationHandler;
 
-class GW2Api {
+class GW2Api implements IParent {
     /** @var string $apiUrl */
     protected $apiUrl = 'https://api.guildwars2.com/';
 
@@ -52,6 +53,9 @@ class GW2Api {
 
     /** @var array $handlers */
     protected $handlers = [];
+
+    /** @var string|null $apiKey */
+    protected $apiKey = null;
 
     function __construct( array $options = [] ) {
         $this->options = $this->getOptions( $options );
@@ -141,8 +145,8 @@ class GW2Api {
         return $this->client;
     }
 
-    public function account( $apiKey ) {
-        return new AccountEndpoint( $this, $apiKey );
+    public function account() {
+        return new AccountEndpoint( $this );
     }
 
     public function achievements() {
@@ -153,8 +157,8 @@ class GW2Api {
         return new BuildEndpoint( $this );
     }
 
-    public function characters( $apiKey ) {
-        return new CharacterEndpoint( $this, $apiKey );
+    public function characters() {
+        return new CharacterEndpoint( $this );
     }
 
     public function colors() {
@@ -237,8 +241,8 @@ class GW2Api {
         return new SpecializationEndpoint( $this );
     }
 
-    public function tokeninfo( $apiKey ) {
-        return new TokeninfoEndpoint( $this, $apiKey );
+    public function tokeninfo() {
+        return new TokeninfoEndpoint( $this );
     }
 
     public function traits() {
@@ -259,5 +263,30 @@ class GW2Api {
                 $endpoint->attach( new $handler( $endpoint ) );
             }
         }
+    }
+
+    public function getApi() {
+        return $this;
+    }
+
+    public function getParent() {
+        return null;
+    }
+
+
+    /**
+     * Set the API key that should be used to request this endpoint.
+     *
+     * @param string $apiKey
+     * @return static
+     */
+    public function auth($apiKey) {
+        $this->apiKey = $apiKey;
+
+        return $this;
+    }
+
+    public function getApiKey() {
+        return $this->apiKey;
     }
 }

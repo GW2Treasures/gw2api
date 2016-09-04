@@ -2,9 +2,6 @@
 
 namespace GW2Treasures\GW2Api\V2\Endpoint\Pvp;
 
-use GW2Treasures\GW2Api\GW2Api;
-use GW2Treasures\GW2Api\V2\Authentication\AuthenticatedEndpoint;
-use GW2Treasures\GW2Api\V2\Authentication\IAuthenticatedEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint;
 
 class PvpEndpoint extends Endpoint {
@@ -21,37 +18,34 @@ class PvpEndpoint extends Endpoint {
      * @return AmuletEndpoint
      */
     public function amulets() {
-        return new AmuletEndpoint($this->api);
+        return new AmuletEndpoint($this->parent);
     }
 
     /**
-     * @param string $apiKey
      * @return GameEndpoint
      */
-    public function games($apiKey) {
-        return new GameEndpoint($this->api, $apiKey);
+    public function games() {
+        return new GameEndpoint($this->parent);
     }
 
     /**
      * @return SeasonEndpoint
      */
     public function seasons() {
-        return new SeasonEndpoint($this->api);
+        return new SeasonEndpoint($this->parent);
     }
 
     /**
-     * @param string $apiKey
      * @return StandingEndpoint
      */
-    public function standings($apiKey) {
-        return new StandingEndpoint($this->api, $apiKey);
+    public function standings() {
+        return new StandingEndpoint($this->parent);
     }
 
     /**
-     * @param string $apiKey
      * @return StatsEndpoint
      */
-    public function stats($apiKey) {
-        return new StatsEndpoint($this->api, $apiKey);
+    public function stats() {
+        return new StatsEndpoint($this->parent);
     }
 }

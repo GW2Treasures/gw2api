@@ -2,10 +2,10 @@
 
 namespace GW2Treasures\GW2Api\V2\Endpoint\Continent;
 
-use GW2Treasures\GW2Api\GW2Api;
 use GW2Treasures\GW2Api\V2\Bulk\BulkEndpoint;
 use GW2Treasures\GW2Api\V2\Bulk\IBulkEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint;
+use GW2Treasures\GW2Api\V2\IParent;
 use GW2Treasures\GW2Api\V2\Localization\ILocalizedEndpoint;
 use GW2Treasures\GW2Api\V2\Localization\LocalizedEndpoint;
 
@@ -22,17 +22,17 @@ class MapEndpoint extends Endpoint implements IBulkEndpoint, ILocalizedEndpoint 
     protected $region;
 
     /**
-     * @param GW2Api $api
+     * @param IParent $parent
      * @param int    $continent
      * @param int    $floor
      * @param int    $region
      */
-    public function __construct( GW2Api $api, $continent, $floor, $region ) {
+    public function __construct( IParent $parent, $continent, $floor, $region ) {
         $this->continent = $continent;
         $this->floor = $floor;
         $this->region = $region;
 
-        parent::__construct( $api );
+        parent::__construct( $parent );
     }
 
     /**
@@ -50,7 +50,7 @@ class MapEndpoint extends Endpoint implements IBulkEndpoint, ILocalizedEndpoint 
      * @return PoiEndpoint
      */
     public function poisOf( $map ) {
-        return new PoiEndpoint( $this->api, $this->continent, $this->floor, $this->region, $map );
+        return new PoiEndpoint( $this->parent, $this->continent, $this->floor, $this->region, $map );
     }
 
     /**
@@ -61,7 +61,7 @@ class MapEndpoint extends Endpoint implements IBulkEndpoint, ILocalizedEndpoint 
      * @return TaskEndpoint
      */
     public function tasksOf( $map ) {
-        return new TaskEndpoint( $this->api, $this->continent, $this->floor, $this->region, $map );
+        return new TaskEndpoint( $this->parent, $this->continent, $this->floor, $this->region, $map );
     }
 
     /**
@@ -72,6 +72,6 @@ class MapEndpoint extends Endpoint implements IBulkEndpoint, ILocalizedEndpoint 
      * @return SectorEndpoint
      */
     public function sectorsOf( $map ) {
-        return new SectorEndpoint( $this->api, $this->continent, $this->floor, $this->region, $map );
+        return new SectorEndpoint( $this->parent, $this->continent, $this->floor, $this->region, $map );
     }
 }

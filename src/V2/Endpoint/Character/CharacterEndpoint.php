@@ -2,7 +2,6 @@
 
 namespace GW2Treasures\GW2Api\V2\Endpoint\Character;
 
-use GW2Treasures\GW2Api\GW2Api;
 use GW2Treasures\GW2Api\V2\Authentication\AuthenticatedEndpoint;
 use GW2Treasures\GW2Api\V2\Authentication\IAuthenticatedEndpoint;
 use GW2Treasures\GW2Api\V2\Bulk\BulkEndpoint;
@@ -14,12 +13,6 @@ class CharacterEndpoint extends Endpoint implements IAuthenticatedEndpoint, IBul
 
     /** @var bool $supportsIdsAll */
     protected $supportsIdsAll = false;
-
-    public function __construct( GW2Api $api, $apiKey ) {
-        parent::__construct( $api );
-
-        $this->apiKey = $apiKey;
-    }
 
     /**
      * {@inheritdoc}
@@ -35,7 +28,7 @@ class CharacterEndpoint extends Endpoint implements IAuthenticatedEndpoint, IBul
      * @return EquipmentEndpoint
      */
     public function equipmentOf( $character ) {
-        return new EquipmentEndpoint( $this->api, $this->apiKey, $character );
+        return new EquipmentEndpoint( $this->parent, $character );
     }
 
     /**
@@ -45,7 +38,7 @@ class CharacterEndpoint extends Endpoint implements IAuthenticatedEndpoint, IBul
      * @return InventoryEndpoint
      */
     public function inventoryOf( $character ) {
-        return new InventoryEndpoint( $this->api, $this->apiKey, $character );
+        return new InventoryEndpoint( $this->parent, $character );
     }
 
     /**
@@ -55,7 +48,7 @@ class CharacterEndpoint extends Endpoint implements IAuthenticatedEndpoint, IBul
      * @return RecipeEndpoint
      */
     public function recipesOf( $character ) {
-        return new RecipeEndpoint( $this->api, $this->apiKey, $character );
+        return new RecipeEndpoint( $this->parent, $character );
     }
 
     /**
@@ -65,6 +58,6 @@ class CharacterEndpoint extends Endpoint implements IAuthenticatedEndpoint, IBul
      * @return SpecializationEndpoint
      */
     public function specializationsOf( $character ) {
-        return new SpecializationEndpoint( $this->api, $this->apiKey, $character );
+        return new SpecializationEndpoint( $this->parent, $character );
     }
 }

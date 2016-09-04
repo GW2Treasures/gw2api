@@ -19,7 +19,7 @@ class EmblemEndpoint extends Endpoint {
      * @return LayerEndpoint
      */
     public function backgrounds() {
-        return new LayerEndpoint($this->api, LayerEndpoint::TYPE_BACKGROUNDS);
+        return new LayerEndpoint($this->parent, LayerEndpoint::TYPE_BACKGROUNDS);
     }
 
     /**
@@ -28,6 +28,6 @@ class EmblemEndpoint extends Endpoint {
      * @return LayerEndpoint
      */
     public function foregrounds() {
-        return new LayerEndpoint($this->api, LayerEndpoint::TYPE_FOREGROUNDS);
+        return new LayerEndpoint($this->parent, LayerEndpoint::TYPE_FOREGROUNDS);
     }
 }

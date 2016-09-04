@@ -21,7 +21,7 @@ class CommerceEndpoint extends Endpoint {
      * @return ExchangeEndpoint
      */
     public function exchange() {
-        return new ExchangeEndpoint( $this->getApi() );
+        return new ExchangeEndpoint( $this->getParent() );
     }
 
     /**
@@ -30,7 +30,7 @@ class CommerceEndpoint extends Endpoint {
      * @return ListingEndpoint
      */
     public function listings() {
-        return new ListingEndpoint( $this->getApi() );
+        return new ListingEndpoint( $this->getParent() );
     }
 
     /**
@@ -39,16 +39,15 @@ class CommerceEndpoint extends Endpoint {
      * @return PriceEndpoint
      */
     public function prices() {
-        return new PriceEndpoint( $this->getApi() );
+        return new PriceEndpoint( $this->getParent() );
     }
 
     /**
      * Current and completed transactions.
      *
-     * @param string $apiKey
      * @return TransactionEndpoint
      */
-    public function transactions( $apiKey ) {
-        return new TransactionEndpoint( $this->getApi(), $apiKey );
+    public function transactions() {
+        return new TransactionEndpoint( $this->getParent() );
     }
 }

@@ -13,10 +13,10 @@ class WvWEndpoint extends Endpoint {
     }
 
     public function matches() {
-        return new MatchEndpoint( $this->api );
+        return new MatchEndpoint( $this->parent );
     }
 
     public function objectives() {
-        return new ObjectiveEndpoint( $this->api );
+        return new ObjectiveEndpoint( $this->parent );
     }
 }
