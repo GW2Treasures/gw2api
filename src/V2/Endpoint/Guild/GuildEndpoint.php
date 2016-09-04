@@ -75,7 +75,7 @@ class GuildEndpoint extends Endpoint {
     }
 
     /**
-     * Get temas of a guild.
+     * Get teams of a guild.
      *
      * @param string $apiKey
      * @param string $guildId

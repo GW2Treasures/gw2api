@@ -99,10 +99,10 @@ For all examples it is assumed that you have a variable `$api = new GW2Api()`.
  /v2/achievements/groups      | [Achievement\GroupEndpoint][Achievement\GroupEndpoint]     <br>`GW2Api::achievements()->groups()`  | 📦🌏
  /v2/build                    | [Build\BuildEndpoint][BuildEndpoint]                       <br>`GW2Api::build()`                   |
  /v2/characters               | [Character\CharacterEndpoint][CharacterEndpoint]           <br>`GW2Api::characters()`              | 🔒📦
- /v2/characters/:id/equipment | [Character\EquipmentEndpoint][Character\EquipmentEndpoint] <br>`GW2Api::characters()->equipment()` | 🔒
- /v2/characters/:id/inventory | [Character\InventoryEndpoint][Character\InventoryEndpoint] <br>`GW2Api::characters()->inventory()` | 🔒
- /v2/characters/:id/recipes   | [Character\RecipeEndpoint][Character\RecipeEndpoint]       <br>`GW2Api::characters()->recipes()`   | 🔒
- /v2/characters/:id/specializations | [Character\SpecializationEndpoint][Character\SpecializationEndpoint] <br>`GW2Api::characters()->specializations()` | 🔒
+ /v2/characters/:id/equipment | [Character\EquipmentEndpoint][Character\EquipmentEndpoint] <br>`GW2Api::characters()->equipmentOf()`| 🔒
+ /v2/characters/:id/inventory | [Character\InventoryEndpoint][Character\InventoryEndpoint] <br>`GW2Api::characters()->inventoryOf()`| 🔒
+ /v2/characters/:id/recipes   | [Character\RecipeEndpoint][Character\RecipeEndpoint]       <br>`GW2Api::characters()->recipesOf()` | 🔒
+ /v2/characters/:id/specializations | [Character\SpecializationEndpoint][Character\SpecializationEndpoint] <br>`GW2Api::characters()->specializationsOf()` | 🔒
  /v2/colors                   | [Color\ColorEndpoint][ColorEndpoint]                       <br>`GW2Api::colors()`                  | 📦🌏
  /v2/commerce/exchange        | [Commerce\ExchangeEndpoint][Commerce\ExchangeEndpoint]     <br>`GW2Api::commerce()->exchange()`    |
  /v2/commerce/listings        | [Commerce\ListingEndpoint][Commerce\ListingEndpoint]       <br>`GW2Api::commerce()->listings()`    | 📦
@@ -115,12 +115,15 @@ For all examples it is assumed that you have a variable `$api = new GW2Api()`.
  ~~/v2/events-state~~         | *disabled*                                                                                         | 🚫
  /v2/files                    | [File\FileEndpoint][FileEndpoint]                          <br>`GW2Api::files()`                   | 📦
  ~~/v2/guild/:id~~            | *disabled*                                                                                         | 🚫
- ~~/v2/guild/:id/inventory~~  | *disabled*                                                                                         | 🔒🚫
- /v2/guild/:id/log            | [Guild\LogEndpoint][Guild\LogEndpoint]                     <br>`GW2Api::guild()->log()`            | 🔒
- /v2/guild/:id/members        | [Guild\MemberEndpoint][Guild\MemberEndpoint]               <br>`GW2Api::guild()->members()`        | 🔒
- /v2/guild/:id/ranks          | [Guild\RankEndpoint][Guild\RankEndpoint]                   <br>`GW2Api::guild()->ranks()`          | 🔒
- /v2/guild/permissions        | [Guild\PermissionEndpoint][Guild\PermissionEndpoint]       <br>`GW2Api::guild()->permissions()`    | 📦🌏
- /v2/guild/upgrades           | [Guild\UpgradeEndpoint][Guild\UpgradeEndpoint]             <br>`GW2Api::guild()->upgrades()`       | 📦🌏
+ /v2/guild/:id/log            | [Guild\Authenticated\LogEndpoint][Guild\Authenticated\LogEndpoint] <br>`GW2Api::guild()->logOf()`  | 🔒
+ /v2/guild/:id/members        | [Guild\Authenticated\MemberEndpoint][Guild\Authenticated\MemberEndpoint] <br>`GW2Api::guild()->membersOf()`     | 🔒
+ /v2/guild/:id/ranks          | [Guild\Authenticated\RankEndpoint][Guild\Authenticated\RankEndpoint] <br>`GW2Api::guild()->ranksOf()`           | 🔒
+ /v2/guild/:id/stash          | [Guild\Authenticated\StashEndpoint][Guild\Authenticated\StashEndpoint] <br>`GW2Api::guild()->stashOf()`         | 🔒
+ /v2/guild/:id/teams          | [Guild\Authenticated\TeamEndpoint][Guild\Authenticated\TeamEndpoint] <br>`GW2Api::guild()->teamsOf()`           | 🔒
+ /v2/guild/:id/treasury       | [Guild\Authenticated\TreasuryEndpoint][Guild\Authenticated\TreasuryEndpoint] <br>`GW2Api::guild()->treasuryOf()`| 🔒
+ /v2/guild/:id/upgrades       | [Guild\Authenticated\UpgradeEndpoint][Guild\Authenticated\UpgradeEndpoint] <br>`GW2Api::guild()->upgradesOf()`  | 🔒
+ /v2/guild/permissions        | [Guild\PermissionEndpoint][Guild\PermissionEndpoint]       <br>`GW2Api::guild()->permissionsOf()`  | 📦🌏
+ /v2/guild/upgrades           | [Guild\UpgradeEndpoint][Guild\UpgradeEndpoint]             <br>`GW2Api::guild()->upgradesOf()`     | 📦🌏
  /v2/items                    | [Item\ItemEndpoint][ItemEndpoint]                          <br>`GW2Api::items()`                   | 📦🌏
  ~~/v2/leaderboards~~         | *disabled*                                                                                         | 🚫
  /v2/legends                  | [Legend\LegendEndpoint][LegendEndpoint]                    <br>`GW2Api::legends()`                 | 📦🌏
@@ -128,6 +131,7 @@ For all examples it is assumed that you have a variable `$api = new GW2Api()`.
  /v2/materials                | [Material\MaterialEndpoint][MaterialEndpoint]              <br>`GW2Api::materials()`               | 📦🌏
  /v2/minis                    | [Mini\MiniEndpoint][MiniEndpoint]                          <br>`GW2Api::minis()`                   | 📦🌏
  /v2/pets                     | [Pet\PetEndpoint][PetEndpoint]                             <br>`GW2Api::pets()`                    | 📦🌏
+ /v2/profession               | [Profession\ProfessionEndpoint][ProfessionEndpoint]        <br>`GW2Api::professions()`             | 📦🌏
  /v2/pvp/amulets              | [Pvp\AmuletEndpoint][Pvp\AmuletEndpoint]                   <br>`GW2Api::pvp()->amulets()`          | 📦🌏
  /v2/pvp/games                | [Pvp\GameEndpoint][Pvp\GameEndpoint]                       <br>`GW2Api::pvp()->games()`            | 🔒📦
  /v2/pvp/seasons              | [Pvp\SeasonEndpoint][Pvp\SeasonEndpoint]                   <br>`GW2Api::pvp()->seasons()`          | 📦🌏
@@ -393,7 +397,7 @@ Extends [GuildException][GuildException].
 ##### Example
 ```php
 try {
-    $api->guild()->members('API_KEY', 'GUILD_ID_YOU_ARE_NOT_LEADER_OF');
+    $api->guild()->membersOf('API_KEY', 'GUILD_ID_YOU_ARE_NOT_LEADER_OF');
 } catch(GuildLeaderRequiredException $exception) {
     $exception->getMessage() === "access restricted to guild leaders"
 }
@@ -413,7 +417,7 @@ Extends [GuildException][GuildException].
 ##### Example
 ```php
 try {
-    $api->guild()->members('API_KEY', 'GUILD_ID_YOU_ARE_NOT_A_MEMBER_OF');
+    $api->guild()->membersOf('API_KEY', 'GUILD_ID_YOU_ARE_NOT_A_MEMBER_OF');
 } catch(GuildLeaderRequiredException $exception) {
     $exception->getMessage() === "membership required"
 }
@@ -706,13 +710,13 @@ $api->build()->get();
 Implements [🔒AuthenticatedEndpoint][AuthenticatedEndpoint] and [📦BulkEndpoint][BulkEndpoint].
 
 ##### Methods
- - `equipment():Character\EquipmentEndpoint`
+ - `equipmentOf():Character\EquipmentEndpoint`
    Gets a new [Character\EquipmentEndpoint][Character\EquipmentEndpoint] instance.
- - `inventory():Character\InventoryEndpoint`
+ - `inventoryOf():Character\InventoryEndpoint`
    Gets a new [Character\InventoryEndpoint][Character\InventoryEndpoint] instance.
- - `recipes():Character\RecipeEndpoint`
+ - `recipesOf():Character\RecipeEndpoint`
    Gets a new [Character\RecipeEndpoint][Character\RecipeEndpoint] instance.
- - `specializations():Character\SpecializationEndpoint`
+ - `specializationsOf():Character\SpecializationEndpoint`
    Gets a new [Character\SpecializationEndpoint][Character\SpecializationEndpoint] instance.
  - Inherited from [📦BulkEndpoint][BulkEndpoint].
 
@@ -736,7 +740,7 @@ Implements [🔒AuthenticatedEndpoint][AuthenticatedEndpoint].
 
 ##### Example
 ```php
-$api->characters('API_KEY')->equipment('Character Name')->get();
+$api->characters('API_KEY')->equipmentOf('Character Name')->get();
 // => [ { id: 6472, slot: "Coat" }, … ]
 ```
 
@@ -754,7 +758,7 @@ Implements [🔒AuthenticatedEndpoint][AuthenticatedEndpoint].
 
 ##### Example
 ```php
-$api->characters('API_KEY')->inventory('Character Name')->get();
+$api->characters('API_KEY')->inventoryOf('Character Name')->get();
 // => [ { id: 8941, size: 4 inventory: [ null, { id: 32134, count: 1 }, … ] }, … ]
 ```
 
@@ -772,7 +776,7 @@ Implements [🔒AuthenticatedEndpoint][AuthenticatedEndpoint].
 
 ##### Example
 ```php
-$api->characters('API_KEY')->recipes('Character Name')->get();
+$api->characters('API_KEY')->recipesOf('Character Name')->get();
 // => [ 7, 8, 9, 10, 11, … ]
 ```
 
@@ -790,7 +794,7 @@ Implements [🔒AuthenticatedEndpoint][AuthenticatedEndpoint].
 
 ##### Example
 ```php
-$api->characters('API_KEY')->specializations('Character Name')->get();
+$api->characters('API_KEY')->specializationsOf('Character Name')->get();
 // => { pve: [ { id: 41, traits: [232, 214, 226] }, … ], … }
 ```
 
@@ -971,7 +975,7 @@ Implements [📦BulkEndpoint][BulkEndpoint].
 
 ##### Example
 ```php
-$api->continents()->floors(1)->get(0);
+$api->continents()->floorsOf(1)->get(0);
 // => { texture_dims: [ 32768, 32768 ], … }
 ```
 
@@ -1025,10 +1029,10 @@ $api->files()->ids();
 ```
 
 #### /v2/guild/:id/log
-[Guild\LogEndpoint]: #v2guildidlog
+[Guild\Authenticated\LogEndpoint]: #v2guildidlog
 
-`\GW2Treasures\GW2Api\V2\Endpoint\Guild\LogEndpoint`
-([source](src/V2/Endpoint/Guild/LogEndpoint.php))
+`\GW2Treasures\GW2Api\V2\Endpoint\Guild\Authenticated\LogEndpoint`
+([source](src/V2/Endpoint/Guild/Authenticated/LogEndpoint.php))
 
 Implements [🔒AuthenticatedEndpoint][AuthenticatedEndpoint] and [RestrictedGuildEndpoint][RestrictedGuildEndpoint].
 
@@ -1037,15 +1041,15 @@ Implements [🔒AuthenticatedEndpoint][AuthenticatedEndpoint] and [RestrictedGui
 
 ##### Example
 ```php
-$api->guild()->log('API_KEY', 'GUILD_ID');
+$api->guild()->logOf('API_KEY', 'GUILD_ID');
 // => [ { id: 1190, time: "…", type: "treasury", user: "Lawton Campbell.9413", … }, … ]
 ```
 
 #### /v2/guild/:id/members
-[Guild\MemberEndpoint]: #v2guildidmembers
+[Guild\Authenticated\MemberEndpoint]: #v2guildidmembers
 
-`\GW2Treasures\GW2Api\V2\Endpoint\Guild\MemberEndpoint`
-([source](src/V2/Endpoint/Guild/MemberEndpoint.php))
+`\GW2Treasures\GW2Api\V2\Endpoint\Guild\Authenticated\MemberEndpoint`
+([source](src/V2/Endpoint/Guild/Authenticated/MemberEndpoint.php))
 
 Implements [🔒AuthenticatedEndpoint][AuthenticatedEndpoint] and [RestrictedGuildEndpoint][RestrictedGuildEndpoint].
 
@@ -1054,16 +1058,16 @@ Implements [🔒AuthenticatedEndpoint][AuthenticatedEndpoint] and [RestrictedGui
 
 ##### Example
 ```php
-$api->guild()->members('API_KEY', 'GUILD_ID');
+$api->guild()->membersOf('API_KEY', 'GUILD_ID');
 // => [ { name: "darthmaim.6017", rank: "Leader", joined: "2015-12-16T02:50:26.000Z" } ]
 ```
 
 
 #### /v2/guild/:id/ranks
-[Guild\RankEndpoint]: #v2guildidranks
+[Guild\Authenticated\RankEndpoint]: #v2guildidranks
 
-`\GW2Treasures\GW2Api\V2\Endpoint\Guild\RankEndpoint`
-([source](src/V2/Endpoint/Guild/RankEndpoint.php))
+`\GW2Treasures\GW2Api\V2\Endpoint\Guild\Authenticated\RankEndpoint`
+([source](src/V2/Endpoint/Guild/Authenticated/RankEndpoint.php))
 
 Implements [🔒AuthenticatedEndpoint][AuthenticatedEndpoint] and [RestrictedGuildEndpoint][RestrictedGuildEndpoint].
 
@@ -1072,8 +1076,80 @@ Implements [🔒AuthenticatedEndpoint][AuthenticatedEndpoint] and [RestrictedGui
 
 ##### Example
 ```php
-$api->guild()->ranks('API_KEY', 'GUILD_ID');
+$api->guild()->ranksOf('API_KEY', 'GUILD_ID');
 // => [ { id: "Leader", order: 1, permissions: [ "Admin", … ], icon: "…" }, … ]
+```
+
+
+#### /v2/guild/:id/stash
+[Guild\Authenticated\StashEndpoint]: #v2guildidstash
+
+`\GW2Treasures\GW2Api\V2\Endpoint\Guild\Authenticated\StashEndpoint`
+([source](src/V2/Endpoint/Guild/Authenticated/StashEndpoint.php))
+
+Implements [🔒AuthenticatedEndpoint][AuthenticatedEndpoint] and [RestrictedGuildEndpoint][RestrictedGuildEndpoint].
+
+##### Methods
+- Inherited methods from [🔒AuthenticatedEndpoint][AuthenticatedEndpoint]
+
+##### Example
+```php
+$api->guild()->stashOf('API_KEY', 'GUILD_ID')->get();
+// => [ { upgrade_id: 1, size: 100, coins: 1002, note: "stash test", inventory: [] } ]
+```
+
+
+#### /v2/guild/:id/teams
+[Guild\Authenticated\TeamEndpoint]: #v2guildidteams
+
+`\GW2Treasures\GW2Api\V2\Endpoint\Guild\Authenticated\TeamEndpoint`
+([source](src/V2/Endpoint/Guild/Authenticated/TeamEndpoint.php))
+
+Implements [🔒AuthenticatedEndpoint][AuthenticatedEndpoint] and [RestrictedGuildEndpoint][RestrictedGuildEndpoint].
+
+##### Methods
+- Inherited methods from [🔒AuthenticatedEndpoint][AuthenticatedEndpoint]
+
+##### Example
+```php
+$api->guild()->teamsOf('API_KEY', 'GUILD_ID')->get();
+// => [ { id: 1, members: [], name: "ez game" } ]
+```
+
+
+#### /v2/guild/:id/treasury
+[Guild\Authenticated\TreasuryEndpoint]: #v2guildidtreasury
+
+`\GW2Treasures\GW2Api\V2\Endpoint\Guild\Authenticated\TreasuryEndpoint`
+([source](src/V2/Endpoint/Guild/Authenticated/TreasuryEndpoint.php))
+
+Implements [🔒AuthenticatedEndpoint][AuthenticatedEndpoint] and [RestrictedGuildEndpoint][RestrictedGuildEndpoint].
+
+##### Methods
+- Inherited methods from [🔒AuthenticatedEndpoint][AuthenticatedEndpoint]
+
+##### Example
+```php
+$api->guild()->treasuryOf('API_KEY', 'GUILD_ID')->get();
+// => [ { id: 123, count: 100, needed_by: [] } ]
+```
+
+
+#### /v2/guild/:id/upgrades
+[Guild\Authenticated\UpgradeEndpoint]: #v2guildidupgrades
+
+`\GW2Treasures\GW2Api\V2\Endpoint\Guild\Authenticated\UpgradeEndpoint`
+([source](src/V2/Endpoint/Guild/Authenticated/UpgradeEndpoint.php))
+
+Implements [🔒AuthenticatedEndpoint][AuthenticatedEndpoint] and [RestrictedGuildEndpoint][RestrictedGuildEndpoint].
+
+##### Methods
+- Inherited methods from [🔒AuthenticatedEndpoint][AuthenticatedEndpoint]
+
+##### Example
+```php
+$api->guild()->upgradesOf('API_KEY', 'GUILD_ID')->get();
+// => [ 38, 43, 44, 51, 55, … ]
 ```
 
 
@@ -1226,6 +1302,25 @@ Implements [📦BulkEndpoint][BulkEndpoint] and [🌏LocalizedEndpoint][Localize
 ```php
 $api->pets()->get(1);
 // => { id: 1, name: "Juvenile Jungle Stalker", … }
+```
+
+
+#### /v2/professions
+[ProfessionEndpoint]: #v2professions
+
+`\GW2Treasures\GW2Api\V2\Endpoint\Profession\ProfessionEndpoint`
+([source](src/V2/Endpoint/Profession/ProfessionEndpoint.php))
+
+Implements [📦BulkEndpoint][BulkEndpoint] and [🌏LocalizedEndpoint][LocalizedEndpoint].
+
+##### Methods
+ - Inherited methods from [📦BulkEndpoint][BulkEndpoint]
+ - Inherited methods from [🌏LocalizedEndpoint][LocalizedEndpoint]
+
+##### Example
+```php
+$api->professions()->get('Warrior');
+// => { id: "Warrior", name: "Warrior", … }
 ```
 
 
