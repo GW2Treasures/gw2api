@@ -397,7 +397,7 @@ Extends [GuildException][GuildException].
 ##### Example
 ```php
 try {
-    $api->guild()->members('API_KEY', 'GUILD_ID_YOU_ARE_NOT_LEADER_OF');
+    $api->guild()->membersOf('API_KEY', 'GUILD_ID_YOU_ARE_NOT_LEADER_OF');
 } catch(GuildLeaderRequiredException $exception) {
     $exception->getMessage() === "access restricted to guild leaders"
 }
@@ -417,7 +417,7 @@ Extends [GuildException][GuildException].
 ##### Example
 ```php
 try {
-    $api->guild()->members('API_KEY', 'GUILD_ID_YOU_ARE_NOT_A_MEMBER_OF');
+    $api->guild()->membersOf('API_KEY', 'GUILD_ID_YOU_ARE_NOT_A_MEMBER_OF');
 } catch(GuildLeaderRequiredException $exception) {
     $exception->getMessage() === "membership required"
 }
