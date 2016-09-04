@@ -3,12 +3,23 @@
 namespace GW2Treasures\GW2Api\V2;
 
 use GuzzleHttp\Client;
+use GW2Treasures\GW2Api\GW2Api;
 
 trait EndpointTrait {
     /**
      * @return Client
      */
     protected abstract function getClient();
+
+    /**
+     * @return GW2Api
+     */
+    protected abstract function getApi();
+
+    /**
+     * @return IParent
+     */
+    protected abstract function getParent();
 
     /**
      * Creates a new Request to this Endpoint.

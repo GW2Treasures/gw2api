@@ -29,7 +29,7 @@ class AchievementEndpoint extends Endpoint implements IBulkEndpoint, ILocalizedE
      * @return CategoryEndpoint
      */
     public function categories() {
-        return new CategoryEndpoint($this->api);
+        return new CategoryEndpoint($this->parent);
     }
 
     /**
@@ -38,7 +38,7 @@ class AchievementEndpoint extends Endpoint implements IBulkEndpoint, ILocalizedE
      * @return DailyEndpoint
      */
     public function daily() {
-        return new DailyEndpoint($this->api);
+        return new DailyEndpoint($this->parent);
     }
 
     /**
@@ -47,6 +47,6 @@ class AchievementEndpoint extends Endpoint implements IBulkEndpoint, ILocalizedE
      * @return GroupEndpoint
      */
     public function groups() {
-        return new GroupEndpoint($this->api);
+        return new GroupEndpoint($this->parent);
     }
 }

@@ -2,11 +2,11 @@
 
 namespace GW2Treasures\GW2Api\V2\Endpoint\Guild\Authenticated;
 
-use GW2Treasures\GW2Api\GW2Api;
 use GW2Treasures\GW2Api\V2\Authentication\AuthenticatedEndpoint;
 use GW2Treasures\GW2Api\V2\Authentication\IAuthenticatedEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Guild\IRestrictedGuildEndpoint;
+use GW2Treasures\GW2Api\V2\IParent;
 
 class MemberEndpoint extends Endpoint implements IAuthenticatedEndpoint, IRestrictedGuildEndpoint {
     use AuthenticatedEndpoint;
@@ -14,10 +14,9 @@ class MemberEndpoint extends Endpoint implements IAuthenticatedEndpoint, IRestri
     /** @var string $guildId */
     protected $guildId;
 
-    public function __construct(GW2Api $api, $apiKey, $guildId) {
-        parent::__construct($api);
+    public function __construct(IParent $parent, $guildId) {
+        parent::__construct($parent);
 
-        $this->apiKey = $apiKey;
         $this->guildId = $guildId;
     }
 

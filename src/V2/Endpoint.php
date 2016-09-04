@@ -13,20 +13,20 @@ use GW2Treasures\GW2Api\GW2Api;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
-abstract class Endpoint implements IEndpoint {
-    /** @var GW2Api $api */
-    protected $api;
+abstract class Endpoint implements IEndpoint, IParent {
+    /** @var GW2Api $parent */
+    protected $parent;
 
     /** @var ApiHandler[] */
     protected $handlers = [];
 
     /**
-     * @param GW2Api $api
+     * @param IParent $parent
      */
-    public function __construct( GW2Api $api ) {
-        $this->api = $api;
+    public function __construct( IParent $parent ) {
+        $this->parent = $parent;
 
-        $this->api->attachRegisteredHandlers( $this );
+        $this->getApi()->attachRegisteredHandlers( $this );
     }
 
     /**
@@ -37,10 +37,17 @@ abstract class Endpoint implements IEndpoint {
     }
 
     /**
+     * @return IParent
+     */
+    public function getParent() {
+        return $this->parent;
+    }
+
+    /**
      * @return GW2Api
      */
-    protected function getApi() {
-        return $this->api;
+    public function getApi() {
+        return $this->getParent()->getApi();
     }
 
     /**

@@ -2,10 +2,10 @@
 
 namespace GW2Treasures\GW2Api\V2\Endpoint\Continent;
 
-use GW2Treasures\GW2Api\GW2Api;
 use GW2Treasures\GW2Api\V2\Bulk\BulkEndpoint;
 use GW2Treasures\GW2Api\V2\Bulk\IBulkEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint;
+use GW2Treasures\GW2Api\V2\IParent;
 use GW2Treasures\GW2Api\V2\Localization\ILocalizedEndpoint;
 use GW2Treasures\GW2Api\V2\Localization\LocalizedEndpoint;
 
@@ -19,15 +19,15 @@ class RegionEndpoint extends Endpoint implements IBulkEndpoint, ILocalizedEndpoi
     protected $floor;
 
     /**
-     * @param GW2Api $api
-     * @param int    $continent
-     * @param int    $floor
+     * @param IParent $parent
+     * @param int     $continent
+     * @param int     $floor
      */
-    public function __construct( GW2Api $api, $continent, $floor ) {
+    public function __construct( IParent $parent, $continent, $floor ) {
         $this->continent = $continent;
         $this->floor = $floor;
 
-        parent::__construct( $api );
+        parent::__construct( $parent );
     }
 
     /**
@@ -45,6 +45,6 @@ class RegionEndpoint extends Endpoint implements IBulkEndpoint, ILocalizedEndpoi
      * @return MapEndpoint
      */
     public function mapsOf( $region ) {
-        return new MapEndpoint( $this->api, $this->continent, $this->floor, $region );
+        return new MapEndpoint( $this->parent, $this->continent, $this->floor, $region );
     }
 }

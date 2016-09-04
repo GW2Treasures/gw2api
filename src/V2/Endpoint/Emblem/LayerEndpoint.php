@@ -2,10 +2,10 @@
 
 namespace GW2Treasures\GW2Api\V2\Endpoint\Emblem;
 
-use GW2Treasures\GW2Api\GW2Api;
 use GW2Treasures\GW2Api\V2\Bulk\BulkEndpoint;
 use GW2Treasures\GW2Api\V2\Bulk\IBulkEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint;
+use GW2Treasures\GW2Api\V2\IParent;
 
 class LayerEndpoint extends Endpoint implements IBulkEndpoint {
     use BulkEndpoint;
@@ -25,11 +25,11 @@ class LayerEndpoint extends Endpoint implements IBulkEndpoint {
     protected $type;
 
     /**
-     * @param GW2Api $api
+     * @param IParent $parent
      * @param string $type Type of this endpoint.
      */
-    public function __construct(GW2Api $api, $type) {
-        parent::__construct($api);
+    public function __construct(IParent $parent, $type) {
+        parent::__construct($parent);
 
         if( !in_array($type, self::$types) ) {
             throw new \InvalidArgumentException('$type has to be one of '.implode(', ', self::$types));

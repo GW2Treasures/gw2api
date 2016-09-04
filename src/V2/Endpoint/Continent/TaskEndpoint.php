@@ -2,10 +2,10 @@
 
 namespace GW2Treasures\GW2Api\V2\Endpoint\Continent;
 
-use GW2Treasures\GW2Api\GW2Api;
 use GW2Treasures\GW2Api\V2\Bulk\BulkEndpoint;
 use GW2Treasures\GW2Api\V2\Bulk\IBulkEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint;
+use GW2Treasures\GW2Api\V2\IParent;
 use GW2Treasures\GW2Api\V2\Localization\ILocalizedEndpoint;
 use GW2Treasures\GW2Api\V2\Localization\LocalizedEndpoint;
 
@@ -25,19 +25,19 @@ class TaskEndpoint extends Endpoint implements IBulkEndpoint, ILocalizedEndpoint
     protected $map;
 
     /**
-     * @param GW2Api $api
-     * @param int    $continent
-     * @param int    $floor
-     * @param int    $region
-     * @param int    $map
+     * @param IParent $parent
+     * @param int     $continent
+     * @param int     $floor
+     * @param int     $region
+     * @param int     $map
      */
-    public function __construct( GW2Api $api, $continent, $floor, $region, $map ) {
+    public function __construct( IParent $parent, $continent, $floor, $region, $map ) {
         $this->continent = $continent;
         $this->floor = $floor;
         $this->region = $region;
         $this->map = $map;
 
-        parent::__construct( $api );
+        parent::__construct( $parent );
     }
 
     /**

@@ -5,7 +5,7 @@ use GW2Treasures\GW2Api\V2\Endpoint\Commerce\Transaction\TypeEndpoint;
 
 class CommerceTransactionEndpointTest extends TestCase {
     public function testTransactionUrls() {
-        $endpoint = $this->api()->commerce()->transactions('api_key');
+        $endpoint = $this->api()->commerce()->transactions();
 
         $this->assertEndpointUrl( 'v2/commerce/transactions', $endpoint );
         $this->assertEndpointUrl( 'v2/commerce/transactions/current', $endpoint->current() );
@@ -13,7 +13,7 @@ class CommerceTransactionEndpointTest extends TestCase {
     }
 
     public function testCurrentBuys() {
-        $endpoint = $this->api()->commerce()->transactions('api_key')->current()->buys();
+        $endpoint = $this->api()->commerce()->transactions()->current()->buys();
 
         $this->assertEndpointIsAuthenticated( $endpoint );
         $this->assertEndpointIsPaginated( $endpoint );
@@ -30,7 +30,7 @@ class CommerceTransactionEndpointTest extends TestCase {
     }
 
     public function testCurrentSells() {
-        $endpoint = $this->api()->commerce()->transactions('api_key')->current()->sells();
+        $endpoint = $this->api()->commerce()->transactions()->current()->sells();
 
         $this->assertEndpointIsAuthenticated( $endpoint );
         $this->assertEndpointIsPaginated( $endpoint );
@@ -47,7 +47,7 @@ class CommerceTransactionEndpointTest extends TestCase {
     }
 
     public function testHistoryBuys() {
-        $endpoint = $this->api()->commerce()->transactions('api_key')->history()->buys();
+        $endpoint = $this->api()->commerce()->transactions()->history()->buys();
 
         $this->assertEndpointIsAuthenticated( $endpoint );
         $this->assertEndpointIsPaginated( $endpoint );
@@ -65,7 +65,7 @@ class CommerceTransactionEndpointTest extends TestCase {
     }
 
     public function testHistorySells() {
-        $endpoint = $this->api()->commerce()->transactions('api_key')->history()->sells();
+        $endpoint = $this->api()->commerce()->transactions()->history()->sells();
 
         $this->assertEndpointIsAuthenticated( $endpoint );
         $this->assertEndpointIsPaginated( $endpoint );

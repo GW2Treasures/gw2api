@@ -24,23 +24,21 @@ class GuildEndpoint extends Endpoint {
     /**
      * Get log of a guild.
      *
-     * @param string $apiKey
      * @param string $guildId
      * @return LogEndpoint
      */
-    public function logOf($apiKey, $guildId) {
-        return new LogEndpoint($this->api, $apiKey, $guildId);
+    public function logOf($guildId) {
+        return new LogEndpoint($this->parent, $guildId);
     }
 
     /**
      * Get members of a guild.
      *
-     * @param string $apiKey
      * @param string $guildId
      * @return MemberEndpoint
      */
-    public function membersOf($apiKey, $guildId) {
-        return new MemberEndpoint($this->api, $apiKey, $guildId);
+    public function membersOf($guildId) {
+        return new MemberEndpoint($this->parent, $guildId);
     }
 
     /**
@@ -49,62 +47,57 @@ class GuildEndpoint extends Endpoint {
      * @return PermissionEndpoint
      */
     public function permissions() {
-        return new PermissionEndpoint($this->api);
+        return new PermissionEndpoint($this->parent);
     }
 
     /**
      * Get ranks of a guild.
      *
-     * @param string $apiKey
      * @param string $guildId
      * @return RankEndpoint
      */
-    public function ranksOf($apiKey, $guildId) {
-        return new RankEndpoint($this->api, $apiKey, $guildId);
+    public function ranksOf($guildId) {
+        return new RankEndpoint($this->parent, $guildId);
     }
 
     /**
      * Get stash of a guild.
      *
-     * @param string $apiKey
      * @param string $guildId
      * @return StashEndpoint
      */
-    public function stashOf($apiKey, $guildId) {
-        return new StashEndpoint($this->api, $apiKey, $guildId);
+    public function stashOf($guildId) {
+        return new StashEndpoint($this->parent, $guildId);
     }
 
     /**
      * Get teams of a guild.
      *
-     * @param string $apiKey
      * @param string $guildId
      * @return TeamEndpoint
      */
-    public function teamsOf($apiKey, $guildId) {
-        return new TeamEndpoint($this->api, $apiKey, $guildId);
+    public function teamsOf($guildId) {
+        return new TeamEndpoint($this->parent, $guildId);
     }
 
     /**
      * Get treasury of a guild.
      *
-     * @param string $apiKey
      * @param string $guildId
      * @return TreasuryEndpoint
      */
-    public function treasuryOf($apiKey, $guildId) {
-        return new TreasuryEndpoint($this->api, $apiKey, $guildId);
+    public function treasuryOf($guildId) {
+        return new TreasuryEndpoint($this->parent, $guildId);
     }
 
     /**
      * Get upgrades of a guild.
      *
-     * @param string $apiKey
      * @param string $guildId
      * @return AuthenticatedUpgradeEndpoint
      */
-    public function upgradesOf($apiKey, $guildId) {
-        return new AuthenticatedUpgradeEndpoint($this->api, $apiKey, $guildId);
+    public function upgradesOf($guildId) {
+        return new AuthenticatedUpgradeEndpoint($this->parent, $guildId);
     }
 
     /**
@@ -113,6 +106,6 @@ class GuildEndpoint extends Endpoint {
      * @return UpgradeEndpoint
      */
     public function upgrades() {
-        return new UpgradeEndpoint($this->api);
+        return new UpgradeEndpoint($this->parent);
     }
 }

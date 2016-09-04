@@ -4,10 +4,11 @@ use GuzzleHttp\Psr7\Response;
 use GuzzleHttp\Psr7;
 use GW2Treasures\GW2Api\V2\Authentication\Exception\InvalidPermissionsException;
 use Stubs\AuthenticatedEndpointStub;
+use Stubs\EndpointStub;
 
 class AuthenticatedEndpointTest extends TestCase {
     protected function getAuthenticatedEndpoint( $apiKey ) {
-        return new AuthenticatedEndpointStub( $this->api(), $apiKey );
+        return (new AuthenticatedEndpointStub($this->api()))->auth($apiKey);
     }
 
     public function testBasic() {
@@ -15,12 +16,56 @@ class AuthenticatedEndpointTest extends TestCase {
 
         $endpoint = $this->getAuthenticatedEndpoint('test');
 
-        $this->assertEndpointIsAuthenticated( $endpoint );
+        $this->assertEndpointIsAuthenticated( $endpoint, 'test' );
 
         $endpoint->test();
 
         $request = $this->getLastRequest();
         $this->assertHasHeader($request, 'Authorization', 'Bearer test');
+    }
+
+    public function testUnauthorized() {
+        $api = new \GW2Treasures\GW2Api\GW2Api();
+        $this->assertNull($api->getApiKey());
+
+        $endpoint = new AuthenticatedEndpointStub($api);
+        $this->assertNull($endpoint->getApiKey());
+    }
+
+    public function testInheritance() {
+        $this->api()->auth('API_KEY_INHERITANCE');
+        $endpoint = $this->getAuthenticatedEndpoint('API_KEY_INHERITANCE');
+
+        $this->assertEndpointIsAuthenticated($endpoint, 'API_KEY_INHERITANCE');
+    }
+
+    public function testDeepInheritance() {
+        $this->api()->auth('API_KEY_BASE');
+
+        $endpoint1 = new AuthenticatedEndpointStub($this->api());
+        $endpoint2 = new AuthenticatedEndpointStub($endpoint1);
+
+        $this->assertEndpointIsAuthenticated($endpoint1, 'API_KEY_BASE');
+        $this->assertEndpointIsAuthenticated($endpoint2, 'API_KEY_BASE');
+
+        $endpoint2->auth('API_KEY_OVERRIDE');
+
+        $this->assertEndpointIsAuthenticated($endpoint1, 'API_KEY_BASE');
+        $this->assertEndpointIsAuthenticated($endpoint2, 'API_KEY_OVERRIDE');
+    }
+
+    public function testSiblings() {
+        $this->api()->auth('API_KEY_BASE');
+        $endpoint1 = new AuthenticatedEndpointStub($this->api());
+        $endpoint2 = new AuthenticatedEndpointStub($this->api());
+
+        $this->assertEquals('API_KEY_BASE', $endpoint1->getApiKey());
+        $this->assertEquals('API_KEY_BASE', $endpoint2->getApiKey());
+
+        $endpoint1->auth('API_KEY_SIBLING');
+
+        $this->assertEquals('API_KEY_SIBLING', $endpoint1->getApiKey());
+        $this->assertEquals('API_KEY_BASE', $endpoint2->getApiKey());
     }
 
     /**
