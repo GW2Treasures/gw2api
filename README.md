@@ -128,6 +128,7 @@ For all examples it is assumed that you have a variable `$api = new GW2Api()`.
  /v2/materials                | [Material\MaterialEndpoint][MaterialEndpoint]              <br>`GW2Api::materials()`               | 📦🌏
  /v2/minis                    | [Mini\MiniEndpoint][MiniEndpoint]                          <br>`GW2Api::minis()`                   | 📦🌏
  /v2/pets                     | [Pet\PetEndpoint][PetEndpoint]                             <br>`GW2Api::pets()`                    | 📦🌏
+ /v2/profession               | [Profession\ProfessionEndpoint][ProfessionEndpoint]        <br>`GW2Api::professions()`             | 📦🌏
  /v2/pvp/amulets              | [Pvp\AmuletEndpoint][Pvp\AmuletEndpoint]                   <br>`GW2Api::pvp()->amulets()`          | 📦🌏
  /v2/pvp/games                | [Pvp\GameEndpoint][Pvp\GameEndpoint]                       <br>`GW2Api::pvp()->games()`            | 🔒📦
  /v2/pvp/seasons              | [Pvp\SeasonEndpoint][Pvp\SeasonEndpoint]                   <br>`GW2Api::pvp()->seasons()`          | 📦🌏
@@ -1226,6 +1227,25 @@ Implements [📦BulkEndpoint][BulkEndpoint] and [🌏LocalizedEndpoint][Localize
 ```php
 $api->pets()->get(1);
 // => { id: 1, name: "Juvenile Jungle Stalker", … }
+```
+
+
+#### /v2/professions
+[ProfessionEndpoint]: #v2professions
+
+`\GW2Treasures\GW2Api\V2\Endpoint\Profession\ProfessionEndpoint`
+([source](src/V2/Endpoint/Profession/ProfessionEndpoint.php))
+
+Implements [📦BulkEndpoint][BulkEndpoint] and [🌏LocalizedEndpoint][LocalizedEndpoint].
+
+##### Methods
+ - Inherited methods from [📦BulkEndpoint][BulkEndpoint]
+ - Inherited methods from [🌏LocalizedEndpoint][LocalizedEndpoint]
+
+##### Example
+```php
+$api->professions()->get('Warrior');
+// => { id: "Warrior", name: "Warrior", … }
 ```
 
 
