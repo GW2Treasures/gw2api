@@ -22,6 +22,17 @@ class GuildEndpoint extends Endpoint {
     }
 
     /**
+     * Get the guild details of a guild.
+     *
+     * @param string $guildId
+     * @param string|null $apiKey
+     * @return DetailsEndpoint
+     */
+    public function detailsOf($guildId, $apiKey = null) {
+        return new DetailsEndpoint($this->api, $guildId, $apiKey);
+    }
+
+    /**
      * Get log of a guild.
      *
      * @param string $apiKey

@@ -3,6 +3,7 @@
 use GuzzleHttp\Psr7;
 use GuzzleHttp\Psr7\Response;
 use GW2Treasures\GW2Api\Exception\ApiException;
+use GW2Treasures\GW2Api\V2\Authentication\IAuthenticatedEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Guild\Exception\GuildLeaderRequiredException;
 use GW2Treasures\GW2Api\V2\Endpoint\Guild\Exception\MembershipRequiredException;
 use GW2Treasures\GW2Api\V2\Endpoint\Guild\IRestrictedGuildEndpoint;
@@ -12,6 +13,27 @@ class GuildEndpointTest extends TestCase {
         $endpoint = $this->api()->guild();
 
         $this->assertEndpointUrl('v2/guild', $endpoint);
+    }
+
+    public function testDetails() {
+        $endpoint = $this->api()->guild()->detailsOf('GUILD_ID');
+
+        $this->assertEndpointUrl('v2/guild/GUILD_ID', $endpoint);
+        $this->assertInstanceOf(IAuthenticatedEndpoint::class, $endpoint);
+        $this->assertNull($endpoint->getApiKey());
+
+        $this->mockResponse('{"id":"GUILD_ID","name":"Test Guild","tag":"API"}');
+        $this->assertEquals('API', $endpoint->get()->tag);
+    }
+
+    public function testDetailsAuthenticated() {
+        $endpoint = $this->api()->guild()->detailsOf('GUILD_ID', 'API_KEY');
+
+        $this->assertEndpointUrl('v2/guild/GUILD_ID', $endpoint);
+        $this->assertEndpointIsAuthenticated($endpoint);
+
+        $this->mockResponse('{"level":42,"motd":"Test everything\n","id":"GUILD_ID","name":"Test Guild","tag":"API"}');
+        $this->assertEquals('API', $endpoint->get()->tag);
     }
 
     public function testLog() {
