@@ -68,4 +68,13 @@ class AuthenticatedEndpointTest extends TestCase {
 
         $this->getAuthenticatedEndpoint('invalid')->test();
     }
+
+    public function testNullKey() {
+        $this->mockResponse('[]');
+
+        $this->getAuthenticatedEndpoint(null)->test();
+
+        $request = $this->getLastRequest();
+        $this->assertHasNotHeader($request, 'Authorization');
+    }
 }

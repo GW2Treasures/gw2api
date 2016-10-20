@@ -114,7 +114,7 @@ For all examples it is assumed that you have a variable `$api = new GW2Api()`.
  ~~/v2/events~~               | *disabled*                                                                                         | 🌏🚫
  ~~/v2/events-state~~         | *disabled*                                                                                         | 🚫
  /v2/files                    | [File\FileEndpoint][FileEndpoint]                          <br>`GW2Api::files()`                   | 📦
- ~~/v2/guild/:id~~            | *disabled*                                                                                         | 🚫
+ /v2/guild/:id                | [Guild\DetailsEndpoint][Guild\DetailsEndpoint]             <br>`GW2Api::guild()->detailsOf()`      | 🔓                                                                                  | 🚫
  /v2/guild/:id/log            | [Guild\Authenticated\LogEndpoint][Guild\Authenticated\LogEndpoint] <br>`GW2Api::guild()->logOf()`  | 🔒
  /v2/guild/:id/members        | [Guild\Authenticated\MemberEndpoint][Guild\Authenticated\MemberEndpoint] <br>`GW2Api::guild()->membersOf()`     | 🔒
  /v2/guild/:id/ranks          | [Guild\Authenticated\RankEndpoint][Guild\Authenticated\RankEndpoint] <br>`GW2Api::guild()->ranksOf()`           | 🔒
@@ -1027,6 +1027,29 @@ Implements [📦BulkEndpoint][BulkEndpoint].
 $api->files()->ids();
 // => [ "map_complete", "map_dungeon", … ]
 ```
+
+
+#### /v2/guild/:id
+[Guild\DetailsEndpoint]: #v2guildid
+
+`\GW2Treasures\GW2Api\V2\Endpoint\Guild\DetailsEndpoint`
+([source](src/V2/Endpoint/Guild/DetailsEndpoint.php))
+
+Implements [🔒AuthenticatedEndpoint][AuthenticatedEndpoint]. The API key is optional.
+
+##### Methods
+ - Inherited methods from [🔒AuthenticatedEndpoint][AuthenticatedEndpoint]
+ - `get():array` Get the guild details of a guild.
+
+##### Example
+```php
+$api->guild()->detailsOf('GUILD_ID');
+// => { id: "GUILD_ID", name: "Test Guild", tag: "API", … }
+
+$api->guild()->detailsOf('GUILD_ID', 'API_KEY');
+// => { level: 42, motd: "gw2treasures.com\n", id: "GUILD_ID", name: "Test Guild", tag: "API", … }
+```
+
 
 #### /v2/guild/:id/log
 [Guild\Authenticated\LogEndpoint]: #v2guildidlog
