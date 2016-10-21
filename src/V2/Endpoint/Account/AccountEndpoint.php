@@ -87,6 +87,15 @@ class AccountEndpoint extends Endpoint implements IAuthenticatedEndpoint {
     }
 
     /**
+     * Get unlocked recipes.
+     *
+     * @return RecipeEndpoint
+     */
+    public function recipes() {
+        return new RecipeEndpoint( $this->api, $this->apiKey );
+    }
+
+    /**
      * Get the unlocked skins.
      *
      * @return SkinEndpoint
