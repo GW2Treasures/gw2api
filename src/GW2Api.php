@@ -21,6 +21,7 @@ use GW2Treasures\GW2Api\V2\Endpoint\Finisher\FinisherEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Guild\GuildEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Guild\RestrictedGuildHandler;
 use GW2Treasures\GW2Api\V2\Endpoint\Item\ItemEndpoint;
+use GW2Treasures\GW2Api\V2\Endpoint\Itemstat\ItemstatEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Legend\LegendEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Map\MapEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Mastery\MasteryEndpoint;
@@ -195,6 +196,10 @@ class GW2Api {
 
     public function items() {
         return new ItemEndpoint( $this );
+    }
+
+    public function itemstats() {
+        return new ItemstatEndpoint( $this );
     }
 
     public function legends() {
