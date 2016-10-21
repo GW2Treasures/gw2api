@@ -30,6 +30,16 @@ class CharacterEndpointTest extends TestCase {
         $this->assertEquals( 80, $character->level );
     }
 
+    public function testBackstory() {
+        $endpoint = $this->api()->characters('test')->backstoryOf('char');
+
+        $this->assertEndpointIsAuthenticated( $endpoint );
+        $this->assertEndpointUrl( 'v2/characters/char/backstory', $endpoint );
+
+        $this->mockResponse('{"backstory":["26-122","27-125"]}');
+        $this->assertEquals('26-122', $endpoint->get()[0]);
+    }
+
     public function testRecipes() {
         $endpoint = $this->api()->characters('test')->recipesOf('char');
 

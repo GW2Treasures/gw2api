@@ -29,6 +29,17 @@ class CharacterEndpoint extends Endpoint implements IAuthenticatedEndpoint, IBul
     }
 
     /**
+     * Get the backstory of a character.
+     *
+     * @param string $character
+     * @return BackstoryEndpoint
+     */
+    public function backstoryOf( $character ) {
+        return new BackstoryEndpoint( $this->api, $this->apiKey, $character );
+    }
+
+
+    /**
      * Get the equipment of a character.
      *
      * @param string $character
