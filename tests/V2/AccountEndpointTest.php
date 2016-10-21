@@ -120,6 +120,16 @@ class AccountEndpointTest extends TestCase {
         $this->assertEquals([1,2,3,4,5,6], $endpoint->get());
     }
 
+    public function testTitles() {
+        $endpoint = $this->api()->account('test')->titles();
+
+        $this->assertEndpointIsAuthenticated( $endpoint );
+        $this->assertEndpointUrl( 'v2/account/titles', $endpoint );
+
+        $this->mockResponse('[1,17,188,189,190,191,217]');
+        $this->assertEquals([1,17,188,189,190,191,217], $endpoint->get());
+    }
+
     public function testWallet() {
         $endpoint = $this->api()->account('test')->wallet();
 

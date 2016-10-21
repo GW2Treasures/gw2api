@@ -35,6 +35,7 @@ use GW2Treasures\GW2Api\V2\Endpoint\Skill\SkillEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Skin\SkinEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Specialization\SpecializationEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Story\StoryEndpoint;
+use GW2Treasures\GW2Api\V2\Endpoint\Title\TitleEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Tokeninfo\TokeninfoEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Traits\TraitEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\World\WorldEndpoint;
@@ -250,6 +251,10 @@ class GW2Api {
 
     public function stories() {
         return new StoryEndpoint( $this );
+    }
+
+    public function titles() {
+        return new TitleEndpoint( $this );
     }
 
     public function tokeninfo( $apiKey ) {

@@ -123,6 +123,15 @@ class AccountEndpoint extends Endpoint implements IAuthenticatedEndpoint {
     }
 
     /**
+     * Get the unlocked skins.
+     *
+     * @return TitleEndpoint
+     */
+    public function titles() {
+        return new TitleEndpoint( $this->api, $this->apiKey );
+    }
+
+    /**
      * Get the account wallet.
      *
      * @return WalletEndpoint
