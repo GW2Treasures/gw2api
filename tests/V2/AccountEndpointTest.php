@@ -60,6 +60,16 @@ class AccountEndpointTest extends TestCase {
         $this->assertEquals(12138, $endpoint->get()[1]->id);
     }
 
+    public function testMasteries() {
+        $endpoint = $this->api()->account('test')->masteries();
+
+        $this->assertEndpointIsAuthenticated( $endpoint );
+        $this->assertEndpointUrl( 'v2/account/masteries', $endpoint );
+
+        $this->mockResponse('[{"id":4,"level":4}]');
+        $this->assertEquals(4, $endpoint->get()[0]->id);
+    }
+
     public function testMaterials() {
         $endpoint = $this->api()->account('test')->materials();
 

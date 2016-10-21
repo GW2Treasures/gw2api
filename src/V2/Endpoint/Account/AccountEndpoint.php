@@ -69,6 +69,15 @@ class AccountEndpoint extends Endpoint implements IAuthenticatedEndpoint {
     }
 
     /**
+     * Get unlocked masteries.
+     *
+     * @return MasteryEndpoint
+     */
+    public function masteries() {
+        return new MasteryEndpoint( $this->api, $this->apiKey );
+    }
+
+    /**
      * Get the account material storage.
      *
      * @return MaterialEndpoint
