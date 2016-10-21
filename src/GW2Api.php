@@ -17,6 +17,7 @@ use GW2Treasures\GW2Api\V2\Endpoint\Continent\ContinentEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Currency\CurrencyEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Emblem\EmblemEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\File\FileEndpoint;
+use GW2Treasures\GW2Api\V2\Endpoint\Finisher\FinisherEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Guild\GuildEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Guild\RestrictedGuildHandler;
 use GW2Treasures\GW2Api\V2\Endpoint\Item\ItemEndpoint;
@@ -181,6 +182,10 @@ class GW2Api {
 
     public function files() {
         return new FileEndpoint( $this );
+    }
+
+    public function finishers() {
+        return new FinisherEndpoint( $this );
     }
 
     public function guild() {

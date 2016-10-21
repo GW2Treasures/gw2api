@@ -60,6 +60,15 @@ class AccountEndpoint extends Endpoint implements IAuthenticatedEndpoint {
     }
 
     /**
+     * Get all unlocked finishers.
+     *
+     * @return FinisherEndpoint
+     */
+    public function finishers() {
+        return new FinisherEndpoint( $this->api, $this->apiKey );
+    }
+
+    /**
      * Get a list of item stacks representing the account's shared inventory slots.
      *
      * @return InventoryEndpoint
