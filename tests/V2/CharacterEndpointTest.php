@@ -40,13 +40,33 @@ class CharacterEndpointTest extends TestCase {
         $this->assertEquals('26-122', $endpoint->get()[0]);
     }
 
-    public function testRecipes() {
-        $endpoint = $this->api()->characters('test')->recipesOf('char');
+    public function testCore() {
+        $endpoint = $this->api()->characters('test')->coreOf('char');
 
         $this->assertEndpointIsAuthenticated( $endpoint );
-        $this->assertEndpointUrl( 'v2/characters/char/recipes', $endpoint );
+        $this->assertEndpointUrl( 'v2/characters/char/core', $endpoint );
 
-        $this->mockResponse('{"recipes":[7,8,9,10,11]}');
-        $this->assertEquals(7, $endpoint->get()[0]);
+        $this->mockResponse('{"name":"Test Char","race":"Norn","gender":"Female"}');
+        $this->assertEquals('Test Char', $endpoint->get()->name);
+    }
+
+    public function testCrafting() {
+        $endpoint = $this->api()->characters('test')->craftingOf('char');
+
+        $this->assertEndpointIsAuthenticated( $endpoint );
+        $this->assertEndpointUrl( 'v2/characters/char/crafting', $endpoint );
+
+        $this->mockResponse('{"crafting":[{"discipline":"Tailor","rating":400,"active":true}]}');
+        $this->assertEquals('Tailor', $endpoint->get()[0]->discipline);
+    }
+
+    public function testTraining() {
+        $endpoint = $this->api()->characters('test')->trainingOf('char');
+
+        $this->assertEndpointIsAuthenticated( $endpoint );
+        $this->assertEndpointUrl( 'v2/characters/char/training', $endpoint );
+
+        $this->mockResponse('{"training":[{"id":111,"spent":24,"done":true}]}');
+        $this->assertEquals(111, $endpoint->get()[0]->id);
     }
 }
