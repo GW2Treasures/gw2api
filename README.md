@@ -87,22 +87,34 @@ For all examples it is assumed that you have a variable `$api = new GW2Api()`.
  /v2/account/achievements     | [Account\AchievementEndpoint][Account\AchievementEndpoint] <br>`GW2Api::account()->achievement()`  | 🔒
  /v2/account/bank             | [Account\BankEndpoint][Account\BankEndpoint]               <br>`GW2Api::account()->bank()`         | 🔒
  /v2/account/dyes             | [Account\DyeEndpoint][Account\DyeEndpoint]                 <br>`GW2Api::account()->dyes()`         | 🔒
+ /v2/account/finishers        | [Account\FinisherEndpoint][Account\FinisherEndpoint]       <br>`GW2Api::account()->finishers()`    | 🔒
  /v2/account/inventory        | [Account\InventoryEndpoint][Account\InventoryEndpoint]     <br>`GW2Api::account()->inventory()`    | 🔒
+ /v2/account/masteries        | [Account\MasteryEndpoint][Account\MasteryEndpoint]         <br>`GW2Api::account()->masteries()`    | 🔒
  /v2/account/materials        | [Account\MaterialEndpoint][Account\MaterialEndpoint]       <br>`GW2Api::account()->materials()`    | 🔒
  /v2/account/minis            | [Account\MiniEndpoint][Account\MiniEndpoint]               <br>`GW2Api::account()->minis()`        | 🔒
+ /v2/account/recipes          | [Account\RecipeEndpoint][Account\RecipeEndpoint]           <br>`GW2Api::account()->recipes()`      | 🔒
  /v2/account/skins            | [Account\SkinEndpoint][Account\SkinEndpoint]               <br>`GW2Api::account()->skins()`        | 🔒
+ /v2/account/titles           | [Account\TitleEndpoint][Account\TitleEndpoint]             <br>`GW2Api::account()->titles()`       | 🔒
  /v2/account/wallet           | [Account\WalletEndpoint][Account\WalletEndpoint]           <br>`GW2Api::account()->wallet()`       | 🔒
  /v2/achievements             | [Achievement\AchievementEndpoint][AchievementEndpoint]     <br>`GW2Api::achievements()`            | 📦🌏
  /v2/achievements/categories  | [Achievement\CategoryEndpoint][Achievement\CategoryEndpoint]<br>`GW2Api::achievements()->categories()`| 📦🌏
  /v2/achievements/daily       | [Achievement\DailyEndpoint][Achievement\DailyEndpoint]     <br>`GW2Api::achievements()->daily()`   |
  /v2/achievements/daily/tomorrow | [Achievement\DailyTomorrowEndpoint][Achievement\DailyTomorrowEndpoint] <br>`GW2Api::achievements()->daily()->tomorrow()` |
  /v2/achievements/groups      | [Achievement\GroupEndpoint][Achievement\GroupEndpoint]     <br>`GW2Api::achievements()->groups()`  | 📦🌏
+ /v2/backstory/answers        | [Backstory\AnswerEndpoint][Backstory\AnswerEndpoint]       <br>`GW2Api::backstory()->answers()`    | 📦🌏
+ /v2/backstory/questions      | [Backstory\QuestionEndpoint][Backstory\QuestionEndpoint]   <br>`GW2Api::backstory()->questions()`  | 📦🌏
  /v2/build                    | [Build\BuildEndpoint][BuildEndpoint]                       <br>`GW2Api::build()`                   |
  /v2/characters               | [Character\CharacterEndpoint][CharacterEndpoint]           <br>`GW2Api::characters()`              | 🔒📦
- /v2/characters/:id/equipment | [Character\EquipmentEndpoint][Character\EquipmentEndpoint] <br>`GW2Api::characters()->equipmentOf()`| 🔒
- /v2/characters/:id/inventory | [Character\InventoryEndpoint][Character\InventoryEndpoint] <br>`GW2Api::characters()->inventoryOf()`| 🔒
+ /v2/characters/:id/backstory | [Character\BackstoryEndpoint][Character\BackstoryEndpoint] <br>`GW2Api::characters()->backstoryOf()`| 🔒
+ /v2/characters/:id/core      | [Character\CoreEndpoint][Character\CoreEndpoint]           <br>`GW2Api::characters()->coreOf()`    | 🔒
+ /v2/characters/:id/crafting  | [Character\CraftingEndpoint][Character\CraftingEndpoint]   <br>`GW2Api::characters()->craftingOf()`| 🔒
+ /v2/characters/:id/equipment | [Character\EquipmentEndpoint][Character\EquipmentEndpoint] <br>`GW2Api::characters()->equipmentOf()` | 🔒
+ /v2/characters/:id/heropoints| [Character\HeropointEndpoint][Character\HeropointEndpoint] <br>`GW2Api::characters()->heropointsOf()`| 🔒
+ /v2/characters/:id/inventory | [Character\InventoryEndpoint][Character\InventoryEndpoint] <br>`GW2Api::characters()->inventoryOf()` | 🔒
  /v2/characters/:id/recipes   | [Character\RecipeEndpoint][Character\RecipeEndpoint]       <br>`GW2Api::characters()->recipesOf()` | 🔒
+ /v2/characters/:id/skills    | [Character\SkillEndpoint][Character\SkillEndpoint]         <br>`GW2Api::characters()->skillsOf()`  | 🔒
  /v2/characters/:id/specializations | [Character\SpecializationEndpoint][Character\SpecializationEndpoint] <br>`GW2Api::characters()->specializationsOf()` | 🔒
+ /v2/characters/:id/training  | [Character\TrainingEndpoint][Character\TrainingEndpoint]   <br>`GW2Api::characters()->trainingOf()`| 🔒
  /v2/colors                   | [Color\ColorEndpoint][ColorEndpoint]                       <br>`GW2Api::colors()`                  | 📦🌏
  /v2/commerce/exchange        | [Commerce\ExchangeEndpoint][Commerce\ExchangeEndpoint]     <br>`GW2Api::commerce()->exchange()`    |
  /v2/commerce/listings        | [Commerce\ListingEndpoint][Commerce\ListingEndpoint]       <br>`GW2Api::commerce()->listings()`    | 📦
@@ -114,6 +126,7 @@ For all examples it is assumed that you have a variable `$api = new GW2Api()`.
  ~~/v2/events~~               | *disabled*                                                                                         | 🌏🚫
  ~~/v2/events-state~~         | *disabled*                                                                                         | 🚫
  /v2/files                    | [File\FileEndpoint][FileEndpoint]                          <br>`GW2Api::files()`                   | 📦
+ /v2/finishers                | [Finisher\FinisherEndpoint][FinisherEndpoint]              <br>`GW2Api::finishers()`               | 📦🌏
  /v2/guild/:id                | [Guild\DetailsEndpoint][Guild\DetailsEndpoint]             <br>`GW2Api::guild()->detailsOf()`      | 🔓                                                                                  | 🚫
  /v2/guild/:id/log            | [Guild\Authenticated\LogEndpoint][Guild\Authenticated\LogEndpoint] <br>`GW2Api::guild()->logOf()`  | 🔒
  /v2/guild/:id/members        | [Guild\Authenticated\MemberEndpoint][Guild\Authenticated\MemberEndpoint] <br>`GW2Api::guild()->membersOf()`     | 🔒
@@ -125,11 +138,14 @@ For all examples it is assumed that you have a variable `$api = new GW2Api()`.
  /v2/guild/permissions        | [Guild\PermissionEndpoint][Guild\PermissionEndpoint]       <br>`GW2Api::guild()->permissionsOf()`  | 📦🌏
  /v2/guild/upgrades           | [Guild\UpgradeEndpoint][Guild\UpgradeEndpoint]             <br>`GW2Api::guild()->upgradesOf()`     | 📦🌏
  /v2/items                    | [Item\ItemEndpoint][ItemEndpoint]                          <br>`GW2Api::items()`                   | 📦🌏
+ /v2/itemstats                | [Itemstat\ItemstatEndpoint][ItemstatEndpoint]              <br>`GW2Api::itemstats()`               | 📦🌏
  ~~/v2/leaderboards~~         | *disabled*                                                                                         | 🚫
  /v2/legends                  | [Legend\LegendEndpoint][LegendEndpoint]                    <br>`GW2Api::legends()`                 | 📦🌏
  /v2/maps                     | [Map\MapEndpoint][MapEndpoint]                             <br>`GW2Api::maps()`                    | 📦🌏
+ /v2/masteries                | [Mastery\MasteryEndpoint][MasteryEndpoint]                 <br>`GW2Api::masteries()`                    | 📦🌏
  /v2/materials                | [Material\MaterialEndpoint][MaterialEndpoint]              <br>`GW2Api::materials()`               | 📦🌏
  /v2/minis                    | [Mini\MiniEndpoint][MiniEndpoint]                          <br>`GW2Api::minis()`                   | 📦🌏
+ /v2/outfits                  | [Outfit\OutfitEndpoint][OutfitEndpoint]                    <br>`GW2Api::outfits()`                 | 📦🌏
  /v2/pets                     | [Pet\PetEndpoint][PetEndpoint]                             <br>`GW2Api::pets()`                    | 📦🌏
  /v2/profession               | [Profession\ProfessionEndpoint][ProfessionEndpoint]        <br>`GW2Api::professions()`             | 📦🌏
  /v2/pvp/amulets              | [Pvp\AmuletEndpoint][Pvp\AmuletEndpoint]                   <br>`GW2Api::pvp()->amulets()`          | 📦🌏
@@ -143,10 +159,13 @@ For all examples it is assumed that you have a variable `$api = new GW2Api()`.
  /v2/skills                   | [Skill\SkillEndpoint][SkillEndpoint]                       <br>`GW2Api::skills()`                  | 📦🌏
  /v2/skins                    | [Skin\SkinEndpoint][SkinEndpoint]                          <br>`GW2Api::skins()`                   | 📦🌏
  /v2/specializations          | [Specialization\SpecializationEndpoint][SpecializationEndpoint] <br>`GW2Api::specializations()`    | 📦🌏
+ /v2/stories                  | [Story\StoryEndpoint][Story\StoryEndpoint]                 <br>`GW2Api::stories()`                 | 📦🌏
+ /v2/stories/seasons          | [Story\SeasonEndpoint][Story\SeasonEndpoint]               <br>`GW2Api::stories()->season`         | 📦🌏
+ /v2/titles                   | [Title\TitleEndpoint][TitleEndpoint]                       <br>`GW2Api::titles()`                  | 📦🌏
  /v2/tokeninfo                | [Tokeninfo\TokeninfoEndpoint][TokeninfoEndpoint]           <br>`GW2Api::tokeninfo()`               | 🔒
  /v2/traits                   | [Traits\TraitEndpoint][TraitEndpoint]                      <br>`GW2Api::traits()`                  | 📦🌏
  /v2/worlds                   | [World\WorldEndpoint][WorldEndpoint]                       <br>`GW2Api::worlds()`                  | 📦🌏
- ~~/v2/wvw/abilities~~        | *disabled*                                                                                         | 🌏🚫
+ /v2/wvw/abilities            | [WvW\AbilityEndpoint][WvW\AbilityEndpoint]                 <br>`GW2Api::wvw()->abilities()`        | 📦🌏
  /v2/wvw/matches              | [WvW\MatchEndpoint][WvW\MatchEndpoint]                     <br>`GW2Api::wvw()->matches()`          | 📦
  /v2/wvw/objectives           | [WvW\ObjectiveEndpoint][WvW\ObjectiveEndpoint]             <br>`GW2Api::wvw()->objectives()`       | 📦🌏
 
@@ -489,7 +508,7 @@ $api->account('API_KEY')->bank()->get();
 `\GW2Treasures\GW2Api\V2\Endpoint\Account\DyeEndpoint`
 ([source](src/V2/Endpoint/Account/DyeEndpoint.php))
 
-The [ColorEndpoint][ColorEndpoint] can be used to look up the skins used by this endpoint.
+The [ColorEndpoint][ColorEndpoint] can be used to look up the colors used by this endpoint.
 Implements [🔒AuthenticatedEndpoint][AuthenticatedEndpoint].
 
 ##### Methods
@@ -499,6 +518,25 @@ Implements [🔒AuthenticatedEndpoint][AuthenticatedEndpoint].
 ```php
 $api->account('API_KEY')->dyes()->get();
 // => [ 8, 12, 14, 17, … ]
+```
+
+
+#### /v2/account/finishers
+[Account\FinisherEndpoint]: #v2accountfinishers
+
+`\GW2Treasures\GW2Api\V2\Endpoint\Account\FinisherEndpoint`
+([source](src/V2/Endpoint/Account/FinisherEndpoint.php))
+
+The [FinisherEndpoint][FinisherEndpoint] can be used to look up the finishers used by this endpoint.
+Implements [🔒AuthenticatedEndpoint][AuthenticatedEndpoint].
+
+##### Methods
+ - `get():array` Get unlocked finishers.
+
+##### Example
+```php
+$api->account('API_KEY')->finishers()->get();
+// => [ { id: 1, permanent: true }
 ```
 
 
@@ -517,6 +555,25 @@ Implements [🔒AuthenticatedEndpoint][AuthenticatedEndpoint].
 ```php
 $api->account('API_KEY')->inventory()->get();
 // => [ null, { id: 12138, count: 250 }, null ]
+```
+
+
+#### /v2/account/masteries
+[Account\MasteryEndpoint]: #v2accountmasteries
+
+`\GW2Treasures\GW2Api\V2\Endpoint\Account\MasteryEndpoint`
+([source](src/V2/Endpoint/Account/MasteryEndpoint.php))
+
+The [MasteryEndpoint][MasteryEndpoint] can be used to get the masteries used by this endpoint.
+Implements [🔒AuthenticatedEndpoint][AuthenticatedEndpoint].
+
+##### Methods
+ - `get():array` Get unlocked masteries.
+
+##### Example
+```php
+$api->account('API_KEY')->masteries()->get();
+// => [ { id: 4, level: 4 }, … ]
 ```
 
 
@@ -557,6 +614,24 @@ $api->account('API_KEY')->minis()->get();
 // => [ 1, 2, 3, 4, … ]
 ```
 
+#### /v2/account/recipes
+[Account\RecipeEndpoint]: #v2accountrecipes
+
+`\GW2Treasures\GW2Api\V2\Endpoint\Account\RecipeEndpoint`
+([source](src/V2/Endpoint/Account/RecipeEndpoint.php))
+
+The [RecipeEndpoint][RecipeEndpoint] can be used to look up the recipes used by this endpoint.
+Implements [🔒AuthenticatedEndpoint][AuthenticatedEndpoint].
+
+##### Methods
+ - `get():array` Get unlocked recipes.
+
+##### Example
+```php
+$api->account('API_KEY')->recipes()->get();
+// => [ 104, 105, 106, 107, … ]
+```
+
 
 #### /v2/account/skins
 [Account\SkinEndpoint]: #v2accountskins
@@ -574,6 +649,25 @@ Implements [🔒AuthenticatedEndpoint][AuthenticatedEndpoint].
 ```php
 $api->account('API_KEY')->skins()->get();
 // => [ 1, 2, 3, 4, … ]
+```
+
+
+#### /v2/account/titles
+[Account\TitleEndpoint]: #v2accounttitles
+
+`\GW2Treasures\GW2Api\V2\Endpoint\Account\TitleEndpoint`
+([source](src/V2/Endpoint/Account/TitleEndpoint.php))
+
+The [TitleEndpoint][TitleEndpoint] can be used to look up the titles used by this endpoint.
+Implements [🔒AuthenticatedEndpoint][AuthenticatedEndpoint].
+
+##### Methods
+ - `get():array` Get unlocked titles.
+
+##### Example
+```php
+$api->account('API_KEY')->titles()->get();
+// => [ 1, 17, 188, … ]
 ```
 
 
@@ -685,6 +779,40 @@ $api->achievements()->groups()->get('65B4B678-607E-4D97-B458-076C3E96A810');
 ```
 
 
+#### /v2/backstory/answers
+[Backstory\AnswerEndpoint]: #v2backstoryanswers
+
+`\GW2Treasures\GW2Api\V2\Endpoint\Backstory\AnswerEndpoint`
+([source](src/V2/Endpoint/Backstory/AnswerEndpoint.php))
+
+##### Methods
+ - Inherited methods from [📦BulkEndpoint][BulkEndpoint]
+ - Inherited methods from [🌏LocalizedEndpoint][LocalizedEndpoint]
+
+##### Example
+```php
+$api->backstory()->answers()->get('7-54');
+// => { id: "7-54", title: "Dignity", question: 7, … }
+```
+
+
+#### /v2/backstory/questions
+[Backstory\QuestionEndpoint]: #v2backstoryquestions
+
+`\GW2Treasures\GW2Api\V2\Endpoint\Backstory\QuestionEndpoint`
+([source](src/V2/Endpoint/Backstory/QuestionEndpoint.php))
+
+##### Methods
+ - Inherited methods from [📦BulkEndpoint][BulkEndpoint]
+ - Inherited methods from [🌏LocalizedEndpoint][LocalizedEndpoint]
+
+##### Example
+```php
+$api->backstory()->questions()->get('7');
+// => { id: 7, title: "My Personality", answers: [ "7-53", "7-54", "7-55" ], … }
+```
+
+
 #### /v2/build
 [BuildEndpoint]: #v2build
 
@@ -727,6 +855,60 @@ $api->characters('API_KEY')->get('Character Name');
 ```
 
 
+#### /v2/characters/:id/backstory
+[Character\BackstoryEndpoint]: #v2charactersidbackstory
+
+`\GW2Treasures\GW2Api\V2\Endpoint\Character\BackstoryEndpoint`
+([source](src/V2/Endpoint/Character/BackstoryEndpoint.php))
+
+Implements [🔒AuthenticatedEndpoint][AuthenticatedEndpoint].
+
+##### Methods
+ - `get():array` Gets the characters backstory.
+
+##### Example
+```php
+$api->characters('API_KEY')->backstoryOf('Character Name')->get();
+// => [ "26-122", "27-125", … ]
+```
+
+
+#### /v2/characters/:id/core
+[Character\CoreEndpoint]: #v2charactersidcore
+
+`\GW2Treasures\GW2Api\V2\Endpoint\Character\CoreEndpoint`
+([source](src/V2/Endpoint/Character/CoreEndpoint.php))
+
+Implements [🔒AuthenticatedEndpoint][AuthenticatedEndpoint].
+
+##### Methods
+ - `get():array` Gets the core information of a character.
+
+##### Example
+```php
+$api->characters('API_KEY')->coreOf('Character Name')->get();
+// => { name: "Test Char", race: "Norn", gender: "Female", … }
+```
+
+
+#### /v2/characters/:id/crafting
+[Character\CraftingEndpoint]: #v2charactersidcrafting
+
+`\GW2Treasures\GW2Api\V2\Endpoint\Character\CraftingEndpoint`
+([source](src/V2/Endpoint/Character/CraftingEndpoint.php))
+
+Implements [🔒AuthenticatedEndpoint][AuthenticatedEndpoint].
+
+##### Methods
+ - `get():array` Get the crafting information of a character.
+
+##### Example
+```php
+$api->characters('API_KEY')->craftingOf('Character Name')->get();
+// => [ { discipline: "Tailor", rating: 400, active: true }, … ]
+```
+
+
 #### /v2/characters/:id/equipment
 [Character\EquipmentEndpoint]: #v2charactersidequipment
 
@@ -742,6 +924,24 @@ Implements [🔒AuthenticatedEndpoint][AuthenticatedEndpoint].
 ```php
 $api->characters('API_KEY')->equipmentOf('Character Name')->get();
 // => [ { id: 6472, slot: "Coat" }, … ]
+```
+
+
+#### /v2/characters/:id/heropoints
+[Character\HeropointEndpoint]: #v2charactersidheropoints
+
+`\GW2Treasures\GW2Api\V2\Endpoint\Character\HeropointEndpoint`
+([source](src/V2/Endpoint/Character/HeropointEndpoint.php))
+
+Implements [🔒AuthenticatedEndpoint][AuthenticatedEndpoint].
+
+##### Methods
+ - `get():array` Gets the characters heropoints.
+
+##### Example
+```php
+$api->characters('API_KEY')->heropointsOf('Character Name')->get();
+// => [ "0-3", "0-4", "0-5", "0-6", "0-8", … ]
 ```
 
 
@@ -781,6 +981,24 @@ $api->characters('API_KEY')->recipesOf('Character Name')->get();
 ```
 
 
+#### /v2/characters/:id/skills
+[Character\SkillEndpoint]: #v2charactersidskills
+
+`\GW2Treasures\GW2Api\V2\Endpoint\Character\SkillEndpoint`
+([source](src/V2/Endpoint/Character/SkillEndpoint.php))
+
+Implements [🔒AuthenticatedEndpoint][AuthenticatedEndpoint].
+
+##### Methods
+ - `get():array` Gets the characters skills.
+
+##### Example
+```php
+$api->characters('API_KEY')->skillsOf('Character Name')->get();
+// => { pve: { heal: 5503, utilities: [ 5641, 5734, 5502 ], elite: 5666 }, … }
+```
+
+
 #### /v2/characters/:id/specializations
 [Character\SpecializationEndpoint]: #v2charactersidspecializations
 
@@ -796,6 +1014,24 @@ Implements [🔒AuthenticatedEndpoint][AuthenticatedEndpoint].
 ```php
 $api->characters('API_KEY')->specializationsOf('Character Name')->get();
 // => { pve: [ { id: 41, traits: [232, 214, 226] }, … ], … }
+```
+
+
+#### /v2/characters/:id/training
+[Character\TrainingEndpoint]: #v2charactersidtraining
+
+`\GW2Treasures\GW2Api\V2\Endpoint\Character\TrainingEndpoint`
+([source](src/V2/Endpoint/Character/TrainingEndpoint.php))
+
+Implements [🔒AuthenticatedEndpoint][AuthenticatedEndpoint].
+
+##### Methods
+ - `get():array` Gets the characters trainings.
+
+##### Example
+```php
+$api->characters('API_KEY')->trainingOf('Character Name')->get();
+// => [ { id: 111, spent: 24, done: true }, … ]
 ```
 
 
@@ -1029,6 +1265,25 @@ $api->files()->ids();
 ```
 
 
+#### /v2/finishers
+[FinisherEndpoint]: #v2finishers
+
+`\GW2Treasures\GW2Api\V2\Endpoint\Finisher\FinisherEndpoint`
+([source](src/V2/Endpoint/Finisher/FinisherEndpoint.php))
+
+Implements [📦BulkEndpoint][BulkEndpoint] and [🌏LocalizedEndpoint][LocalizedEndpoint].
+
+##### Methods
+ - Inherited methods from [📦BulkEndpoint][BulkEndpoint]
+ - Inherited methods from [🌏LocalizedEndpoint][LocalizedEndpoint]
+
+##### Example
+```php
+$api->finishers()->get();
+// => { id:1, name: "Rabbit Rank Finisher", … }
+```
+
+
 #### /v2/guild/:id
 [Guild\DetailsEndpoint]: #v2guildid
 
@@ -1233,6 +1488,25 @@ $api->items()->ids();
 ```
 
 
+#### /v2/itemstats
+[ItemstatEndpoint]: #v2itemstats
+
+`\GW2Treasures\GW2Api\V2\Endpoint\Itemstat\ItemstatEndpoint`
+([source](src/V2/Endpoint/Itemstat/ItemstatEndpoint.php))
+
+Implements [📦BulkEndpoint][BulkEndpoint] and [🌏LocalizedEndpoint][LocalizedEndpoint].
+
+##### Methods
+ - Inherited methods from [📦BulkEndpoint][BulkEndpoint]
+ - Inherited methods from [🌏LocalizedEndpoint][LocalizedEndpoint]
+
+##### Example
+```php
+$api->itemstats()->get(137);
+// => { id: 137, name: "Mighty", attributes: { Power: 0.35 } }
+```
+
+
 #### /v2/legends
 [LegendEndpoint]: #v2legends
 
@@ -1271,6 +1545,25 @@ $api->maps()->get(15);
 ```
 
 
+#### /v2/masteries
+[MasteryEndpoint]: #v2masteries
+
+`\GW2Treasures\GW2Api\V2\Endpoint\Mastery\MasteryEndpoint`
+([source](src/V2/Endpoint/Mastery/MasteryEndpoint.php))
+
+Implements [📦BulkEndpoint][BulkEndpoint] and [🌏LocalizedEndpoint][LocalizedEndpoint].
+
+##### Methods
+ - Inherited methods from [📦BulkEndpoint][BulkEndpoint]
+ - Inherited methods from [🌏LocalizedEndpoint][LocalizedEndpoint]
+
+##### Example
+```php
+$api->masteries()->get(15);
+// => { id: 1, name: "Exalted Lore", … }
+```
+
+
 #### /v2/materials
 [MaterialEndpoint]: #v2materials
 
@@ -1306,6 +1599,25 @@ Implements [📦BulkEndpoint][BulkEndpoint] and [🌏LocalizedEndpoint][Localize
 ```php
 $api->minis()->get(1);
 // => { id: 1, name: "Miniature Rytlock", … }
+```
+
+
+#### /v2/outfits
+[OutfitEndpoint]: #v2outfits
+
+`\GW2Treasures\GW2Api\V2\Endpoint\Outfit\OutfitEndpoint`
+([source](src/V2/Endpoint/Outfit/OutfitEndpoint.php))
+
+Implements [📦BulkEndpoint][BulkEndpoint] and [🌏LocalizedEndpoint][LocalizedEndpoint].
+
+##### Methods
+ - Inherited methods from [📦BulkEndpoint][BulkEndpoint]
+ - Inherited methods from [🌏LocalizedEndpoint][LocalizedEndpoint]
+
+##### Example
+```php
+$api->outfits()->get(1);
+// => { id: 1, name: "Cook's Outfit", … }
 ```
 
 
@@ -1550,6 +1862,84 @@ $api->specializations()->get(1);
 ```
 
 
+
+#### /v2/titles
+[TitleEndpoint]: #v2titles
+
+`\GW2Treasures\GW2Api\V2\Endpoint\Title\TitleEndpoint`
+([source](src/V2/Endpoint/Title/TitleEndpoint.php))
+
+Implements [📦BulkEndpoint][BulkEndpoint] and [🌏LocalizedEndpoint][LocalizedEndpoint].
+
+##### Methods
+ - Inherited methods from [📦BulkEndpoint][BulkEndpoint]
+ - Inherited methods from [🌏LocalizedEndpoint][LocalizedEndpoint]
+
+##### Example
+```php
+$api->titles()->get(1);
+// => { id: 1, name: "Traveler", achievement: 111 }
+```
+
+
+#### /v2/stories
+[Story\StoryEndpoint]: #v2stories
+
+`\GW2Treasures\GW2Api\V2\Endpoint\Story\StoryEndpoint`
+([source](src/V2/Endpoint/Story/StoryEndpoint.php))
+
+Implements [📦BulkEndpoint][BulkEndpoint] and [🌏LocalizedEndpoint][LocalizedEndpoint].
+
+##### Methods
+ - Inherited methods from [📦BulkEndpoint][BulkEndpoint]
+ - Inherited methods from [🌏LocalizedEndpoint][LocalizedEndpoint]
+ - `seasons():Story\SeasonEndpoint` Gets a new [Story\SeasonEndpoint][Story\SeasonEndpoint] instance.
+
+##### Example
+```php
+$api->stories()->get(1);
+// => { id: 1, season: "215AAA0F-CDAC-4F93-86DA-C155A99B5784", name: "My Story", … }
+```
+
+
+#### /v2/stories/seasons
+[Story\SeasonEndpoint]: #v2storiesseasons
+
+`\GW2Treasures\GW2Api\V2\Endpoint\Story\SeasonEndpoint`
+([source](src/V2/Endpoint/Story/SeasonEndpoint.php))
+
+Implements [📦BulkEndpoint][BulkEndpoint] and [🌏LocalizedEndpoint][LocalizedEndpoint].
+
+##### Methods
+ - Inherited methods from [📦BulkEndpoint][BulkEndpoint]
+ - Inherited methods from [🌏LocalizedEndpoint][LocalizedEndpoint]
+
+##### Example
+```php
+$api->stories()->seasons()->get('215AAA0F-CDAC-4F93-86DA-C155A99B5784');
+// => { id: "215AAA0F-CDAC-4F93-86DA-C155A99B5784", name: "My Story", … }
+```
+
+
+#### /v2/titles
+[TitleEndpoint]: #v2titles
+
+`\GW2Treasures\GW2Api\V2\Endpoint\Title\TitleEndpoint`
+([source](src/V2/Endpoint/Title/TitleEndpoint.php))
+
+Implements [📦BulkEndpoint][BulkEndpoint] and [🌏LocalizedEndpoint][LocalizedEndpoint].
+
+##### Methods
+ - Inherited methods from [📦BulkEndpoint][BulkEndpoint]
+ - Inherited methods from [🌏LocalizedEndpoint][LocalizedEndpoint]
+
+##### Example
+```php
+$api->titles()->get(1);
+// => { id: 1, name: "Traveler", achievement: 111 }
+```
+
+
 #### /v2/tokeninfo
 [TokeninfoEndpoint]: #v2tokeninfo
 
@@ -1603,6 +1993,25 @@ Implements [📦BulkEndpoint][BulkEndpoint] and [🌏LocalizedEndpoint][Localize
 ```php
 $api->worlds()->all();
 // => [ { id: 1001, name: "Anvil Rock" }, … ]
+```
+
+
+#### /v2/wvw/abilities
+[WvW\AbilityEndpoint]: #v2wvwabilities
+
+`\GW2Treasures\GW2Api\V2\Endpoint\WvW\AbilityEndpoint`
+([source](src/V2/Endpoint/WvW/AbilityEndpoint.php))
+
+Implements [📦BulkEndpoint][BulkEndpoint] and [🌏LocalizedEndpoint][LocalizedEndpoint].
+
+##### Methods
+ - Inherited methods from [📦BulkEndpoint][BulkEndpoint]
+ - Inherited methods from [🌏LocalizedEndpoint][LocalizedEndpoint]
+
+##### Example
+```php
+$api->wvw()->abilities()->get(2);
+// => { id: 2, name: "Guard Killer", … }
 ```
 
 
