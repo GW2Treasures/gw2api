@@ -60,12 +60,30 @@ class AccountEndpoint extends Endpoint implements IAuthenticatedEndpoint {
     }
 
     /**
+     * Get all unlocked finishers.
+     *
+     * @return FinisherEndpoint
+     */
+    public function finishers() {
+        return new FinisherEndpoint( $this->api, $this->apiKey );
+    }
+
+    /**
      * Get a list of item stacks representing the account's shared inventory slots.
      *
      * @return InventoryEndpoint
      */
     public function inventory() {
         return new InventoryEndpoint( $this->api, $this->apiKey );
+    }
+
+    /**
+     * Get unlocked masteries.
+     *
+     * @return MasteryEndpoint
+     */
+    public function masteries() {
+        return new MasteryEndpoint( $this->api, $this->apiKey );
     }
 
     /**
@@ -87,12 +105,30 @@ class AccountEndpoint extends Endpoint implements IAuthenticatedEndpoint {
     }
 
     /**
+     * Get unlocked recipes.
+     *
+     * @return RecipeEndpoint
+     */
+    public function recipes() {
+        return new RecipeEndpoint( $this->api, $this->apiKey );
+    }
+
+    /**
      * Get the unlocked skins.
      *
      * @return SkinEndpoint
      */
     public function skins() {
         return new SkinEndpoint( $this->api, $this->apiKey );
+    }
+
+    /**
+     * Get the unlocked skins.
+     *
+     * @return TitleEndpoint
+     */
+    public function titles() {
+        return new TitleEndpoint( $this->api, $this->apiKey );
     }
 
     /**

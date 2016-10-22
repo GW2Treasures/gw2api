@@ -9,6 +9,7 @@ use GW2Treasures\GW2Api\V2\ApiHandler;
 use GW2Treasures\GW2Api\V2\Authentication\AuthenticationHandler;
 use GW2Treasures\GW2Api\V2\Endpoint\Account\AccountEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Achievement\AchievementEndpoint;
+use GW2Treasures\GW2Api\V2\Endpoint\Backstory\BackstoryEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Build\BuildEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Character\CharacterEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Color\ColorEndpoint;
@@ -17,13 +18,17 @@ use GW2Treasures\GW2Api\V2\Endpoint\Continent\ContinentEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Currency\CurrencyEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Emblem\EmblemEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\File\FileEndpoint;
+use GW2Treasures\GW2Api\V2\Endpoint\Finisher\FinisherEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Guild\GuildEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Guild\RestrictedGuildHandler;
 use GW2Treasures\GW2Api\V2\Endpoint\Item\ItemEndpoint;
+use GW2Treasures\GW2Api\V2\Endpoint\Itemstat\ItemstatEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Legend\LegendEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Map\MapEndpoint;
+use GW2Treasures\GW2Api\V2\Endpoint\Mastery\MasteryEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Material\MaterialEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Mini\MiniEndpoint;
+use GW2Treasures\GW2Api\V2\Endpoint\Outfit\OutfitEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Pet\PetEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Profession\ProfessionEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Pvp\PvpEndpoint;
@@ -32,6 +37,8 @@ use GW2Treasures\GW2Api\V2\Endpoint\Recipe\RecipeEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Skill\SkillEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Skin\SkinEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Specialization\SpecializationEndpoint;
+use GW2Treasures\GW2Api\V2\Endpoint\Story\StoryEndpoint;
+use GW2Treasures\GW2Api\V2\Endpoint\Title\TitleEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Tokeninfo\TokeninfoEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Traits\TraitEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\World\WorldEndpoint;
@@ -149,6 +156,10 @@ class GW2Api {
         return new AchievementEndpoint( $this );
     }
 
+    public function backstory() {
+        return new BackstoryEndpoint( $this );
+    }
+
     public function build() {
         return new BuildEndpoint( $this );
     }
@@ -181,12 +192,20 @@ class GW2Api {
         return new FileEndpoint( $this );
     }
 
+    public function finishers() {
+        return new FinisherEndpoint( $this );
+    }
+
     public function guild() {
         return new GuildEndpoint( $this );
     }
 
     public function items() {
         return new ItemEndpoint( $this );
+    }
+
+    public function itemstats() {
+        return new ItemstatEndpoint( $this );
     }
 
     public function legends() {
@@ -197,12 +216,20 @@ class GW2Api {
         return new MapEndpoint( $this );
     }
 
+    public function masteries() {
+        return new MasteryEndpoint( $this );
+    }
+
     public function materials() {
         return new MaterialEndpoint( $this );
     }
 
     public function minis() {
         return new MiniEndpoint( $this );
+    }
+
+    public function outfits() {
+        return new OutfitEndpoint( $this );
     }
 
     public function pets() {
@@ -235,6 +262,14 @@ class GW2Api {
 
     public function specializations() {
         return new SpecializationEndpoint( $this );
+    }
+
+    public function stories() {
+        return new StoryEndpoint( $this );
+    }
+
+    public function titles() {
+        return new TitleEndpoint( $this );
     }
 
     public function tokeninfo( $apiKey ) {

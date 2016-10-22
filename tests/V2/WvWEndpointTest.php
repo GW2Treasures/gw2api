@@ -7,6 +7,17 @@ class WvWEndpointTest extends TestCase {
         $this->assertEndpointUrl( 'v2/wvw', $endpoint );
     }
 
+    public function testAbilityEndpoint() {
+        $endpoint = $this->api()->wvw()->abilities();
+
+        $this->assertEndpointIsBulk( $endpoint );
+        $this->assertEndpointIsLocalized( $endpoint );
+        $this->assertEndpointUrl( 'v2/wvw/abilities', $endpoint );
+
+        $this->mockResponse('[2,3,4,5,6,7,8,9,10,11,12,14,15,16,17,18,19,20,23,24]');
+        $this->assertEquals( [2,3,4,5,6,7,8,9,10,11,12,14,15,16,17,18,19,20,23,24], $endpoint->ids() );
+    }
+
     public function testObjectiveEndpoint() {
         $endpoint = $this->api()->wvw()->objectives();
 

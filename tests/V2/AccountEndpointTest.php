@@ -50,6 +50,16 @@ class AccountEndpointTest extends TestCase {
         $this->assertEquals(8, $endpoint->get()[0]);
     }
 
+    public function testFinishers() {
+        $endpoint = $this->api()->account('test')->finishers();
+
+        $this->assertEndpointIsAuthenticated( $endpoint );
+        $this->assertEndpointUrl( 'v2/account/finishers', $endpoint );
+
+        $this->mockResponse('[{"id":1,"permanent":true}]');
+        $this->assertEquals(true, $endpoint->get()[0]->permanent);
+    }
+
     public function testInventory() {
         $endpoint = $this->api()->account('test')->inventory();
 
@@ -58,6 +68,16 @@ class AccountEndpointTest extends TestCase {
 
         $this->mockResponse('[null,{"id":12138,"count":250},null]');
         $this->assertEquals(12138, $endpoint->get()[1]->id);
+    }
+
+    public function testMasteries() {
+        $endpoint = $this->api()->account('test')->masteries();
+
+        $this->assertEndpointIsAuthenticated( $endpoint );
+        $this->assertEndpointUrl( 'v2/account/masteries', $endpoint );
+
+        $this->mockResponse('[{"id":4,"level":4}]');
+        $this->assertEquals(4, $endpoint->get()[0]->id);
     }
 
     public function testMaterials() {
@@ -80,6 +100,16 @@ class AccountEndpointTest extends TestCase {
         $this->assertEquals([1,2,3,4,5,6], $endpoint->get());
     }
 
+    public function testRecipes() {
+        $endpoint = $this->api()->account('test')->recipes();
+
+        $this->assertEndpointIsAuthenticated( $endpoint );
+        $this->assertEndpointUrl( 'v2/account/recipes', $endpoint );
+
+        $this->mockResponse('[104,105,106,107,108,109,110,113,114]');
+        $this->assertEquals([104,105,106,107,108,109,110,113,114], $endpoint->get());
+    }
+
     public function testSkins() {
         $endpoint = $this->api()->account('test')->skins();
 
@@ -88,6 +118,16 @@ class AccountEndpointTest extends TestCase {
 
         $this->mockResponse('[1,2,3,4,5,6]');
         $this->assertEquals([1,2,3,4,5,6], $endpoint->get());
+    }
+
+    public function testTitles() {
+        $endpoint = $this->api()->account('test')->titles();
+
+        $this->assertEndpointIsAuthenticated( $endpoint );
+        $this->assertEndpointUrl( 'v2/account/titles', $endpoint );
+
+        $this->mockResponse('[1,17,188,189,190,191,217]');
+        $this->assertEquals([1,17,188,189,190,191,217], $endpoint->get());
     }
 
     public function testWallet() {

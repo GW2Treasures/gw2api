@@ -29,6 +29,36 @@ class CharacterEndpoint extends Endpoint implements IAuthenticatedEndpoint, IBul
     }
 
     /**
+     * Get the backstory of a character.
+     *
+     * @param string $character
+     * @return BackstoryEndpoint
+     */
+    public function backstoryOf( $character ) {
+        return new BackstoryEndpoint( $this->api, $this->apiKey, $character );
+    }
+
+    /**
+     * Get the core information of a character.
+     *
+     * @param string $character
+     * @return CoreEndpoint
+     */
+    public function coreOf( $character ) {
+        return new CoreEndpoint( $this->api, $this->apiKey, $character );
+    }
+
+    /**
+     * Get the crafting information of a character.
+     *
+     * @param string $character
+     * @return CraftingEndpoint
+     */
+    public function craftingOf( $character ) {
+        return new CraftingEndpoint( $this->api, $this->apiKey, $character );
+    }
+
+    /**
      * Get the equipment of a character.
      *
      * @param string $character
@@ -37,6 +67,17 @@ class CharacterEndpoint extends Endpoint implements IAuthenticatedEndpoint, IBul
     public function equipmentOf( $character ) {
         return new EquipmentEndpoint( $this->api, $this->apiKey, $character );
     }
+
+    /**
+     * Get the herpoints of a character.
+     *
+     * @param string $character
+     * @return HeropointEndpoint
+     */
+    public function heropointsOf( $character ) {
+        return new HeropointEndpoint( $this->api, $this->apiKey, $character );
+    }
+
 
     /**
      * Get the inventory of a character.
@@ -59,6 +100,16 @@ class CharacterEndpoint extends Endpoint implements IAuthenticatedEndpoint, IBul
     }
 
     /**
+     * Get the skills of a character.
+     *
+     * @param string $character
+     * @return SkillEndpoint
+     */
+    public function skillsOf( $character ) {
+        return new SkillEndpoint( $this->api, $this->apiKey, $character );
+    }
+
+    /**
      * Get the specializations of a character.
      *
      * @param string $character
@@ -66,5 +117,15 @@ class CharacterEndpoint extends Endpoint implements IAuthenticatedEndpoint, IBul
      */
     public function specializationsOf( $character ) {
         return new SpecializationEndpoint( $this->api, $this->apiKey, $character );
+    }
+
+    /**
+     * Get the training information of a character.
+     *
+     * @param string $character
+     * @return TrainingEndpoint
+     */
+    public function trainingOf( $character ) {
+        return new TrainingEndpoint( $this->api, $this->apiKey, $character );
     }
 }
