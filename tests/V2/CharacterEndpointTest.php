@@ -70,6 +70,16 @@ class CharacterEndpointTest extends TestCase {
         $this->assertEquals('0-3', $endpoint->get()[0]);
     }
 
+    public function testRecipes() {
+        $endpoint = $this->api()->characters('test')->recipesOf('char');
+
+        $this->assertEndpointIsAuthenticated( $endpoint );
+        $this->assertEndpointUrl( 'v2/characters/char/recipes', $endpoint );
+
+        $this->mockResponse('{"recipes":[7,8,9,10,11,12,23]}');
+        $this->assertEquals([7,8,9,10,11,12,23], $endpoint->get());
+    }
+
     public function testSkills() {
         $endpoint = $this->api()->characters('test')->skillsOf('char');
 
