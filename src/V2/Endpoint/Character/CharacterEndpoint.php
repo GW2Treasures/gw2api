@@ -69,6 +69,17 @@ class CharacterEndpoint extends Endpoint implements IAuthenticatedEndpoint, IBul
     }
 
     /**
+     * Get the herpoints of a character.
+     *
+     * @param string $character
+     * @return HeropointEndpoint
+     */
+    public function heropointsOf( $character ) {
+        return new HeropointEndpoint( $this->api, $this->apiKey, $character );
+    }
+
+
+    /**
      * Get the inventory of a character.
      *
      * @param string $character

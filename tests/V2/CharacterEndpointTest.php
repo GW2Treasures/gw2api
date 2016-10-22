@@ -60,6 +60,16 @@ class CharacterEndpointTest extends TestCase {
         $this->assertEquals('Tailor', $endpoint->get()[0]->discipline);
     }
 
+    public function testHeropoints() {
+        $endpoint = $this->api()->characters('test')->heropointsOf('char');
+
+        $this->assertEndpointIsAuthenticated( $endpoint );
+        $this->assertEndpointUrl( 'v2/characters/char/heropoints', $endpoint );
+
+        $this->mockResponse('["0-3","0-4","0-5","0-6","0-8"]');
+        $this->assertEquals('0-3', $endpoint->get()[0]);
+    }
+
     public function testSkills() {
         $endpoint = $this->api()->characters('test')->skillsOf('char');
 
