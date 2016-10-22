@@ -28,6 +28,7 @@ use GW2Treasures\GW2Api\V2\Endpoint\Map\MapEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Mastery\MasteryEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Material\MaterialEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Mini\MiniEndpoint;
+use GW2Treasures\GW2Api\V2\Endpoint\Outfit\OutfitEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Pet\PetEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Profession\ProfessionEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Pvp\PvpEndpoint;
@@ -225,6 +226,10 @@ class GW2Api {
 
     public function minis() {
         return new MiniEndpoint( $this );
+    }
+
+    public function outfits() {
+        return new OutfitEndpoint( $this );
     }
 
     public function pets() {
