@@ -89,6 +89,16 @@ class CharacterEndpoint extends Endpoint implements IAuthenticatedEndpoint, IBul
     }
 
     /**
+     * Get the skills of a character.
+     *
+     * @param string $character
+     * @return SkillEndpoint
+     */
+    public function skillsOf( $character ) {
+        return new SkillEndpoint( $this->api, $this->apiKey, $character );
+    }
+
+    /**
      * Get the specializations of a character.
      *
      * @param string $character

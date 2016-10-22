@@ -60,6 +60,16 @@ class CharacterEndpointTest extends TestCase {
         $this->assertEquals('Tailor', $endpoint->get()[0]->discipline);
     }
 
+    public function testSkills() {
+        $endpoint = $this->api()->characters('test')->skillsOf('char');
+
+        $this->assertEndpointIsAuthenticated( $endpoint );
+        $this->assertEndpointUrl( 'v2/characters/char/skills', $endpoint );
+
+        $this->mockResponse('{"skills":{"pve":{"heal":5503,"utilities":[5641,5734,5502],"elite":5666}}}');
+        $this->assertEquals(5503, $endpoint->get()->pve->heal);
+    }
+
     public function testTraining() {
         $endpoint = $this->api()->characters('test')->trainingOf('char');
 
