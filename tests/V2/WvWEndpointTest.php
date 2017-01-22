@@ -38,4 +38,15 @@ class WvWEndpointTest extends TestCase {
         $this->mockResponse('{"id":"2-6","scores":{"red":169331,"blue":246780,"green":216241}}');
         $this->assertEquals(169331, $endpoint->world('id')->scores->red);
     }
+
+    public function testRankEndpoint() {
+        $endpoint = $this->api()->wvw()->ranks();
+
+        $this->assertEndpointUrl('v2/wvw/ranks', $endpoint);
+        $this->assertEndpointIsBulk($endpoint);
+        $this->assertEndpointIsLocalized($endpoint);
+
+        $this->mockResponse('{"id":1,"title":"Invader","min_rank":1}');
+        $this->assertEquals('Invader', $endpoint->get(1)->title);
+    }
 }
