@@ -80,6 +80,17 @@ class GuildEndpointTest extends TestCase {
         $this->assertEquals('Leader', $endpoint->get()[0]->id);
     }
 
+    public function testSearch() {
+        $endpoint = $this->api()->guild()->search();
+
+        $this->assertEndpointUrl('v2/guild/search', $endpoint);
+
+        $this->mockResponse('["335C4BB3-5CA3-E511-80D3-E4115BD7186D"]');
+        $this->assertEquals('335C4BB3-5CA3-E511-80D3-E4115BD7186D', $endpoint->name("API Test")[0]);
+
+        $this->assertEquals('name=API%20Test', $this->getLastRequest()->getUri()->getQuery());
+    }
+
     public function testStash() {
         $endpoint = $this->api()->guild()->stashOf('API_KEY', 'GUILD_ID');
 
