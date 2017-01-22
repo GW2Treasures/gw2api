@@ -64,6 +64,26 @@ class PvpEndpointTest extends TestCase {
         $this->assertEquals('PvP League Season One', $endpoint->get("44B85826-B5ED-4890-8C77-82DDF9F2CF2B")->name);
     }
 
+    public function testSeasonLeaderboardsList() {
+        $endpoint = $this->api()->pvp()->seasons()->leaderboardsOf('44B85826-B5ED-4890-8C77-82DDF9F2CF2B');
+
+        $this->assertEndpointUrl('v2/pvp/seasons/44B85826-B5ED-4890-8C77-82DDF9F2CF2B/leaderboards', $endpoint);
+
+        $this->mockResponse('["legendary","guild"]');
+        $this->assertEquals('legendary', $endpoint->ids()[0]);
+    }
+
+    public function testSeasonLeaderboardsGet() {
+        $endpoint = $this->api()->pvp()->seasons()->leaderboardsOf('44B85826-B5ED-4890-8C77-82DDF9F2CF2B')
+            ->get('legendary', 'na');
+
+        $this->assertEndpointUrl('v2/pvp/seasons/44B85826-B5ED-4890-8C77-82DDF9F2CF2B/leaderboards/legendary/na', $endpoint);
+        $this->assertEndpointIsPaginated($endpoint);
+
+        $this->mockResponse('[{"name":"darthmaim.6017", "rank":1}]');
+        $this->assertEquals('darthmaim.6017', $endpoint->page(0, 1)[0]->name);
+    }
+
     public function testStanding() {
         $endpoint = $this->api()->pvp()->standings('API_KEY');
 

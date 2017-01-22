@@ -17,4 +17,8 @@ class SeasonEndpoint extends Endpoint implements IBulkEndpoint, ILocalizedEndpoi
     public function url() {
         return 'v2/pvp/seasons';
     }
+
+    public function leaderboardsOf($season) {
+        return new LeaderboardEndpoint($this->api, $season);
+    }
 }
