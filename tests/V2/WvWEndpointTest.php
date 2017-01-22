@@ -37,6 +37,7 @@ class WvWEndpointTest extends TestCase {
 
         $this->mockResponse('{"id":"2-6","scores":{"red":169331,"blue":246780,"green":216241}}');
         $this->assertEquals(169331, $endpoint->world('id')->scores->red);
+        $this->assertEquals('world=id', $this->getLastRequest()->getUri()->getQuery());
     }
 
     public function testMatchOverviewEndpoint() {
@@ -47,6 +48,7 @@ class WvWEndpointTest extends TestCase {
 
         $this->mockResponse('{"id":"1-1","worlds":{"red":1008,"blue":1019,"green":1005}}');
         $this->assertEquals(1008, $endpoint->world(1008)->worlds->red);
+        $this->assertEquals('world=1008', $this->getLastRequest()->getUri()->getQuery());
     }
 
     public function testMatchScoreEndpoint() {
@@ -57,6 +59,7 @@ class WvWEndpointTest extends TestCase {
 
         $this->mockResponse('{"id":"1-1","scores":{"red":169331,"blue":246780,"green":216241}}');
         $this->assertEquals(169331, $endpoint->world(1008)->scores->red);
+        $this->assertEquals('world=1008', $this->getLastRequest()->getUri()->getQuery());
     }
 
     public function testMatchStatEndpoint() {
@@ -67,6 +70,7 @@ class WvWEndpointTest extends TestCase {
 
         $this->mockResponse('{"id":"1-1","deaths":{"red":7276,"blue":5922,"green":5767}}');
         $this->assertEquals(7276, $endpoint->world(1008)->deaths->red);
+        $this->assertEquals('world=1008', $this->getLastRequest()->getUri()->getQuery());
     }
 
     public function testRankEndpoint() {
