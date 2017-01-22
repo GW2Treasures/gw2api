@@ -100,6 +100,16 @@ class AccountEndpointTest extends TestCase {
         $this->assertEquals([1,2,3,4,5,6], $endpoint->get());
     }
 
+    public function testOutfits() {
+        $endpoint = $this->api()->account('test')->outfits();
+
+        $this->assertEndpointIsAuthenticated( $endpoint );
+        $this->assertEndpointUrl( 'v2/account/outfits', $endpoint );
+
+        $this->mockResponse('[1,2,3]');
+        $this->assertEquals([1,2,3], $endpoint->get());
+    }
+
     public function testRecipes() {
         $endpoint = $this->api()->account('test')->recipes();
 

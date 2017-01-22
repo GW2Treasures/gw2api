@@ -6,14 +6,14 @@ use GW2Treasures\GW2Api\V2\Bulk\BulkEndpoint;
 use GW2Treasures\GW2Api\V2\Bulk\IBulkEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint;
 
-class MatchEndpoint extends Endpoint implements IBulkEndpoint {
+class StatEndpoint extends Endpoint implements IBulkEndpoint {
     use BulkEndpoint;
 
     /**
      * {@inheritdoc}
      */
     public function url() {
-        return 'v2/wvw/matches';
+        return 'v2/wvw/matches/stats';
     }
 
     /**
@@ -24,17 +24,5 @@ class MatchEndpoint extends Endpoint implements IBulkEndpoint {
      */
     public function world($id) {
         return $this->request(['world' => $id])->json();
-    }
-
-    public function overview() {
-        return new OverviewEndpoint($this->api);
-    }
-
-    public function scores() {
-        return new ScoreEndpoint($this->api);
-    }
-
-    public function stats() {
-        return new StatEndpoint($this->api);
     }
 }

@@ -75,6 +75,15 @@ class GuildEndpoint extends Endpoint {
     }
 
     /**
+     * Search for a guild.
+     *
+     * @return SearchEndpoint
+     */
+    public function search() {
+        return new SearchEndpoint($this->api);
+    }
+
+    /**
      * Get stash of a guild.
      *
      * @param string $apiKey

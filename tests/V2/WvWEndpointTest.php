@@ -38,4 +38,45 @@ class WvWEndpointTest extends TestCase {
         $this->mockResponse('{"id":"2-6","scores":{"red":169331,"blue":246780,"green":216241}}');
         $this->assertEquals(169331, $endpoint->world('id')->scores->red);
     }
+
+    public function testMatchOverviewEndpoint() {
+        $endpoint = $this->api()->wvw()->matches()->overview();
+
+        $this->assertEndpointUrl('v2/wvw/matches/overview', $endpoint);
+        $this->assertEndpointIsBulk($endpoint);
+
+        $this->mockResponse('{"id":"1-1","worlds":{"red":1008,"blue":1019,"green":1005}}');
+        $this->assertEquals(1008, $endpoint->world(1008)->worlds->red);
+    }
+
+    public function testMatchScoreEndpoint() {
+        $endpoint = $this->api()->wvw()->matches()->scores();
+
+        $this->assertEndpointUrl('v2/wvw/matches/scores', $endpoint);
+        $this->assertEndpointIsBulk($endpoint);
+
+        $this->mockResponse('{"id":"1-1","scores":{"red":169331,"blue":246780,"green":216241}}');
+        $this->assertEquals(169331, $endpoint->world(1008)->scores->red);
+    }
+
+    public function testMatchStatEndpoint() {
+        $endpoint = $this->api()->wvw()->matches()->stats();
+
+        $this->assertEndpointUrl('v2/wvw/matches/stats', $endpoint);
+        $this->assertEndpointIsBulk($endpoint);
+
+        $this->mockResponse('{"id":"1-1","deaths":{"red":7276,"blue":5922,"green":5767}}');
+        $this->assertEquals(7276, $endpoint->world(1008)->deaths->red);
+    }
+
+    public function testRankEndpoint() {
+        $endpoint = $this->api()->wvw()->ranks();
+
+        $this->assertEndpointUrl('v2/wvw/ranks', $endpoint);
+        $this->assertEndpointIsBulk($endpoint);
+        $this->assertEndpointIsLocalized($endpoint);
+
+        $this->mockResponse('{"id":1,"title":"Invader","min_rank":1}');
+        $this->assertEquals('Invader', $endpoint->get(1)->title);
+    }
 }
