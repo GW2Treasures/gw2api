@@ -105,6 +105,15 @@ class AccountEndpoint extends Endpoint implements IAuthenticatedEndpoint {
     }
 
     /**
+     * Get unlocked outfits.
+     *
+     * @return MiniEndpoint
+     */
+    public function outfits() {
+        return new OutfitEndpoint( $this->api, $this->apiKey );
+    }
+
+    /**
      * Get unlocked recipes.
      *
      * @return RecipeEndpoint
