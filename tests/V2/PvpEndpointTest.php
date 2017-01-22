@@ -35,6 +35,17 @@ class PvpEndpointTest extends TestCase {
         $this->assertContains('4FDC931F-677F-4369-B20A-9FBB6A63B2B4', $endpoint->ids());
     }
 
+    public function testRanks() {
+        $endpoint = $this->api()->pvp()->ranks();
+
+        $this->assertEndpointUrl('v2/pvp/ranks', $endpoint);
+        $this->assertEndpointIsBulk($endpoint);
+        $this->assertEndpointIsLocalized($endpoint);
+
+        $this->mockResponse('[1,2,3,4,5,6,7,8,9]');
+        $this->assertEquals([1,2,3,4,5,6,7,8,9], $endpoint->ids());
+    }
+
     public function testSeasons() {
         $endpoint = $this->api()->pvp()->seasons();
 
