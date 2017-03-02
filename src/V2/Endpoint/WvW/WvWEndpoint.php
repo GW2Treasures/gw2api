@@ -27,4 +27,8 @@ class WvWEndpoint extends Endpoint {
     public function ranks() {
         return new RankEndpoint( $this->api );
     }
+
+    public function upgrades() {
+        return new UpgradeEndpoint( $this->api );
+    }
 }

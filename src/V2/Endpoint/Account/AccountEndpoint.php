@@ -6,6 +6,7 @@ use GW2Treasures\GW2Api\GW2Api;
 use GW2Treasures\GW2Api\V2\Authentication\AuthenticatedEndpoint;
 use GW2Treasures\GW2Api\V2\Authentication\IAuthenticatedEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint;
+use GW2Treasures\GW2Api\V2\Endpoint\Account\Home\HomeEndpoint;
 
 class AccountEndpoint extends Endpoint implements IAuthenticatedEndpoint {
     use AuthenticatedEndpoint;
@@ -51,6 +52,15 @@ class AccountEndpoint extends Endpoint implements IAuthenticatedEndpoint {
     }
 
     /**
+     * Get daily dungeon completions.
+     *
+     * @return DungeonEndpoint
+     */
+    public function dungeons() {
+        return new DungeonEndpoint( $this->api, $this->apiKey );
+    }
+
+    /**
      * Get a list of all unlocked dyes (ids).
      *
      * @return DyeEndpoint
@@ -66,6 +76,15 @@ class AccountEndpoint extends Endpoint implements IAuthenticatedEndpoint {
      */
     public function finishers() {
         return new FinisherEndpoint( $this->api, $this->apiKey );
+    }
+
+    /**
+     * Get info about the home instance.
+     *
+     * @return HomeEndpoint
+     */
+    public function home() {
+        return new HomeEndpoint($this->api, $this->apiKey);
     }
 
     /**
@@ -107,10 +126,19 @@ class AccountEndpoint extends Endpoint implements IAuthenticatedEndpoint {
     /**
      * Get unlocked outfits.
      *
-     * @return MiniEndpoint
+     * @return OutfitEndpoint
      */
     public function outfits() {
         return new OutfitEndpoint( $this->api, $this->apiKey );
+    }
+
+    /**
+     * Get weekly raid completion.
+     *
+     * @return RaidEndpoint
+     */
+    public function raids() {
+        return new RaidEndpoint( $this->api, $this->apiKey );
     }
 
     /**
