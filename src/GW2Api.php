@@ -16,6 +16,7 @@ use GW2Treasures\GW2Api\V2\Endpoint\Color\ColorEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Commerce\CommerceEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Continent\ContinentEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Currency\CurrencyEndpoint;
+use GW2Treasures\GW2Api\V2\Endpoint\Dungeon\DungeonEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Emblem\EmblemEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\File\FileEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Finisher\FinisherEndpoint;
@@ -33,6 +34,8 @@ use GW2Treasures\GW2Api\V2\Endpoint\Pet\PetEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Profession\ProfessionEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Pvp\PvpEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Quaggan\QuagganEndpoint;
+use GW2Treasures\GW2Api\V2\Endpoint\Race\RaceEndpoint;
+use GW2Treasures\GW2Api\V2\Endpoint\Raid\RaidEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Recipe\RecipeEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Skill\SkillEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Skin\SkinEndpoint;
@@ -184,6 +187,10 @@ class GW2Api {
         return new CurrencyEndpoint( $this );
     }
 
+    public function dungeons() {
+        return new DungeonEndpoint( $this );
+    }
+
     public function emblem() {
         return new EmblemEndpoint( $this );
     }
@@ -246,6 +253,14 @@ class GW2Api {
 
     public function quaggans() {
         return new QuagganEndpoint( $this );
+    }
+
+    public function races() {
+        return new RaceEndpoint( $this );
+    }
+
+    public function raids() {
+        return new RaidEndpoint( $this );
     }
 
     public function recipes() {

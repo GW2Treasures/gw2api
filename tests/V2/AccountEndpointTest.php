@@ -40,6 +40,16 @@ class AccountEndpointTest extends TestCase {
         $this->assertEquals(24675, $endpoint->get()[1]->upgrades[0]);
     }
 
+    public function testDungeon() {
+        $endpoint = $this->api()->account('test')->dungeons();
+
+        $this->assertEndpointIsAuthenticated( $endpoint );
+        $this->assertEndpointUrl( 'v2/account/dungeons', $endpoint );
+
+        $this->mockResponse('[]');
+        $this->assertEquals([], $endpoint->get());
+    }
+
     public function testDyes() {
         $endpoint = $this->api()->account('test')->dyes();
 
@@ -58,6 +68,33 @@ class AccountEndpointTest extends TestCase {
 
         $this->mockResponse('[{"id":1,"permanent":true}]');
         $this->assertEquals(true, $endpoint->get()[0]->permanent);
+    }
+
+    public function testHome() {
+        $endpoint = $this->api()->account('test')->home();
+
+        $this->assertEndpointIsAuthenticated( $endpoint );
+        $this->assertEndpointUrl( 'v2/account/home', $endpoint );
+    }
+
+    public function testHomeCat() {
+        $endpoint = $this->api()->account('test')->home()->cats();
+
+        $this->assertEndpointIsAuthenticated( $endpoint );
+        $this->assertEndpointUrl( 'v2/account/home/cats', $endpoint );
+
+        $this->mockResponse('[{"id": 1,"hint": "chicken"}]');
+        $this->assertEquals('chicken', $endpoint->get()[0]->hint);
+    }
+
+    public function testHomeNodes() {
+        $endpoint = $this->api()->account('test')->home()->nodes();
+
+        $this->assertEndpointIsAuthenticated( $endpoint );
+        $this->assertEndpointUrl( 'v2/account/home/nodes', $endpoint );
+
+        $this->mockResponse('["quartz_node","sprocket_generator"]');
+        $this->assertEquals(["quartz_node","sprocket_generator"], $endpoint->get());
     }
 
     public function testInventory() {
@@ -108,6 +145,16 @@ class AccountEndpointTest extends TestCase {
 
         $this->mockResponse('[1,2,3]');
         $this->assertEquals([1,2,3], $endpoint->get());
+    }
+
+    public function testRaids() {
+        $endpoint = $this->api()->account('test')->raids();
+
+        $this->assertEndpointIsAuthenticated( $endpoint );
+        $this->assertEndpointUrl( 'v2/account/raids', $endpoint );
+
+        $this->mockResponse('[]');
+        $this->assertEquals([], $endpoint->get());
     }
 
     public function testRecipes() {

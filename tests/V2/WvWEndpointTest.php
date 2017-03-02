@@ -83,4 +83,15 @@ class WvWEndpointTest extends TestCase {
         $this->mockResponse('{"id":1,"title":"Invader","min_rank":1}');
         $this->assertEquals('Invader', $endpoint->get(1)->title);
     }
+
+    public function testUpgradeEndpoint() {
+        $endpoint = $this->api()->wvw()->upgrades();
+
+        $this->assertEndpointUrl('v2/wvw/upgrades', $endpoint);
+        $this->assertEndpointIsBulk($endpoint);
+        $this->assertEndpointIsLocalized($endpoint);
+
+        $this->mockResponse('[3,4,7,8,9]');
+        $this->assertEquals([3,4,7,8,9], $endpoint->ids());
+    }
 }
