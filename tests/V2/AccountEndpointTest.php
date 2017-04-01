@@ -82,6 +82,17 @@ class AccountEndpointTest extends TestCase {
         $this->assertEquals(true, $endpoint->get()[0]->permanent);
     }
 
+    public function testGliders() {
+        $endpoint = $this->api()->account('test')->gliders();
+
+        $this->assertEndpointIsAuthenticated( $endpoint );
+        $this->assertEndpointUrl( 'v2/account/gliders', $endpoint );
+
+        $this->mockResponse('[1,2,3]');
+        $this->assertEquals([1,2,3], $endpoint->get());
+    }
+
+
     public function testHome() {
         $endpoint = $this->api()->account('test')->home();
 

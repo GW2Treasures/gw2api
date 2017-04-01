@@ -20,6 +20,7 @@ use GW2Treasures\GW2Api\V2\Endpoint\Dungeon\DungeonEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Emblem\EmblemEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\File\FileEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Finisher\FinisherEndpoint;
+use GW2Treasures\GW2Api\V2\Endpoint\Glider\GliderEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Guild\GuildEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Guild\RestrictedGuildHandler;
 use GW2Treasures\GW2Api\V2\Endpoint\Item\ItemEndpoint;
@@ -201,6 +202,10 @@ class GW2Api {
 
     public function finishers() {
         return new FinisherEndpoint( $this );
+    }
+
+    public function gliders() {
+        return new GliderEndpoint( $this );
     }
 
     public function guild() {
