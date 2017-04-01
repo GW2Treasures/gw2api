@@ -31,9 +31,21 @@ class LogEndpoint extends Endpoint implements IAuthenticatedEndpoint, IRestricte
     }
 
     /**
+     * Get log entries.
+     *
      * @return array
      */
     public function get() {
         return $this->request()->json();
+    }
+
+    /**
+     * Get log entries newer than `$lastId`.
+     *
+     * @param int $lastId
+     * @return array
+     */
+    public function since($lastId) {
+        return $this->request(['since' => $lastId])->json();
     }
 }
