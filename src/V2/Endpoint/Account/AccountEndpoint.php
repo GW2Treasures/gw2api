@@ -79,6 +79,15 @@ class AccountEndpoint extends Endpoint implements IAuthenticatedEndpoint {
     }
 
     /**
+     * Get all unlocked gliders.
+     *
+     * @return GliderEndpoint
+     */
+    public function gliders() {
+        return new GliderEndpoint( $this->api, $this->apiKey );
+    }
+
+    /**
      * Get info about the home instance.
      *
      * @return HomeEndpoint
