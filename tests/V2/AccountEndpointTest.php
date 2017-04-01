@@ -24,10 +24,22 @@ class AccountEndpointTest extends TestCase {
         $endpoint = $this->api()->account('test')->achievements();
 
         $this->assertEndpointIsAuthenticated( $endpoint );
+        $this->assertEndpointIsBulk( $endpoint );
         $this->assertEndpointUrl( 'v2/account/achievements', $endpoint );
 
         $this->mockResponse('[{"id":1,"current":1,"max":1000,"done":false}]');
         $this->assertEquals(1000, $endpoint->get()[0]->max);
+
+        $this->mockResponse('{"id":1,"current":1,"max":1000,"done":false}');
+        $this->assertEquals(1, $endpoint->get(1)->id);
+    }
+
+    /** @expectedException Exception */
+    public function testAchievementsIds() {
+        $endpoint = $this->api()->account('test')->achievements();
+
+        /** @noinspection PhpDeprecationInspection */
+        $endpoint->ids();
     }
 
     public function testBank() {
