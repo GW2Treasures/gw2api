@@ -80,6 +80,16 @@ class CharacterEndpointTest extends TestCase {
         $this->assertEquals([7,8,9,10,11,12,23], $endpoint->get());
     }
 
+    public function testSab() {
+        $endpoint = $this->api()->characters('test')->sabOf('char');
+
+        $this->assertEndpointIsAuthenticated( $endpoint );
+        $this->assertEndpointUrl( 'v2/characters/char/sab', $endpoint );
+
+        $this->mockResponse('{"zones":[{"id":1,"mode":"tribulation"}]}');
+        $this->assertEquals(1, $endpoint->get()->zones[0]->id);
+    }
+
     public function testSkills() {
         $endpoint = $this->api()->characters('test')->skillsOf('char');
 

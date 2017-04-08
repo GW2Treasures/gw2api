@@ -100,6 +100,16 @@ class CharacterEndpoint extends Endpoint implements IAuthenticatedEndpoint, IBul
     }
 
     /**
+     * Get Super Adventure Box progression of a character.
+     *
+     * @param $character
+     * @return SabEndpoint
+     */
+    public function sabOf( $character ) {
+        return new SabEndpoint( $this->api, $this->apiKey, $character );
+    }
+
+    /**
      * Get the skills of a character.
      *
      * @param string $character
