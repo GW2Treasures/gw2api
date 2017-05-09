@@ -35,6 +35,16 @@ class PvpEndpointTest extends TestCase {
         $this->assertContains('4FDC931F-677F-4369-B20A-9FBB6A63B2B4', $endpoint->ids());
     }
 
+    public function testHeroes() {
+        $endpoint = $this->api()->pvp()->heroes('API_KEY');
+
+        $this->assertEndpointUrl('v2/pvp/heroes', $endpoint);
+        $this->assertEndpointIsBulk($endpoint);
+
+        $this->mockResponse('{"id":"115C140F-C2F5-40EB-8EA2-C3773F2AE468","name":"Nika"}');
+        $this->assertContains('Nika', $endpoint->get('115C140F-C2F5-40EB-8EA2-C3773F2AE468')->name);
+    }
+
     public function testRanks() {
         $endpoint = $this->api()->pvp()->ranks();
 

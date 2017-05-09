@@ -130,6 +130,16 @@ class AccountEndpointTest extends TestCase {
         $this->assertEquals(12138, $endpoint->get()[1]->id);
     }
 
+    public function testMailcarriers() {
+        $endpoint = $this->api()->account('test')->mailcarriers();
+
+        $this->assertEndpointIsAuthenticated( $endpoint );
+        $this->assertEndpointUrl( 'v2/account/mailcarriers', $endpoint );
+
+        $this->mockResponse('[15,4]');
+        $this->assertEquals([15,4], $endpoint->get());
+    }
+
     public function testMasteries() {
         $endpoint = $this->api()->account('test')->masteries();
 
@@ -168,6 +178,23 @@ class AccountEndpointTest extends TestCase {
 
         $this->mockResponse('[1,2,3]');
         $this->assertEquals([1,2,3], $endpoint->get());
+    }
+
+    public function testPvp() {
+        $endpoint = $this->api()->account('test')->pvp();
+
+        $this->assertEndpointIsAuthenticated( $endpoint );
+        $this->assertEndpointUrl( 'v2/account/pvp', $endpoint );
+    }
+
+    public function testPvpHeroes() {
+        $endpoint = $this->api()->account('test')->pvp()->heroes();
+
+        $this->assertEndpointIsAuthenticated( $endpoint );
+        $this->assertEndpointUrl( 'v2/account/pvp/heroes', $endpoint );
+
+        $this->mockResponse('[3]');
+        $this->assertEquals([3], $endpoint->get());
     }
 
     public function testRaids() {
