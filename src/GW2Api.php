@@ -26,6 +26,7 @@ use GW2Treasures\GW2Api\V2\Endpoint\Guild\RestrictedGuildHandler;
 use GW2Treasures\GW2Api\V2\Endpoint\Item\ItemEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Itemstat\ItemstatEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Legend\LegendEndpoint;
+use GW2Treasures\GW2Api\V2\Endpoint\Mailcarrier\MailcarrierEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Map\MapEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Mastery\MasteryEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Material\MaterialEndpoint;
@@ -222,6 +223,10 @@ class GW2Api {
 
     public function legends() {
         return new LegendEndpoint( $this );
+    }
+
+    public function mailcarriers() {
+        return new MailcarrierEndpoint($this);
     }
 
     public function maps() {

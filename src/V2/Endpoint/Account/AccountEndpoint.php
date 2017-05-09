@@ -106,6 +106,15 @@ class AccountEndpoint extends Endpoint implements IAuthenticatedEndpoint {
     }
 
     /**
+     * Get unlocked mailcarriers.
+     *
+     * @return MailcarrierEndpoint
+     */
+    public function mailcarriers() {
+        return new MailcarrierEndpoint( $this->api, $this->apiKey );
+    }
+
+    /**
      * Get unlocked masteries.
      *
      * @return MasteryEndpoint

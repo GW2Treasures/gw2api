@@ -130,6 +130,16 @@ class AccountEndpointTest extends TestCase {
         $this->assertEquals(12138, $endpoint->get()[1]->id);
     }
 
+    public function testMailcarriers() {
+        $endpoint = $this->api()->account('test')->mailcarriers();
+
+        $this->assertEndpointIsAuthenticated( $endpoint );
+        $this->assertEndpointUrl( 'v2/account/mailcarriers', $endpoint );
+
+        $this->mockResponse('[15,4]');
+        $this->assertEquals([15,4], $endpoint->get());
+    }
+
     public function testMasteries() {
         $endpoint = $this->api()->account('test')->masteries();
 
