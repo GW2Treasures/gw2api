@@ -33,6 +33,14 @@ class PvpEndpoint extends Endpoint {
     }
 
     /**
+     * @param string $apiKey
+     * @return HeroEndpoint
+     */
+    public function heroes($apiKey) {
+        return new HeroEndpoint($this->api, $apiKey);
+    }
+
+    /**
      * @return RankEndpoint
      */
     public function ranks() {
