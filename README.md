@@ -145,6 +145,8 @@ For all examples it is assumed that you have a variable `$api = new GW2Api()`.
  /v2/masteries                | [Mastery\MasteryEndpoint][MasteryEndpoint]                 <br>`GW2Api::masteries()`                    | 📦🌏
  /v2/materials                | [Material\MaterialEndpoint][MaterialEndpoint]              <br>`GW2Api::materials()`               | 📦🌏
  /v2/minis                    | [Mini\MiniEndpoint][MiniEndpoint]                          <br>`GW2Api::minis()`                   | 📦🌏
+ /v2/mounts/types             | [Mount\TypeEndpoint][Mount\TypeEndpoint]                   <br>`GW2Api::mounts()->types()`         | 📦🌏
+ /v2/mounts/skins             | [Mount\SkinEndpoint][Mount\SkinEndpoint]                   <br>`GW2Api::mounts()->skins()`         | 📦🌏
  /v2/outfits                  | [Outfit\OutfitEndpoint][OutfitEndpoint]                    <br>`GW2Api::outfits()`                 | 📦🌏
  /v2/pets                     | [Pet\PetEndpoint][PetEndpoint]                             <br>`GW2Api::pets()`                    | 📦🌏
  /v2/profession               | [Profession\ProfessionEndpoint][ProfessionEndpoint]        <br>`GW2Api::professions()`             | 📦🌏
@@ -1599,6 +1601,44 @@ Implements [📦BulkEndpoint][BulkEndpoint] and [🌏LocalizedEndpoint][Localize
 ```php
 $api->minis()->get(1);
 // => { id: 1, name: "Miniature Rytlock", … }
+```
+
+
+#### /v2/mounts/types
+[Mount\TypeEndpoint]: #v2mountstypes
+
+`\GW2Treasures\GW2Api\V2\Endpoint\Mount\TypeEndpoint`
+([source](src/V2/Endpoint/Mount/TypeEndpoint.php))
+
+Implements [📦BulkEndpoint][BulkEndpoint] and [🌏LocalizedEndpoint][LocalizedEndpoint].
+
+##### Methods
+ - Inherited methods from [📦BulkEndpoint][BulkEndpoint]
+ - Inherited methods from [🌏LocalizedEndpoint][LocalizedEndpoint]
+
+##### Example
+```php
+$api->mounts()->types()->get('raptor');
+// => { id: "raptor", name: "Raptor", … }
+```
+
+
+#### /v2/mounts/skins
+[Mount\SkinEndpoint]: #v2mountsskins
+
+`\GW2Treasures\GW2Api\V2\Endpoint\Mount\SkinEndpoint`
+([source](src/V2/Endpoint/Mount/SkinEndpoint.php))
+
+Implements [📦BulkEndpoint][BulkEndpoint] and [🌏LocalizedEndpoint][LocalizedEndpoint].
+
+##### Methods
+ - Inherited methods from [📦BulkEndpoint][BulkEndpoint]
+ - Inherited methods from [🌏LocalizedEndpoint][LocalizedEndpoint]
+
+##### Example
+```php
+$api->mounts()->skins()->get(1);
+// => { id: 1, mount: "raptor", … }
 ```
 
 
