@@ -16,4 +16,20 @@ interface IEndpoint {
      * @return string
      */
     public function url();
+
+    /**
+     * Set the schema version to use when requesting this endpoint.
+     *
+     * @param string $schema
+     * @return $this
+     */
+    public function schema( $schema );
+
+    /**
+     * Get the schema used to request this endpoint.
+     * Falls back to the global schema set in the GW2API instance.
+     *
+     * @return String
+     */
+    public function getSchema();
 }

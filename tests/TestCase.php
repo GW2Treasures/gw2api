@@ -39,6 +39,10 @@ abstract class TestCase extends PHPUnit_Framework_TestCase {
         return $this->api;
     }
 
+    protected function resetApi() {
+        unset($this->api);
+    }
+
     /**
      * @param Response|RequestException|string $response
      * @param string $language

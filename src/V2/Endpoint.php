@@ -20,6 +20,9 @@ abstract class Endpoint implements IEndpoint {
     /** @var ApiHandler[] */
     protected $handlers = [];
 
+    /** @var string schema */
+    protected $schema = null;
+
     /**
      * @param GW2Api $api
      */
@@ -41,6 +44,28 @@ abstract class Endpoint implements IEndpoint {
      */
     protected function getApi() {
         return $this->api;
+    }
+
+    /**
+     * Set the schema version to use when requesting this endpoint.
+     *
+     * @param string $schema
+     * @return $this
+     */
+    public function schema( $schema ) {
+        $this->schema = $schema;
+
+        return $this;
+    }
+
+    /**
+     * Get the schema used to request this endpoint.
+     * Falls back to the global schema set in the GW2API instance.
+     *
+     * @return String
+     */
+    public function getSchema() {
+        return $this->schema !== null ? $this->schema : $this->getApi()->getSchema();
     }
 
     /**
