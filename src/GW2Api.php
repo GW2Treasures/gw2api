@@ -23,6 +23,7 @@ use GW2Treasures\GW2Api\V2\Endpoint\Finisher\FinisherEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Glider\GliderEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Guild\GuildEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Guild\RestrictedGuildHandler;
+use GW2Treasures\GW2Api\V2\Endpoint\Home\HomeEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Item\ItemEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Itemstat\ItemstatEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Legend\LegendEndpoint;
@@ -212,6 +213,10 @@ class GW2Api {
 
     public function guild() {
         return new GuildEndpoint( $this );
+    }
+
+    public function home() {
+        return new HomeEndpoint( $this );
     }
 
     public function items() {
