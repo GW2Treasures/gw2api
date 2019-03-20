@@ -137,6 +137,8 @@ For all examples it is assumed that you have a variable `$api = new GW2Api()`.
  /v2/guild/:id/upgrades       | [Guild\Authenticated\UpgradeEndpoint][Guild\Authenticated\UpgradeEndpoint] <br>`GW2Api::guild()->upgradesOf()`  | 🔒
  /v2/guild/permissions        | [Guild\PermissionEndpoint][Guild\PermissionEndpoint]       <br>`GW2Api::guild()->permissionsOf()`  | 📦🌏
  /v2/guild/upgrades           | [Guild\UpgradeEndpoint][Guild\UpgradeEndpoint]             <br>`GW2Api::guild()->upgradesOf()`     | 📦🌏
+ /v2/home/cats                | [Home\CatEndpoint][Home\CatEndpoint]                       <br>`GW2Api::home()->cats()`            | 📦
+ /v2/home/nodes               | [Home\NodeEndpoint][Home\NodeEndpoint]                     <br>`GW2Api::home()->nodes()`           | 📦
  /v2/items                    | [Item\ItemEndpoint][ItemEndpoint]                          <br>`GW2Api::items()`                   | 📦🌏
  /v2/itemstats                | [Itemstat\ItemstatEndpoint][ItemstatEndpoint]              <br>`GW2Api::itemstats()`               | 📦🌏
  ~~/v2/leaderboards~~         | *disabled*                                                                                         | 🚫
@@ -1468,6 +1470,42 @@ Implements [📦BulkEndpoint][BulkEndpoint] and [🌏LocalizedEndpoint][Localize
 ```php
 $api->guild()->upgrades()->get(38);
 // => { id: 38, name: "Guild Armorer 1", … }
+```
+
+
+#### /v2/home/cats
+[Home\CatEndpoint]: #v2homecats
+
+`\GW2Treasures\GW2Api\V2\Endpoint\Home\CatEndpoint`
+([source](src/V2/Endpoint/Home/CatEndpoint.php))
+
+Implements [📦BulkEndpoint][BulkEndpoint].
+
+##### Methods
+ - Inherited methods from [📦BulkEndpoint][BulkEndpoint]
+
+##### Example
+```php
+$api->home()->cats()->get('1');
+// => { id: 1, hint: "chicken", … }
+```
+
+
+#### /v2/home/nodes
+[Home\NodeEndpoint]: #v2homenodes
+
+`\GW2Treasures\GW2Api\V2\Endpoint\Home\NodeEndpoint`
+([source](src/V2/Endpoint/Home/NodeEndpoint.php))
+
+Implements [📦BulkEndpoint][BulkEndpoint].
+
+##### Methods
+ - Inherited methods from [📦BulkEndpoint][BulkEndpoint]
+
+##### Example
+```php
+$api->mounts()->skins()->ids();
+// => [ "advanced_cloth_rack", "advanced_leather_rack", … ]
 ```
 
 
