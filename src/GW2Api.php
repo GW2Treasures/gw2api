@@ -53,8 +53,12 @@ use GW2Treasures\GW2Api\V2\Endpoint\WvW\WvWEndpoint;
 use GW2Treasures\GW2Api\V2\IEndpoint;
 use GW2Treasures\GW2Api\V2\Localization\LocalizationHandler;
 use GW2Treasures\GW2Api\V2\Pagination\PaginationHandler;
+use GW2Treasures\GW2Api\V2\Schema\SchemaHandler;
 
 class GW2Api {
+    /** @const string */
+    const DEFAULT_SCHEMA = '2019-03-20T00:00:00Z';
+
     /** @var string $apiUrl */
     protected $apiUrl = 'https://api.guildwars2.com/';
 
@@ -66,6 +70,9 @@ class GW2Api {
 
     /** @var array $handlers */
     protected $handlers = [];
+
+    /** @var string $schema */
+    protected $schema = self::DEFAULT_SCHEMA;
 
     function __construct( array $options = [] ) {
         $this->options = $this->getOptions( $options );
@@ -149,6 +156,7 @@ class GW2Api {
         $this->registerHandler(LocalizationHandler::class);
         $this->registerHandler(PaginationHandler::class);
         $this->registerHandler(RestrictedGuildHandler::class);
+        $this->registerHandler(SchemaHandler::class);
     }
 
     public function getClient() {
@@ -329,5 +337,26 @@ class GW2Api {
                 $endpoint->attach( new $handler( $endpoint ) );
             }
         }
+    }
+
+    /**
+     * Set the schema version to use for this api instance.
+     *
+     * @param string $schema
+     * @return $this
+     */
+    public function schema( $schema ) {
+        $this->schema = $schema;
+
+        return $this;
+    }
+
+    /**
+     * Get the schema version used by this api instance.
+     *
+     * @return String
+     */
+    public function getSchema() {
+        return $this->schema;
     }
 }
