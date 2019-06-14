@@ -180,6 +180,15 @@ class AccountEndpoint extends Endpoint implements IAuthenticatedEndpoint {
     }
 
     /**
+     * Get unlocked novelties.
+     *
+     * @return NoveltyEndpoint
+     */
+    public function novelties() {
+        return new NoveltyEndpoint( $this->api, $this->apiKey );
+    }
+
+    /**
      * Get unlocked outfits.
      *
      * @return OutfitEndpoint
