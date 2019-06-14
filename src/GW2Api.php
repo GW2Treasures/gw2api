@@ -55,6 +55,7 @@ use GW2Treasures\GW2Api\V2\Endpoint\Title\TitleEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Tokeninfo\TokeninfoEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Traits\TraitEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\World\WorldEndpoint;
+use GW2Treasures\GW2Api\V2\Endpoint\WorldBoss\WorldBossEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\WvW\WvWEndpoint;
 use GW2Treasures\GW2Api\V2\IEndpoint;
 use GW2Treasures\GW2Api\V2\Localization\LocalizationHandler;
@@ -351,6 +352,10 @@ class GW2Api {
 
     public function traits() {
         return new TraitEndpoint( $this );
+    }
+
+    public function worldbosses() {
+        return new WorldBossEndpoint( $this );
     }
 
     public function worlds() {
