@@ -135,6 +135,15 @@ class AccountEndpoint extends Endpoint implements IAuthenticatedEndpoint {
     }
 
     /**
+     * Get acquired mapchests.
+     *
+     * @return MapchestEndpoint
+     */
+    public function mapchests() {
+        return new MapchestEndpoint( $this->api, $this->apiKey );
+    }
+
+    /**
      * Get unlocked masteries.
      *
      * @return MasteryEndpoint
