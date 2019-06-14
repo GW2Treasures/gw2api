@@ -31,6 +31,7 @@ use GW2Treasures\GW2Api\V2\Endpoint\Itemstat\ItemstatEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Legend\LegendEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Mailcarrier\MailcarrierEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Map\MapEndpoint;
+use GW2Treasures\GW2Api\V2\Endpoint\Mapchest\MapchestEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Mastery\MasteryEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Material\MaterialEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Mini\MiniEndpoint;
@@ -251,6 +252,10 @@ class GW2Api {
 
     public function mailcarriers() {
         return new MailcarrierEndpoint($this);
+    }
+
+    public function mapchests() {
+        return new MapchestEndpoint( $this );
     }
 
     public function maps() {
