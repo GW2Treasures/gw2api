@@ -117,6 +117,15 @@ class AccountEndpoint extends Endpoint implements IAuthenticatedEndpoint {
     }
 
     /**
+     * Get the amount of luck this account has.
+     *
+     * @return LuckEndpoint
+     */
+    public function luck() {
+        return new LuckEndpoint( $this->api, $this->apiKey );
+    }
+
+    /**
      * Get unlocked mailcarriers.
      *
      * @return MailcarrierEndpoint
