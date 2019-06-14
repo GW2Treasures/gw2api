@@ -43,6 +43,7 @@ use GW2Treasures\GW2Api\V2\Endpoint\Pet\PetEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Profession\ProfessionEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Pvp\PvpEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Quaggan\QuagganEndpoint;
+use GW2Treasures\GW2Api\V2\Endpoint\Quest\QuestEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Race\RaceEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Raid\RaidEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Recipe\RecipeEndpoint;
@@ -306,6 +307,10 @@ class GW2Api {
 
     public function quaggans() {
         return new QuagganEndpoint( $this );
+    }
+
+    public function quests() {
+        return new QuestEndpoint( $this );
     }
 
     public function races() {
