@@ -54,6 +54,15 @@ class AccountEndpoint extends Endpoint implements IAuthenticatedEndpoint {
     }
 
     /**
+     * Returns information about time-gated recipes that have been crafted by the account since daily-reset.
+     *
+     * @return DailyCraftingEndpoint
+     */
+    public function dailycrafting() {
+        return new DailyCraftingEndpoint( $this->api, $this->apiKey );
+    }
+
+    /**
      * Get daily dungeon completions.
      *
      * @return DungeonEndpoint
