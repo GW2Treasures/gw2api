@@ -17,6 +17,7 @@ use GW2Treasures\GW2Api\V2\Endpoint\Color\ColorEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Commerce\CommerceEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Continent\ContinentEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Currency\CurrencyEndpoint;
+use GW2Treasures\GW2Api\V2\Endpoint\DailyCrafting\DailyCraftingEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Dungeon\DungeonEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Emblem\EmblemEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\File\FileEndpoint;
@@ -202,6 +203,10 @@ class GW2Api {
 
     public function currencies() {
         return new CurrencyEndpoint( $this );
+    }
+
+    public function dailycrafting() {
+        return new DailyCraftingEndpoint( $this );
     }
 
     public function dungeons() {
