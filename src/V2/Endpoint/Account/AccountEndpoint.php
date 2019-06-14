@@ -7,6 +7,7 @@ use GW2Treasures\GW2Api\V2\Authentication\AuthenticatedEndpoint;
 use GW2Treasures\GW2Api\V2\Authentication\IAuthenticatedEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Account\Home\HomeEndpoint;
+use GW2Treasures\GW2Api\V2\Endpoint\Account\Mount\MountEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Account\Pvp\PvpEndpoint;
 
 class AccountEndpoint extends Endpoint implements IAuthenticatedEndpoint {
@@ -140,6 +141,15 @@ class AccountEndpoint extends Endpoint implements IAuthenticatedEndpoint {
      */
     public function minis() {
         return new MiniEndpoint( $this->api, $this->apiKey );
+    }
+
+    /**
+     * Get infos about unlocked mounts.
+     *
+     * @return MountEndpoint
+     */
+    public function mounts() {
+        return new MountEndpoint( $this->api, $this->apiKey );
     }
 
     /**
