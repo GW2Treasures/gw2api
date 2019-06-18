@@ -10,7 +10,7 @@ use GW2Treasures\GW2Api\V2\Endpoint;
 class MountEndpoint extends Endpoint implements IAuthenticatedEndpoint {
     use AuthenticatedEndpoint;
 
-    public function __construct(GW2Api $api, $apiKey) {
+    public function __construct( GW2Api $api, $apiKey ) {
         parent::__construct($api);
 
         $this->apiKey = $apiKey;
