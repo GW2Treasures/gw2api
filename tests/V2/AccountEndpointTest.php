@@ -52,6 +52,16 @@ class AccountEndpointTest extends TestCase {
         $this->assertEquals(24675, $endpoint->get()[1]->upgrades[0]);
     }
 
+    public function testDailycrafting() {
+        $endpoint = $this->api()->account('test')->dailycrafting();
+
+        $this->assertEndpointIsAuthenticated( $endpoint );
+        $this->assertEndpointUrl( 'v2/account/dailycrafting', $endpoint );
+
+        $this->mockResponse('["lump_of_mithrilium","charged_quartz_crystal"]');
+        $this->assertEquals(['lump_of_mithrilium','charged_quartz_crystal'], $endpoint->get());
+    }
+
     public function testDungeon() {
         $endpoint = $this->api()->account('test')->dungeons();
 
@@ -130,6 +140,16 @@ class AccountEndpointTest extends TestCase {
         $this->assertEquals(12138, $endpoint->get()[1]->id);
     }
 
+    public function testLuck() {
+        $endpoint = $this->api()->account('test')->luck();
+
+        $this->assertEndpointIsAuthenticated( $endpoint );
+        $this->assertEndpointUrl( 'v2/account/luck', $endpoint );
+
+        $this->mockResponse('[{"id":"luck","value":496420}]');
+        $this->assertEquals(496420, $endpoint->get());
+    }
+
     public function testMailcarriers() {
         $endpoint = $this->api()->account('test')->mailcarriers();
 
@@ -138,6 +158,16 @@ class AccountEndpointTest extends TestCase {
 
         $this->mockResponse('[15,4]');
         $this->assertEquals([15,4], $endpoint->get());
+    }
+
+    public function testMapchests() {
+        $endpoint = $this->api()->account('test')->mapchests();
+
+        $this->assertEndpointIsAuthenticated( $endpoint );
+        $this->assertEndpointUrl( 'v2/account/mapchests', $endpoint );
+
+        $this->mockResponse('["auric_basin_heros_choice_chest"]');
+        $this->assertEquals('auric_basin_heros_choice_chest', $endpoint->get()[0]);
     }
 
     public function testMasteries() {
@@ -168,6 +198,43 @@ class AccountEndpointTest extends TestCase {
 
         $this->mockResponse('[1,2,3,4,5,6]');
         $this->assertEquals([1,2,3,4,5,6], $endpoint->get());
+    }
+
+    public function testMounts() {
+        $endpoint = $this->api()->account('test')->mounts();
+
+        $this->assertEndpointIsAuthenticated( $endpoint );
+        $this->assertEndpointUrl( 'v2/account/mounts', $endpoint );
+    }
+
+    public function testMountSkins() {
+        $endpoint = $this->api()->account('test')->mounts()->skins();
+
+        $this->assertEndpointIsAuthenticated( $endpoint );
+        $this->assertEndpointUrl( 'v2/account/mounts/skins', $endpoint );
+
+        $this->mockResponse('[92,3,103,95,4,94,1,6,93,2,96,161]');
+        $this->assertEquals([92,3,103,95,4,94,1,6,93,2,96,161], $endpoint->get());
+    }
+
+    public function testMountTypes() {
+        $endpoint = $this->api()->account('test')->mounts()->types();
+
+        $this->assertEndpointIsAuthenticated( $endpoint );
+        $this->assertEndpointUrl( 'v2/account/mounts/types', $endpoint );
+
+        $this->mockResponse('["jackal","griffon","skimmer","springer","raptor"]');
+        $this->assertEquals(["jackal","griffon","skimmer","springer","raptor"], $endpoint->get());
+    }
+
+    public function testNovelties() {
+        $endpoint = $this->api()->account('test')->novelties();
+
+        $this->assertEndpointIsAuthenticated( $endpoint );
+        $this->assertEndpointUrl( 'v2/account/novelties', $endpoint );
+
+        $this->mockResponse('[230,131,4]');
+        $this->assertEquals([230,131,4], $endpoint->get());
     }
 
     public function testOutfits() {
