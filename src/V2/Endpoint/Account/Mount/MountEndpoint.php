@@ -11,7 +11,7 @@ class MountEndpoint extends Endpoint implements IAuthenticatedEndpoint {
     use AuthenticatedEndpoint;
 
     public function __construct( GW2Api $api, $apiKey ) {
-        parent::__construct($api);
+        parent::__construct( $api );
 
         $this->apiKey = $apiKey;
     }
