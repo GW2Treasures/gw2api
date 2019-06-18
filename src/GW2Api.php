@@ -11,7 +11,6 @@ use GW2Treasures\GW2Api\V2\Endpoint\Account\AccountEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Achievement\AchievementEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Backstory\BackstoryEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Build\BuildEndpoint;
-use GW2Treasures\GW2Api\V2\Endpoint\Cat\CatEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Character\CharacterEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Color\ColorEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Commerce\CommerceEndpoint;
@@ -184,10 +183,6 @@ class GW2Api {
 
     public function build() {
         return new BuildEndpoint( $this );
-    }
-
-    public function cats() {
-        return new CatEndpoint( $this );
     }
 
     public function characters( $apiKey ) {
