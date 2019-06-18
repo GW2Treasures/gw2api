@@ -29,6 +29,6 @@ class MountEndpoint extends Endpoint implements IAuthenticatedEndpoint {
         return new SkinEndpoint($this->api, $this->apiKey);
     }
     public function types() {
-        return new TypeEndpoint($this->api, $this->apiKey);
+        return new TypeEndpoint( $this->api, $this->apiKey );
     }
 }
