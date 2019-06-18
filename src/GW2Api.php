@@ -35,7 +35,6 @@ use GW2Treasures\GW2Api\V2\Endpoint\Mastery\MasteryEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Material\MaterialEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Mini\MiniEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Mount\MountEndpoint;
-use GW2Treasures\GW2Api\V2\Endpoint\Node\NodeEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Novelty\NoveltyEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Outfit\OutfitEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Pet\PetEndpoint;
@@ -275,10 +274,6 @@ class GW2Api {
 
     public function mounts() {
         return new MountEndpoint( $this );
-    }
-
-    public function nodes() {
-        return new NodeEndpoint( $this );
     }
     
     public function novelties() {
