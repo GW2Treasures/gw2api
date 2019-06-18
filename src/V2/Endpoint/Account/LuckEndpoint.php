@@ -24,7 +24,7 @@ class LuckEndpoint extends Endpoint implements IAuthenticatedEndpoint {
     }
 
     public function get() {
-	$result	= $this->request()->json();
-	return (isset($result[0]) ? $result[0]->value : false);
+        $result	= $this->request()->json();
+        return (isset($result[0]) ? $result[0]->value : false);
     }
 }
