@@ -90,6 +90,16 @@ class CharacterEndpoint extends Endpoint implements IAuthenticatedEndpoint, IBul
     }
 
     /**
+     * Get completed quests of a character.
+     *
+     * @param $character
+     * @return QuestEndpoint
+     */
+    public function questsOf( $character ) {
+        return new QuestEndpoint( $this->api, $this->apiKey, $character );
+    }
+
+    /**
      * Get unlocked recipes of a character.
      *
      * @param $character

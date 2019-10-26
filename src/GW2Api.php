@@ -16,6 +16,7 @@ use GW2Treasures\GW2Api\V2\Endpoint\Color\ColorEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Commerce\CommerceEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Continent\ContinentEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Currency\CurrencyEndpoint;
+use GW2Treasures\GW2Api\V2\Endpoint\DailyCrafting\DailyCraftingEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Dungeon\DungeonEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Emblem\EmblemEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\File\FileEndpoint;
@@ -29,15 +30,18 @@ use GW2Treasures\GW2Api\V2\Endpoint\Itemstat\ItemstatEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Legend\LegendEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Mailcarrier\MailcarrierEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Map\MapEndpoint;
+use GW2Treasures\GW2Api\V2\Endpoint\Mapchest\MapchestEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Mastery\MasteryEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Material\MaterialEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Mini\MiniEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Mount\MountEndpoint;
+use GW2Treasures\GW2Api\V2\Endpoint\Novelty\NoveltyEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Outfit\OutfitEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Pet\PetEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Profession\ProfessionEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Pvp\PvpEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Quaggan\QuagganEndpoint;
+use GW2Treasures\GW2Api\V2\Endpoint\Quest\QuestEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Race\RaceEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Raid\RaidEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Recipe\RecipeEndpoint;
@@ -49,6 +53,7 @@ use GW2Treasures\GW2Api\V2\Endpoint\Title\TitleEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Tokeninfo\TokeninfoEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Traits\TraitEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\World\WorldEndpoint;
+use GW2Treasures\GW2Api\V2\Endpoint\WorldBoss\WorldBossEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\WvW\WvWEndpoint;
 use GW2Treasures\GW2Api\V2\IEndpoint;
 use GW2Treasures\GW2Api\V2\Localization\LocalizationHandler;
@@ -199,6 +204,10 @@ class GW2Api {
         return new CurrencyEndpoint( $this );
     }
 
+    public function dailycrafting() {
+        return new DailyCraftingEndpoint( $this );
+    }
+
     public function dungeons() {
         return new DungeonEndpoint( $this );
     }
@@ -243,6 +252,10 @@ class GW2Api {
         return new MailcarrierEndpoint($this);
     }
 
+    public function mapchests() {
+        return new MapchestEndpoint( $this );
+    }
+
     public function maps() {
         return new MapEndpoint( $this );
     }
@@ -261,6 +274,10 @@ class GW2Api {
 
     public function mounts() {
         return new MountEndpoint( $this );
+    }
+    
+    public function novelties() {
+        return new NoveltyEndpoint( $this );
     }
 
     public function outfits() {
@@ -281,6 +298,10 @@ class GW2Api {
 
     public function quaggans() {
         return new QuagganEndpoint( $this );
+    }
+
+    public function quests() {
+        return new QuestEndpoint( $this );
     }
 
     public function races() {
@@ -321,6 +342,10 @@ class GW2Api {
 
     public function traits() {
         return new TraitEndpoint( $this );
+    }
+
+    public function worldbosses() {
+        return new WorldBossEndpoint( $this );
     }
 
     public function worlds() {

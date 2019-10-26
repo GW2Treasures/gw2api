@@ -7,6 +7,7 @@ use GW2Treasures\GW2Api\V2\Authentication\AuthenticatedEndpoint;
 use GW2Treasures\GW2Api\V2\Authentication\IAuthenticatedEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Account\Home\HomeEndpoint;
+use GW2Treasures\GW2Api\V2\Endpoint\Account\Mount\MountEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Account\Pvp\PvpEndpoint;
 
 class AccountEndpoint extends Endpoint implements IAuthenticatedEndpoint {
@@ -50,6 +51,15 @@ class AccountEndpoint extends Endpoint implements IAuthenticatedEndpoint {
      */
     public function bank() {
         return new BankEndpoint( $this->api, $this->apiKey );
+    }
+
+    /**
+     * Returns information about time-gated recipes that have been crafted by the account since daily-reset.
+     *
+     * @return DailyCraftingEndpoint
+     */
+    public function dailycrafting() {
+        return new DailyCraftingEndpoint( $this->api, $this->apiKey );
     }
 
     /**
@@ -107,12 +117,30 @@ class AccountEndpoint extends Endpoint implements IAuthenticatedEndpoint {
     }
 
     /**
+     * Get the amount of luck this account has.
+     *
+     * @return LuckEndpoint
+     */
+    public function luck() {
+        return new LuckEndpoint( $this->api, $this->apiKey );
+    }
+
+    /**
      * Get unlocked mailcarriers.
      *
      * @return MailcarrierEndpoint
      */
     public function mailcarriers() {
         return new MailcarrierEndpoint( $this->api, $this->apiKey );
+    }
+
+    /**
+     * Get acquired mapchests.
+     *
+     * @return MapchestEndpoint
+     */
+    public function mapchests() {
+        return new MapchestEndpoint( $this->api, $this->apiKey );
     }
 
     /**
@@ -140,6 +168,24 @@ class AccountEndpoint extends Endpoint implements IAuthenticatedEndpoint {
      */
     public function minis() {
         return new MiniEndpoint( $this->api, $this->apiKey );
+    }
+
+    /**
+     * Get infos about unlocked mounts.
+     *
+     * @return MountEndpoint
+     */
+    public function mounts() {
+        return new MountEndpoint( $this->api, $this->apiKey );
+    }
+
+    /**
+     * Get unlocked novelties.
+     *
+     * @return NoveltyEndpoint
+     */
+    public function novelties() {
+        return new NoveltyEndpoint( $this->api, $this->apiKey );
     }
 
     /**
