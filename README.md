@@ -122,6 +122,7 @@ For all examples it is assumed that you have a variable `$api = new GW2Api()`.
  /v2/commerce/transactions    | [Commerce\Transaction\TransactionEndpoint][Commerce\TransactionEndpoint] <br>`GW2Api::commerce()->transactions()` | 🔒📄
  /v2/continents               | [Continent\ContinentEndpoint][ContinentEndpoint]           <br>`GW2Api::continents()`              | 📦🌏
  /v2/currencies               | [Currency\CurrencyEndpoint][CurrencyEndpoint]              <br>`GW2Api::currencies()`              | 📦🌏
+ /v2/novelties                | [Novelty\NoveltyEndpoint][NoveltyEndpoint]                 <br>`GW2Api::novelties()`               | 📦🌏
  /v2/emblem                   | [Emblem\EmblemEndpoint][EmblemEndpoint]                    <br>`GW2Api::emblem()`                  |
  ~~/v2/events~~               | *disabled*                                                                                         | 🌏🚫
  ~~/v2/events-state~~         | *disabled*                                                                                         | 🚫
@@ -149,6 +150,7 @@ For all examples it is assumed that you have a variable `$api = new GW2Api()`.
  /v2/minis                    | [Mini\MiniEndpoint][MiniEndpoint]                          <br>`GW2Api::minis()`                   | 📦🌏
  /v2/mounts/types             | [Mount\TypeEndpoint][Mount\TypeEndpoint]                   <br>`GW2Api::mounts()->types()`         | 📦🌏
  /v2/mounts/skins             | [Mount\SkinEndpoint][Mount\SkinEndpoint]                   <br>`GW2Api::mounts()->skins()`         | 📦🌏
+ /v2/novelties                | [Novelty\NoveltyEndpoint][NoveltyEndpoint]                 <br>`GW2Api::novelties()`               | 📦🌏
  /v2/outfits                  | [Outfit\OutfitEndpoint][OutfitEndpoint]                    <br>`GW2Api::outfits()`                 | 📦🌏
  /v2/pets                     | [Pet\PetEndpoint][PetEndpoint]                             <br>`GW2Api::pets()`                    | 📦🌏
  /v2/profession               | [Profession\ProfessionEndpoint][ProfessionEndpoint]        <br>`GW2Api::professions()`             | 📦🌏
@@ -615,6 +617,24 @@ Implements [🔒AuthenticatedEndpoint][AuthenticatedEndpoint].
 ##### Example
 ```php
 $api->account('API_KEY')->minis()->get();
+// => [ 1, 2, 3, 4, … ]
+```
+
+#### /v2/account/novelties
+[Account\MiniEndpoint]: #v2accountnovelties
+
+`\GW2Treasures\GW2Api\V2\Endpoint\Account\MiniEndpoint`
+([source](src/V2/Endpoint/Account/NoveltyEndpoint.php))
+
+The [NoveltyEndpoint][NoveltyEndpoint] can be used to look up the minis returned by this endpoint.
+Implements [🔒AuthenticatedEndpoint][AuthenticatedEndpoint].
+
+##### Methods
+ - `get():array` Get unlocked novelties.
+
+##### Example
+```php
+$api->account('API_KEY')->novelties()->get();
 // => [ 1, 2, 3, 4, … ]
 ```
 
@@ -1677,6 +1697,25 @@ Implements [📦BulkEndpoint][BulkEndpoint] and [🌏LocalizedEndpoint][Localize
 ```php
 $api->mounts()->skins()->get(1);
 // => { id: 1, mount: "raptor", … }
+```
+
+
+#### /v2/novelties
+[NoveltyEndpoint]: #v2novelties
+
+`\GW2Treasures\GW2Api\V2\Endpoint\Novelty\NoveltyEndpoint`
+([source](src/V2/Endpoint/Novelty/NoveltyEndpoint.php))
+
+Implements [📦BulkEndpoint][BulkEndpoint] and [🌏LocalizedEndpoint][LocalizedEndpoint].
+
+##### Methods
+ - Inherited methods from [📦BulkEndpoint][BulkEndpoint]
+ - Inherited methods from [🌏LocalizedEndpoint][LocalizedEndpoint]
+
+##### Example
+```php
+$api->novelties()->get(1);
+// => { id: 1, name: "Embellished Kite", … }
 ```
 
 
