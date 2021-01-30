@@ -1,6 +1,6 @@
 <?php
 
-class GliderEndpointTest extends TestCase {
+class GliderEndpointTest extends BasicTestCase {
     public function test() {
         $endpoint = $this->api()->gliders();
 

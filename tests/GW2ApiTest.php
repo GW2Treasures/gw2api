@@ -1,6 +1,6 @@
 <?php
 
-class GW2ApiTest extends TestCase {
+class GW2ApiTest extends BasicTestCase {
     public function testExtractCacertPhar() {
         $api = new \Stubs\GW2ApiStub(true);
 

@@ -3,7 +3,7 @@
 use GW2Treasures\GW2Api\V2\Endpoint\Commerce\Transaction\ListEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Commerce\Transaction\TypeEndpoint;
 
-class CommerceTransactionEndpointTest extends TestCase {
+class CommerceTransactionEndpointTest extends BasicTestCase {
     public function testTransactionUrls() {
         $endpoint = $this->api()->commerce()->transactions('api_key');
 
@@ -82,18 +82,24 @@ class CommerceTransactionEndpointTest extends TestCase {
         $this->assertEquals( 19699, $endpoint->page(0, 1)[0]->item_id );
     }
 
-    /** @expectedException \InvalidArgumentException */
+    /** */
     public function testTypeEndpointValidation() {
+        $this->expectException(\InvalidArgumentException::class);
+
         new TypeEndpoint( $this->api(), 'api_key', 'invalid' );
     }
 
-    /** @expectedException \InvalidArgumentException */
+    /** */
     public function testListEndpointTypeValidation() {
+        $this->expectException(\InvalidArgumentException::class);
+
         new ListEndpoint( $this->api(), 'api_key', 'invalid', 'buys' );
     }
 
-    /** @expectedException \InvalidArgumentException */
+    /** */
     public function testListEndpointListValidation() {
+        $this->expectException(\InvalidArgumentException::class);
+
         new ListEndpoint( $this->api(), 'api_key', 'current', 'invalid' );
     }
 }

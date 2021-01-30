@@ -1,6 +1,6 @@
 <?php
 
-class ContinentEndpointTest extends TestCase {
+class ContinentEndpointTest extends BasicTestCase {
     public function testIds() {
         $endpoint = $this->api()->continents();
 

@@ -2,9 +2,9 @@
 
 namespace V2;
 
-use TestCase;
+use BasicTestCase;
 
-class CharacterEquipmentEndpointTest extends TestCase {
+class CharacterEquipmentEndpointTest extends BasicTestCase {
     public function test() {
         $endpoint = $this->api()->characters('test')->equipmentOf('char');
 

@@ -1,6 +1,6 @@
 <?php
 
-class SpecializationEndpointTest extends TestCase {
+class SpecializationEndpointTest extends BasicTestCase {
     public function test() {
         $endpoint = $this->api()->specializations();
 

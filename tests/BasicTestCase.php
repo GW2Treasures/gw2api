@@ -14,8 +14,9 @@ use GW2Treasures\GW2Api\V2\Localization\ILocalizedEndpoint;
 use GW2Treasures\GW2Api\V2\Pagination\IPaginatedEndpoint;
 use Psr\Http\Message\MessageInterface;
 use Psr\Http\Message\RequestInterface;
+use PHPUnit\Framework\TestCase;
 
-abstract class TestCase extends PHPUnit_Framework_TestCase {
+abstract class BasicTestCase extends TestCase {
     /** @var GW2Api $api */
     protected $api;
 

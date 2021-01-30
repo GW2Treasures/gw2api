@@ -1,6 +1,6 @@
 <?php
 
-class TokeninfoEndpointTest extends TestCase {
+class TokeninfoEndpointTest extends BasicTestCase {
     public function test() {
         $endpoint = $this->api()->tokeninfo('api_key');
 
@@ -17,6 +17,6 @@ class TokeninfoEndpointTest extends TestCase {
         }');
         $tokeninfo = $endpoint->get();
         $this->assertEquals( 'public key', $tokeninfo->name );
-        $this->assertContains( 'characters', $tokeninfo->permissions );
+        $this->assertContainsEquals( 'characters', $tokeninfo->permissions );
     }
 }

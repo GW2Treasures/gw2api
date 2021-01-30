@@ -1,6 +1,6 @@
 <?php
 
-class DungeonEndpointTest extends TestCase {
+class DungeonEndpointTest extends BasicTestCase {
     public function test() {
         $endpoint = $this->api()->dungeons();
 

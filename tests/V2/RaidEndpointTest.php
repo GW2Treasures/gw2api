@@ -1,6 +1,6 @@
 <?php
 
-class RaidEndpointTest extends TestCase {
+class RaidEndpointTest extends BasicTestCase {
     public function test() {
         $endpoint = $this->api()->raids();
 

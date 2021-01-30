@@ -21,7 +21,7 @@
  - Parallel requests for pagination and bulk expansion
 
 ## Requirements
- - PHP >= 5.5
+ - PHP >= 7.2
 
 ## Setup
 

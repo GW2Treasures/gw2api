@@ -1,6 +1,6 @@
 <?php
 
-class QuagganEndpointTest extends TestCase {
+class QuagganEndpointTest extends BasicTestCase {
     public function test() {
         $endpoint = $this->api()->quaggans();
 

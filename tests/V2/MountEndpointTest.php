@@ -1,6 +1,6 @@
 <?php
 
-class MountEndpointTest extends TestCase {
+class MountEndpointTest extends BasicTestCase {
     public function testMounts() {
         $endpoint = $this->api()->mounts();
 

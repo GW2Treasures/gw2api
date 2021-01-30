@@ -2,7 +2,7 @@
 
 use Stubs\EndpointStub;
 
-class EndpointTest extends TestCase {
+class EndpointTest extends BasicTestCase {
     protected function getEndpoint() {
         return new EndpointStub( $this->api() );
     }

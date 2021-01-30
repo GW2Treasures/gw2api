@@ -1,6 +1,6 @@
 <?php
 
-class CharacterEndpointTest extends TestCase {
+class CharacterEndpointTest extends BasicTestCase {
     public function testIds() {
         $endpoint = $this->api()->characters('api_key');
 

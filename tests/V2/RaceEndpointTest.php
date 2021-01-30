@@ -1,6 +1,6 @@
 <?php
 
-class RaceEndpointTest extends TestCase {
+class RaceEndpointTest extends BasicTestCase {
     public function test() {
         $endpoint = $this->api()->races();
 

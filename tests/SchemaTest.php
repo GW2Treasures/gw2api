@@ -6,7 +6,7 @@ use Stubs\EndpointStub;
 const EXPECTED_DEFAULT_SCHEMA = GW2Api::DEFAULT_SCHEMA;
 const EXPECTED_CUSTOM_SCHEMA = '2077-01-01T00:00:00Z';
 
-class SchemaTest extends TestCase {
+class SchemaTest extends BasicTestCase {
     protected function getEndpoint() {
         return new EndpointStub( $this->api() );
     }

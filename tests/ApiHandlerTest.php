@@ -10,7 +10,7 @@ use GW2Treasures\GW2Api\V2\ApiHandler;
 use GW2Treasures\GW2Api\V2\IEndpoint;
 use Stubs\EndpointStub;
 
-class ApiHandlerTest extends TestCase {
+class ApiHandlerTest extends BasicTestCase {
     protected function getEndpoint() {
         return new EndpointStub( $this->api() );
     }
@@ -44,24 +44,27 @@ class ApiHandlerTest extends TestCase {
     }
 
     /**
-     * @expectedException \InvalidArgumentException
      */
     public function testRegisterNull() {
+        $this->expectException(\InvalidArgumentException::class);
+
         $this->api()->registerHandler( null );
     }
 
 
     /**
-     * @expectedException \InvalidArgumentException
      */
     public function testRegisterSubclassOfHandler() {
+        $this->expectException(\InvalidArgumentException::class);
+
         $this->api()->registerHandler( 'stdClass' );
     }
 
     /**
-     * @expectedException \InvalidArgumentException
      */
     public function testRegisterHandler() {
+        $this->expectException(\InvalidArgumentException::class);
+
         $this->api()->registerHandler( $this->getHandler( $this->getEndpoint() ) );
     }
 }

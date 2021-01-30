@@ -1,6 +1,6 @@
 <?php
 
-class CommerceEndpointTest extends TestCase {
+class CommerceEndpointTest extends BasicTestCase {
     public function testCommerceUrl() {
         $endpoint = $this->api()->commerce();
 

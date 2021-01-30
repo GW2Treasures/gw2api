@@ -1,6 +1,6 @@
 <?php
 
-class DailyCraftingEndpointTest extends TestCase {
+class DailyCraftingEndpointTest extends BasicTestCase {
     public function test() {
         $endpoint = $this->api()->dailycrafting();
 

@@ -1,6 +1,6 @@
 <?php
 
-class QuestTest extends TestCase {
+class QuestTest extends BasicTestCase {
     public function test() {
         $endpoint = $this->api()->quests();
 
