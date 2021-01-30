@@ -1,6 +1,6 @@
 <?php
 
-class AccountEndpointTest extends TestCase {
+class AccountEndpointTest extends BasicTestCase {
     public function testAccount() {
         $endpoint = $this->api()->account('api_key');
 
@@ -34,8 +34,10 @@ class AccountEndpointTest extends TestCase {
         $this->assertEquals(1, $endpoint->get(1)->id);
     }
 
-    /** @expectedException Exception */
+    /** */
     public function testAchievementsIds() {
+        $this->expectException(\Exception::class);
+
         $endpoint = $this->api()->account('test')->achievements();
 
         /** @noinspection PhpDeprecationInspection */

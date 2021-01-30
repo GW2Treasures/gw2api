@@ -1,6 +1,6 @@
 <?php
 
-class MiniEndpointTest extends TestCase {
+class MiniEndpointTest extends BasicTestCase {
     public function testMinis() {
         $endpoint = $this->api()->minis();
 

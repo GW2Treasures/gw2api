@@ -1,6 +1,6 @@
 <?php
 
-class PetEndpointTest extends TestCase {
+class PetEndpointTest extends BasicTestCase {
     public function testIds() {
         $endpoint = $this->api()->pets();
 

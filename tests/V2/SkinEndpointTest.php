@@ -1,6 +1,6 @@
 <?php
 
-class SkinEndpointTest extends TestCase {
+class SkinEndpointTest extends BasicTestCase {
     public function test() {
         $endpoint = $this->api()->skins();
 

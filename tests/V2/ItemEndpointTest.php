@@ -1,6 +1,6 @@
 <?php
 
-class ItemEndpointTest extends TestCase {
+class ItemEndpointTest extends BasicTestCase {
     public function testIds() {
         $endpoint = $this->api()->items();
 

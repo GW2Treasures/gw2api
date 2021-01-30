@@ -1,6 +1,6 @@
 <?php
 
-class ItemstatEndpointTest extends TestCase {
+class ItemstatEndpointTest extends BasicTestCase {
     public function test() {
         $endpoint = $this->api()->itemstats();
 

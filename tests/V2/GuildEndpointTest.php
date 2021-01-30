@@ -8,7 +8,7 @@ use GW2Treasures\GW2Api\V2\Endpoint\Guild\Exception\GuildLeaderRequiredException
 use GW2Treasures\GW2Api\V2\Endpoint\Guild\Exception\MembershipRequiredException;
 use GW2Treasures\GW2Api\V2\Endpoint\Guild\IRestrictedGuildEndpoint;
 
-class GuildEndpointTest extends TestCase {
+class GuildEndpointTest extends BasicTestCase {
     public function testGuild() {
         $endpoint = $this->api()->guild();
 
@@ -160,7 +160,7 @@ class GuildEndpointTest extends TestCase {
     }
 
     public function testMembershipRequiredException() {
-        $this->setExpectedException(MembershipRequiredException::class);
+        $this->expectException(MembershipRequiredException::class);
 
         $endpoint = $this->api()->guild()->ranksOf('API_KEY', 'GUILD_ID');
 
@@ -175,7 +175,7 @@ class GuildEndpointTest extends TestCase {
     }
 
     public function testGuildLeaderRequiredException() {
-        $this->setExpectedException(GuildLeaderRequiredException::class);
+        $this->expectException(GuildLeaderRequiredException::class);
 
         $endpoint = $this->api()->guild()->ranksOf('API_KEY', 'GUILD_ID');
 
@@ -193,7 +193,7 @@ class GuildEndpointTest extends TestCase {
      * Test that other exceptions bypass the RestrictedGuildHandler.
      */
     public function testOtherException() {
-        $this->setExpectedException(ApiException::class);
+        $this->expectException(ApiException::class);
 
         $endpoint = $this->api()->guild()->membersOf('API_KEY', 'GUILD_ID');
 

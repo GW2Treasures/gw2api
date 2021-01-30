@@ -1,6 +1,6 @@
 <?php
 
-class RecipeEndpointTest extends TestCase {
+class RecipeEndpointTest extends BasicTestCase {
     public function test() {
         $endpoint = $this->api()->recipes();
 
@@ -17,7 +17,7 @@ class RecipeEndpointTest extends TestCase {
         $this->assertEndpointUrl( 'v2/recipes/search', $endpoint );
 
         $this->mockResponse( '[7259,7260,7261,7262,7263,7264,7265,7266,7267,7268,7269,7270,7271,7272,7273,7274,7275]' );
-        $this->assertContains( 7267, $endpoint->input(43775) );
+        $this->assertContainsEquals( 7267, $endpoint->input(43775) );
         $this->assertEquals('input=43775', $this->getLastRequest()->getUri()->getQuery());
     }
 

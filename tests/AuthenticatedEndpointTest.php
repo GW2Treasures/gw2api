@@ -5,7 +5,7 @@ use GuzzleHttp\Psr7;
 use GW2Treasures\GW2Api\V2\Authentication\Exception\InvalidPermissionsException;
 use Stubs\AuthenticatedEndpointStub;
 
-class AuthenticatedEndpointTest extends TestCase {
+class AuthenticatedEndpointTest extends BasicTestCase {
     protected function getAuthenticatedEndpoint( $apiKey ) {
         return new AuthenticatedEndpointStub( $this->api(), $apiKey );
     }
@@ -24,10 +24,10 @@ class AuthenticatedEndpointTest extends TestCase {
     }
 
     /**
-     * @expectedException \GW2Treasures\GW2Api\V2\Authentication\Exception\AuthenticationException
-     * @expectedExceptionMessage invalid key
      */
     public function testInvalidKey() {
+        $this->expectException(\GW2Treasures\GW2Api\V2\Authentication\Exception\AuthenticationException::class, 'invalid key');
+
         $this->mockResponse( new Response(
             400, [ 'Content-Type' => 'application/json; charset=utf-8' ],
             Psr7\stream_for( '{"text":"invalid key"}' )
@@ -57,10 +57,10 @@ class AuthenticatedEndpointTest extends TestCase {
     }
 
     /**
-     * @expectedException \GW2Treasures\GW2Api\Exception\ApiException
-     * @expectedExceptionMessage unknown error
      */
     public function testUnknownError() {
+        $this->expectException(\GW2Treasures\GW2Api\Exception\ApiException::class, 'unknown error');
+
         $this->mockResponse( new Response(
             400, [ 'Content-Type' => 'application/json; charset=utf-8' ],
             Psr7\stream_for( '{"text":"unknown error"}' )

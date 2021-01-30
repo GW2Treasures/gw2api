@@ -1,6 +1,6 @@
 <?php
 
-class TraitEndpointTest extends TestCase {
+class TraitEndpointTest extends BasicTestCase {
     public function test() {
         $endpoint = $this->api()->traits();
 

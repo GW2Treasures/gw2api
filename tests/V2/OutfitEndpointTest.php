@@ -1,6 +1,6 @@
 <?php
 
-class OutfitEndpointTest extends TestCase {
+class OutfitEndpointTest extends BasicTestCase {
     public function test() {
         $endpoint = $this->api()->outfits();
 

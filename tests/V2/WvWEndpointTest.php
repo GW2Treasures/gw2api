@@ -1,6 +1,6 @@
 <?php
 
-class WvWEndpointTest extends TestCase {
+class WvWEndpointTest extends BasicTestCase {
     public function test() {
         $endpoint = $this->api()->wvw();
 

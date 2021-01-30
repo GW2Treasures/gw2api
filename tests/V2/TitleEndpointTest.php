@@ -1,6 +1,6 @@
 <?php
 
-class TitleEndpointTest extends TestCase {
+class TitleEndpointTest extends BasicTestCase {
     public function test() {
         $endpoint = $this->api()->titles();
 

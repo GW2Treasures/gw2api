@@ -1,6 +1,6 @@
 <?php
 
-class MailcarrierEndpointTest extends TestCase {
+class MailcarrierEndpointTest extends BasicTestCase {
     public function test() {
         $endpoint = $this->api()->mailcarriers();
 

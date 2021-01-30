@@ -1,6 +1,6 @@
 <?php
 
-class BackstoryEndpointTest extends TestCase {
+class BackstoryEndpointTest extends BasicTestCase {
     public function test() {
         $endpoint = $this->api()->backstory();
 

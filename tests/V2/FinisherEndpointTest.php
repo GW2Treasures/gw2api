@@ -1,6 +1,6 @@
 <?php
 
-class FinisherEndpointTest extends TestCase {
+class FinisherEndpointTest extends BasicTestCase {
     public function test() {
         $endpoint = $this->api()->finishers();
 

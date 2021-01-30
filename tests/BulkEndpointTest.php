@@ -4,7 +4,7 @@ use GuzzleHttp\Psr7\Response;
 use GuzzleHttp\Psr7;
 use Stubs\BulkEndpointStub;
 
-class BulkEndpointTest extends TestCase {
+class BulkEndpointTest extends BasicTestCase {
     protected function getBulkEndpoint( $supportsIdsAll = true, $maxPageSize = 10 ) {
         return new BulkEndpointStub( $this->api(), $supportsIdsAll, $maxPageSize );
     }
@@ -109,10 +109,10 @@ class BulkEndpointTest extends TestCase {
 }
 
     /**
-     * @expectedException \GW2Treasures\GW2Api\Exception\ApiException
-     * @expectedExceptionMessage no such id
      */
     public function testInvalidId() {
+        $this->expectException(\GW2Treasures\GW2Api\Exception\ApiException::class, 'no such id');
+
         $this->mockResponse( new Response(
             404, [ 'Content-Type' => 'application/json; charset=utf-8' ],
             Psr7\stream_for( '{"text":"no such id"}' )
@@ -122,10 +122,10 @@ class BulkEndpointTest extends TestCase {
     }
 
     /**
-     * @expectedException \GW2Treasures\GW2Api\Exception\ApiException
-     * @expectedExceptionMessage all ids provided are invalid
      */
     public function testInvalidIds() {
+        $this->expectException(\GW2Treasures\GW2Api\Exception\ApiException::class, 'all ids provided are invalid');
+
         $this->mockResponse( new Response(
             404, [ 'Content-Type' => 'application/json; charset=utf-8' ],
             Psr7\stream_for( '{"text":"all ids provided are invalid"}' )

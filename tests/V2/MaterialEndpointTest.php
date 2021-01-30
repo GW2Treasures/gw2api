@@ -2,9 +2,9 @@
 
 namespace V2;
 
-use TestCase;
+use BasicTestCase;
 
-class MaterialEndpointTest extends TestCase {
+class MaterialEndpointTest extends BasicTestCase {
     public function test() {
         $endpoint = $this->api()->materials();
 

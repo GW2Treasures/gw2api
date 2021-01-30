@@ -1,6 +1,6 @@
 <?php
 
-class StoryEndpointTest extends TestCase {
+class StoryEndpointTest extends BasicTestCase {
     public function test() {
         $endpoint = $this->api()->stories();
 

@@ -3,7 +3,7 @@
 use GW2Treasures\GW2Api\V2\Endpoint\Pvp\GameEndpoint;
 use GW2Treasures\GW2Api\V2\Endpoint\Pvp\StatsEndpoint;
 
-class PvpEndpointTest extends TestCase {
+class PvpEndpointTest extends BasicTestCase {
     public function testPvp() {
         $endpoint = $this->api()->pvp();
 
@@ -32,7 +32,7 @@ class PvpEndpointTest extends TestCase {
         $this->assertEndpointIsBulk($endpoint);
 
         $this->mockResponse('["A9F9FD97-F114-4F97-B2CA-5E814DF0340E","4FDC931F-677F-4369-B20A-9FBB6A63B2B4"]');
-        $this->assertContains('4FDC931F-677F-4369-B20A-9FBB6A63B2B4', $endpoint->ids());
+        $this->assertContainsEquals('4FDC931F-677F-4369-B20A-9FBB6A63B2B4', $endpoint->ids());
     }
 
     public function testHeroes() {
@@ -42,7 +42,7 @@ class PvpEndpointTest extends TestCase {
         $this->assertEndpointIsBulk($endpoint);
 
         $this->mockResponse('{"id":"115C140F-C2F5-40EB-8EA2-C3773F2AE468","name":"Nika"}');
-        $this->assertContains('Nika', $endpoint->get('115C140F-C2F5-40EB-8EA2-C3773F2AE468')->name);
+        $this->assertStringContainsString('Nika', $endpoint->get('115C140F-C2F5-40EB-8EA2-C3773F2AE468')->name);
     }
 
     public function testRanks() {
@@ -65,10 +65,10 @@ class PvpEndpointTest extends TestCase {
 
         $this->mockResponse('{
             "id": "44B85826-B5ED-4890-8C77-82DDF9F2CF2B",
-            "name": "PvP League Season One", 
-            "start": "2015-12-01T20:00:00.000Z", 
-            "end": "2016-01-28T01:00:00.000Z", 
-            "active": false, 
+            "name": "PvP League Season One",
+            "start": "2015-12-01T20:00:00.000Z",
+            "end": "2016-01-28T01:00:00.000Z",
+            "active": false,
             "divisions": []
         }');
         $this->assertEquals('PvP League Season One', $endpoint->get("44B85826-B5ED-4890-8C77-82DDF9F2CF2B")->name);

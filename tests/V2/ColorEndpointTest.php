@@ -1,6 +1,6 @@
 <?php
 
-class ColorEndpointTest extends TestCase {
+class ColorEndpointTest extends BasicTestCase {
     public function testIds() {
         $endpoint = $this->api()->colors();
 
