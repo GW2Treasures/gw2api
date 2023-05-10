@@ -5,7 +5,7 @@ on:
     branches: [ "master" ]
   pull_request:
   merge_group:
-  
+
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
@@ -33,10 +33,10 @@ jobs:
         include:
         - php: '7.2'
           phar: true
-        
+
     steps:
     - uses: actions/checkout@v3
-    
+
     - uses: shivammathur/setup-php@v2
       with:
         php-version: ${{ matrix.php }}
@@ -61,19 +61,19 @@ jobs:
 
     - name: Install dependencies
       run: composer install --prefer-dist --no-progress
-      
+
     - name: Build phar
       if: matrix.phar
       run: php build/build.php
-      
+
     - name: Run Tests
       if: matrix.phar == false
       run: vendor/bin/phpunit --configuration phpunit.xml --coverage-clover clover.xml
-      
+
     - name: Run Tests (phar)
       if: matrix.phar
       run: vendor/bin/phpunit --configuration phpunit.xml --bootstrap build/autoload.php
-      
+
     - name: Download base coverage
       uses: dawidd6/action-download-artifact@v2
       if: github.event_name == 'pull_request' && matrix.phar == false
@@ -99,6 +99,15 @@ jobs:
       with:
           name: coverage-${{ matrix.php }}
           path: ./clover.xml
+
+    - name: Upload phar
+      uses: actions/upload-artifact@v3
+      if: matrix.phar
+      with:
+          name: phar
+          path: |
+            ./build/artifacts/gw2api.phar
+            ./build/artifacts/gw2api.zip
 
   success:
     name: Success
