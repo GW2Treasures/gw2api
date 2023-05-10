@@ -1,6 +1,6 @@
 <?php
 
-class BuildEndpointTest extends TestCase {
+class BuildEndpointTest extends BasicTestCase {
     public function test() {
         $endpoint = $this->api()->build();
 

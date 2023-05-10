@@ -3,22 +3,22 @@
 use GuzzleHttp\Exception\ConnectException;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
-use GuzzleHttp\Psr7;
+use GuzzleHttp\Psr7\Utils;
 use Stubs\EndpointStub;
 
-class ApiExceptionTest extends TestCase {
+class ApiExceptionTest extends BasicTestCase {
     protected function getEndpoint() {
         return new EndpointStub( $this->api() );
     }
 
     /**
-     * @expectedException \GW2Treasures\GW2Api\Exception\ApiException
-     * @expectedExceptionMessage this is the error message.
      */
     public function testMessage() {
+        $this->expectException(\GW2Treasures\GW2Api\Exception\ApiException::class, 'this is the error message.');
+
         $this->mockResponse( new Response(
             400, [ 'Content-Type' => 'application/json; charset=utf-8' ],
-            Psr7\stream_for( '{"text":"this is the error message."}' )
+            Utils::streamFor( '{"text":"this is the error message."}' )
         ));
 
         $this->getEndpoint()->test();
@@ -29,7 +29,7 @@ class ApiExceptionTest extends TestCase {
 
         $this->mockResponse( new Response(
             400, [ 'Content-Type' => 'application/json; charset=utf-8', 'foo' => 'bar' ],
-            Psr7\stream_for( '{"text":"this is the error message."}' )
+            Utils::streamFor( '{"text":"this is the error message."}' )
         ));
 
         try {
@@ -48,22 +48,22 @@ class ApiExceptionTest extends TestCase {
     }
 
     /**
-     * @expectedException \GW2Treasures\GW2Api\Exception\ApiException
-     * @expectedExceptionMessage Unknown GW2Api error
      */
     public function testUnknownException() {
+        $this->expectException(\GW2Treasures\GW2Api\Exception\ApiException::class, 'Unknown GW2Api error');
+
         $this->mockResponse( new Response(
-            500, [], Psr7\stream_for( 'Internal server error' )
+            500, [], Utils::streamFor( 'Internal server error' )
         ));
 
         $this->getEndpoint()->test();
     }
 
     /**
-     * @expectedException \GuzzleHttp\Exception\ConnectException
-     * @expectedExceptionMessage RequestExceptionWithoutResponse
      */
     public function testRequestExceptionWithoutResponse() {
+        $this->expectException(\GuzzleHttp\Exception\ConnectException::class, 'RequestExceptionWithoutResponse');
+
         $this->mockResponse(
             new ConnectException('RequestExceptionWithoutResponse', new Request('GET', 'test/exception'))
         );
@@ -73,13 +73,13 @@ class ApiExceptionTest extends TestCase {
 
 
     /**
-     * @expectedException \GuzzleHttp\Exception\ConnectException
-     * @expectedExceptionMessage RequestManyExceptionWithoutResponse
      */
     public function testRequestManyExceptionWithoutResponse() {
+        $this->expectException(\GuzzleHttp\Exception\ConnectException::class, 'RequestManyExceptionWithoutResponse');
+
         $this->mockResponse( new Response(
             200, [ 'X-Result-Total' => 10, 'Content-Type' => 'application/json; charset=utf-8' ],
-            Psr7\stream_for( '[1,2,3]' )
+            Utils::streamFor( '[1,2,3]' )
         ));
         $this->mockResponse(
             new ConnectException('RequestManyExceptionWithoutResponse', new Request('GET', 'test/exception'))

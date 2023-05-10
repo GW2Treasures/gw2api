@@ -1,11 +1,11 @@
 <?php
 
 use GuzzleHttp\Psr7\Response;
-use GuzzleHttp\Psr7;
+use GuzzleHttp\Psr7\Utils;
 use GW2Treasures\GW2Api\V2\Authentication\Exception\InvalidPermissionsException;
 use Stubs\AuthenticatedEndpointStub;
 
-class AuthenticatedEndpointTest extends TestCase {
+class AuthenticatedEndpointTest extends BasicTestCase {
     protected function getAuthenticatedEndpoint( $apiKey ) {
         return new AuthenticatedEndpointStub( $this->api(), $apiKey );
     }
@@ -24,13 +24,13 @@ class AuthenticatedEndpointTest extends TestCase {
     }
 
     /**
-     * @expectedException \GW2Treasures\GW2Api\V2\Authentication\Exception\AuthenticationException
-     * @expectedExceptionMessage invalid key
      */
     public function testInvalidKey() {
+        $this->expectException(\GW2Treasures\GW2Api\V2\Authentication\Exception\AuthenticationException::class, 'invalid key');
+
         $this->mockResponse( new Response(
             400, [ 'Content-Type' => 'application/json; charset=utf-8' ],
-            Psr7\stream_for( '{"text":"invalid key"}' )
+            Utils::streamFor( '{"text":"invalid key"}' )
         ));
 
         $this->getAuthenticatedEndpoint('invalid')->test();
@@ -39,7 +39,7 @@ class AuthenticatedEndpointTest extends TestCase {
     public function testInvalidPermissions() {
         $this->mockResponse( new Response(
             400, [ 'Content-Type' => 'application/json; charset=utf-8' ],
-            Psr7\stream_for( '{"text":"requires scope characters"}' )
+            Utils::streamFor( '{"text":"requires scope characters"}' )
         ));
 
         try {
@@ -57,13 +57,13 @@ class AuthenticatedEndpointTest extends TestCase {
     }
 
     /**
-     * @expectedException \GW2Treasures\GW2Api\Exception\ApiException
-     * @expectedExceptionMessage unknown error
      */
     public function testUnknownError() {
+        $this->expectException(\GW2Treasures\GW2Api\Exception\ApiException::class, 'unknown error');
+
         $this->mockResponse( new Response(
             400, [ 'Content-Type' => 'application/json; charset=utf-8' ],
-            Psr7\stream_for( '{"text":"unknown error"}' )
+            Utils::streamFor( '{"text":"unknown error"}' )
         ));
 
         $this->getAuthenticatedEndpoint('invalid')->test();

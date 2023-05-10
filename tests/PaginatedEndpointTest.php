@@ -1,10 +1,10 @@
 <?php
 
 use GuzzleHttp\Psr7\Response;
-use GuzzleHttp\Psr7;
+use GuzzleHttp\Psr7\Utils;
 use Stubs\PaginatedEndpointStub;
 
-class PaginatedEndpointTest extends TestCase {
+class PaginatedEndpointTest extends BasicTestCase {
     protected function getPaginatedEndpoint( $maxPageSize = 10 ) {
         return new PaginatedEndpointStub( $this->api(), $maxPageSize );
     }
@@ -28,7 +28,7 @@ class PaginatedEndpointTest extends TestCase {
         $firstResponse = new Response(
             200,
             [ 'X-Result-Total' => 10, 'Content-Type' => 'application/json; charset=utf-8' ],
-            Psr7\stream_for( '[1,2,3]' )
+            Utils::streamFor( '[1,2,3]' )
         );
 
         $this->mockResponse( $firstResponse );
@@ -52,7 +52,7 @@ class PaginatedEndpointTest extends TestCase {
         $firstResponse = new Response(
             200,
             [ 'X-Result-Total' => 3, 'Content-Type' => 'application/json; charset=utf-8' ],
-            Psr7\stream_for( '[1,2,3]' )
+            Utils::streamFor( '[1,2,3]' )
         );
 
         $this->mockResponse( $firstResponse );
@@ -69,7 +69,7 @@ class PaginatedEndpointTest extends TestCase {
         $firstResponse = new Response(
             200,
             [ 'X-Result-Total' => 10, 'Content-Type' => 'application/json; charset=utf-8' ],
-            Psr7\stream_for( '[1,2,3]' )
+            Utils::streamFor( '[1,2,3]' )
         );
 
         $this->mockResponse( $firstResponse );
@@ -94,30 +94,37 @@ class PaginatedEndpointTest extends TestCase {
     }
 
 
-    /** @expectedException \OutOfRangeException */
+    /** */
     public function testPageOutOfRangeLower() {
+        $this->expectException(\OutOfRangeException::class);
+
         $this->getPaginatedEndpoint()->page( -1 );
     }
 
     /**
-     * @expectedException GW2Treasures\GW2Api\V2\Pagination\Exception\PageOutOfRangeException
      */
     public function testPageOutOfRangeUpper() {
+        $this->expectException(\GW2Treasures\GW2Api\V2\Pagination\Exception\PageOutOfRangeException::class);
+
         $this->mockResponse( new Response(
             400, [ 'Content-Type' => 'application/json; charset=utf-8' ],
-            Psr7\stream_for( '{"text":"page out of range. Use page values 0 - 1."}' )
+            Utils::streamFor( '{"text":"page out of range. Use page values 0 - 1."}' )
         ));
 
         $this->getPaginatedEndpoint()->page( 5 );
     }
 
-    /** @expectedException \OutOfRangeException */
+    /** */
     public function testPageSizeOutOfRangeLower() {
+        $this->expectException(\OutOfRangeException::class);
+
         $this->getPaginatedEndpoint()->page( 0, 0 );
     }
 
-    /** @expectedException \OutOfRangeException */
+    /** */
     public function testPageSizeOutOfRangeUpper() {
+        $this->expectException(\OutOfRangeException::class);
+
         $this->getPaginatedEndpoint( 1 )->page( 0, 2 );
     }
 }

@@ -1,10 +1,10 @@
 <?php
 
 use GuzzleHttp\Psr7\Response;
-use GuzzleHttp\Psr7;
+use GuzzleHttp\Psr7\Utils;
 use Stubs\BulkEndpointStub;
 
-class BulkEndpointTest extends TestCase {
+class BulkEndpointTest extends BasicTestCase {
     protected function getBulkEndpoint( $supportsIdsAll = true, $maxPageSize = 10 ) {
         return new BulkEndpointStub( $this->api(), $supportsIdsAll, $maxPageSize );
     }
@@ -44,7 +44,7 @@ class BulkEndpointTest extends TestCase {
         $firstResponse = new Response(
             200,
             [ 'X-Result-Total' => 5, 'Content-Type' => 'application/json; charset=utf-8' ],
-            Psr7\stream_for( '[1,2,3]' )
+            Utils::streamFor( '[1,2,3]' )
         );
         $this->mockResponse( $firstResponse );
         $this->mockResponse( '[4,5]' );
@@ -109,26 +109,26 @@ class BulkEndpointTest extends TestCase {
 }
 
     /**
-     * @expectedException \GW2Treasures\GW2Api\Exception\ApiException
-     * @expectedExceptionMessage no such id
      */
     public function testInvalidId() {
+        $this->expectException(\GW2Treasures\GW2Api\Exception\ApiException::class, 'no such id');
+
         $this->mockResponse( new Response(
             404, [ 'Content-Type' => 'application/json; charset=utf-8' ],
-            Psr7\stream_for( '{"text":"no such id"}' )
+            Utils::streamFor( '{"text":"no such id"}' )
         ));
 
         $this->getBulkEndpoint()->get('invalid');
     }
 
     /**
-     * @expectedException \GW2Treasures\GW2Api\Exception\ApiException
-     * @expectedExceptionMessage all ids provided are invalid
      */
     public function testInvalidIds() {
+        $this->expectException(\GW2Treasures\GW2Api\Exception\ApiException::class, 'all ids provided are invalid');
+
         $this->mockResponse( new Response(
             404, [ 'Content-Type' => 'application/json; charset=utf-8' ],
-            Psr7\stream_for( '{"text":"all ids provided are invalid"}' )
+            Utils::streamFor( '{"text":"all ids provided are invalid"}' )
         ));
 
         $this->getBulkEndpoint()->many(['invalid']);

@@ -3,7 +3,7 @@
 use GW2Treasures\GW2Api\V2\Localization\Exception\InvalidLanguageException;
 use Stubs\LocalizedEndpointStub;
 
-class LocalizedEndpointTest extends TestCase {
+class LocalizedEndpointTest extends BasicTestCase {
     protected function getLocalizedEndpoint() {
         return new LocalizedEndpointStub( $this->api() );
     }

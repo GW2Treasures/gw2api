@@ -2,7 +2,7 @@
 
 use GW2Treasures\GW2Api\V2\Endpoint\Emblem\LayerEndpoint;
 
-class EmblemEndpointTest extends TestCase {
+class EmblemEndpointTest extends BasicTestCase {
     public function testEmblem() {
         $endpoint = $this->api()->emblem();
 
@@ -31,8 +31,10 @@ class EmblemEndpointTest extends TestCase {
         $this->assertEndpointUrl('v2/emblem/foregrounds', $foregrounds);
     }
 
-    /** @expectedException \InvalidArgumentException */
+    /** */
     public function testInvalidLayerType() {
+        $this->expectException(\InvalidArgumentException::class);
+
         new LayerEndpoint($this->api(), 'invalid');
     }
 }

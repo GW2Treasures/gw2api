@@ -4,8 +4,9 @@ use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Middleware;
-use GuzzleHttp\Psr7;
 use GuzzleHttp\Psr7\Response;
+use GuzzleHttp\Psr7\Utils;
+use GuzzleHttp\Psr7\Query;
 use GW2Treasures\GW2Api\GW2Api;
 use GW2Treasures\GW2Api\V2\Authentication\IAuthenticatedEndpoint;
 use GW2Treasures\GW2Api\V2\Bulk\IBulkEndpoint;
@@ -14,8 +15,9 @@ use GW2Treasures\GW2Api\V2\Localization\ILocalizedEndpoint;
 use GW2Treasures\GW2Api\V2\Pagination\IPaginatedEndpoint;
 use Psr\Http\Message\MessageInterface;
 use Psr\Http\Message\RequestInterface;
+use PHPUnit\Framework\TestCase;
 
-abstract class TestCase extends PHPUnit_Framework_TestCase {
+abstract class BasicTestCase extends TestCase {
     /** @var GW2Api $api */
     protected $api;
 
@@ -55,7 +57,7 @@ abstract class TestCase extends PHPUnit_Framework_TestCase {
                 new Response( 200, [
                     'Content-Type' => 'application/json; charset=utf-8',
                     'Content-Language' => $language
-                ], Psr7\stream_for( $response ))
+                ], Utils::streamFor( $response ))
             );
         } elseif( $response instanceof RequestException ) {
             $this->mock->append( $response );
@@ -129,7 +131,7 @@ abstract class TestCase extends PHPUnit_Framework_TestCase {
      * @param string|null $value
      */
     public function assertHasQuery(RequestInterface $request, $name, $value = null) {
-        $query = Psr7\parse_query( $request->getUri()->getQuery() );
+        $query = Query::parse( $request->getUri()->getQuery() );
 
         $this->assertArrayHasKey( $name, $query, "The request does not contain the query parameter $name");
 

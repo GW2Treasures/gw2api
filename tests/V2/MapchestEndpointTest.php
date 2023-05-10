@@ -1,6 +1,6 @@
 <?php
 
-class MapchestEndpointTest extends TestCase {
+class MapchestEndpointTest extends BasicTestCase {
     public function test() {
         $endpoint = $this->api()->mapchests();
 

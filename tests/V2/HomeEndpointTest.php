@@ -1,6 +1,6 @@
 <?php
 
-class HomeEndpointTest extends TestCase {
+class HomeEndpointTest extends BasicTestCase {
     public function testMounts() {
         $endpoint = $this->api()->home();
 

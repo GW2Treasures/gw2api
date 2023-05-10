@@ -1,6 +1,6 @@
 <?php
 
-class WorldEndpointTest extends TestCase {
+class WorldEndpointTest extends BasicTestCase {
     public function test() {
         $endpoint = $this->api()->worlds();
 

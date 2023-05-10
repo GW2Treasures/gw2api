@@ -1,6 +1,6 @@
 <?php
 
-class CurrencyEndpointTest extends TestCase {
+class CurrencyEndpointTest extends BasicTestCase {
     public function test() {
         $endpoint = $this->api()->currencies();
 

@@ -1,6 +1,6 @@
 <?php
 
-use GuzzleHttp\Psr7;
+use GuzzleHttp\Psr7\Utils;
 use GuzzleHttp\Psr7\Response;
 use GW2Treasures\GW2Api\Exception\ApiException;
 use GW2Treasures\GW2Api\V2\Authentication\IAuthenticatedEndpoint;
@@ -8,7 +8,7 @@ use GW2Treasures\GW2Api\V2\Endpoint\Guild\Exception\GuildLeaderRequiredException
 use GW2Treasures\GW2Api\V2\Endpoint\Guild\Exception\MembershipRequiredException;
 use GW2Treasures\GW2Api\V2\Endpoint\Guild\IRestrictedGuildEndpoint;
 
-class GuildEndpointTest extends TestCase {
+class GuildEndpointTest extends BasicTestCase {
     public function testGuild() {
         $endpoint = $this->api()->guild();
 
@@ -160,7 +160,7 @@ class GuildEndpointTest extends TestCase {
     }
 
     public function testMembershipRequiredException() {
-        $this->setExpectedException(MembershipRequiredException::class);
+        $this->expectException(MembershipRequiredException::class);
 
         $endpoint = $this->api()->guild()->ranksOf('API_KEY', 'GUILD_ID');
 
@@ -168,14 +168,14 @@ class GuildEndpointTest extends TestCase {
 
         $this->mockResponse( new Response(
             400, [ 'Content-Type' => 'application/json; charset=utf-8' ],
-            Psr7\stream_for( '{"text":"membership required"}' )
+            Utils::streamFor( '{"text":"membership required"}' )
         ));
 
         $endpoint->get();
     }
 
     public function testGuildLeaderRequiredException() {
-        $this->setExpectedException(GuildLeaderRequiredException::class);
+        $this->expectException(GuildLeaderRequiredException::class);
 
         $endpoint = $this->api()->guild()->ranksOf('API_KEY', 'GUILD_ID');
 
@@ -183,7 +183,7 @@ class GuildEndpointTest extends TestCase {
 
         $this->mockResponse( new Response(
             400, [ 'Content-Type' => 'application/json; charset=utf-8' ],
-            Psr7\stream_for( '{"text":"access restricted to guild leaders"}' )
+            Utils::streamFor( '{"text":"access restricted to guild leaders"}' )
         ));
 
         $endpoint->get();
@@ -193,7 +193,7 @@ class GuildEndpointTest extends TestCase {
      * Test that other exceptions bypass the RestrictedGuildHandler.
      */
     public function testOtherException() {
-        $this->setExpectedException(ApiException::class);
+        $this->expectException(ApiException::class);
 
         $endpoint = $this->api()->guild()->membersOf('API_KEY', 'GUILD_ID');
 
@@ -201,7 +201,7 @@ class GuildEndpointTest extends TestCase {
 
         $this->mockResponse( new Response(
             400, [ 'Content-Type' => 'application/json; charset=utf-8' ],
-            Psr7\stream_for( '{"text":"unknown error"}' )
+            Utils::streamFor( '{"text":"unknown error"}' )
         ));
 
         $endpoint->get();

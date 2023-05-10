@@ -1,6 +1,6 @@
 <?php
 
-class LegendEndpointTest extends TestCase {
+class LegendEndpointTest extends BasicTestCase {
     public function testLegends() {
         $endpoint = $this->api()->legends();
 

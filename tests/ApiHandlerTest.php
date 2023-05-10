@@ -2,15 +2,15 @@
 
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
-use GuzzleHttp\Psr7;
 use GuzzleHttp\Psr7\Uri;
+use GuzzleHttp\Psr7\Utils;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use GW2Treasures\GW2Api\V2\ApiHandler;
 use GW2Treasures\GW2Api\V2\IEndpoint;
 use Stubs\EndpointStub;
 
-class ApiHandlerTest extends TestCase {
+class ApiHandlerTest extends BasicTestCase {
     protected function getEndpoint() {
         return new EndpointStub( $this->api() );
     }
@@ -26,7 +26,7 @@ class ApiHandlerTest extends TestCase {
             ? [ 'Content-Type' => $contentType ]
             : [];
 
-        return new Response( 200, $header, Psr7\stream_for( $content ));
+        return new Response( 200, $header, Utils::streamFor( $content ));
     }
 
     public function testAsJson() {
@@ -44,24 +44,27 @@ class ApiHandlerTest extends TestCase {
     }
 
     /**
-     * @expectedException \InvalidArgumentException
      */
     public function testRegisterNull() {
+        $this->expectException(\InvalidArgumentException::class);
+
         $this->api()->registerHandler( null );
     }
 
 
     /**
-     * @expectedException \InvalidArgumentException
      */
     public function testRegisterSubclassOfHandler() {
+        $this->expectException(\InvalidArgumentException::class);
+
         $this->api()->registerHandler( 'stdClass' );
     }
 
     /**
-     * @expectedException \InvalidArgumentException
      */
     public function testRegisterHandler() {
+        $this->expectException(\InvalidArgumentException::class);
+
         $this->api()->registerHandler( $this->getHandler( $this->getEndpoint() ) );
     }
 }

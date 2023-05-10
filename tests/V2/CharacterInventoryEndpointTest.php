@@ -2,9 +2,9 @@
 
 namespace V2;
 
-use TestCase;
+use BasicTestCase;
 
-class CharacterInventoryEndpointTest extends TestCase {
+class CharacterInventoryEndpointTest extends BasicTestCase {
     public function test() {
         $endpoint = $this->api()->characters('test')->inventoryOf('char');
 

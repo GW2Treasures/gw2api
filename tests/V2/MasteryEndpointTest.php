@@ -1,6 +1,6 @@
 <?php
 
-class MasteryEndpointTest extends TestCase {
+class MasteryEndpointTest extends BasicTestCase {
     public function test() {
         $endpoint = $this->api()->masteries();
 

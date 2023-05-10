@@ -1,6 +1,6 @@
 <?php
 
-class MapEndpointTest extends TestCase {
+class MapEndpointTest extends BasicTestCase {
     public function test() {
         $endpoint = $this->api()->maps();
 

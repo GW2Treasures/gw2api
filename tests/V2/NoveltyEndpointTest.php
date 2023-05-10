@@ -1,6 +1,6 @@
 <?php
 
-class NoveltyEndpointTest extends TestCase {
+class NoveltyEndpointTest extends BasicTestCase {
     public function test() {
         $endpoint = $this->api()->novelties();
 

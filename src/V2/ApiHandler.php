@@ -2,7 +2,7 @@
 
 namespace GW2Treasures\GW2Api\V2;
 
-use GuzzleHttp\Psr7;
+use GuzzleHttp\Psr7\Query;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
@@ -50,7 +50,7 @@ abstract class ApiHandler {
      * @return array
      */
     protected function getQueryAsArray( RequestInterface $request ) {
-        return Psr7\parse_query($request->getUri()->getQuery());
+        return Query::parse($request->getUri()->getQuery());
     }
 
     /**
