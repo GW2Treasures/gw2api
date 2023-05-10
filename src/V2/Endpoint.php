@@ -77,6 +77,7 @@ abstract class Endpoint implements IEndpoint {
      * @param string   $method
      * @param array    $options
      * @return ApiResponse
+     * @throws ApiException|GuzzleException
      */
     protected function request( array $query = [], $url = null, $method = 'GET', $options = [] ) {
         $request = $this->createRequest( $query, $url, $method, $options );

@@ -1,6 +1,6 @@
 <?php
 
-use GuzzleHttp\Exception\ConnectException;
+use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
 use GuzzleHttp\Psr7\Utils;
@@ -62,10 +62,10 @@ class ApiExceptionTest extends BasicTestCase {
     /**
      */
     public function testRequestExceptionWithoutResponse() {
-        $this->expectException(\GuzzleHttp\Exception\ConnectException::class, 'RequestExceptionWithoutResponse');
+        $this->expectException(RequestException::class, 'RequestExceptionWithoutResponse');
 
         $this->mockResponse(
-            new ConnectException('RequestExceptionWithoutResponse', new Request('GET', 'test/exception'))
+            new RequestException('RequestExceptionWithoutResponse', new Request('GET', 'test/exception'))
         );
 
         $this->getEndpoint()->test();
@@ -75,14 +75,14 @@ class ApiExceptionTest extends BasicTestCase {
     /**
      */
     public function testRequestManyExceptionWithoutResponse() {
-        $this->expectException(\GuzzleHttp\Exception\ConnectException::class, 'RequestManyExceptionWithoutResponse');
+        $this->expectException(RequestException::class, 'RequestManyExceptionWithoutResponse');
 
         $this->mockResponse( new Response(
             200, [ 'X-Result-Total' => 10, 'Content-Type' => 'application/json; charset=utf-8' ],
             Utils::streamFor( '[1,2,3]' )
         ));
         $this->mockResponse(
-            new ConnectException('RequestManyExceptionWithoutResponse', new Request('GET', 'test/exception'))
+            new RequestException('RequestManyExceptionWithoutResponse', new Request('GET', 'test/exception'))
         );
 
         $this->getEndpoint()->testMany(2);
