@@ -36,6 +36,8 @@ jobs:
         php-version: ${{ matrix.php }}
         ini-values: |
           phar.readonly=false
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Validate composer.json and composer.lock
       run: composer validate --strict
