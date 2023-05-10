@@ -90,6 +90,8 @@ jobs:
       with:
           base-file: ./coverage-base/clover.xml
           file: ./clover.xml
+          with-chart: false
+          signature: PHP ${{ matrix.php }}
 
     - name: Upload coverage
       uses: actions/upload-artifact@v3
