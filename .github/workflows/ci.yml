@@ -73,6 +73,23 @@ jobs:
       if: matrix.phar
       run: vendor/bin/phpunit --configuration phpunit.xml --bootstrap build/autoload.php
       
+    - name: Download base coverage
+      uses: dawidd6/action-download-artifact@v2
+      if: ${{ github.event_name == 'pull_request' }}
+      continue-on-error: true
+      with:
+          branch: master
+          name: coverage-${{ matrix.php }}
+          path: ./coverage-base/
+          search_artifacts: true
+          workflow: .github/workflows/ci.yml
+    - name: Report coverage
+      if: ${{ github.event_name == 'pull_request' }}
+      uses: lucassabreu/comment-coverage-clover@v0.9.1
+      with:
+          base-file: ./coverage-base/clover.xml
+          file: ./clover.xml
+
     - name: Upload coverage
       uses: actions/upload-artifact@v3
       if: matrix.phar == false
