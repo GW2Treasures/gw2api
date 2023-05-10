@@ -3,6 +3,7 @@
 namespace GW2Treasures\GW2Api\V2;
 
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Pool;
 use GuzzleHttp\Psr7\Request;
@@ -101,7 +102,7 @@ abstract class Endpoint implements IEndpoint {
         }
 
         foreach( $this->handlers as $handler ) {
-            $handler->onResponse( $response, $request );
+            $response = $handler->onResponse( $response, $request );
         }
 
         return new ApiResponse( $response );
@@ -154,7 +155,7 @@ abstract class Endpoint implements IEndpoint {
             }
 
             foreach( $this->handlers as $handler ) {
-                $handler->onResponse( $response, $request );
+                $response = $handler->onResponse( $response, $request );
             }
 
             $responses[] = new ApiResponse( $response );

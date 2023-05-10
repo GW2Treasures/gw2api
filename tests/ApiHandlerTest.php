@@ -21,7 +21,7 @@ class ApiHandlerTest extends BasicTestCase {
         return $handler;
     }
 
-    protected function makeResponse( $content, $contentType = 'application/json; charset=utf-8' ) {
+    public static function makeResponse( $content, $contentType = 'application/json; charset=utf-8' ) {
         $header = !is_null( $contentType )
             ? [ 'Content-Type' => $contentType ]
             : [];
@@ -67,6 +67,16 @@ class ApiHandlerTest extends BasicTestCase {
 
         $this->api()->registerHandler( $this->getHandler( $this->getEndpoint() ) );
     }
+
+    public function testReturnCustomResponse() {
+        $endpoint = $this->getEndpoint();
+        $this->getHandler($endpoint);
+
+        $this->mockResponse('{ "handler": false }');
+        $response = $endpoint->test();
+
+        $this->assertTrue( $response->handler );
+    }
 }
 
 class TestHandler extends ApiHandler {
@@ -76,5 +86,9 @@ class TestHandler extends ApiHandler {
 
     public function queryAsArray( RequestInterface $request ) {
         return $this->getQueryAsArray($request);
+    }
+
+    public function onResponse( ResponseInterface $response, RequestInterface $request ) {
+        return ApiHandlerTest::makeResponse('{ "handler": true }');
     }
 }
