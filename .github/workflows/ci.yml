@@ -76,7 +76,7 @@ jobs:
       
     - name: Download base coverage
       uses: dawidd6/action-download-artifact@v2
-      if: ${{ github.event_name == 'pull_request' }}
+      if: github.event_name == 'pull_request' && matrix.phar == false
       continue-on-error: true
       with:
           branch: master
@@ -85,7 +85,7 @@ jobs:
           search_artifacts: true
           workflow: .github/workflows/ci.yml
     - name: Report coverage
-      if: ${{ github.event_name == 'pull_request' }}
+      if: github.event_name == 'pull_request' && matrix.phar == false
       uses: lucassabreu/comment-coverage-clover@v0.9.1
       with:
           base-file: ./coverage-base/clover.xml
