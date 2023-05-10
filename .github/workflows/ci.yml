@@ -34,6 +34,7 @@ jobs:
     - uses: shivammathur/setup-php@v2
       with:
         php-version: ${{ matrix.php }}
+        tools: phpunit:8
         ini-values: |
           phar.readonly=false
       env:
@@ -62,9 +63,9 @@ jobs:
       
     - name: Run Tests
       if: matrix.phar == false
-      run: vendor/bin/phpunit --configuration phpunit.xml --coverage-clover clover.xml
+      run: phpunit --configuration phpunit.xml --coverage-clover clover.xml
       
     - name: Run Tests (phar)
       if: matrix.phar
-      run: vendor/bin/phpunit --configuration phpunit.xml --bootstrap build/autoload.php
+      run: phpunit --configuration phpunit.xml --bootstrap build/autoload.php
 
