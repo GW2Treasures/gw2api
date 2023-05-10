@@ -1,0 +1,81 @@
+name: CI
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+  merge_group:
+  
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
+
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: Build / PHP ${{ matrix.php }}${{ matrix.phar && ' (phar)' || '' }}
+    runs-on: ubuntu-latest
+    continue-on-error: ${{ startsWith(matrix.php, '8.') }}
+    strategy:
+      fail-fast: false
+      matrix:
+        php: 
+        - '7.2' # version used by gw2treasures.com
+        - '7.4' # latest 7.x
+        - '8.1' # stable 8
+        - '8.2' # stable 8
+        phar:
+        - false
+        include:
+        - php: '7.2'
+          phar: true
+        
+    steps:
+    - uses: actions/checkout@v3
+    
+    - uses: shivammathur/setup-php@v2
+      with:
+        php-version: ${{ matrix.php }}
+        ini-values: |
+          phar.readonly=false
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Validate composer.json and composer.lock
+      run: composer validate --strict
+
+    - name: Get composer cache directory
+      id: composer-cache
+      run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
+
+    - name: Cache dependencies
+      uses: actions/cache@v3
+      with:
+        path: ${{ steps.composer-cache.outputs.dir }}
+        key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.json') }}
+        restore-keys: ${{ runner.os }}-composer-
+
+    - name: Install dependencies
+      run: composer install --prefer-dist --no-progress
+      
+    - name: Build phar
+      if: matrix.phar
+      run: php build/build.php
+      
+    - name: Run Tests
+      if: matrix.phar == false
+      run: vendor/bin/phpunit --configuration phpunit.xml --coverage-clover clover.xml
+      
+    - name: Run Tests (phar)
+      if: matrix.phar
+      run: vendor/bin/phpunit --configuration phpunit.xml --bootstrap build/autoload.php
+
+  success:
+    name: Success
+    needs: [build]
+    runs-on: ubuntu-latest
+    steps:
+    - run: echo "Success"
