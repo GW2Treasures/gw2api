@@ -1,18 +1,11 @@
 # gw2treasures/gw2api
 
 <!-- badges -->
-[![version][packagist-badge]][packagist]
-[![license][license-badge]][packagist]
-[![Travis][travis-badge]][travis]
-[![Coverage][coverage-badge]][coverage]
+[![version][packagist-badge]](https://packagist.org/packages/gw2treasures/gw2api)
+[![license][license-badge]](./LICENSE)
 
 [packagist-badge]: https://img.shields.io/packagist/v/gw2treasures/gw2api.svg?style=flat-square
 [license-badge]: https://img.shields.io/packagist/l/gw2treasures/gw2api.svg?style=flat-square
-[travis-badge]: https://img.shields.io/travis/GW2Treasures/gw2api.svg?style=flat-square
-[coverage-badge]: https://img.shields.io/codecov/c/github/GW2Treasures/gw2api.svg?style=flat-square
-[packagist]: https://packagist.org/packages/gw2treasures/gw2api
-[travis]: https://travis-ci.org/GW2Treasures/gw2api
-[coverage]: https://codecov.io/github/GW2Treasures/gw2api
 
 **PHP wrapper for the Guild Wars 2 API**.
 
@@ -41,7 +34,7 @@ include 'vendor/autoload.php';
 ### Using the gw2api.phar archive
 
 You need to download the [latest gw2api.phar](https://github.com/GW2Treasures/gw2api/releases/latest)
-and the [guzzle.phar of the latest 6.x version](https://github.com/guzzle/guzzle/releases/latest) of the
+and the [guzzle.phar of the latest 7.x version](https://github.com/guzzle/guzzle/releases/latest) of the
 [guzzle](https://github.com/guzzle/guzzle) library and place both files in your project directory.
 Now you can include both files to start using the GW2 API wrapper.
 
