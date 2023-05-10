@@ -168,7 +168,7 @@ class GuildEndpointTest extends BasicTestCase {
 
         $this->mockResponse( new Response(
             400, [ 'Content-Type' => 'application/json; charset=utf-8' ],
-            Utils::stream_for( '{"text":"membership required"}' )
+            Utils::streamFor( '{"text":"membership required"}' )
         ));
 
         $endpoint->get();
@@ -183,7 +183,7 @@ class GuildEndpointTest extends BasicTestCase {
 
         $this->mockResponse( new Response(
             400, [ 'Content-Type' => 'application/json; charset=utf-8' ],
-            Utils::stream_for( '{"text":"access restricted to guild leaders"}' )
+            Utils::streamFor( '{"text":"access restricted to guild leaders"}' )
         ));
 
         $endpoint->get();
@@ -201,7 +201,7 @@ class GuildEndpointTest extends BasicTestCase {
 
         $this->mockResponse( new Response(
             400, [ 'Content-Type' => 'application/json; charset=utf-8' ],
-            Utils::stream_for( '{"text":"unknown error"}' )
+            Utils::streamFor( '{"text":"unknown error"}' )
         ));
 
         $endpoint->get();

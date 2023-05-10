@@ -44,7 +44,7 @@ class BulkEndpointTest extends BasicTestCase {
         $firstResponse = new Response(
             200,
             [ 'X-Result-Total' => 5, 'Content-Type' => 'application/json; charset=utf-8' ],
-            Utils::stream_for( '[1,2,3]' )
+            Utils::streamFor( '[1,2,3]' )
         );
         $this->mockResponse( $firstResponse );
         $this->mockResponse( '[4,5]' );
@@ -115,7 +115,7 @@ class BulkEndpointTest extends BasicTestCase {
 
         $this->mockResponse( new Response(
             404, [ 'Content-Type' => 'application/json; charset=utf-8' ],
-            Utils::stream_for( '{"text":"no such id"}' )
+            Utils::streamFor( '{"text":"no such id"}' )
         ));
 
         $this->getBulkEndpoint()->get('invalid');
@@ -128,7 +128,7 @@ class BulkEndpointTest extends BasicTestCase {
 
         $this->mockResponse( new Response(
             404, [ 'Content-Type' => 'application/json; charset=utf-8' ],
-            Utils::stream_for( '{"text":"all ids provided are invalid"}' )
+            Utils::streamFor( '{"text":"all ids provided are invalid"}' )
         ));
 
         $this->getBulkEndpoint()->many(['invalid']);

@@ -30,7 +30,7 @@ class AuthenticatedEndpointTest extends BasicTestCase {
 
         $this->mockResponse( new Response(
             400, [ 'Content-Type' => 'application/json; charset=utf-8' ],
-            Utils::stream_for( '{"text":"invalid key"}' )
+            Utils::streamFor( '{"text":"invalid key"}' )
         ));
 
         $this->getAuthenticatedEndpoint('invalid')->test();
@@ -39,7 +39,7 @@ class AuthenticatedEndpointTest extends BasicTestCase {
     public function testInvalidPermissions() {
         $this->mockResponse( new Response(
             400, [ 'Content-Type' => 'application/json; charset=utf-8' ],
-            Utils::stream_for( '{"text":"requires scope characters"}' )
+            Utils::streamFor( '{"text":"requires scope characters"}' )
         ));
 
         try {
@@ -63,7 +63,7 @@ class AuthenticatedEndpointTest extends BasicTestCase {
 
         $this->mockResponse( new Response(
             400, [ 'Content-Type' => 'application/json; charset=utf-8' ],
-            Utils::stream_for( '{"text":"unknown error"}' )
+            Utils::streamFor( '{"text":"unknown error"}' )
         ));
 
         $this->getAuthenticatedEndpoint('invalid')->test();

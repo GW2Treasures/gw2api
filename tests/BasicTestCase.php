@@ -57,7 +57,7 @@ abstract class BasicTestCase extends TestCase {
                 new Response( 200, [
                     'Content-Type' => 'application/json; charset=utf-8',
                     'Content-Language' => $language
-                ], Utils::stream_for( $response ))
+                ], Utils::streamFor( $response ))
             );
         } elseif( $response instanceof RequestException ) {
             $this->mock->append( $response );

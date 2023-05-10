@@ -28,7 +28,7 @@ class PaginatedEndpointTest extends BasicTestCase {
         $firstResponse = new Response(
             200,
             [ 'X-Result-Total' => 10, 'Content-Type' => 'application/json; charset=utf-8' ],
-            Utils::stream_for( '[1,2,3]' )
+            Utils::streamFor( '[1,2,3]' )
         );
 
         $this->mockResponse( $firstResponse );
@@ -52,7 +52,7 @@ class PaginatedEndpointTest extends BasicTestCase {
         $firstResponse = new Response(
             200,
             [ 'X-Result-Total' => 3, 'Content-Type' => 'application/json; charset=utf-8' ],
-            Utils::stream_for( '[1,2,3]' )
+            Utils::streamFor( '[1,2,3]' )
         );
 
         $this->mockResponse( $firstResponse );
@@ -69,7 +69,7 @@ class PaginatedEndpointTest extends BasicTestCase {
         $firstResponse = new Response(
             200,
             [ 'X-Result-Total' => 10, 'Content-Type' => 'application/json; charset=utf-8' ],
-            Utils::stream_for( '[1,2,3]' )
+            Utils::streamFor( '[1,2,3]' )
         );
 
         $this->mockResponse( $firstResponse );
@@ -108,7 +108,7 @@ class PaginatedEndpointTest extends BasicTestCase {
 
         $this->mockResponse( new Response(
             400, [ 'Content-Type' => 'application/json; charset=utf-8' ],
-            Utils::stream_for( '{"text":"page out of range. Use page values 0 - 1."}' )
+            Utils::streamFor( '{"text":"page out of range. Use page values 0 - 1."}' )
         ));
 
         $this->getPaginatedEndpoint()->page( 5 );

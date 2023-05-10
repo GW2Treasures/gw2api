@@ -26,7 +26,7 @@ class ApiHandlerTest extends BasicTestCase {
             ? [ 'Content-Type' => $contentType ]
             : [];
 
-        return new Response( 200, $header, Utils::stream_for( $content ));
+        return new Response( 200, $header, Utils::streamFor( $content ));
     }
 
     public function testAsJson() {
