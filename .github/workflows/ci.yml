@@ -72,6 +72,12 @@ jobs:
     - name: Run Tests (phar)
       if: matrix.phar
       run: vendor/bin/phpunit --configuration phpunit.xml --bootstrap build/autoload.php
+      
+    - name: Upload coverage
+      uses: actions/upload-artifact@v3
+      with:
+          name: coverage-${{ matrix.php }}
+          path: ./clover.xml
 
   success:
     name: Success
