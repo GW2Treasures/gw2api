@@ -69,8 +69,12 @@ abstract class ApiHandler {
      *
      * @param ResponseInterface $response
      * @param RequestInterface  $request
+     *
+     * @return ResponseInterface
      */
-    public function onResponse( ResponseInterface $response, RequestInterface $request ) { }
+    public function onResponse( ResponseInterface $response, RequestInterface $request ) {
+        return $response;
+    }
 
     /**
      * Handle errors by the api.

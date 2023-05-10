@@ -39,5 +39,7 @@ class LocalizationHandler extends ApiHandler {
             $message = 'Invalid language (expected: ' . $requestLanguage . '; actual: ' . $responseLanguage . ')';
             throw new InvalidLanguageException( $message, $requestLanguage, $responseLanguage, $response );
         }
+
+        return $response;
     }
 }
