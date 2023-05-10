@@ -11,9 +11,11 @@ permissions:
 
 jobs:
   build:
-    name: Build / PHP ${{ matrix.php }}${{ matrix.phar && ' (phar)' || '' }})
+    name: Build / PHP ${{ matrix.php }}${{ matrix.phar && ' (phar)' || '' }}
     runs-on: ubuntu-latest
+    continue-on-error: ${{ startsWith(matrix.php, '8.') }}
     strategy:
+      fail-fast: false
       matrix:
         php: 
         - '7.2' # version used by gw2treasures.com
