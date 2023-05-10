@@ -1,6 +1,6 @@
 <?php
 
-use GuzzleHttp\Psr7;
+use GuzzleHttp\Psr7\Utils;
 use GuzzleHttp\Psr7\Response;
 use GW2Treasures\GW2Api\Exception\ApiException;
 use GW2Treasures\GW2Api\V2\Authentication\IAuthenticatedEndpoint;
@@ -168,7 +168,7 @@ class GuildEndpointTest extends BasicTestCase {
 
         $this->mockResponse( new Response(
             400, [ 'Content-Type' => 'application/json; charset=utf-8' ],
-            Psr7\stream_for( '{"text":"membership required"}' )
+            Utils::stream_for( '{"text":"membership required"}' )
         ));
 
         $endpoint->get();
@@ -183,7 +183,7 @@ class GuildEndpointTest extends BasicTestCase {
 
         $this->mockResponse( new Response(
             400, [ 'Content-Type' => 'application/json; charset=utf-8' ],
-            Psr7\stream_for( '{"text":"access restricted to guild leaders"}' )
+            Utils::stream_for( '{"text":"access restricted to guild leaders"}' )
         ));
 
         $endpoint->get();
@@ -201,7 +201,7 @@ class GuildEndpointTest extends BasicTestCase {
 
         $this->mockResponse( new Response(
             400, [ 'Content-Type' => 'application/json; charset=utf-8' ],
-            Psr7\stream_for( '{"text":"unknown error"}' )
+            Utils::stream_for( '{"text":"unknown error"}' )
         ));
 
         $endpoint->get();

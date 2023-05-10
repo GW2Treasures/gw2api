@@ -1,7 +1,7 @@
 <?php
 
 use GuzzleHttp\Psr7\Response;
-use GuzzleHttp\Psr7;
+use GuzzleHttp\Psr7\Utils;
 use GW2Treasures\GW2Api\V2\Authentication\Exception\InvalidPermissionsException;
 use Stubs\AuthenticatedEndpointStub;
 
@@ -30,7 +30,7 @@ class AuthenticatedEndpointTest extends BasicTestCase {
 
         $this->mockResponse( new Response(
             400, [ 'Content-Type' => 'application/json; charset=utf-8' ],
-            Psr7\stream_for( '{"text":"invalid key"}' )
+            Utils::stream_for( '{"text":"invalid key"}' )
         ));
 
         $this->getAuthenticatedEndpoint('invalid')->test();
@@ -39,7 +39,7 @@ class AuthenticatedEndpointTest extends BasicTestCase {
     public function testInvalidPermissions() {
         $this->mockResponse( new Response(
             400, [ 'Content-Type' => 'application/json; charset=utf-8' ],
-            Psr7\stream_for( '{"text":"requires scope characters"}' )
+            Utils::stream_for( '{"text":"requires scope characters"}' )
         ));
 
         try {
@@ -63,7 +63,7 @@ class AuthenticatedEndpointTest extends BasicTestCase {
 
         $this->mockResponse( new Response(
             400, [ 'Content-Type' => 'application/json; charset=utf-8' ],
-            Psr7\stream_for( '{"text":"unknown error"}' )
+            Utils::stream_for( '{"text":"unknown error"}' )
         ));
 
         $this->getAuthenticatedEndpoint('invalid')->test();

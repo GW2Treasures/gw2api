@@ -3,7 +3,7 @@
 use GuzzleHttp\Exception\ConnectException;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
-use GuzzleHttp\Psr7;
+use GuzzleHttp\Psr7\Utils;
 use Stubs\EndpointStub;
 
 class ApiExceptionTest extends BasicTestCase {
@@ -18,7 +18,7 @@ class ApiExceptionTest extends BasicTestCase {
 
         $this->mockResponse( new Response(
             400, [ 'Content-Type' => 'application/json; charset=utf-8' ],
-            Psr7\stream_for( '{"text":"this is the error message."}' )
+            Utils::stream_for( '{"text":"this is the error message."}' )
         ));
 
         $this->getEndpoint()->test();
@@ -29,7 +29,7 @@ class ApiExceptionTest extends BasicTestCase {
 
         $this->mockResponse( new Response(
             400, [ 'Content-Type' => 'application/json; charset=utf-8', 'foo' => 'bar' ],
-            Psr7\stream_for( '{"text":"this is the error message."}' )
+            Utils::stream_for( '{"text":"this is the error message."}' )
         ));
 
         try {
@@ -53,7 +53,7 @@ class ApiExceptionTest extends BasicTestCase {
         $this->expectException(\GW2Treasures\GW2Api\Exception\ApiException::class, 'Unknown GW2Api error');
 
         $this->mockResponse( new Response(
-            500, [], Psr7\stream_for( 'Internal server error' )
+            500, [], Utils::stream_for( 'Internal server error' )
         ));
 
         $this->getEndpoint()->test();
@@ -79,7 +79,7 @@ class ApiExceptionTest extends BasicTestCase {
 
         $this->mockResponse( new Response(
             200, [ 'X-Result-Total' => 10, 'Content-Type' => 'application/json; charset=utf-8' ],
-            Psr7\stream_for( '[1,2,3]' )
+            Utils::stream_for( '[1,2,3]' )
         ));
         $this->mockResponse(
             new ConnectException('RequestManyExceptionWithoutResponse', new Request('GET', 'test/exception'))

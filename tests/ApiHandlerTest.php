@@ -2,8 +2,8 @@
 
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
-use GuzzleHttp\Psr7;
 use GuzzleHttp\Psr7\Uri;
+use GuzzleHttp\Psr7\Utils;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use GW2Treasures\GW2Api\V2\ApiHandler;
@@ -26,7 +26,7 @@ class ApiHandlerTest extends BasicTestCase {
             ? [ 'Content-Type' => $contentType ]
             : [];
 
-        return new Response( 200, $header, Psr7\stream_for( $content ));
+        return new Response( 200, $header, Utils::stream_for( $content ));
     }
 
     public function testAsJson() {
