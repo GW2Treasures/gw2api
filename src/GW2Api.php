@@ -62,7 +62,7 @@ use GW2Treasures\GW2Api\V2\Schema\SchemaHandler;
 
 class GW2Api {
     /** @const string */
-    const DEFAULT_SCHEMA = '2019-03-20T00:00:00Z';
+    const DEFAULT_SCHEMA = '2022-03-23T19:00:00Z';
 
     /** @var string $apiUrl */
     protected $apiUrl = 'https://api.guildwars2.com/';
