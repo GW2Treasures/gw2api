@@ -153,7 +153,7 @@ class GW2Api {
         }
 
         $firstConstructorParameter = $handlerClass->getConstructor()->getParameters()[0];
-        $this->handlers[ $handler ] = $firstConstructorParameter->getClass()->getName();
+        $this->handlers[ $handler ] = $firstConstructorParameter->getType()->getName();
     }
 
     protected function registerDefaultHandlers() {
