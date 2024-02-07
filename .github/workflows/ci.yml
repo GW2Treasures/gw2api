@@ -24,10 +24,10 @@ jobs:
       fail-fast: false
       matrix:
         php: 
-        - '7.2' # version used by gw2treasures.com
+        - '7.2' # version used by legacy.gw2treasures.com
         - '7.4' # latest 7.x
-        - '8.1' # stable 8
         - '8.2' # stable 8
+        - '8.3' # stable 8
         phar:
         - false
         include:
