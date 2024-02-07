@@ -9,6 +9,9 @@ use GW2Treasures\GW2Api\V2\Pagination\PaginatedEndpoint;
 class PaginatedEndpointStub extends EndpointStub implements IPaginatedEndpoint {
     use PaginatedEndpoint;
 
+    /** @var int $maxPageSize */
+    protected $maxPageSize = false;
+    
     public function __construct(  GW2Api $api, $maxPageSize = 10 ) {
         parent::__construct( $api );
 

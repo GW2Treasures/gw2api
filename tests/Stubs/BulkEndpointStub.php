@@ -8,6 +8,12 @@ use GW2Treasures\GW2Api\V2\Bulk\IBulkEndpoint;
 
 class BulkEndpointStub extends EndpointStub implements IBulkEndpoint {
     use BulkEndpoint;
+    
+    /** @var bool $supportsIdsAll */
+    protected $supportsIdsAll = false;
+
+    /** @var int $maxPageSize */
+    protected $maxPageSize = false;
 
     public function __construct( GW2Api $api, $supportsIdsAll, $maxPageSize ) {
         $this->supportsIdsAll = $supportsIdsAll;
