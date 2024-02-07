@@ -9,7 +9,7 @@ class ApiException extends Exception {
     /** @var ResponseInterface $response */
     protected $response;
 
-    public function __construct( $message = "", ResponseInterface $response ) {
+    public function __construct( $message, ResponseInterface $response ) {
         $this->response = $response;
 
         parent::__construct( $message, $response->getStatusCode() );
