@@ -30,5 +30,5 @@ interface IPaginatedEndpoint extends IEndpoint {
      * @param callable $callback
      * @return void
      */
-    function batch( $parallelRequests = null, callable $callback );
+    function batch( $parallelRequests, $callback = null );
 }

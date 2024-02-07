@@ -81,7 +81,7 @@ trait PaginatedEndpoint {
      * @param callable $callback
      * @return void
      */
-    public function batch( $parallelRequests = null, callable $callback = null ) {
+    public function batch( $parallelRequests, $callback = null ) {
         /** @noinspection PhpParamsInspection */
         if( !isset( $callback ) && is_callable( $parallelRequests )) {
             $callback = $parallelRequests;
