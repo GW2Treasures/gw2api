@@ -41,9 +41,13 @@ jobs:
       with:
         php-version: ${{ matrix.php }}
         ini-values: |
-          phar.readonly=false
+          phar.readonly = false
+          error_reporting = E_ALL
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Setup problem matchers for PHPUnit
+      run: echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
 
     - name: Validate composer.json and composer.lock
       run: composer validate --strict

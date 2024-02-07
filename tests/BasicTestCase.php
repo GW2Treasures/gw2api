@@ -17,8 +17,6 @@ use Psr\Http\Message\MessageInterface;
 use Psr\Http\Message\RequestInterface;
 use PHPUnit\Framework\TestCase;
 
-error_reporting(E_ALL);
-
 abstract class BasicTestCase extends TestCase {
     /** @var GW2Api $api */
     protected $api;
