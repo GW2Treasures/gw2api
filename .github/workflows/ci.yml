@@ -79,7 +79,7 @@ jobs:
       run: vendor/bin/phpunit --configuration phpunit.xml --bootstrap build/autoload.php
 
     - name: Download base coverage
-      uses: dawidd6/action-download-artifact@v3
+      uses: dawidd6/action-download-artifact@v6
       if: github.event_name == 'pull_request' && matrix.phar == false
       continue-on-error: true
       with:
